@@ -7,15 +7,18 @@ Created on Fri Jun  7 23:57:13 2019
 
 from datetime import date
 import dblp
+from scopus import AuthorRetrieval
 
-#rise_list = ["Markus Borg", "Ulrik Franke", "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson", "Stefan Cedergren", "Jakob Axelsson"]
+rise_list = ["Mehrdad Saadatmand", "Pasqualina Potena"] #"Markus Borg", "Ulrik Franke", "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson", "Stefan Cedergren", "Jakob Axelsson"]
 #lu_list = ["Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström"]
 bth_list = [ "Efi Papatheocharous"] #"Emil Alégroth", "Ali Nauman", "Fabian Fagerholm", "Javier Gonzalez Huerta", "Muhammad Usman"] #["Claes Wohlin", "Tony Gorschek", "Krzysztof Wnuk", "Michael Unterkalmsteiner", "Michael Mattsson", "Mikael Svahnberg", "Darja Smite", "Michael Felderer", "Jürgen Börstler"]
-chalmers_list = ["Jean-Philipp Steghöfer", "Christian Berger"] #"Robert Feldt", "Richard Torkar", "Ivica Crnkovic", "Richard Berntsson Svensson", "Francisco Gomes", "Gregory Gay", "Michel Chaudron", "Jan Bosch", "Eric Knauss", "Jennifer Horkoff","Eric Knauss", "Thorsten Berger", 
-kth_list = ["Benoit Baudry", "Martin Montperrus"] # "Frederic Loiret", "Karl Meinke"
+chalmers_list = ["Gul Calikli", "Regina Hebig", "Philipp Leitner", "Agneta Nilsson", "Håkan Burden", "Patrizio Pelliccione", "", "Riccardo Scandariato", "Miroslaw Staron", "Jan-Philipp Steghöfer", "Christian Berger"] #"Robert Feldt", "Richard Torkar", "Ivica Crnkovic", "Richard Berntsson Svensson", "Francisco Gomes", "Gregory Gay", "Michel Chaudron", "Jan Bosch", "Eric Knauss", "Jennifer Horkoff","Eric Knauss", "Thorsten Berger", 
+kth_list = ["Martin Monperrus"] # "Frederic Loiret", "Karl Meinke", "Benoit Baudry",
 malmo_list = ["Helena Holmström Olsson", "Annabella Loconsole"]
 linkoping_list = ["Kristian Sandahl"]
-affiliation_list = bth_list
+mdh_list = ["Hans Hansson", "Jan Carlsson", "Antonio Cicchetti", "Federico Ciccozzi", "Séverine Sentilles" ] #"Kristina Lundqvist", "Daniel Sundmark", "Wasif Afzal", "Adnan Causevic", "Eduard Paul Enoiu", 
+linne_list = ["Jesper Andersson"]
+affiliation_list = linne_list
 
 sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM Trans. Softw. Eng. Methodol.", "Autom. Softw. Eng.", "Information & Software Technology", "Requir. Eng.", " Software and System Modeling", "Software Quality Journal", "Journal of Systems and Software", "Journal of Software: Evolution and Process", "Softw. Test., Verif. Reliab.", "Softw., Pract. Exper.", "IET Software", "International Journal of Software Engineering and Knowledge Engineering"]
 
@@ -52,14 +55,14 @@ for scholar in affiliation_list:
 		    if co_authors[0] == affiliation_list[i]:
 		    	nbr_first_authorships += 1   
 	    counter += 1
-	    if counter>=250:
+	    if counter>=1000:
 	    	break
 	
 	nbr_publications -= nbr_arxiv
 	seed_ratio = nbr_first_authorships / nbr_publications
 	quality_ratio = len(top_papers) / nbr_publications
 
-	result_string = affiliation_list[i] + " (" + str(nbr_publications) + " publ.) \t ### Seed ratio: " + str(seed_ratio) + " \t Quality ratio: " + str(quality_ratio) + "\n"
+	result_string = affiliation_list[i] + " (" + str(nbr_publications) + " publ.) \t ### Self-made ratio: " + str(seed_ratio) + " \t Quality ratio: " + str(quality_ratio) + "\n"
 	print(result_string)
 
 	f.write(result_string) 
