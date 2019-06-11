@@ -11,16 +11,16 @@ from scopus import AuthorRetrieval
 
 
 rise_list2 = {
-			  #"Efi Papatheocharous": False,
-			  #"Mehrdad Saadatmand": False,
-			  #"Pasqualina Potena": False,
-			  #"Markus Borg": False, }
-			  #"Ulrik Franke": False,
+			  "Efi Papatheocharous": False,
+			  "Mehrdad Saadatmand": False,
+			  "Pasqualina Potena": False,
+			  "Markus Borg": False, 
+			  "Ulrik Franke": False,
 			  "Ana Magazinius": False,
 			  "Joakim Fröberg": False,
 			  "Thomas Olsson": False,
 			  "Stefan Cedergren": False,
-			  #"Jakob Axelsson": False, 
+			  "Jakob Axelsson": False, 
 			  }
 
 
@@ -33,20 +33,19 @@ malmo_list = ["Helena Holmström Olsson", "Annabella Loconsole"]
 linkoping_list = ["Kristian Sandahl"]
 mdh_list = ["Hans Hansson", "Jan Carlsson", "Antonio Cicchetti", "Federico Ciccozzi", "Séverine Sentilles", "Kristina Lundqvist", "Daniel Sundmark", "Wasif Afzal", "Adnan Causevic", "Eduard Paul Enoiu"]
 linne_list = ["Jesper Andersson"]
-affiliation_list = rise_list
+affiliation_list = chalmers_list
 
 sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM Trans. Softw. Eng. Methodol.", "Autom. Softw. Eng.", "Information & Software Technology", "Requir. Eng.", " Software and System Modeling", "Software Quality Journal", "Journal of Systems and Software", "Journal of Software: Evolution and Process", "Softw. Test., Verif. Reliab.", "Softw., Pract. Exper.", "IET Software", "International Journal of Software Engineering and Knowledge Engineering"]
 
 x = date.today()
 print(x.day)
-#f = open(str(x) + "_RISE_output.txt","w+")
-f = open(str(x) + "_LU_output.txt","w+")
+f = open(str(x) + "_output.txt","w+")
 i = 0
 nbr_remaining = len(rise_list2)
 
 while nbr_remaining > 0:
 	for scholar, processed in rise_list2.items():
-		if  not processed:
+		if not processed:
 			print(scholar)
 			authors = dblp.search(scholar)
 
@@ -77,7 +76,8 @@ while nbr_remaining > 0:
 			    # count first-authorships in general
 			    if len(co_authors) > 0:
 				    if co_authors[0] == scholar:
-				    	nbr_first_authorships += 1   
+				    	nbr_first_authorships += 1
+				    #print(co_authors) # used to find authors with a number, e.g., "Thomas Olsson 0001".
 				    	
 			    counter += 1
 			    if counter>=1000:
@@ -88,8 +88,6 @@ while nbr_remaining > 0:
 			quality_ratio = len(top_papers) / nbr_publications
 
 			result_string = scholar + " (" + str(nbr_publications) + " publ., First-in-top: " + str(nbr_first_top) + ") \t\t ### Self-made ratio: " + str(seed_ratio) + " \t Quality ratio: " + str(quality_ratio) + "\n"
-			
-			#result_string = affiliation_list[i] + " (" + str(nbr_publications) + " publ., First-in-top: " + str(nbr_first_top) + ") \t\t ### Self-made ratio: " + str(seed_ratio) + " \t Quality ratio: " + str(quality_ratio) + "\n"
 			print(result_string)
 			processed = True
 			nbr_remaining -= 1
