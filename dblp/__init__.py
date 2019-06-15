@@ -20,7 +20,7 @@ class LazyAPIData(object):
             if self.data is None:
                 self.load_data()
             return self.data[key]
-        #raise AttributeError, key
+        raise AttributeError("Error when getting attribute: " + key)
 
     def load_data(self):
         pass
@@ -41,6 +41,8 @@ class Author(LazyAPIData):
         self.xml = None
         super(Author, self).__init__(['name','publications','homepages',
                                       'homonyms'])
+        self.first_ratio = -1
+        self.quality_ratio = -1
 
     def load_data(self):
         resp = requests.get(DBLP_PERSON_URL.format(urlpt=self.urlpt))
