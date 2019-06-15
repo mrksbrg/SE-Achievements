@@ -41,6 +41,8 @@ class Author(LazyAPIData):
         self.xml = None
         super(Author, self).__init__(['name','publications','homepages',
                                       'homonyms'])
+    
+        self.cleaned_publications = -1
         self.first_ratio = -1
         self.quality_ratio = -1
 
