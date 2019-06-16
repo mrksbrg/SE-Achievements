@@ -5,6 +5,9 @@ class Scholar:
         
     def __str__(self):
         return self.name + " (" + str(len(self.publications)) + " publications)"
+    
+    def __repr__(self):
+        return self.name + " (" + str(len(self.publications)) + " publications)"
         
     def add_publication(self, publ):
         self.publications.add(publ)

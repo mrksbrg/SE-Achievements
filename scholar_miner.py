@@ -23,7 +23,6 @@ class ScholarMiner:
         while nbr_remaining > 0:
             for scholar, processed in researchers.items():	
                 if not processed: # only proceed if the scholar hasn't been processed already
-                    Scholar(scholar)
                     try:
                         print("\n####### Processing scholar: " + scholar + " #######")
                         authors = dblp.search(scholar)
@@ -32,9 +31,10 @@ class ScholarMiner:
                         print("ERROR: Invalid search result from DBLP. Waiting...")
                         time.sleep(5)
                         break
-                     
-                    self.scholars[scholar] = search_res
                     
+                    current = Scholar(scholar)
+                    self.scholars[scholar] = current
+                                        
         			# initiate variables
                     nbr_publications = len(search_res.publications)
                     print("DBLP entries: ", nbr_publications)
@@ -71,6 +71,7 @@ class ScholarMiner:
                             print("ERROR. Processing one of the papers failed. Waiting...")
                             time.sleep(5)
                             break
+                        self.scholars[scholar].add_publication(p)
                     nbr_publications -= nbr_arxiv
                     if nbr_publications > 0:
                         seed_ratio = nbr_first_authorships / nbr_publications
@@ -79,12 +80,20 @@ class ScholarMiner:
                         seed_ratio = "N/A"
                         quality_ratio = "N/A"
                         
-                    result_string = "\n" + scholar + " (" + str(nbr_publications) + " publ., First-in-top: " + str(nbr_first_top) + ") \t\t ### Self-made ratio: " + str(seed_ratio) + " \t Quality ratio: " + str(quality_ratio) + "\n"
+                    result_string = scholar + " (" + str(nbr_publications) + " publ., First-in-top: " + str(nbr_first_top) + ") \t\t ### Self-made ratio: " + str(seed_ratio) + " \t Quality ratio: " + str(quality_ratio) + "\n"
                     result_string += total_text
                     processed = True
                     print("Scholar processed: " + scholar)
                     nbr_remaining -= 1
-            self.output_file.write(result_string)
+                    self.output_file.write(result_string)
             
+        self.output_file.close()
+    
     def get_scholars(self):
         return self.scholars
+    
+    def print_scholars(self):
+        tmp = open(str(date.today()) + "_ATTEMPT.txt","w+")
+        for scholar in self.scholars.items():
+            tmp.write(str(scholar) + "\n")
+        tmp.close()
