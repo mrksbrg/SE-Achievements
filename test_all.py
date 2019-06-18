@@ -24,4 +24,15 @@ class TestClass:
         
         # TC2: Test that David Notkin has 151 DBLP entries
         assert len(dblp_search_res.publications) == 151
+        
+        # TC3: Get David Notkin as an SEScholar
+        scholars = self.miner.get_scholars()
+        david = scholars["David Notkin"]
+        assert david.name == "David Notkin"
+        
+        # TC4: Test that David Notkin has 151 publications after removing duplicates
+        assert david.get_nbr_publications() == 151
+        
+        # TC5: Test that David Notkin has 35 publications in SCI-listed journals
+        assert david.get_nbr_sci_publications() == 35
     

@@ -5,7 +5,8 @@ Created on Sat Jun 15 21:18:26 2019
 @author: Markus Borg
 """
 
-from scholar import Scholar
+from scholar import SEScholar
+from publication import SEPublication
 from datetime import date
 import time
 import dblp
@@ -32,8 +33,8 @@ class ScholarMiner:
                         time.sleep(5)
                         break
                     
-                    current = Scholar(scholar)
-                    self.scholars[scholar] = current
+                    current_scholar = SEScholar(scholar)
+                    self.scholars[scholar] = current_scholar
                                         
         			# initiate variables
                     nbr_publications = len(search_res.publications)
@@ -46,7 +47,9 @@ class ScholarMiner:
         				
         			# traverse publications
                     for p in search_res.publications:
-        				#temp.add_publication(p.title)
+                        current_publication = SEPublication(p.title, p.journal, p.authors, False)
+                        current_scholar.add_publication(current_publication)
+        				
                         try:
                             time.sleep(0.5) # There appears to be some race condition in the dblp package	
                             print(p.title, " ", p.type, " ", p.journal)
@@ -62,6 +65,9 @@ class ScholarMiner:
                                     if (co_authors[0] == scholar):
                                         nbr_first_top += 1
                                         total_text += "-" + p.title + "\n"
+                                        
+                                        
+                                                                       
                                 if len(co_authors) > 0:
                                     if co_authors[0] == scholar:
                                         nbr_first_authorships += 1
@@ -71,7 +77,7 @@ class ScholarMiner:
                             print("ERROR. Processing one of the papers failed. Waiting...")
                             time.sleep(5)
                             break
-                        self.scholars[scholar].add_publication(p)
+                        
                     nbr_publications -= nbr_arxiv
                     if nbr_publications > 0:
                         seed_ratio = nbr_first_authorships / nbr_publications
