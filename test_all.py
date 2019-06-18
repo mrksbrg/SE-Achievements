@@ -11,7 +11,7 @@ class TestClass:
 
     def setup_method(self, module):
         self.scholars = None
-        self.test_scholar = {"David Notkin":False}
+        self.test_scholar = {"David Notkin":False, "Simon M. Poulding":False}
         self.miner = ScholarMiner()
         
     def test_david_notkin(self):
@@ -35,4 +35,26 @@ class TestClass:
         
         # TC5: Test that David Notkin has 35 publications in SCI-listed journals
         assert david.get_nbr_sci_publications() == 35
+        
+    def test_simon_poulding(self):
+        self.miner.process_group(self.test_scholar)
+        self.scholars = self.miner.get_scholars()
+        dblp_search_res = self.scholars["Simon M. Poulding"]
+
+        # TC1: Test that DBLP returns a result
+        assert self.scholars != None
+        
+        # TC2: Test that Simon Poulding has 48 DBLP entries
+        assert len(dblp_search_res.publications) == 48
+        
+        # TC3: Get Simon Poulding as an SEScholar
+        scholars = self.miner.get_scholars()
+        simon = scholars["Simon M. Poulding"]
+        assert simon.name == "Simon M. Poulding"
+        
+        # TC4: Test that Simon Poulding has 48 publications after removing duplicates
+        assert simon.get_nbr_publications() == 48
+        
+        # TC5: Test that David Notkin has 35 publications in SCI-listed journals
+        assert simon.get_nbr_sci_publications() == 8
     
