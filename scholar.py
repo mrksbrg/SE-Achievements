@@ -29,20 +29,23 @@ class SEScholar:
             if publ.sci_listed == True:
                 nbr += 1
         return nbr
-    
+ 
     def calc_stats(self):
         nbr_first_author = 0
         nbr_sci_listed = 0
         self._nbr_first_sci = 0
         for publ in self._publications:
-            if publ.sci_listed == True and publ.authors[0] == self.name:
-                nbr_first_author += 1
-                nbr_sci_listed += 1
-                self._nbr_first_sci += 1       
-            elif publ.authors[0] == self.name:
-                nbr_first_author += 1
-            elif publ.sci_listed:
-                nbr_sci_listed += 1
+            try:
+                if publ.sci_listed == True and publ.authors[0] == self.name:
+                    nbr_first_author += 1
+                    nbr_sci_listed += 1
+                    self._nbr_first_sci += 1       
+                elif publ.authors[0] == self.name:
+                    nbr_first_author += 1
+                elif publ.sci_listed:
+                    nbr_sci_listed += 1
+            except:
+                print("No authors for the publication: " + publ.title)
                 
         self._first_ratio = nbr_first_author/self.get_nbr_publications()
         self._sci_ratio = nbr_sci_listed/self.get_nbr_publications()
