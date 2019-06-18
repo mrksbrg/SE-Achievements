@@ -34,6 +34,10 @@ class TestClass:
         # TC5: Test that David Notkin has 35 publications in SCI-listed journals
         assert david.get_nbr_sci_publications() == 35
         
+        # TC6:
+        #david.calc_stats()
+        #assert david._first_ratio != -1
+        
     def test_simon_poulding(self):
         self.miner.process_group(self.test_scholar)
         self.scholars = self.miner.get_scholars()

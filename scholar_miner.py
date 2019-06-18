@@ -51,7 +51,7 @@ class ScholarMiner:
         				
                         try:
                             time.sleep(0.5) # There appears to be some race condition in the dblp package	
-                            print(p.title, " ", p.type, " ", p.journal)
+                            #print(p.title, " ", p.type, " ", p.journal)
                             co_authors = p.authors
         					# count SCI journals and how many as first author
                             if p.type == "article":
