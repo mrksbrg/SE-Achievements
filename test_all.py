@@ -17,17 +17,15 @@ class TestClass:
     def test_david_notkin(self):
         self.miner.process_group(self.test_scholar)
         self.scholars = self.miner.get_scholars()
-        dblp_search_res = self.scholars["David Notkin"]
+        david = self.scholars["David Notkin"]
 
         # TC1: Test that DBLP returns a result
         assert self.scholars != None
         
         # TC2: Test that David Notkin has 151 DBLP entries
-        assert len(dblp_search_res.publications) == 151
+        assert david.dblp_entries == 151
         
-        # TC3: Get David Notkin as an SEScholar
-        scholars = self.miner.get_scholars()
-        david = scholars["David Notkin"]
+        # TC3: Test that the name is correctly processed
         assert david.name == "David Notkin"
         
         # TC4: Test that David Notkin has 151 publications after removing duplicates
@@ -39,21 +37,19 @@ class TestClass:
     def test_simon_poulding(self):
         self.miner.process_group(self.test_scholar)
         self.scholars = self.miner.get_scholars()
-        dblp_search_res = self.scholars["Simon M. Poulding"]
+        simon = self.scholars["Simon M. Poulding"]
 
         # TC1: Test that DBLP returns a result
         assert self.scholars != None
         
         # TC2: Test that Simon Poulding has 48 DBLP entries
-        assert len(dblp_search_res.publications) == 48
+        assert simon.dblp_entries == 48
         
-        # TC3: Get Simon Poulding as an SEScholar
-        scholars = self.miner.get_scholars()
-        simon = scholars["Simon M. Poulding"]
+        # TC3: Test that the name is correctly processed
         assert simon.name == "Simon M. Poulding"
         
         # TC4: Test that Simon Poulding has 48 publications after removing duplicates
-        assert simon.get_nbr_publications() == 48
+        assert simon.get_nbr_publications() == 44
         
         # TC5: Test that David Notkin has 35 publications in SCI-listed journals
         assert simon.get_nbr_sci_publications() == 8

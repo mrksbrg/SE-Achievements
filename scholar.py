@@ -1,8 +1,9 @@
 from publication import SEPublication
 
 class SEScholar:  
-    def __init__(self, name):
+    def __init__(self, name, dblp_entries):
         self.name = name        
+        self.dblp_entries = dblp_entries
         self.publications = set()
         
     def __str__(self):
