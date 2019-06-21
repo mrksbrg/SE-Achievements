@@ -52,5 +52,6 @@ class SEScholar:
                 print("No authors for the publication: " + publ.title)
                 
         self._first_ratio = nbr_first_author/self.get_nbr_publications()
+        print("Nbr first: " + str(nbr_first_author))
         print("Nbr sci: " + str(nbr_sci_listed) + " Tot number: " + str(self.get_nbr_publications()))
         self._sci_ratio = nbr_sci_listed/self.get_nbr_publications()

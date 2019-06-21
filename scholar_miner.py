@@ -48,8 +48,9 @@ class ScholarMiner:
                     #self.print_progress_bar(0, dblp_entries)
                     
         			# traverse publications
+                    i = 0
                     for p in search_res.publications:
-                        #self.print_progress_bar(i + 1, dblp_entries, prefix = 'Progress:', suffix = 'Complete', length = 50)
+                        self.print_progress_bar(i + 1, dblp_entries)
                         try:
                             time.sleep(0.5) # There appears to be some race condition in the dblp package	
                             #print(p.title, " ", p.type, " ", p.journal)
@@ -75,6 +76,7 @@ class ScholarMiner:
         					    #print(co_authors) # used to find authors with a number, e.g., "Thomas Olsson 0001".
                             current_publication = SEPublication(p.title, p.journal, p.authors, False)
                             current_scholar.add_publication(current_publication)
+                            i += 1
                         except:
                             print("ERROR. Processing one of the papers failed. Waiting...")
                             time.sleep(5)
@@ -88,6 +90,7 @@ class ScholarMiner:
                         seed_ratio = "N/A"
                         quality_ratio = "N/A"
                         
+                    current_scholar.calc_stats()
                     result_string = scholar + " (" + str(dblp_entries) + " publ., First-in-top: " + str(nbr_first_top) + ") \t\t ### Self-made ratio: " + str(seed_ratio) + " \t Quality ratio: " + str(quality_ratio) + "\n"
                     result_string += total_text
                     processed = True
@@ -98,7 +101,7 @@ class ScholarMiner:
         self.output_file.close()
     
     # Print iterations progress
-    def print_progress_bar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█'):
+    def print_progress_bar(self, iteration, total):
         """
         Call in a loop to create terminal progress bar
         @params:
@@ -110,6 +113,11 @@ class ScholarMiner:
             length      - Optional  : character length of bar (Int)
             fill        - Optional  : bar fill character (Str)
         """
+        prefix = 'Progress:'
+        suffix = 'Complete'
+        length = 50
+        decimals = 1
+        fill = '█'
         percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
         filledLength = int(length * iteration // total)
         bar = fill * filledLength + '-' * (length - filledLength)
