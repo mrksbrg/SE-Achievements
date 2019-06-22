@@ -13,7 +13,7 @@ class TestClass:
 
     def setup_method(self, module):
         self.scholars = None
-        self.test_scholar = {"David Notkin":False, "Simon M. Poulding":False, "Richard C. Holst":False}
+        self.test_scholar = {"David Notkin":False, "Simon M. Poulding":False, "Richard C. Holt":False}
         self.miner = ScholarMiner()
         
     def test_david_notkin(self):
@@ -72,7 +72,7 @@ class TestClass:
     def test_richard_holst(self):
         self.miner.process_group(self.test_scholar)
         self.scholars = self.miner.get_scholars()
-        richard = self.scholars["Richard C. Holst"]
+        richard = self.scholars["Richard C. Holt"]
 
         # TC1: Test that DBLP returns a result
         assert self.scholars != None
@@ -81,7 +81,7 @@ class TestClass:
         assert richard.dblp_entries == 138
         
         # TC3: Test that the name is correctly processed
-        assert richard.name == "Richard C. Holst"
+        assert richard.name == "Richard C. Holt"
         
         # TC4: Test that Simon Poulding has 44 publications after removing duplicates
         assert richard.get_nbr_publications() == 137
@@ -91,6 +91,6 @@ class TestClass:
     
         #TC6: Test that Simon Poulding has the correct ratios
         richard.calc_stats()
-        assert richard._first_ratio == pytest.approx(0.212, 0.001)
-        assert richard._sci_ratio == pytest.approx(0.058, 0.001)
+        assert richard._first_ratio == pytest.approx(0.2117, 0.001)
+        assert richard._sci_ratio == pytest.approx(0.0584, 0.001)
         assert richard.get_nbr_sci_publications() == 8    
