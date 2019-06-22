@@ -23,7 +23,7 @@ kth_list = {"Martin Monperrus": False, "Frederic Loiret": False, "Karl Meinke": 
 malmo_list = {"Helena Holmström Olsson": False, "Annabella Loconsole": False}
 linkoping_list = {"Kristian Sandahl": False}
 mdh_list = {"Hans Hansson": False, "Jan Carlsson": False, "Antonio Cicchetti": False, "Federico Ciccozzi": False, "Séverine Sentilles": False,
-			"Kristina Lundqvist": False, "Daniel Sundmark": False, "Wasif Afzal": False, "Adnan Causevic": False, "Eduard Paul Enoiu": False}
+			"Kristina Lundqvist": False, "Daniel Sundmark": False, "Wasif Afzal": False, "Adnan Causevic": False, "Eduard Paul Enoiu": False, "Barbara Gallina":False}
 linne_list = {"Jesper Andersson": False}
 affiliation_list = fast_list
 

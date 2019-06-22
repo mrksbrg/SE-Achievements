@@ -52,17 +52,19 @@ class ScholarMiner:
                     for p in search_res.publications:
                         self.print_progress_bar(i + 1, dblp_entries)
                         try:
-                            time.sleep(0.5) # There appears to be some race condition in the dblp package	
-                            #print(p.title, " ", p.type, " ", p.journal)
-                            co_authors = p.authors
-        					# count SCI journals and how many as first author
-                            if p.type == "article":
+                            time.sleep(0.5) # There appears to be some race condition in the dblp package
+                            co_authors = p.authors	
+                            #print(p.title, " ", str(len(co_authors))) #p.type, " ", p.journal)
+        					
+                            # count SCI journals and how many as first author
+                            if len(co_authors) == 0:
+                                    print ("Skipping one paper: " + p.title)
+                                    continue
+                            elif p.type == "article":
                                 if p.journal == "CoRR": #skip ArXiv preprints
                                     nbr_arxiv += 1
                                     continue
-                                elif len(co_authors) == 0:
-                                    print ("Skipping one paper: " + p.title)
-                                    continue
+                                
                                 elif p.journal in sci_list:
                                     #sci_journal = True
                                     top_papers.append(p.title)

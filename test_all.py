@@ -13,7 +13,7 @@ class TestClass:
 
     def setup_method(self, module):
         self.scholars = None
-        self.test_scholar = {"David Notkin":False, "Simon M. Poulding":False}
+        self.test_scholar = {"David Notkin":False, "Simon M. Poulding":False, "Richard C. Holst":False}
         self.miner = ScholarMiner()
         
     def test_david_notkin(self):
@@ -30,16 +30,16 @@ class TestClass:
         # TC3: Test that the name is correctly processed
         assert david.name == "David Notkin"
         
-        # TC4: Test that David Notkin has 151 publications after removing duplicates
-        assert david.get_nbr_publications() == 151
+        # TC4: Test that David Notkin has 151 publications after cleaning the list
+        assert david.get_nbr_publications() == 146
         
         # TC5: Test that David Notkin has 35 publications in SCI-listed journals
         assert david.get_nbr_sci_publications() == 35
         
         # TC6: Test that David Notkin has the correct ratios
         david.calc_stats()
-        assert david._first_ratio == pytest.approx(0.285, 0.001)
-        assert david._sci_ratio == pytest.approx(0.232, 0.001)
+        assert david._first_ratio == pytest.approx(0.295, 0.001)
+        assert david._sci_ratio == pytest.approx(0.240, 0.001)
         assert david.get_nbr_sci_publications() == 35        
         
         
@@ -57,7 +57,7 @@ class TestClass:
         # TC3: Test that the name is correctly processed
         assert simon.name == "Simon M. Poulding"
         
-        # TC4: Test that Simon Poulding has 48 publications after removing duplicates
+        # TC4: Test that Simon Poulding has 44 publications after removing duplicates
         assert simon.get_nbr_publications() == 44
         
         # TC5: Test that Simon Poulding has 8 publications in SCI-listed journals
@@ -67,4 +67,30 @@ class TestClass:
         simon.calc_stats()
         assert simon._first_ratio == pytest.approx(0.364, 0.001)
         assert simon._sci_ratio == pytest.approx(0.182, 0.001)
-        assert simon.get_nbr_sci_publications() == 8    
+        assert simon.get_nbr_sci_publications() == 8
+        
+    def test_richard_holst(self):
+        self.miner.process_group(self.test_scholar)
+        self.scholars = self.miner.get_scholars()
+        richard = self.scholars["Richard C. Holst"]
+
+        # TC1: Test that DBLP returns a result
+        assert self.scholars != None
+        
+        # TC2: Test that Simon Poulding has 48 DBLP entries
+        assert richard.dblp_entries == 138
+        
+        # TC3: Test that the name is correctly processed
+        assert richard.name == "Richard C. Holst"
+        
+        # TC4: Test that Simon Poulding has 44 publications after removing duplicates
+        assert richard.get_nbr_publications() == 137
+        
+        # TC5: Test that Simon Poulding has 8 publications in SCI-listed journals
+        assert richard.get_nbr_sci_publications() == 8
+    
+        #TC6: Test that Simon Poulding has the correct ratios
+        richard.calc_stats()
+        assert richard._first_ratio == pytest.approx(0.212, 0.001)
+        assert richard._sci_ratio == pytest.approx(0.058, 0.001)
+        assert richard.get_nbr_sci_publications() == 8    
