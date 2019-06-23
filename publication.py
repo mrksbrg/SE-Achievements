@@ -2,12 +2,14 @@ class SEPublication:
     
     sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM Trans. Softw. Eng. Methodol.", "Autom. Softw. Eng.", "Information & Software Technology", "Requir. Eng.", " Software and System Modeling", "Software Quality Journal", "Journal of Systems and Software", "Journal of Software: Evolution and Process", "Softw. Test., Verif. Reliab.", "Softw., Pract. Exper.", "IET Software", "International Journal of Software Engineering and Knowledge Engineering"]
 
-    def __init__(self, title, journal, authors, sci_listed):
-        self.title = title        
+    def __init__(self, title, journal, year, authors, sci_listed):
+        self.title = title       
+        print(str(year))
         self.journal = journal
+        self.year = year
         self.authors = authors
         self.sci_listed = sci_listed
-        if journal in self.sci_list:
+        if self.journal in self.sci_list:
             self.sci_listed = True
         
     def __str__(self):

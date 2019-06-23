@@ -51,14 +51,18 @@ class ScholarMiner:
                     i = 0
                     for p in search_res.publications:
                         self.print_progress_bar(i + 1, dblp_entries)
+                        #if p.year > 0:
+                        #    print("¤¤¤ " + str(p.year))
+                        #else:
+                        #    p.year = -1
                         try:
                             time.sleep(0.5) # There appears to be some race condition in the dblp package
-                            co_authors = p.authors	
+                            co_authors = p.authors
+                            sci_journal = False
                             #print(p.title, " ", str(len(co_authors))) #p.type, " ", p.journal)
         					
                             # count SCI journals and how many as first author
-                            if len(co_authors) == 0:
-                                    print ("Skipping one paper: " + p.title)
+                            if len(co_authors) == 0: #skip papers with 0 authors
                                     continue
                             elif p.type == "article":
                                 if p.journal == "CoRR": #skip ArXiv preprints
@@ -66,7 +70,8 @@ class ScholarMiner:
                                     continue
                                 
                                 elif p.journal in sci_list:
-                                    #sci_journal = True
+                                    print("SCI paper")
+                                    sci_journal = True
                                     top_papers.append(p.title)
                                     if (co_authors[0] == scholar):
                                         nbr_first_top += 1
@@ -76,7 +81,8 @@ class ScholarMiner:
                                         nbr_first_authorships += 1
         						#temp.publications.add(Publication(p.title, p.journal, sci_journal, len(co_authors))
         					    #print(co_authors) # used to find authors with a number, e.g., "Thomas Olsson 0001".
-                            current_publication = SEPublication(p.title, p.journal, p.authors, False)
+                            
+                            current_publication = SEPublication(p.title, p.journal, p.year, p.authors, sci_journal)
                             current_scholar.add_publication(current_publication)
                             i += 1
                         except:

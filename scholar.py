@@ -38,7 +38,7 @@ class SEScholar:
         result = ""
         for publ in self._publications:
             if publ.sci_listed and publ.authors[0] == self.name:
-                result += "\t" + publ.title + "\n"
+                result += "\t" + str(publ.year) + ": " + publ.title + "\n"
         return result
  
     def calc_stats(self):
@@ -60,9 +60,8 @@ class SEScholar:
                 
         if self.get_nbr_publications() > 0:
             self._first_ratio = nbr_first_author/self.get_nbr_publications()
-            print("Nbr first: " + str(nbr_first_author))
-            print("Nbr sci: " + str(nbr_sci_listed) + " Tot number: " + str(self.get_nbr_publications()))
             self._sci_ratio = nbr_sci_listed/self.get_nbr_publications()
+        print(self.to_string())
 
     def to_string(self):
         return self.name + " (" + str(len(self._publications)) + " publications. First-ratio: " + str(round(self._first_ratio, 2)) + " SCI-ratio: " + str(round(self._sci_ratio, 2)) + " Nbr firsts in SCI: " + str(self._nbr_first_sci) + ")"
