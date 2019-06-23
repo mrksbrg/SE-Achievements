@@ -51,15 +51,10 @@ class ScholarMiner:
                     i = 0
                     for p in search_res.publications:
                         self.print_progress_bar(i + 1, dblp_entries)
-                        #if p.year > 0:
-                        #    print("¤¤¤ " + str(p.year))
-                        #else:
-                        #    p.year = -1
+
                         try:
                             time.sleep(0.5) # There appears to be some race condition in the dblp package
                             co_authors = p.authors
-                            sci_journal = False
-                            #print(p.title, " ", str(len(co_authors))) #p.type, " ", p.journal)
         					
                             # count SCI journals and how many as first author
                             if len(co_authors) == 0: #skip papers with 0 authors
@@ -70,8 +65,6 @@ class ScholarMiner:
                                     continue
                                 
                                 elif p.journal in sci_list:
-                                    print("SCI paper")
-                                    sci_journal = True
                                     top_papers.append(p.title)
                                     if (co_authors[0] == scholar):
                                         nbr_first_top += 1
@@ -79,10 +72,8 @@ class ScholarMiner:
                                 if len(co_authors) > 0:
                                     if co_authors[0] == scholar:
                                         nbr_first_authorships += 1
-        						#temp.publications.add(Publication(p.title, p.journal, sci_journal, len(co_authors))
-        					    #print(co_authors) # used to find authors with a number, e.g., "Thomas Olsson 0001".
                             
-                            current_publication = SEPublication(p.title, p.journal, p.year, p.authors, sci_journal)
+                            current_publication = SEPublication(p.title, p.journal, p.year, p.authors)
                             current_scholar.add_publication(current_publication)
                             i += 1
                         except:
@@ -102,7 +93,6 @@ class ScholarMiner:
                     result_string = scholar + " (" + str(dblp_entries) + " publ., First-in-top: " + str(nbr_first_top) + ") \t\t ### Self-made ratio: " + str(seed_ratio) + " \t Quality ratio: " + str(quality_ratio) + "\n"
                     result_string += total_text
                     processed = True
-                    print("Scholar processed: " + scholar)
                     nbr_remaining -= 1
                     self.output_file.write(result_string)
             
