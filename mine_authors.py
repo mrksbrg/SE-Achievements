@@ -27,13 +27,9 @@ ericsson_list = {"Sigrid Eldh":False, "Kristian Wiklund":False, "Leif Jonsson":F
 others_list = {"":False}
 merged_lists = {**rise_list, **linne_list, **ericsson_list}
 all_lists = {**rise_list, **lu_list, **bth_list, **chalmers_list, **kth_list, **malmo_list, **linkoping_list, **mdh_list, **linne_list}
-#merged_lists = {**malmo_list, **linkoping_list}
 
-#sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM Trans. Softw. Eng. Methodol.", "Autom. Softw. Eng.", "Information & Software Technology", "Requir. Eng.", " Software and System Modeling", "Software Quality Journal", "Journal of Systems and Software", "Journal of Software: Evolution and Process", "Softw. Test., Verif. Reliab.", "Softw., Pract. Exper.", "IET Software", "International Journal of Software Engineering and Knowledge Engineering"]
-        
+# Where the action is      
 scholars = {}
-
 miner = ScholarMiner()
-
-miner.process_group(fast_list)
+miner.process_group(rise_list)
 miner.write_scholars()

@@ -34,6 +34,13 @@ class SEScholar:
                 nbr += 1
         return nbr
     
+    def get_nbr_main_confs(self):
+        nbr = 0
+        for publ in self._publications:
+            if publ.major_conf:
+                nbr += 1
+        return nbr
+    
     def sci_publications_to_string(self):
         result = ""
         for publ in self._publications:
@@ -64,5 +71,5 @@ class SEScholar:
         print(self.to_string())
 
     def to_string(self):
-        return self.name + " (" + str(len(self._publications)) + " publications. First-ratio: " + str(round(self._first_ratio, 2)) + " SCI-ratio: " + str(round(self._sci_ratio, 2)) + " Nbr firsts in SCI: " + str(self._nbr_first_sci) + ")"
+        return self.name + " (" + str(len(self._publications)) + " publications. First-ratio: " + str(round(self._first_ratio, 2)) + " SCI-ratio: " + str(round(self._sci_ratio, 2)) + " Nbr firsts in SCI: " + str(self._nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"
         

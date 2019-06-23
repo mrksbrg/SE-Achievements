@@ -47,8 +47,10 @@ class ScholarMiner:
                                     continue
                             elif p.type == "article":
                                 if p.journal == "CoRR": #skip ArXiv preprints
-                                    continue                          
-                            current_publication = SEPublication(p.title, p.journal, p.year, p.authors)
+                                    continue 
+                            elif p.type == "inproceedings":
+                                print(p.booktitle)
+                            current_publication = SEPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
                             current_scholar.add_publication(current_publication)
                             i += 1
                         except:
@@ -74,7 +76,7 @@ class ScholarMiner:
         percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
         filledLength = int(length * iteration // total)
         bar = fill * filledLength + '-' * (length - filledLength)
-        print('\r%s |%s| %s%% %s' % ("Progress:", bar, percent, "Complete"), end = '\r')
+        print('\r%s |%s| %s%% %s' % ("Progress:", bar, percent, "Complete "), end = '\r')
         # Print New Line on Complete
         if iteration == total: 
             print()
