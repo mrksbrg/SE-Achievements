@@ -124,8 +124,9 @@ class ScholarMiner:
     def get_scholars(self):
         return self.scholars
     
-    def print_scholars(self):
+    def write_scholars(self):
         tmp = open(str(date.today()) + "_ATTEMPT.txt","w+")
-        for scholar in self.scholars.items():
-            tmp.write(str(scholar) + "\n")
+        for key, value in self.scholars.items():
+            tmp.write(value.to_string() + "\n")
+            tmp.write(value.sci_publications_to_string())
         tmp.close()

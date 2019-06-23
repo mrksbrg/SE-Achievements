@@ -14,7 +14,7 @@ class SEScholar:
         return self.name + " (" + str(len(self._publications)) + " publications)"
     
     def __repr__(self):
-        return self.name + " (" + str(len(self._publications)) + " publications)"
+        return self.name + " (" + str(len(self._publications)) + " publications. First-ratio: " + str(self._first_ratio) + " SCI-ratio: " + str(self._sci_ratio) + " Nbr firsts in SCI: " + str(self._nbr_first_sci) + ")"
         
     def add_publication(self, publ):
         if not isinstance(publ, SEPublication):
@@ -30,9 +30,16 @@ class SEScholar:
     def get_nbr_sci_publications(self):
         nbr = 0
         for publ in self._publications:
-            if publ.sci_listed == True:
+            if publ.sci_listed:
                 nbr += 1
         return nbr
+    
+    def sci_publications_to_string(self):
+        result = ""
+        for publ in self._publications:
+            if publ.sci_listed and publ.authors[0] == self.name:
+                result += "\t" + publ.title + "\n"
+        return result
  
     def calc_stats(self):
         nbr_first_author = 0
@@ -40,10 +47,10 @@ class SEScholar:
         self._nbr_first_sci = 0
         for publ in self._publications:
             try:
-                if publ.sci_listed == True and publ.authors[0] == self.name:
+                if publ.sci_listed and publ.authors[0] == self.name:
                     nbr_first_author += 1
                     nbr_sci_listed += 1
-                    #self._nbr_first_sci += 1       
+                    self._nbr_first_sci += 1       
                 elif publ.authors[0] == self.name:
                     nbr_first_author += 1
                 elif publ.sci_listed:
@@ -56,3 +63,7 @@ class SEScholar:
             print("Nbr first: " + str(nbr_first_author))
             print("Nbr sci: " + str(nbr_sci_listed) + " Tot number: " + str(self.get_nbr_publications()))
             self._sci_ratio = nbr_sci_listed/self.get_nbr_publications()
+
+    def to_string(self):
+        return self.name + " (" + str(len(self._publications)) + " publications. First-ratio: " + str(round(self._first_ratio, 2)) + " SCI-ratio: " + str(round(self._sci_ratio, 2)) + " Nbr firsts in SCI: " + str(self._nbr_first_sci) + ")"
+        
