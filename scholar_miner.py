@@ -8,6 +8,7 @@ Created on Sat Jun 15 21:18:26 2019
 from scholar import SEScholar
 from publication import SEPublication
 from datetime import date
+from collections import Counter
 import time
 import dblp
 
@@ -17,6 +18,7 @@ class ScholarMiner:
     
     def __init__(self):
         self.scholars = {}
+        self.coauthors = Counter()
             
     def process_group(self, researchers):
         nbr_remaining = len(researchers)
@@ -52,6 +54,7 @@ class ScholarMiner:
                                 #print(p.booktitle)
                             current_publication = SEPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
                             current_scholar.add_publication(current_publication)
+                            self.coauthors = self.coauthors + Counter(p.authors)
                             i += 1
                         except:
                             print("ERROR. Processing one of the papers failed. Waiting...")
@@ -100,3 +103,6 @@ class ScholarMiner:
     def sort_and_print(self):
         print(sorted(self.scholars.items(), key = 
              lambda kv:(kv[1], kv[0])))
+        
+    def print_coauthors(self):
+        print(self.coauthors)

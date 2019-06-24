@@ -31,7 +31,8 @@ all_list = {**rise_list, **lu_list, **bth_list, **chalmers_list, **kth_list, **m
 # Where the action is      
 scholars = {}
 miner = ScholarMiner()
-miner.process_group(all_list)
+miner.process_group(lu_list)
 miner.write_scholars_txt()
 miner.write_scholars_csv()
-miner.sort_and_print();
+#miner.sort_and_print();
+miner.print_coauthors()
