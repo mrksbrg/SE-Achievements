@@ -25,11 +25,13 @@ linne_list = {"Jesper Andersson": False}
 
 ericsson_list = {"Sigrid Eldh":False, "Kristian Wiklund":False, "Leif Jonsson":False, "Sahar Tahvili":False}
 others_list = {"":False}
-merged_lists = {**rise_list, **linne_list, **ericsson_list}
-all_lists = {**rise_list, **lu_list, **bth_list, **chalmers_list, **kth_list, **malmo_list, **linkoping_list, **mdh_list, **linne_list}
+merged_list = {**rise_list, **linne_list, **ericsson_list}
+all_list = {**rise_list, **lu_list, **bth_list, **chalmers_list, **kth_list, **malmo_list, **linkoping_list, **mdh_list, **linne_list, **ericsson_list}
 
 # Where the action is      
 scholars = {}
 miner = ScholarMiner()
-miner.process_group(rise_list)
-miner.write_scholars()
+miner.process_group(all_list)
+miner.write_scholars_txt()
+miner.write_scholars_csv()
+miner.sort_and_print();

@@ -48,8 +48,8 @@ class ScholarMiner:
                             elif p.type == "article":
                                 if p.journal == "CoRR": #skip ArXiv preprints
                                     continue 
-                            elif p.type == "inproceedings":
-                                print(p.booktitle)
+                            #elif p.type == "inproceedings": # This is what conference proceedings look like
+                                #print(p.booktitle)
                             current_publication = SEPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
                             current_scholar.add_publication(current_publication)
                             i += 1
@@ -84,11 +84,17 @@ class ScholarMiner:
     def get_scholars(self):
         return self.scholars
     
-    def write_scholars(self):
+    def write_scholars_txt(self):
         tmp = open(str(date.today()) + "_SCHOLARS.txt","w+")
         for key, value in self.scholars.items():
             tmp.write(value.to_string() + "\n")
             tmp.write(value.sci_publications_to_string())
+        tmp.close()
+        
+    def write_scholars_csv(self):
+        tmp = open(str(date.today()) + "_SCHOLARS.csv","w+")
+        for key, value in self.scholars.items():
+            tmp.write(value.to_csv_line() + "\n")
         tmp.close()
         
     def sort_and_print(self):

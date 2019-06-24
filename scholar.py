@@ -75,4 +75,6 @@ class SEScholar:
 
     def to_string(self):
         return self.name + " (" + str(len(self._publications)) + " publications. First-ratio: " + str(round(self._first_ratio, 2)) + " SCI-ratio: " + str(round(self._sci_ratio, 2)) + " Nbr firsts in SCI: " + str(self._nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"
-        
+    
+    def to_csv_line(self):
+        return self.name + ";" + str(self.dblp_entries) + ";" + str(len(self._publications)) + ";" + str(self._first_ratio) + ";" + str(self._sci_ratio) + ";" + str(self._nbr_first_sci) + ";" + str(self.get_nbr_main_confs())    
