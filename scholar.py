@@ -16,6 +16,9 @@ class SEScholar:
     def __repr__(self):
         return self.name + " (" + str(len(self._publications)) + " publications. First-ratio: " + str(self._first_ratio) + " SCI-ratio: " + str(self._sci_ratio) + " Nbr firsts in SCI: " + str(self._nbr_first_sci) + ")"
         
+    def __lt__(self, other):
+        return self._first_ratio < other._first_ratio
+    
     def add_publication(self, publ):
         if not isinstance(publ, SEPublication):
             raise TypeError("Error: do not add anything but instances of publication.SEPublication to the collection")

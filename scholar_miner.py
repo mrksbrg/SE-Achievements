@@ -90,3 +90,7 @@ class ScholarMiner:
             tmp.write(value.to_string() + "\n")
             tmp.write(value.sci_publications_to_string())
         tmp.close()
+        
+    def sort_and_print(self):
+        print(sorted(self.scholars.items(), key = 
+             lambda kv:(kv[1], kv[0])))
