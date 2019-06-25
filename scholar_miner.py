@@ -67,6 +67,7 @@ class ScholarMiner:
                     current_scholar.calc_stats()
                     processed = True
                     nbr_remaining -= 1
+                    self.print_progress_bar(dblp_entries, dblp_entries)
     
     # Print progress bar for scholar processing
     def print_progress_bar(self, iteration, total):
@@ -90,6 +91,9 @@ class ScholarMiner:
     def get_scholars(self):
         return self.scholars
     
+    def get_coauthors(self):
+        return self.coauthors
+    
     def write_scholars_txt(self):
         tmp = open(str(date.today()) + "_SCHOLARS.txt","w+")
         for key, value in self.scholars.items():
@@ -109,4 +113,8 @@ class ScholarMiner:
         
     def write_coauthors_csv(self):
         (pd.DataFrame.from_dict(data=self.coauthors, orient='index').to_csv('coauthors.csv', sep=';', header=False))
+        
+    def write_candidate_SEScholars_csv(self, SEScholars):
+        diff = dict(SEScholars.items() ^ self.coauthors.items())
+        (pd.DataFrame.from_dict(data=diff, orient='index').to_csv('candidates.csv', sep=';', header=False))
         

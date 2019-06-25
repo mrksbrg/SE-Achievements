@@ -9,7 +9,7 @@ from scholar_miner import ScholarMiner
 
 fast_list = {"Annabella Loconsole": False}
 rise_list = {"Niklas Mellegård":False, "Efi Papatheocharous": False, "Mehrdad Saadatmand": False, "Pasqualina Potena": False, "Markus Borg": False, "Ulrik Franke": False,
-			  "Ana Magazinius": False, "Joakim Fröberg": False, "Thomas Olsson 0001": False, "Stefan Cedergren": False, "Jakob Axelsson": False}
+			  "Ana Magazinius": False, "Joakim Fröberg": False, "Thomas Olsson": False, "Stefan Cedergren": False, "Jakob Axelsson": False}
 lu_list = {"Per Runeson": False, "Björn Regnell": False, "Martin Höst": False, "Elizabeth Bjarnason": False, "Emelie Engström": False}
 bth_list = {"Claes Wohlin": False, "Tony Gorschek": False, "Krzysztof Wnuk": False, "Michael Unterkalmsteiner": False, "Michael Mattsson": False,
 			"Mikael Svahnberg": False, "Darja Smite": False, "Michael Felderer": False, "Jürgen Börstler": False, "Emil Alégroth": False, "Ali Nauman": False, "Fabian Fagerholm": False, "Javier Gonzalez Huerta": False, "Muhammad Usman": False}
@@ -21,18 +21,18 @@ malmo_list = {"Helena Holmström Olsson": False, "Annabella Loconsole": False}
 linkoping_list = {"Kristian Sandahl": False}
 mdh_list = {"Hans Hansson": False, "Jan Carlsson": False, "Antonio Cicchetti": False, "Federico Ciccozzi": False, "Séverine Sentilles": False,
 			"Kristina Lundqvist": False, "Daniel Sundmark": False, "Wasif Afzal": False, "Adnan Causevic": False, "Eduard Paul Enoiu": False, "Barbara Gallina":False}
-linne_list = {"Jesper Andersson": False}
+linne_list = {"Jesper Andersson": False, "Morgan Ericsson":False}
 
 ericsson_list = {"Sigrid Eldh":False, "Kristian Wiklund":False, "Leif Jonsson":False, "Sahar Tahvili":False}
 others_list = {"":False}
 merged_list = {**rise_list, **linne_list, **ericsson_list}
 all_list = {**rise_list, **lu_list, **bth_list, **chalmers_list, **kth_list, **malmo_list, **linkoping_list, **mdh_list, **linne_list, **ericsson_list}
 
-# Where the action is      
-scholars = {}
+# Where the action is    
 miner = ScholarMiner()
-miner.process_group(fast_list)
+miner.process_group(all_list)
 miner.write_scholars_txt()
 miner.write_scholars_csv()
 #miner.sort_and_print();
 miner.write_coauthors_csv()
+miner.write_candidate_SEScholars_csv(all_list)
