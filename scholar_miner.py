@@ -63,11 +63,11 @@ class ScholarMiner:
                             print("ERROR. Processing one of the papers failed. Waiting...")
                             time.sleep(5)
                             break
-                                                
+                     
+                    self.print_progress_bar(dblp_entries, dblp_entries)                           
                     current_scholar.calc_stats()
                     processed = True
-                    nbr_remaining -= 1
-                    self.print_progress_bar(dblp_entries, dblp_entries)
+                    nbr_remaining -= 1           
     
     # Print progress bar for scholar processing
     def print_progress_bar(self, iteration, total):
