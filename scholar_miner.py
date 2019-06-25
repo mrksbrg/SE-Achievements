@@ -9,6 +9,7 @@ from scholar import SEScholar
 from publication import SEPublication
 from datetime import date
 from collections import Counter
+import pandas as pd
 import time
 import dblp
 
@@ -19,6 +20,7 @@ class ScholarMiner:
     def __init__(self):
         self.scholars = {}
         self.coauthors = Counter()
+        self.titles = []
             
     def process_group(self, researchers):
         nbr_remaining = len(researchers)
@@ -55,6 +57,7 @@ class ScholarMiner:
                             current_publication = SEPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
                             current_scholar.add_publication(current_publication)
                             self.coauthors = self.coauthors + Counter(p.authors)
+                            self.titles.append(p.title)
                             i += 1
                         except:
                             print("ERROR. Processing one of the papers failed. Waiting...")
@@ -104,5 +107,6 @@ class ScholarMiner:
         print(sorted(self.scholars.items(), key = 
              lambda kv:(kv[1], kv[0])))
         
-    def print_coauthors(self):
-        print(self.coauthors)
+    def write_coauthors_csv(self):
+        (pd.DataFrame.from_dict(data=self.coauthors, orient='index').to_csv('coauthors.csv', sep=';', header=False))
+        
