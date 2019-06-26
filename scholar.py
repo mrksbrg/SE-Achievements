@@ -48,7 +48,7 @@ class SEScholar:
         result = ""
         for publ in self._publications:
             if publ.sci_listed and publ.authors[0] == self.name:
-                result += "\t" + str(publ.year) + ": " + publ.title + "\n"
+                result += "\t" + str(publ.year) + ": " + publ.title + "(" + str(publ.journal) + ")" + "\n"
         return result
  
     def calc_stats(self):

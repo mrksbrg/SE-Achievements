@@ -43,7 +43,8 @@ class ScholarMiner:
         				                    
         			# traverse publications
                     i = 0
-                    for p in search_res.publications:                   
+                    for p in search_res.publications:  
+                        self.print_progress_bar(i + 1, dblp_entries)
                         try:
                             time.sleep(0.5) # There appears to be some race condition in the dblp package  					
                             if len(p.authors) == 0: #skip papers with 0 authors
@@ -62,8 +63,9 @@ class ScholarMiner:
                             print("ERROR. Processing one of the papers failed. Waiting...")
                             time.sleep(5)
                             break
-                        self.print_progress_bar(i + 1, dblp_entries)
                         
+                    if dblp_entries > 0 and i<dblp_entries:
+                        self.print_progress_bar(dblp_entries, dblp_entries)
                     current_scholar.calc_stats()
                     processed = True
                     nbr_remaining -= 1           
