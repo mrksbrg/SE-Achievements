@@ -20,7 +20,6 @@ class ScholarMiner:
     def __init__(self):
         self.scholars = {}
         self.coauthors = Counter()
-        self.titles = []
             
     def process_group(self, researchers):
         nbr_remaining = len(researchers)
@@ -57,7 +56,6 @@ class ScholarMiner:
                             current_publication = SEPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
                             current_scholar.add_publication(current_publication)
                             self.coauthors = self.coauthors + Counter(p.authors)
-                            self.titles.append(p.title)
                             i += 1
                         except:
                             print("ERROR. Processing one of the papers failed. Waiting...")

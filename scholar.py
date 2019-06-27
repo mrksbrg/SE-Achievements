@@ -9,7 +9,7 @@ class SEScholar:
         self._sci_ratio = -1
         self._nbr_sci_listed = -1
         self._nbr_first_sci = -1
-        
+                
     def __str__(self):
         return self.name + " (" + str(len(self._publications)) + " publications)"
     
@@ -44,6 +44,13 @@ class SEScholar:
                 nbr += 1
         return nbr
     
+    def get_first_author_titles(self):
+        first_author_titles = []
+        for p in self._publications:
+            if (p.authors[0] == self.name):
+                first_author_titles.append(p.title)
+        return first_author_titles
+        
     def sci_publications_to_string(self):
         result = ""
         for publ in self._publications:

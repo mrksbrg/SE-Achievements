@@ -6,6 +6,7 @@ Created on Fri Jun  7 23:57:13 2019
 """
 
 from scholar_miner import ScholarMiner
+from datetime import date
 
 fast_list = {"Mathias Ekstedt":False, "Magnus Wärja":False}
 rise_list = {"Niklas Mellegård":False, "Efi Papatheocharous": False, "Mehrdad Saadatmand": False, "Pasqualina Potena": False, "Markus Borg": False, "Ulrik Franke": False,
@@ -29,12 +30,24 @@ merged_list = {**rise_list, **linne_list, **ericsson_list}
 all_list = {**rise_list, **lu_list, **bth_list, **chalmers_list, **kth_list, **malmo_list, **linkoping_list, **mdh_list, **linne_list, **ericsson_list}
 
 # Where the action is  
-process_list = rise_list
+process_list = all_list
   
 miner = ScholarMiner()
 miner.process_group(process_list)
 miner.write_scholars_txt()
 miner.write_scholars_csv()
 #miner.sort_and_print();
-miner.write_coauthors_csv()
-miner.write_candidate_SEScholars_csv(process_list)
+try:
+    miner.write_coauthors_csv()
+    miner.write_candidate_SEScholars_csv(process_list)
+except:
+    print("Could not write csv-files with co-authors and candidate SEScholars")
+
+# Write all titles from all first authors to csv
+scholars = miner.get_scholars()
+tmp = open(str(date.today()) + "_FirstAuthors_vs_titles.csv","w+")
+
+for key, value in scholars.items():
+    for p in value.get_first_author_titles():
+        tmp.write(key + ";" + p + "\n")
+tmp.close()
