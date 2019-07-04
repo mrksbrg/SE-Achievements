@@ -55,10 +55,25 @@ class TestClass:
         assert david._sci_ratio == pytest.approx(0.2397, 0.001)
         assert david.get_nbr_sci_publications() == 35       
         
+        # TC7: Test write to txt-file
         self.miner.write_scholars_txt()
-        self.miner.write_scholars_csv()
+        filename = str(date.today()) + "_SCHOLARS.txt"
+        assert os.path.exists(filename)
         
-        assert os.path.isfile(str(date.today()) + "_SCHOLARS.txt")
+        # TC8: Test file size of txt-file
+        file_stats = os.stat(filename)
+        print(str(file_stats.st_size))
+        assert file_stats.st_size == pytest.approx(1149, 1)
+            
+        # TC9: Test write to csv-file
+        self.miner.write_scholars_csv()
+        filename = str(date.today()) + "_SCHOLARS.csv"
+        assert os.path.exists(filename)
+        
+        # TC10: Test file size of csv-file
+        file_stats = os.stat(filename)
+        print(str(file_stats.st_size))
+        assert file_stats.st_size == pytest.approx(67, 1)
              
     def test_simon_poulding(self):
         self.miner = ScholarMiner(self.test_scholars)
@@ -87,6 +102,26 @@ class TestClass:
         assert simon._sci_ratio == pytest.approx(0.182, 0.001)
         assert simon.get_nbr_sci_publications() == 8
         
+        # TC7: Test write to txt-file
+        self.miner.write_scholars_txt()
+        filename = str(date.today()) + "_SCHOLARS.txt"
+        assert os.path.exists(filename)
+        
+        # TC8: Test file size of txt-file
+        file_stats = os.stat(filename)
+        print(str(file_stats.st_size))
+        assert file_stats.st_size == pytest.approx(476, 1)
+            
+        # TC9: Test write to csv-file
+        self.miner.write_scholars_csv()
+        filename = str(date.today()) + "_SCHOLARS.csv"
+        assert os.path.exists(filename)
+        
+        # TC10: Test file size of csv-file
+        file_stats = os.stat(filename)
+        print(str(file_stats.st_size))
+        assert file_stats.st_size == pytest.approx(139, 1)
+        
     def test_richard_holst(self):
         self.miner = ScholarMiner(self.test_scholars)
         self.miner.process_group(self.test_scholars)
@@ -112,4 +147,24 @@ class TestClass:
         richard.calc_stats()
         assert richard._first_ratio == pytest.approx(0.2117, 0.001)
         assert richard._sci_ratio == pytest.approx(0.0584, 0.001)
-        assert richard.get_nbr_sci_publications() == 8    
+        assert richard.get_nbr_sci_publications() == 8
+        
+        # TC7: Test write to txt-file
+        self.miner.write_scholars_txt()
+        filename = str(date.today()) + "_SCHOLARS.txt"
+        assert os.path.exists(filename)
+        
+        # TC8: Test file size of txt-file
+        file_stats = os.stat(filename)
+        print(str(file_stats.st_size))
+        assert file_stats.st_size == pytest.approx(476, 1)
+            
+        # TC9: Test write to csv-file
+        self.miner.write_scholars_csv()
+        filename = str(date.today()) + "_SCHOLARS.csv"
+        assert os.path.exists(filename)
+        
+        # TC10: Test file size of csv-file
+        file_stats = os.stat(filename)
+        print(str(file_stats.st_size))
+        assert file_stats.st_size == pytest.approx(139, 1)
