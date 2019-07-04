@@ -28,6 +28,7 @@ class TestClass:
             assert self.scholars["ABCDEFGH"]
         
     def test_david_notkin(self):
+        self.miner = ScholarMiner(self.test_scholar)
         self.miner.process_group(self.test_scholar)
         self.scholars = self.miner.get_scholars()
         david = self.scholars["David Notkin"]
@@ -55,6 +56,7 @@ class TestClass:
         
         
     def test_simon_poulding(self):
+        self.miner = ScholarMiner(self.test_scholars)
         self.miner.process_group(self.test_scholars)
         self.scholars = self.miner.get_scholars()
         simon = self.scholars["Simon M. Poulding"]
@@ -81,6 +83,7 @@ class TestClass:
         assert simon.get_nbr_sci_publications() == 8
         
     def test_richard_holst(self):
+        self.miner = ScholarMiner(self.test_scholars)
         self.miner.process_group(self.test_scholars)
         self.scholars = self.miner.get_scholars()
         richard = self.scholars["Richard C. Holt"]
