@@ -6,8 +6,9 @@ Created on Sat Jun 15 16:50:30 2019
 """
 
 import pytest
-
 from scholar_miner import ScholarMiner
+import os.path
+from datetime import date
 
 class TestClass:
 
@@ -52,9 +53,13 @@ class TestClass:
         david.calc_stats()
         assert david._first_ratio == pytest.approx(0.2945, 0.001)
         assert david._sci_ratio == pytest.approx(0.2397, 0.001)
-        assert david.get_nbr_sci_publications() == 35        
+        assert david.get_nbr_sci_publications() == 35       
         
+        self.miner.write_scholars_txt()
+        self.miner.write_scholars_csv()
         
+        assert os.path.isfile(str(date.today()) + "_SCHOLARS.txt")
+             
     def test_simon_poulding(self):
         self.miner = ScholarMiner(self.test_scholars)
         self.miner.process_group(self.test_scholars)
