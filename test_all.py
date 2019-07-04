@@ -12,9 +12,20 @@ from scholar_miner import ScholarMiner
 class TestClass:
 
     def setup_method(self, module):
-        self.scholars = None
-        self.test_scholar = {"David Notkin":False, "Simon M. Poulding":False, "Richard C. Holt":False}
-        self.miner = ScholarMiner()
+        self.scholars = None        
+        self.test_nonsense = {"ABCDEFGH":False}
+        self.test_scholar = {"David Notkin":False}
+        self.test_scholars = {"Simon M. Poulding":False, "Richard C. Holt":False}
+        
+    def test_nonsense(self):
+        self.miner = ScholarMiner(self.test_nonsense)
+        self.miner.process_group(self.test_nonsense)
+        self.scholars = self.miner.get_scholars()
+        
+        assert len(self.scholars) == 0
+        
+        with pytest.raises(Exception):
+            assert self.scholars["ABCDEFGH"]
         
     def test_david_notkin(self):
         self.miner.process_group(self.test_scholar)
@@ -44,7 +55,7 @@ class TestClass:
         
         
     def test_simon_poulding(self):
-        self.miner.process_group(self.test_scholar)
+        self.miner.process_group(self.test_scholars)
         self.scholars = self.miner.get_scholars()
         simon = self.scholars["Simon M. Poulding"]
 
@@ -70,7 +81,7 @@ class TestClass:
         assert simon.get_nbr_sci_publications() == 8
         
     def test_richard_holst(self):
-        self.miner.process_group(self.test_scholar)
+        self.miner.process_group(self.test_scholars)
         self.scholars = self.miner.get_scholars()
         richard = self.scholars["Richard C. Holt"]
 

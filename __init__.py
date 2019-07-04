@@ -24,5 +24,5 @@ mdh_list = {"Hans Hansson": False, "Jan Carlsson": False, "Antonio Cicchetti": F
 linne_list = {"Jesper Andersson": False}
 affiliation_list = fast_list
 
-miner = ScholarMiner()
-miner.process_group(fast_list)
+#miner = ScholarMiner()
+#miner.process_group(fast_list)

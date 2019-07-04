@@ -17,13 +17,18 @@ sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM 
 
 class ScholarMiner:
     
-    def __init__(self):
+    def __init__(self, researchers):
         self.scholars = {}
         self.coauthors = Counter()
+        self.processed = []
+        for i in researchers:
+            self.processed.append(False)
             
     def process_group(self, researchers):
         nbr_remaining = len(researchers)
-        while nbr_remaining > 0: # an extra loop to tackle DBLP flakiness
+        attempts = 0
+        while nbr_remaining > 0 and attempts < 10: # an extra loop to tackle DBLP flakiness
+            attempts += 1
             for scholar, processed in researchers.items():	
                 if not processed: # only proceed if the scholar hasn't been processed already
                     try:
@@ -66,7 +71,10 @@ class ScholarMiner:
                         self.print_progress_bar(dblp_entries, dblp_entries)
                     current_scholar.calc_stats()
                     processed = True
-                    nbr_remaining -= 1           
+                    nbr_remaining -= 1
+                    
+        if attempts >= 10:
+            print("Failed to process scholars")
     
     # Print progress bar for scholar processing
     def print_progress_bar(self, iteration, total):
