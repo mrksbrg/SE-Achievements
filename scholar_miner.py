@@ -12,6 +12,7 @@ from collections import Counter
 import pandas as pd
 import time
 import dblp
+import os.path
 
 sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM Trans. Softw. Eng. Methodol.", "Autom. Softw. Eng.", "Information & Software Technology", "Requir. Eng.", " Software and System Modeling", "Software Quality Journal", "Journal of Systems and Software", "Journal of Software: Evolution and Process", "Softw. Test., Verif. Reliab.", "Softw., Pract. Exper.", "IET Software", "International Journal of Software Engineering and Knowledge Engineering"]
 
@@ -23,7 +24,10 @@ class ScholarMiner:
         self.processed = []
         for i in researchers:
             self.processed.append(False)
-            
+        #if not os.path.exists("cache"):
+        #    os.mkdir("cache")
+        # TODO: Implement some caching
+        
     def process_group(self, researchers):
         nbr_remaining = len(researchers)
         attempts = 0
@@ -61,6 +65,10 @@ class ScholarMiner:
                             current_publication = SEPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
                             current_scholar.add_publication(current_publication)
                             self.coauthors = self.coauthors + Counter(p.authors)
+                            
+                            #store the search_res locally
+                            
+                            
                             i += 1
                         except:
                             print("ERROR. Processing one of the papers failed. Waiting...")

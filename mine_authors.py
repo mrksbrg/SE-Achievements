@@ -25,6 +25,7 @@ mdh_list = {"Markus Bohlin":False, "Raffaela Mirandola":False, "Alessio Bucaioni
 linne_list = {"Jesper Andersson": False, "Morgan Ericsson":False, "Narges Khakpour":False, "Danny Weyns":False, "Welf Löwe":False, "Francesco Flammini":False, "Francis Palma":False, "Andreas Kerren":False, "Rafael Messias Martins":False}
 skovde_list = {"Björn Lundell":False, "Sten Andler":False, "Birgitta Lindström":False}
 karlstad_list = {"Sebastian Herold":False}
+jonkoping_list = {"Anders Adlemo":False}
 ericsson_list = {"Sigrid Eldh":False, "Kristian Wiklund":False, "Leif Jonsson":False, "Sahar Tahvili":False}
 others_list = {"":False}
 merged_list = {**rise_list, **linne_list, **ericsson_list}
@@ -46,16 +47,16 @@ def write_author_titles():
     authors_one_row = open(str(date.today()) + "_Authors_all_titles.csv","w+")
     
     for key, value in scholars.items():
-        tmp = key + " "
+        tmp = key + "; "
         for p in value.get_first_author_titles():
             authors_several_rows.write(key + ";" + p + "\n")
             tmp += p + " "
-        authors_one_row.write(tmp + "\n")    
+        authors_one_row.write(tmp + "\n")
     authors_several_rows.close()
     authors_one_row.close()
-
+    
 # Where the action is  
-process_list = fast_list 
+process_list = jonkoping_list 
 miner = ScholarMiner(process_list)
 miner.process_group(process_list)
 #miner.sort_and_print();
