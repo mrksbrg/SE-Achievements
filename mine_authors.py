@@ -6,9 +6,10 @@ Created on Fri Jun  7 23:57:13 2019
 """
 
 from scholar_miner import ScholarMiner
+from scholar_visualizer import Visualizer 
 from datetime import date
 
-fast_list = {"Martin Blom":False}
+fast_list = {"Markus Borg":False}
 rise_list = {"Niklas Mellegård":False, "Efi Papatheocharous": False, "Mehrdad Saadatmand": False, "Pasqualina Potena": False, "Markus Borg": False, "Ulrik Franke": False,
 			  "Ana Magazinius": False, "Joakim Fröberg": False, "Thomas Olsson": False, "Stefan Cedergren": False, "Stig Larsson":False, "Jakob Axelsson": False}
 lu_list = {"Per Runeson": False, "Björn Regnell": False, "Martin Höst": False, "Elizabeth Bjarnason": False, "Emelie Engström": False}
@@ -55,8 +56,8 @@ def write_author_titles():
     authors_several_rows.close()
     authors_one_row.close()
     
-# Where the action is  
-process_list = jonkoping_list 
+# Mine the scholars 
+process_list = fast_list 
 miner = ScholarMiner(process_list)
 miner.process_group(process_list)
 #miner.sort_and_print();
@@ -66,3 +67,8 @@ miner.write_scholars_txt()
 miner.write_scholars_csv()
 write_coauthors_and_candidates()
 write_author_titles()
+
+# Present the results
+visualizer = Visualizer(str(date.today()) + "_Authors_all_titles.csv")
+visualizer.preprocess()
+visualizer.visualize()

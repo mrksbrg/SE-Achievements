@@ -7,7 +7,6 @@ Created on Fri Jul  5 11:21:15 2019
 
 import csv
 from datetime import date
-import collections
 
 import numpy as np
 from yellowbrick.text import FreqDistVisualizer
@@ -37,6 +36,8 @@ class Visualizer:
         self.tailored_stop_words = []
         self.stopped_corpus = None
         #self.stemmed_corpus = None
+        
+        self.parse_csv()
     
     def parse_csv(self):
         with open(self.filename) as csv_file:
@@ -60,7 +61,9 @@ class Visualizer:
                                                           "review", "non", "approaches",
                                                           "controlled", "intensive", "exploratory",
                                                           "studies", "experimental", "evaluation", 
-                                                          "experiments", "toward"])
+                                                          "experiments", "toward", "s", "1st", 
+                                                          "ieee"])
+    
     
         corpus = word_tokenize(str(self.scholars_list))
         corpus = [word.lower() for word in corpus]
