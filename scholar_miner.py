@@ -66,9 +66,7 @@ class ScholarMiner:
                             current_scholar.add_publication(current_publication)
                             self.coauthors = self.coauthors + Counter(p.authors)
                             
-                            #store the search_res locally
-                            
-                            
+                            # TODO: Store the search_res locally
                             i += 1
                         except:
                             print("ERROR. Processing one of the papers failed. Waiting...")

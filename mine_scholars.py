@@ -6,10 +6,13 @@ Created on Fri Jun  7 23:57:13 2019
 """
 
 from scholar_miner import ScholarMiner
-from scholar_visualizer import Visualizer 
+#from scholar_analyzer import ScholarAnalyzer
+from scholar_writer import ScholarWriter
+from scholar_visualizer import ScholarVisualizer 
+
 from datetime import date
 
-fast_list = {"Markus Borg":False}
+fast_list = {"Stefan Cedergren":False}
 rise_list = {"Niklas Mellegård":False, "Efi Papatheocharous": False, "Mehrdad Saadatmand": False, "Pasqualina Potena": False, "Markus Borg": False, "Ulrik Franke": False,
 			  "Ana Magazinius": False, "Joakim Fröberg": False, "Thomas Olsson": False, "Stefan Cedergren": False, "Stig Larsson":False, "Jakob Axelsson": False}
 lu_list = {"Per Runeson": False, "Björn Regnell": False, "Martin Höst": False, "Elizabeth Bjarnason": False, "Emelie Engström": False}
@@ -68,7 +71,10 @@ miner.write_scholars_csv()
 write_coauthors_and_candidates()
 write_author_titles()
 
+# Analyze the scholars
+#analyzer = ScholarAnalyzer(str(date.today()) + "_Authors_all_titles.csv")
+
 # Present the results
-visualizer = Visualizer(str(date.today()) + "_Authors_all_titles.csv")
+visualizer = ScholarVisualizer(str(date.today()) + "_Authors_all_titles.csv")
 visualizer.preprocess()
 visualizer.visualize()

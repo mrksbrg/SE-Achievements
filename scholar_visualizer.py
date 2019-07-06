@@ -28,7 +28,7 @@ from sklearn.decomposition import NMF
 import matplotlib.pyplot as plt
 
 
-class Visualizer:
+class ScholarVisualizer:
     def __init__(self, filename):
         self.filename = filename
         self.scholars_dict = {}
@@ -67,15 +67,15 @@ class Visualizer:
     
         corpus = word_tokenize(str(self.scholars_list))
         corpus = [word.lower() for word in corpus]
+        
+        tokenizer = RegexpTokenizer(r'\w+')
+        corpus = tokenizer.tokenize(str(corpus))
     
         stopped_corpus = []
         for word in corpus:
             if word not in self.tailored_stop_words:
                 stopped_corpus.append(word)
-                
-        tokenizer = RegexpTokenizer(r'\w+')
-        stopped_corpus = tokenizer.tokenize(str(stopped_corpus))
-        
+                        
         self.stopped_corpus = stopped_corpus
         
 #        stemmer = PorterStemmer()
@@ -119,11 +119,11 @@ class Visualizer:
         lda.fit(tf)
         
         # NMF
-        nmf = NMF(n_components=nbr_topics, random_state=1, alpha=.1, l1_ratio=.5, init='nndsvd').fit(tfidf)
+        #nmf = NMF(n_components=nbr_topics, random_state=1, alpha=.1, l1_ratio=.5, init='nndsvd').fit(tfidf)
 
         print("### LDA topics ###")
         self.display_topics(lda, tf_feature_names, nbr_words)
-        print("\n### NMF topics ###")
+        #print("\n### NMF topics ###")
         #self.display_topics(nmf, tfidf_feature_names, nbr_words)
     
         # t-SNE
@@ -154,6 +154,6 @@ class Visualizer:
             print("Topic %d:" % (topic_idx))
             print(" ".join([feature_names[i] for i in topic.argsort()[:-no_top_words - 1:-1]]))
  
-vis = Visualizer(str(date.today()) + "_Authors_all_titles.csv")
-vis.parse_csv()
-vis.visualize()
+#vis = Visualizer(str(date.today()) + "_Authors_all_titles.csv")
+#vis.parse_csv()
+#vis.visualize()
