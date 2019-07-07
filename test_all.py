@@ -20,7 +20,7 @@ class TestClass:
         self.test_scholars = {"Simon M. Poulding":False, "Richard C. Holt":False}
         
     def test_nonsense(self):
-        self.miner = ScholarMiner(self.test_nonsense)
+        self.miner = ScholarMiner(self.test_nonsense, self.filename_prefix)
         self.miner.process_group(self.test_nonsense)
         self.scholars = self.miner.get_scholars()
         
@@ -30,7 +30,7 @@ class TestClass:
             assert self.scholars["ABCDEFGH"]
         
     def test_david_notkin(self):
-        self.miner = ScholarMiner(self.test_scholar)
+        self.miner = ScholarMiner(self.test_scholar, self.filename_prefix)
         self.miner.process_group(self.test_scholar)
         self.scholars = self.miner.get_scholars()
         david = self.scholars["David Notkin"]
