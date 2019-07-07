@@ -14,7 +14,7 @@ Created on Fri Jun  7 23:57:13 2019
 
 from scholar_miner import ScholarMiner
 from scholar_analyzer import ScholarAnalyzer
-from scholar_writer import ScholarWriter
+from scholar_tabulator import ScholarTabulator
 from scholar_visualizer import ScholarVisualizer 
 
 import os.path
@@ -43,13 +43,6 @@ others_list = {"":False}
 merged_list = {**rise_list, **linne_list, **ericsson_list}
 all_list = {**rise_list, **lu_list, **bth_list, **chalmers_list, **kth_list, **malmo_list, **linkoping_list, **mdh_list, **linne_list, **skovde_list, **karlstad_list, **ericsson_list}
 
-def write_coauthors_and_candidates():
-    try:
-        miner.write_coauthors_csv()
-        miner.write_candidate_SEScholars_csv(process_list)
-    except:
-        print("Could not write csv-files with co-authors and candidate SEScholars")
-
 # Prepare the process    
 process_list = fast_list
 subdirectory = "db"
@@ -59,21 +52,20 @@ except Exception:
     pass
 filename_prefix = os.path.join(subdirectory, str(date.today()) + "_swese_")
 
-# Mine the scholars 
+# 1. Mine the scholars, write the results
 miner = ScholarMiner(process_list, filename_prefix)
-miner.process_group(process_list)
+miner.process_group()
 miner.write_results()
+scholars = miner.get_scholars()
+print(type(scholars))
 
-write_coauthors_and_candidates()
-miner.write_author_titles()
-
-# Analyze the scholars
+# 2. Analyze the scholars, write the results
 analyzer = ScholarAnalyzer(str(date.today()) + "_Authors_all_titles.csv")
 
-# Write the scholars
-writer = ScholarWriter(None)
+# 3. Tabulate the scholars, write the results
+tabulator = ScholarTabulator(None)
 
-# Visualize the results
+# 4. Visualize the results, save to files
 visualizer = ScholarVisualizer(str(date.today()) + "_Authors_all_titles.csv")
 visualizer.preprocess()
 visualizer.visualize()

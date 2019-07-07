@@ -21,17 +21,15 @@ class TestClass:
         
     def test_nonsense(self):
         self.miner = ScholarMiner(self.test_nonsense, self.filename_prefix)
-        self.miner.process_group(self.test_nonsense)
+        self.miner.process_group()
         self.scholars = self.miner.get_scholars()
-        
-        assert len(self.scholars) == 0
         
         with pytest.raises(Exception):
             assert self.scholars["ABCDEFGH"]
         
     def test_david_notkin(self):
         self.miner = ScholarMiner(self.test_scholar, self.filename_prefix)
-        self.miner.process_group(self.test_scholar)
+        self.miner.process_group()
         self.scholars = self.miner.get_scholars()
         david = self.scholars["David Notkin"]
 
@@ -57,7 +55,7 @@ class TestClass:
         assert david.get_nbr_sci_publications() == 35       
         
         # TC7: Test write results
-        self.miner.write_results(self.filename_prefix)
+        self.miner.write_results()
         filename_txt = self.filename_prefix + "1_miner.txt"        
         filename_csv = self.filename_prefix + "1_miner.csv"        
         assert os.path.exists(filename_txt)
@@ -71,7 +69,7 @@ class TestClass:
              
 #    def test_simon_poulding(self):
 #        self.miner = ScholarMiner(self.test_scholars)
-#        self.miner.process_group(self.test_scholars)
+#        self.miner.process_group()
 #        self.scholars = self.miner.get_scholars()
 #        simon = self.scholars["Simon M. Poulding"]
 #
@@ -118,7 +116,7 @@ class TestClass:
 #        
 #    def test_richard_holst(self):
 #        self.miner = ScholarMiner(self.test_scholars)
-#        self.miner.process_group(self.test_scholars)
+#        self.miner.process_group()
 #        self.scholars = self.miner.get_scholars()
 #        richard = self.scholars["Richard C. Holt"]
 #

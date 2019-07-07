@@ -6,7 +6,6 @@ Created on Fri Jul  5 11:21:15 2019
 """
 
 import csv
-from datetime import date
 
 import numpy as np
 from yellowbrick.text import FreqDistVisualizer
