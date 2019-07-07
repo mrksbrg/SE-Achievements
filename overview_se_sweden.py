@@ -6,10 +6,11 @@ Created on Fri Jun  7 23:57:13 2019
 """
 
 from scholar_miner import ScholarMiner
-#from scholar_analyzer import ScholarAnalyzer
+from scholar_analyzer import ScholarAnalyzer
 from scholar_writer import ScholarWriter
 from scholar_visualizer import ScholarVisualizer 
 
+import os.path
 from datetime import date
 
 fast_list = {"Stefan Cedergren":False}
@@ -42,39 +43,30 @@ def write_coauthors_and_candidates():
     except:
         print("Could not write csv-files with co-authors and candidate SEScholars")
 
-def write_author_titles():
-    """ 
-    Write all titles from all first authors to csv
-    """
-    scholars = miner.get_scholars()
-    authors_several_rows = open(str(date.today()) + "_Authors_vs_titles.csv","w+")
-    authors_one_row = open(str(date.today()) + "_Authors_all_titles.csv","w+")
-    
-    for key, value in scholars.items():
-        tmp = key + "; "
-        for p in value.get_first_author_titles():
-            authors_several_rows.write(key + ";" + p + "\n")
-            tmp += p + " "
-        authors_one_row.write(tmp + "\n")
-    authors_several_rows.close()
-    authors_one_row.close()
-    
-# Mine the scholars 
-process_list = fast_list 
-miner = ScholarMiner(process_list)
-miner.process_group(process_list)
-#miner.sort_and_print();
+# Prepare the process    
+process_list = fast_list
+subdirectory = "db"
+try:
+    os.mkdir(subdirectory)
+except Exception:
+    pass
+filename_prefix = os.path.join(subdirectory, str(date.today()) + "_se_sweden_")
 
-# Write the results to files
-miner.write_scholars_txt()
-miner.write_scholars_csv()
+# Mine the scholars 
+miner = ScholarMiner(process_list, filename_prefix)
+miner.process_group(process_list)
+miner.write_results()
+
 write_coauthors_and_candidates()
-write_author_titles()
+miner.write_author_titles()
 
 # Analyze the scholars
-#analyzer = ScholarAnalyzer(str(date.today()) + "_Authors_all_titles.csv")
+analyzer = ScholarAnalyzer(str(date.today()) + "_Authors_all_titles.csv")
 
-# Present the results
+# Write the scholars
+writer = ScholarWriter(None)
+
+# Visualize the results
 visualizer = ScholarVisualizer(str(date.today()) + "_Authors_all_titles.csv")
 visualizer.preprocess()
 visualizer.visualize()

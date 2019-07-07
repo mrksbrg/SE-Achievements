@@ -18,15 +18,13 @@ sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM 
 
 class ScholarMiner:
     
-    def __init__(self, researchers):
+    def __init__(self, researchers, filename_prefix):
         self.scholars = {}
         self.coauthors = Counter()
         self.processed = []
         for i in researchers:
             self.processed.append(False)
-        #if not os.path.exists("cache"):
-        #    os.mkdir("cache")
-        # TODO: Implement some caching
+        self.filename_prefix = filename_prefix
         
     def process_group(self, researchers):
         nbr_remaining = len(researchers)
@@ -100,29 +98,44 @@ class ScholarMiner:
         # Print New Line on Complete
         if iteration == total: 
             print()
+            
+    def write_results(self):
+        tmp = open(self.filename_prefix + "1_miner.txt","w+")
+        for key, value in self.scholars.items():
+            tmp.write(value.to_string() + "\n")
+            tmp.write(value.sci_publications_to_string())
+        tmp.close()
+        
+        tmp = open(self.filename_prefix + "1_miner.csv","w+")
+        for key, value in self.scholars.items():
+            tmp.write(value.to_csv_line() + "\n")
+        tmp.close()
         
     def get_scholars(self):
         return self.scholars
     
     def get_coauthors(self):
         return self.coauthors
-    
-    def write_scholars_txt(self):
-        tmp = open(str(date.today()) + "_SCHOLARS.txt","w+")
-        for key, value in self.scholars.items():
-            tmp.write(value.to_string() + "\n")
-            tmp.write(value.sci_publications_to_string())
-        tmp.close()
-        
-    def write_scholars_csv(self):
-        tmp = open(str(date.today()) + "_SCHOLARS.csv","w+")
-        for key, value in self.scholars.items():
-            tmp.write(value.to_csv_line() + "\n")
-        tmp.close()
         
     def sort_and_print(self):
         print(sorted(self.scholars.items(), key = 
              lambda kv:(kv[1], kv[0])))
+        
+    def write_author_titles(self):
+        """ 
+        Write all titles from all first authors to csv
+        """
+        authors_several_rows = open(self.filename_prefix + "_Authors_vs_titles.csv","w+")
+        authors_one_row = open(self.filename_prefix + "_Authors_all_titles.csv","w+")
+        
+        for key, value in self.scholars.items():
+            tmp = key + "; "
+            for p in value.get_first_author_titles():
+                authors_several_rows.write(key + ";" + p + "\n")
+                tmp += p + " "
+            authors_one_row.write(tmp + "\n")
+        authors_several_rows.close()
+        authors_one_row.close()    
         
     def write_coauthors_csv(self):
         (pd.DataFrame.from_dict(data=self.coauthors, orient='index').to_csv('coauthors.csv', sep=';', header=False))

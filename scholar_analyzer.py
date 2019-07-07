@@ -29,7 +29,7 @@ import matplotlib.pyplot as plt
 
 class ScholarAnalyzer:
     def __init__(self, filename):
-    	self.filename = filename
+        self.filename = filename
         self.scholars_dict = {}
         self.scholars_list = []
         self.tailored_stop_words = []
