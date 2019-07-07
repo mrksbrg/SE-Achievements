@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Sun Jul  7 17:19:46 2019
+
+@author: Markus Borg
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Fri Jun  7 23:57:13 2019
 
 @author: Markus Borg
@@ -50,7 +57,7 @@ try:
     os.mkdir(subdirectory)
 except Exception:
     pass
-filename_prefix = os.path.join(subdirectory, str(date.today()) + "_se_sweden_")
+filename_prefix = os.path.join(subdirectory, str(date.today()) + "_swese_")
 
 # Mine the scholars 
 miner = ScholarMiner(process_list, filename_prefix)

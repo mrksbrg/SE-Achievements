@@ -14,7 +14,7 @@ class TestClass:
 
     def setup_method(self, module):
         self.scholars = None
-        self.filename_prefix = str(date.today()) + "_se_sweden_"        
+        self.filename_prefix = str(date.today()) + "_swese_"        
         self.test_nonsense = {"ABCDEFGH":False}
         self.test_scholar = {"David Notkin":False}
         self.test_scholars = {"Simon M. Poulding":False, "Richard C. Holt":False}
