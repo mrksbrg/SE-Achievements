@@ -57,15 +57,14 @@ miner = ScholarMiner(process_list, filename_prefix)
 miner.process_group()
 miner.write_results()
 scholars = miner.get_scholars()
-print(type(scholars))
 
 # 2. Analyze the scholars, write the results
-analyzer = ScholarAnalyzer(str(date.today()) + "_Authors_all_titles.csv")
+analyzer = ScholarAnalyzer(filename_prefix, scholars)
 
 # 3. Tabulate the scholars, write the results
 tabulator = ScholarTabulator(None)
 
 # 4. Visualize the results, save to files
-visualizer = ScholarVisualizer(str(date.today()) + "_Authors_all_titles.csv")
+visualizer = ScholarVisualizer(filename_prefix)
 visualizer.preprocess()
 visualizer.visualize()

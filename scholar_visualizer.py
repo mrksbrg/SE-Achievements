@@ -29,8 +29,8 @@ import matplotlib.pyplot as plt
 
 
 class ScholarVisualizer:
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, filename_prefix):
+        self.filename_prefix = filename_prefix
         self.scholars_dict = {}
         self.scholars_list = []
         self.tailored_stop_words = []
@@ -40,7 +40,7 @@ class ScholarVisualizer:
         self.parse_csv()
     
     def parse_csv(self):
-        with open(self.filename) as csv_file:
+        with open(self.filename_prefix + "1_titles_per_author.csv") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=';')
             
             line_count = 0

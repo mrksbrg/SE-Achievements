@@ -88,12 +88,15 @@ class ScholarMiner:
             tmp.write(value.to_csv_line() + "\n")
         tmp.close()
         
+        # Write concatenated titles per author and affiliation
+        
+        
         # Write co-authors to csv-file
-        (pd.DataFrame.from_dict(data=self.coauthors, orient='index').to_csv('coauthors.csv', sep=';', header=False))
+        (pd.DataFrame.from_dict(data=self.coauthors, orient='index').to_csv(self.filename_prefix + "1_coauthors.csv", sep=';', header=False))
         
         # Write co-authors that are not already among the mined Swedish scholars 
         diff = dict(self.scholars.items() ^ self.coauthors.items())
-        (pd.DataFrame.from_dict(data=diff, orient='index').to_csv('candidates.csv', sep=';', header=False))
+        (pd.DataFrame.from_dict(data=diff, orient='index').to_csv(self.filename_prefix + "1_candidates.csv", sep=';', header=False))
         
         self.write_author_titles()
         
@@ -101,17 +104,17 @@ class ScholarMiner:
         """ 
         Write all titles from all first authors to csv
         """
-        authors_several_rows = open(self.filename_prefix + "_Authors_vs_titles.csv","w+")
-        authors_one_row = open(self.filename_prefix + "_Authors_all_titles.csv","w+")
+        titles_per_author = open(self.filename_prefix + "1_titles_per_author.csv","w+")
+        titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv","w+")
         
         for key, value in self.scholars.items():
             tmp = key + "; "
             for p in value.get_first_author_titles():
-                authors_several_rows.write(key + ";" + p + "\n")
+                #titles_per_author2.write(key + ";" + p + "\n")
                 tmp += p + " "
-            authors_one_row.write(tmp + "\n")
-        authors_several_rows.close()
-        authors_one_row.close()    
+            titles_per_author.write(tmp + "\n")
+        titles_per_author.close()
+        titles_per_affiliation.close()    
         
     def get_scholars(self):
         return self.scholars

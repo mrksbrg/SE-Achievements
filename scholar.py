@@ -4,6 +4,8 @@ class SEScholar:
     def __init__(self, name, dblp_entries):
         self.name = name        
         self.dblp_entries = dblp_entries
+        self.research_interests = []
+        
         self._publications = set()
         self._first_ratio = -1
         self._sci_ratio = -1
@@ -85,3 +87,11 @@ class SEScholar:
     
     def to_csv_line(self):
         return self.name + ";" + str(self.dblp_entries) + ";" + str(len(self._publications)) + ";" + str(self._first_ratio) + ";" + str(self._sci_ratio) + ";" + str(self._nbr_first_sci) + ";" + str(self.get_nbr_main_confs())    
+    
+    def research_interests_to_string(self):
+        ''' Return a comma separated string by concatenating research interests. '''
+        result = ""
+        for term in self.research_interests:
+            result += str(term[0]) + ", "
+        return result[:-2] # remove two final chars        
+         
