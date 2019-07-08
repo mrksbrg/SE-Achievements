@@ -57,7 +57,9 @@ class ScholarAnalyzer:
                                                           "controlled", "intensive", "exploratory",
                                                           "studies", "experimental", "evaluation", 
                                                           "experiments", "toward", "s", "1st", 
-                                                          "ieee", "conference"])
+                                                          "ieee", "conference", "articles", 
+                                                          "international", "cited", "towards",
+                                                          "problems", "via"])
     
         for scholar, corpus in self.scholars_dict.items():    
             self.stopped_corpus[scholar] = []
@@ -86,7 +88,7 @@ class ScholarAnalyzer:
 
         for scholar, corpus in self.scholars_dict.items(): 
             word_dist = nltk.FreqDist(self.stopped_corpus[scholar])   
-            top = word_dist.most_common(5)
+            top = word_dist.most_common(10)
             research_interests = ""
             for term in top:
                 research_interests += str(term[0]) + ", "

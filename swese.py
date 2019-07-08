@@ -44,7 +44,7 @@ merged_list = {**rise_list, **linne_list, **ericsson_list}
 all_list = {**rise_list, **lu_list, **bth_list, **chalmers_list, **kth_list, **malmo_list, **linkoping_list, **mdh_list, **linne_list, **skovde_list, **karlstad_list, **ericsson_list}
 
 # Prepare the process    
-process_list = rise_list
+process_list = all_list
 subdirectory = "db"
 try:
     os.mkdir(subdirectory)
