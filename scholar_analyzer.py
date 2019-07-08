@@ -25,7 +25,7 @@ class ScholarAnalyzer:
         self.scholars_dict = scholars
         self.scholars_list = []
         self.tailored_stop_words = []
-        self.stopped_corpus = None
+        self.stopped_corpus = {}
         #self.stemmed_corpus = None
         
         self.parse_csv()    
@@ -40,60 +40,60 @@ class ScholarAnalyzer:
                 self.scholars_dict[row[0]] = row[1]
                 self.scholars_list.append(row[1])
                 line_count += 1
+            
+            print(self.scholars_dict)
     
     def preprocess_titles(self):
+        ''' Create a dict with scholars as key and a list representing the corpus of title terms after stop word removal. '''
         stop_words = set(stopwords.words('english'))
 
         self.tailored_stop_words = stop_words.union(["software", "engineering", "based", 
                                                           "using", "case", "study", "oriented", 
                                                           "driven", "workshop", "research",
-                                                          "ubersetzerbau", "zur", "survey",
+                                                          "übersetzerbau", "zur", "survey",
                                                           "approach", "overview", "summary",
                                                           "use", "multi", "experiment",
                                                           "review", "non", "approaches",
                                                           "controlled", "intensive", "exploratory",
                                                           "studies", "experimental", "evaluation", 
                                                           "experiments", "toward", "s", "1st", 
-                                                          "ieee"])
+                                                          "ieee", "conference"])
     
-    
-        corpus = word_tokenize(str(self.scholars_list))
-        corpus = [word.lower() for word in corpus]
+        for scholar, corpus in self.scholars_dict.items():    
+            self.stopped_corpus[scholar] = []
+            
+            corpus = word_tokenize(str(self.scholars_dict[scholar]))
+            corpus = [word.lower() for word in corpus]
+            
+            tokenizer = RegexpTokenizer(r'\w+')
+            corpus = tokenizer.tokenize(str(corpus))
         
-        tokenizer = RegexpTokenizer(r'\w+')
-        corpus = tokenizer.tokenize(str(corpus))
-    
-        stopped_corpus = []
-        for word in corpus:
-            if word not in self.tailored_stop_words:
-                stopped_corpus.append(word)
-                        
-        self.stopped_corpus = stopped_corpus
-        
-#        stemmer = PorterStemmer()
-#        stemmed_corpus = []
-#        for word in stopped_corpus:
-#            stemmed_corpus.append(stemmer.stem(word))
-#            
-#        self.stemmed_corpus = stemmed_corpus
+            for word in corpus:
+                if word not in self.tailored_stop_words:
+                    self.stopped_corpus[scholar].append(word)
+            
+#            stemmer = PorterStemmer()
+#            stemmed_corpus = []
+#            for word in stopped_corpus:
+#                stemmed_corpus.append(stemmer.stem(word))
+#                
+#            self.stemmed_corpus = stemmed_corpus
     
     def analyze_individual_research_interests(self):
-        if self.stopped_corpus == None:
-            print("Preprocess first")
-            return
-        
-        word_dist = nltk.FreqDist(self.stopped_corpus)   
-        top = word_dist.most_common(5)
-        research_interests = ""
-        for term in top:
-            research_interests += str(term[0]) + ", "
-        research_interests = research_interests[:-2] # remove two final chars
-        print("### Apparent research interests: " + research_interests)
+        ''' Extract apparent research interests from all scholars based on first-authored publications '''
+        self.preprocess_titles()
+        print("####### Apparent individual research interests #######")
+
+        for scholar, corpus in self.scholars_dict.items(): 
+            word_dist = nltk.FreqDist(self.stopped_corpus[scholar])   
+            top = word_dist.most_common(5)
+            research_interests = ""
+            for term in top:
+                research_interests += str(term[0]) + ", "
+            research_interests = research_interests[:-2] # remove two final chars
+            print(scholar + ": " + research_interests)
               
     def analyze_affiliation_topics(self):
-        if self.stopped_corpus == None:
-            print("Preprocess first")
-            return
         
         tf_vec = CountVectorizer(stop_words=self.tailored_stop_words)
         tfidf_vec = TfidfVectorizer(stop_words=self.tailored_stop_words) 

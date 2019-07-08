@@ -20,7 +20,7 @@ from scholar_visualizer import ScholarVisualizer
 import os.path
 from datetime import date
 
-fast_list = {"Stefan Cedergren":False}
+fast_list = {"Stefan Cedergren":False, "Annabella Loconsole": False}
 rise_list = {"Niklas Mellegård":False, "Efi Papatheocharous": False, "Mehrdad Saadatmand": False, "Pasqualina Potena": False, "Markus Borg": False, "Ulrik Franke": False,
 			  "Ana Magazinius": False, "Joakim Fröberg": False, "Thomas Olsson": False, "Stefan Cedergren": False, "Stig Larsson":False, "Jakob Axelsson": False}
 lu_list = {"Per Runeson": False, "Björn Regnell": False, "Martin Höst": False, "Elizabeth Bjarnason": False, "Emelie Engström": False}
@@ -44,7 +44,7 @@ merged_list = {**rise_list, **linne_list, **ericsson_list}
 all_list = {**rise_list, **lu_list, **bth_list, **chalmers_list, **kth_list, **malmo_list, **linkoping_list, **mdh_list, **linne_list, **skovde_list, **karlstad_list, **ericsson_list}
 
 # Prepare the process    
-process_list = fast_list
+process_list = rise_list
 subdirectory = "db"
 try:
     os.mkdir(subdirectory)
@@ -60,11 +60,11 @@ scholars = miner.get_scholars()
 
 # 2. Analyze the scholars, write the results
 analyzer = ScholarAnalyzer(filename_prefix, scholars)
+analyzer.analyze_individual_research_interests()
+
 
 # 3. Tabulate the scholars, write the results
 tabulator = ScholarTabulator(None)
 
 # 4. Visualize the results, save to files
 visualizer = ScholarVisualizer(filename_prefix)
-visualizer.preprocess()
-visualizer.visualize()
