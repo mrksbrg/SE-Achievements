@@ -30,7 +30,7 @@ class TestClass:
     def test_david_notkin(self):
         self.miner = ScholarMiner(self.test_scholar, self.filename_prefix)
         self.miner.process_group()
-        self.scholars = self.miner.get_scholars()
+        self.scholars = self.miner.get_process_list()
         david = self.scholars["David Notkin"]
 
         # TC1: Test that DBLP returns a result
@@ -70,7 +70,7 @@ class TestClass:
 #    def test_simon_poulding(self):
 #        self.miner = ScholarMiner(self.test_scholars)
 #        self.miner.process_group()
-#        self.scholars = self.miner.get_scholars()
+#        self.scholars = self.miner.get_process_list()
 #        simon = self.scholars["Simon M. Poulding"]
 #
 #        # TC1: Test that DBLP returns a result
@@ -117,7 +117,7 @@ class TestClass:
 #    def test_richard_holst(self):
 #        self.miner = ScholarMiner(self.test_scholars)
 #        self.miner.process_group()
-#        self.scholars = self.miner.get_scholars()
+#        self.scholars = self.miner.get_process_list()
 #        richard = self.scholars["Richard C. Holt"]
 #
 #        # TC1: Test that DBLP returns a result

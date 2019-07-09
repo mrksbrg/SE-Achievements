@@ -16,7 +16,7 @@ class ScholarMiner:
     
     def __init__(self, process_list, filename_prefix):
         self.process_list = process_list
-        self.SEscholars = {}
+        self.se_scholars = {}
         self.coauthors = Counter()
         self.processed = []
         for i in process_list:
@@ -42,7 +42,7 @@ class ScholarMiner:
                     dblp_entries = len(search_res.publications)
                     print("DBLP entries: ", dblp_entries)          
                     current_scholar = SEScholar(scholar, dblp_entries)
-                    self.process_list[scholar] = current_scholar
+                    self.se_scholars[scholar] = current_scholar
 
                     # traverse publications
                     i = 0
@@ -79,13 +79,13 @@ class ScholarMiner:
             
     def write_results(self):
         tmp = open(self.filename_prefix + "1_miner.txt","w+")
-        for key, value in self.process_list.items():
+        for key, value in self.se_scholars.items():
             tmp.write(value.to_string() + "\n")
             tmp.write(value.sci_publications_to_string())
         tmp.close()
         
         tmp = open(self.filename_prefix + "1_miner.csv","w+")
-        for key, value in self.process_list.items():
+        for key, value in self.se_scholars.items():
             tmp.write(value.to_csv_line() + "\n")
         tmp.close()
         
@@ -106,7 +106,7 @@ class ScholarMiner:
         titles_per_author = open(self.filename_prefix + "1_titles_per_author.csv","w+")
         titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv","w+")
         
-        for key, value in self.process_list.items():
+        for key, value in self.se_scholars.items():
             tmp = key + "; "
             for p in value.get_first_author_titles():
                 #titles_per_author2.write(key + ";" + p + "\n")
@@ -115,8 +115,11 @@ class ScholarMiner:
         titles_per_author.close()
         titles_per_affiliation.close()    
         
-    def get_scholars(self):
+    def get_process_list(self):
         return self.process_list
+
+    def get_scholars(self):
+        return self.se_scholars
     
     def get_coauthors(self):
         return self.coauthors

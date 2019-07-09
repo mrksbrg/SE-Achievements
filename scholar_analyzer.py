@@ -20,10 +20,11 @@ from sklearn.decomposition import LatentDirichletAllocation as LDA
 from sklearn.decomposition import NMF
 
 class ScholarAnalyzer:
-    def __init__(self, filename_prefix, scholars):
+
+    def __init__(self, filename_prefix, se_scholars):
         self.filename_prefix = filename_prefix
-        self.scholars_dict = scholars
-        self.scholars_list = []
+        self.se_scholars = se_scholars
+        self.scholars_dict = {}
         self.tailored_stop_words = []
         self.stopped_corpus = {}
         #self.stemmed_corpus = None
@@ -38,10 +39,7 @@ class ScholarAnalyzer:
             line_count = 0
             for row in csv_reader:
                 self.scholars_dict[row[0]] = row[1]
-                self.scholars_list.append(row[1])
                 line_count += 1
-            
-            print(self.scholars_dict)
     
     def preprocess_titles(self):
         ''' Create a dict with scholars as key and a list representing the corpus of title terms after stop word removal. '''
@@ -91,7 +89,7 @@ class ScholarAnalyzer:
     def analyze_individual_research_interests(self):
         ''' Extract apparent research interests from all scholars based on first-authored publications '''
         self.preprocess_titles()
-        print("####### Apparent individual research interests #######")
+        print("\n####### Apparent individual research interests #######")
 
         for scholar, corpus in self.scholars_dict.items(): 
             word_dist = nltk.FreqDist(self.stopped_corpus[scholar])   
@@ -99,9 +97,7 @@ class ScholarAnalyzer:
             research_interests = ""
             for term in top:
                 research_interests += str(term[0]) + ", "
-                print(type(term[0]))
-                print(type(scholar))
-                #scholar.research_interests.append(str(term[0]))
+                self.se_scholars[scholar].append_research_interest(str(term[0]))
             research_interests = research_interests[:-2] # remove two final chars
             print(scholar + ": " + research_interests)
 
@@ -113,8 +109,8 @@ class ScholarAnalyzer:
         # TF and TFIDF
         tf = tf_vec.fit_transform(self.stopped_corpus)
         tf_feature_names = tf_vec.get_feature_names()
-        tfidf = tfidf_vec.fit_transform(self.stopped_corpus)
-        tfidf_feature_names = tfidf_vec.get_feature_names()
+        #tfidf = tfidf_vec.fit_transform(self.stopped_corpus)
+        #tfidf_feature_names = tfidf_vec.get_feature_names()
         
         nbr_topics = 8
         nbr_words = 7

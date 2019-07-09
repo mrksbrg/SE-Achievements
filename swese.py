@@ -49,10 +49,10 @@ filename_prefix = os.path.join(subdirectory, str(date.today()) + "_swese_")
 miner = ScholarMiner(process_list, filename_prefix)
 miner.process_group()
 miner.write_results()
-scholars = miner.get_scholars()
+se_scholars = miner.get_scholars()
 
 # 2. Analyze the scholars, write the results
-analyzer = ScholarAnalyzer(filename_prefix, scholars)
+analyzer = ScholarAnalyzer(filename_prefix, se_scholars)
 analyzer.analyze_individual_research_interests()
 
 
