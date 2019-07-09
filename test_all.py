@@ -67,10 +67,10 @@ class TestClass:
         assert file_stats_txt.st_size == pytest.approx(1149, 1)
         assert file_stats_csv.st_size == pytest.approx(67, 1)
              
-#    def test_simon_poulding(self):
-#        self.miner = ScholarMiner(self.test_scholars)
-#        self.miner.process_group()
-#        self.scholars = self.miner.get_process_list()
+   def test_simon_poulding(self):
+       self.miner = ScholarMiner(self.test_scholars)
+       self.miner.process_group()
+       self.scholars = self.miner.get_scholars()
 #        simon = self.scholars["Simon M. Poulding"]
 #
 #        # TC1: Test that DBLP returns a result
