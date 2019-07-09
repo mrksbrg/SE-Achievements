@@ -54,6 +54,7 @@ se_scholars = miner.get_scholars()
 # 2. Analyze the scholars, write the results
 analyzer = ScholarAnalyzer(filename_prefix, se_scholars)
 analyzer.analyze_individual_research_interests()
+analyzer.write_results()
 
 
 # 3. Tabulate the scholars, write the results

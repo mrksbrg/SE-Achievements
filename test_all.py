@@ -30,7 +30,7 @@ class TestClass:
     def test_david_notkin(self):
         self.miner = ScholarMiner(self.test_scholar, self.filename_prefix)
         self.miner.process_group()
-        self.scholars = self.miner.get_process_list()
+        self.scholars = self.miner.get_scholars()
         david = self.scholars["David Notkin"]
 
         # TC1: Test that DBLP returns a result

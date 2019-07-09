@@ -81,9 +81,8 @@ class ScholarAnalyzer:
 
     def write_results(self):
         tmp = open(self.filename_prefix + "2_analyzer_interests.csv", "w+")
-        for key, value in self.scholars.items():
-            tmp.write(value.to_string() + "\n")
-            tmp.write(value.sci_publications_to_string())
+        for key, value in self.se_scholars.items():
+            tmp.write(str(key) + ";" + value.research_interests_to_string() + "\n")
         tmp.close()
     
     def analyze_individual_research_interests(self):

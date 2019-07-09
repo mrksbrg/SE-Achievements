@@ -96,5 +96,5 @@ class SEScholar:
         ''' Return a comma separated string by concatenating research interests. '''
         result = ""
         for term in self.research_interests:
-            result += str(term[0]) + ", "
+            result += term + ", "
         return result[:-2] # remove two final chars
