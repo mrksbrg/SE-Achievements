@@ -50,8 +50,8 @@ class TestClass:
         
         # TC6: Test that David Notkin has the correct ratios
         david.calc_stats()
-        assert david._first_ratio == pytest.approx(0.2945, 0.001)
-        assert david._sci_ratio == pytest.approx(0.2397, 0.001)
+        assert david.first_ratio == pytest.approx(0.2945, 0.001)
+        assert david.sci_ratio == pytest.approx(0.2397, 0.001)
         assert david.get_nbr_sci_publications() == 35       
         
         # TC7: Test write results
