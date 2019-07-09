@@ -5,13 +5,6 @@ Created on Sun Jul  7 17:19:46 2019
 @author: Markus Borg
 """
 
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jun  7 23:57:13 2019
-
-@author: Markus Borg
-"""
-
 from scholar_miner import ScholarMiner
 from scholar_analyzer import ScholarAnalyzer
 from scholar_tabulator import ScholarTabulator
@@ -44,7 +37,7 @@ merged_list = {**rise_list, **linne_list, **ericsson_list}
 all_list = {**rise_list, **lu_list, **bth_list, **chalmers_list, **kth_list, **malmo_list, **linkoping_list, **mdh_list, **linne_list, **skovde_list, **karlstad_list, **ericsson_list}
 
 # Prepare the process    
-process_list = all_list
+process_list = fast_list
 subdirectory = "db"
 try:
     os.mkdir(subdirectory)

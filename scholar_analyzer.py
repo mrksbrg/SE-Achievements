@@ -80,6 +80,13 @@ class ScholarAnalyzer:
 #                stemmed_corpus.append(stemmer.stem(word))
 #                
 #            self.stemmed_corpus = stemmed_corpus
+
+    def write_results(self):
+        tmp = open(self.filename_prefix + "2_analyzer_interests.csv", "w+")
+        for key, value in self.scholars.items():
+            tmp.write(value.to_string() + "\n")
+            tmp.write(value.sci_publications_to_string())
+        tmp.close()
     
     def analyze_individual_research_interests(self):
         ''' Extract apparent research interests from all scholars based on first-authored publications '''
@@ -92,9 +99,12 @@ class ScholarAnalyzer:
             research_interests = ""
             for term in top:
                 research_interests += str(term[0]) + ", "
+                print(type(term[0]))
+                print(type(scholar))
+                #scholar.research_interests.append(str(term[0]))
             research_interests = research_interests[:-2] # remove two final chars
             print(scholar + ": " + research_interests)
-              
+
     def analyze_affiliation_topics(self):
         
         tf_vec = CountVectorizer(stop_words=self.tailored_stop_words)

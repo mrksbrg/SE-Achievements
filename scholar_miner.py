@@ -14,20 +14,21 @@ import dblp
 
 class ScholarMiner:
     
-    def __init__(self, scholars, filename_prefix):
-        self.scholars = scholars
+    def __init__(self, process_list, filename_prefix):
+        self.process_list = process_list
+        self.SEscholars = {}
         self.coauthors = Counter()
         self.processed = []
-        for i in scholars:
+        for i in process_list:
             self.processed.append(False)
         self.filename_prefix = filename_prefix
         
     def process_group(self):
-        nbr_remaining = len(self.scholars)
+        nbr_remaining = len(self.process_list)
         attempts = 0
         while nbr_remaining > 0 and attempts < 10: # an extra loop to tackle DBLP flakiness
             attempts += 1
-            for scholar, processed in self.scholars.items():	
+            for scholar, processed in self.process_list.items():
                 if not processed: # only proceed if the scholar hasn't been processed already
                     try:
                         print("\n####### Processing scholar: " + scholar + " #######")
@@ -41,9 +42,9 @@ class ScholarMiner:
                     dblp_entries = len(search_res.publications)
                     print("DBLP entries: ", dblp_entries)          
                     current_scholar = SEScholar(scholar, dblp_entries)
-                    self.scholars[scholar] = current_scholar
-        				                    
-        			# traverse publications
+                    self.process_list[scholar] = current_scholar
+
+                    # traverse publications
                     i = 0
                     for p in search_res.publications:  
                         self.print_progress_bar(i + 1, dblp_entries)
@@ -78,28 +79,26 @@ class ScholarMiner:
             
     def write_results(self):
         tmp = open(self.filename_prefix + "1_miner.txt","w+")
-        for key, value in self.scholars.items():
+        for key, value in self.process_list.items():
             tmp.write(value.to_string() + "\n")
             tmp.write(value.sci_publications_to_string())
         tmp.close()
         
         tmp = open(self.filename_prefix + "1_miner.csv","w+")
-        for key, value in self.scholars.items():
+        for key, value in self.process_list.items():
             tmp.write(value.to_csv_line() + "\n")
         tmp.close()
         
         # Write concatenated titles per author and affiliation
-        
+        self.write_author_titles()
         
         # Write co-authors to csv-file
         (pd.DataFrame.from_dict(data=self.coauthors, orient='index').to_csv(self.filename_prefix + "1_coauthors.csv", sep=';', header=False))
         
         # Write co-authors that are not already among the mined Swedish scholars 
-        diff = dict(self.scholars.items() ^ self.coauthors.items())
+        diff = dict(self.process_list.items() ^ self.coauthors.items())
         (pd.DataFrame.from_dict(data=diff, orient='index').to_csv(self.filename_prefix + "1_candidates.csv", sep=';', header=False))
-        
-        self.write_author_titles()
-        
+
     def write_author_titles(self):
         """ 
         Write all titles from all first authors to csv
@@ -107,7 +106,7 @@ class ScholarMiner:
         titles_per_author = open(self.filename_prefix + "1_titles_per_author.csv","w+")
         titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv","w+")
         
-        for key, value in self.scholars.items():
+        for key, value in self.process_list.items():
             tmp = key + "; "
             for p in value.get_first_author_titles():
                 #titles_per_author2.write(key + ";" + p + "\n")
@@ -117,13 +116,13 @@ class ScholarMiner:
         titles_per_affiliation.close()    
         
     def get_scholars(self):
-        return self.scholars
+        return self.process_list
     
     def get_coauthors(self):
         return self.coauthors
         
     def sort_and_print(self):
-        print(sorted(self.scholars.items(), key = 
+        print(sorted(self.process_list.items(), key =
              lambda kv:(kv[1], kv[0])))
     
     # Print progress bar for scholar processing
