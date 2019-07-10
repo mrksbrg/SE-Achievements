@@ -5,7 +5,7 @@ Created on Sat Jun 15 21:18:26 2019
 @author: Markus Borg
 """
 
-from scholar import SEScholar
+from scholar import SWESEScholar
 from publication import SEPublication
 from collections import Counter
 import pandas as pd
@@ -15,7 +15,7 @@ import dblp
 class ScholarMiner:
     
     def __init__(self, process_list, filename_prefix):
-        self.process_list = process_list
+        self.swese_scholars = process_list
         self.se_scholars = {}
         self.coauthors = Counter()
         self.processed = []
@@ -24,55 +24,55 @@ class ScholarMiner:
         self.filename_prefix = filename_prefix
         
     def process_group(self):
-        nbr_remaining = len(self.process_list)
+        nbr_remaining = len(self.swese_scholars)
         attempts = 0
         while nbr_remaining > 0 and attempts < 10: # an extra loop to tackle DBLP flakiness
             attempts += 1
-            for scholar, processed in self.process_list.items():
-                if not processed: # only proceed if the scholar hasn't been processed already
+            for scholar in self.swese_scholars:
+                try:
+                    print("\n####### Processing scholar: " + scholar.name + " #######")
+                    authors = dblp.search(scholar.name)
+                    search_res = authors[0]
+                except:
+                    print("ERROR: Invalid search result from DBLP. Waiting...")
+                    time.sleep(5)
+                    break
+
+                dblp_entries = len(search_res.publications)
+                print("DBLP entries: ", dblp_entries)
+                #current_scholar = SWESEScholar(scholar)
+                scholar.dblp_entries = dblp_entries
+                self.se_scholars[scholar] = scholar
+
+                # traverse publications
+                i = 0
+                for p in search_res.publications:
+                    self.print_progress_bar(i + 1, dblp_entries)
                     try:
-                        print("\n####### Processing scholar: " + scholar + " #######")
-                        authors = dblp.search(scholar)
-                        search_res = authors[0]
+                        time.sleep(0.5)  # There appears to be some race condition in the dblp package
+                        if len(p.authors) == 0:  # skip papers with 0 authors
+                            continue
+                        elif p.type == "article":
+                            if p.journal == "CoRR":  # skip ArXiv preprints
+                                continue
+                                # elif p.type == "inproceedings": # This is what conference proceedings look like
+                            # print(p.booktitle)
+                        current_publication = SEPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
+                        scholar.add_publication(current_publication)
+                        self.coauthors = self.coauthors + Counter(p.authors)
+
+                        # TODO: Store the search_res locally
+                        i += 1
                     except:
-                        print("ERROR: Invalid search result from DBLP. Waiting...")
+                        print("ERROR. Processing one of the papers failed. Waiting...")
                         time.sleep(5)
                         break
-                                        
-                    dblp_entries = len(search_res.publications)
-                    print("DBLP entries: ", dblp_entries)          
-                    current_scholar = SEScholar(scholar, dblp_entries)
-                    self.se_scholars[scholar] = current_scholar
 
-                    # traverse publications
-                    i = 0
-                    for p in search_res.publications:  
-                        self.print_progress_bar(i + 1, dblp_entries)
-                        try:
-                            time.sleep(0.5) # There appears to be some race condition in the dblp package  					
-                            if len(p.authors) == 0: #skip papers with 0 authors
-                                    continue
-                            elif p.type == "article":
-                                if p.journal == "CoRR": #skip ArXiv preprints
-                                    continue 
-                            #elif p.type == "inproceedings": # This is what conference proceedings look like
-                                #print(p.booktitle)
-                            current_publication = SEPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
-                            current_scholar.add_publication(current_publication)
-                            self.coauthors = self.coauthors + Counter(p.authors)
-                            
-                            # TODO: Store the search_res locally
-                            i += 1
-                        except:
-                            print("ERROR. Processing one of the papers failed. Waiting...")
-                            time.sleep(5)
-                            break
-                        
-                    if dblp_entries > 0 and i<dblp_entries:
-                        self.print_progress_bar(dblp_entries, dblp_entries)
-                    current_scholar.calc_stats()
-                    processed = True
-                    nbr_remaining -= 1
+                if dblp_entries > 0 and i < dblp_entries:
+                    self.print_progress_bar(dblp_entries, dblp_entries)
+                scholar.calc_stats()
+                processed = True
+                nbr_remaining -= 1
                     
         if attempts >= 10:
             print("Failed to process scholars")
@@ -96,7 +96,7 @@ class ScholarMiner:
         (pd.DataFrame.from_dict(data=self.coauthors, orient='index').to_csv(self.filename_prefix + "1_coauthors.csv", sep=';', header=False))
         
         # Write co-authors that are not already among the mined Swedish scholars 
-        diff = dict(self.process_list.items() ^ self.coauthors.items())
+        diff = dict(self.swese_scholars.items() ^ self.coauthors.items())
         (pd.DataFrame.from_dict(data=diff, orient='index').to_csv(self.filename_prefix + "1_candidates.csv", sep=';', header=False))
 
     def write_author_titles(self):
@@ -116,7 +116,7 @@ class ScholarMiner:
         titles_per_affiliation.close()    
         
     def get_process_list(self):
-        return self.process_list
+        return self.swese_scholars
 
     def get_scholars(self):
         return self.se_scholars
@@ -125,7 +125,7 @@ class ScholarMiner:
         return self.coauthors
         
     def sort_and_print(self):
-        print(sorted(self.process_list.items(), key =
+        print(sorted(self.swese_scholars.items(), key =
              lambda kv:(kv[1], kv[0])))
     
     # Print progress bar for scholar processing

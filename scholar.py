@@ -1,11 +1,12 @@
 from publication import SEPublication
 
-class SEScholar:  
-    def __init__(self, name, dblp_entries):
-        self.name = name        
-        self.dblp_entries = dblp_entries
+class SWESEScholar:
+    def __init__(self, name, affiliation):
+        self.name = name
+        self.affiliation = affiliation
         self.research_interests = []
 
+        self.dblp_entries = -1
         self.publications = set()
         self.first_ratio = -1
         self.sci_ratio = -1

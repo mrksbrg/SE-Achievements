@@ -66,21 +66,21 @@ class TestClass:
         file_stats_csv = os.stat(filename_csv)
         assert file_stats_txt.st_size == pytest.approx(1149, 1)
         assert file_stats_csv.st_size == pytest.approx(67, 1)
-             
-   # def test_simon_poulding(self):
-   #     self.miner = ScholarMiner(self.test_scholars)
-   #     self.miner.process_group()
-   #     self.scholars = self.miner.get_scholars()
-#        simon = self.scholars["Simon M. Poulding"]
-#
-#        # TC1: Test that DBLP returns a result
-#        assert self.scholars != None
-#        
-#        # TC2: Test that Simon Poulding has 48 DBLP entries
-#        assert simon.dblp_entries == 48
-#        
-#        # TC3: Test that the name is correctly processed
-#        assert simon.name == "Simon M. Poulding"
+
+    def test_simon_poulding(self):
+        self.miner = ScholarMiner(self.test_scholars)
+        self.miner.process_group()
+        self.scholars = self.miner.get_scholars()
+        simon = self.scholars["Simon M. Poulding"]
+
+        # TC1: Test that DBLP returns a result
+        assert self.scholars != None
+
+        # TC2: Test that Simon Poulding has 48 DBLP entries
+        assert simon.dblp_entries == 48
+
+        # TC3: Test that the name is correctly processed
+        assert simon.name == "Simon M. Poulding"
 #        
 #        # TC4: Test that Simon Poulding has 44 publications after removing duplicates
 #        assert simon.get_nbr_publications() == 44

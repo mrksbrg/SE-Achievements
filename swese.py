@@ -5,36 +5,53 @@ Created on Sun Jul  7 17:19:46 2019
 @author: Markus Borg
 """
 
+from scholar import SWESEScholar
 from scholar_miner import ScholarMiner
 from scholar_analyzer import ScholarAnalyzer
 from scholar_tabulator import ScholarTabulator
-from scholar_visualizer import ScholarVisualizer 
-
+from scholar_visualizer import ScholarVisualizer
 import os.path
 from datetime import date
 
-fast_list = {"Stefan Cedergren":False, "Annabella Loconsole": False}
-rise_list = {"Niklas Mellegård":False, "Efi Papatheocharous": False, "Mehrdad Saadatmand": False, "Pasqualina Potena": False, "Markus Borg": False, "Ulrik Franke": False,
-			  "Ana Magazinius": False, "Joakim Fröberg": False, "Thomas Olsson": False, "Stefan Cedergren": False, "Stig Larsson":False, "Jakob Axelsson": False}
-lu_list = {"Per Runeson": False, "Björn Regnell": False, "Martin Höst": False, "Elizabeth Bjarnason": False, "Emelie Engström": False}
-bth_list = {"Claes Wohlin": False, "Tony Gorschek": False, "Krzysztof Wnuk": False, "Michael Unterkalmsteiner": False, "Michael Mattsson": False,
-			"Mikael Svahnberg": False, "Darja Smite": False, "Michael Felderer": False, "Jürgen Börstler": False, "Emil Alégroth": False, "Ali Nauman": False, "Fabian Fagerholm": False, "Javier Gonzalez Huerta": False, "Muhammad Usman": False}
-chalmers_list = {"Rogardt Heldal":False, "Kenneth Lind":False, "Patrizio Pelliccione": False, "Riccardo Scandariato": False, "Miroslaw Staron": False, "Jan-Philipp Steghöfer": False, "Christian Berger": False, "Robert Feldt": False, "Richard Torkar": False, "Ivica Crnkovic": False,
-				 "Richard Berntsson-Svensson": False, "Francisco Gomes": False, "Gregory Gay": False, "Michel Chaudron": False, "Jan Bosch": False, "Jennifer Horkoff": False, 
-				 "Eric Knauss": False, "Thorsten Berger": False, "Gul Calikli": False, "Regina Hebig": False, "Philipp Leitner":False, "Agneta Nilsson":False}
-kth_list = {"Martin Monperrus": False, "Frederic Loiret": False, "Karl Meinke": False, "Benoit Baudry": False, "Pontus Johnson":False, "Robert Lagerström":False, "Mathias Ekstedt":False}
-malmo_list = {"Helena Holmström Olsson": False, "Annabella Loconsole": False}
-linkoping_list = {"Kristian Sandahl": False}
-mdh_list = {"Markus Bohlin":False, "Raffaela Mirandola":False, "Alessio Bucaioni":False, "Hans Hansson": False, "Jan Carlsson": False, "Antonio Cicchetti": False, "Federico Ciccozzi": False, "Séverine Sentilles": False,
-			"Kristina Lundqvist": False, "Daniel Sundmark": False, "Wasif Afzal": False, "Adnan Causevic": False, "Eduard Paul Enoiu": False, "Barbara Gallina":False, "Mikael Sjödin":False}
-linne_list = {"Jesper Andersson": False, "Morgan Ericsson":False, "Narges Khakpour":False, "Danny Weyns":False, "Welf Löwe":False, "Francesco Flammini":False, "Francis Palma":False, "Andreas Kerren":False, "Rafael Messias Martins":False}
-skovde_list = {"Björn Lundell":False, "Sten Andler":False, "Birgitta Lindström":False}
-karlstad_list = {"Sebastian Herold":False}
-jonkoping_list = {"Anders Adlemo":False}
-ericsson_list = {"Sigrid Eldh":False, "Kristian Wiklund":False, "Leif Jonsson":False, "Sahar Tahvili":False}
-others_list = {"":False}
-merged_list = {**rise_list, **linne_list, **ericsson_list}
-all_list = {**rise_list, **lu_list, **bth_list, **chalmers_list, **kth_list, **malmo_list, **linkoping_list, **mdh_list, **linne_list, **skovde_list, **karlstad_list, **ericsson_list}
+swese_scholars = []
+def add_swese_scholars(process_list, affiliation):
+	for name in process_list:
+		swese_scholars.append(SWESEScholar(name, affiliation))
+
+fast_list = {"Stefan Cedergren", "Annabella Loconsole"}
+rise_list = {"Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
+			  "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson", "Stefan Cedergren", "Stig Larsson", "Jakob Axelsson"}
+add_swese_scholars(rise_list, "RISE Research Institutes of Sweden AB")
+lu_list = {"Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström"}
+add_swese_scholars(lu_list, "Lund University")
+bth_list = {"Claes Wohlin", "Tony Gorschek", "Krzysztof Wnuk", "Michael Unterkalmsteiner", "Michael Mattsson",
+			"Mikael Svahnberg", "Darja Smite", "Michael Felderer", "Jürgen Börstler", "Emil Alégroth", "Ali Nauman", "Fabian Fagerholm", "Javier Gonzalez Huerta", "Muhammad Usman"}
+add_swese_scholars(bth_list, "Blekinge Institute of Technology")
+gbg_list = {"Rogardt Heldal", "Kenneth Lind", "Patrizio Pelliccione", "Riccardo Scandariato", "Miroslaw Staron", "Jan-Philipp Steghöfer", "Christian Berger", "Robert Feldt", "Richard Torkar", "Ivica Crnkovic",
+				 "Richard Berntsson-Svensson", "Francisco Gomes", "Gregory Gay", "Michel Chaudron", "Jan Bosch", "Jennifer Horkoff", 
+				 "Eric Knauss", "Thorsten Berger", "Gul Calikli", "Regina Hebig", "Philipp Leitner", "Agneta Nilsson"}
+add_swese_scholars(gbg_list, "Chalmers / Gothenburg University")
+kth_list = {"Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt"}
+add_swese_scholars(kth_list, "KTH Royal Institute of Technology")
+su_list = {}
+add_swese_scholars(su_list, "Stockholm University")
+malmo_list = {"Helena Holmström Olsson", "Annabella Loconsole"}
+add_swese_scholars(malmo_list, "Malmö University")
+linkoping_list = {"Kristian Sandahl"}
+add_swese_scholars(linkoping_list, "Linköping University")
+mdh_list = {"Markus Bohlin", "Raffaela Mirandola", "Alessio Bucaioni", "Hans Hansson", "Jan Carlsson", "Antonio Cicchetti", "Federico Ciccozzi", "Séverine Sentilles",
+			"Kristina Lundqvist", "Daniel Sundmark", "Wasif Afzal", "Adnan Causevic", "Eduard Paul Enoiu", "Barbara Gallina", "Mikael Sjödin"}
+add_swese_scholars(mdh_list, "Mälardalen University")
+linne_list = {"Jesper Andersson", "Morgan Ericsson", "Narges Khakpour", "Danny Weyns", "Welf Löwe", "Francesco Flammini", "Francis Palma", "Andreas Kerren", "Rafael Messias Martins"}
+add_swese_scholars(linne_list, "Linneaus Univerity")
+skovde_list = {"Björn Lundell", "Sten Andler", "Birgitta Lindström"}
+add_swese_scholars(skovde_list, "Skövde University")
+karlstad_list = {"Sebastian Herold"}
+add_swese_scholars(karlstad_list, "Karlstad University")
+jonkoping_list = {"Anders Adlemo"}
+add_swese_scholars(jonkoping_list, "Jönköping University")
+
+#all_list = {**rise_list, **lu_list, **bth_list, **gbg_list, **kth_list, **malmo_list, **linkoping_list, **mdh_list, **linne_list, **skovde_list, **karlstad_list}
 
 # Prepare the process    
 process_list = fast_list
@@ -46,7 +63,7 @@ except Exception:
 filename_prefix = os.path.join(subdirectory, str(date.today()) + "_swese_")
 
 # 1. Mine the scholars, write the results
-miner = ScholarMiner(process_list, filename_prefix)
+miner = ScholarMiner(swese_scholars, filename_prefix)
 miner.process_group()
 miner.write_results()
 se_scholars = miner.get_scholars()
@@ -62,3 +79,5 @@ tabulator = ScholarTabulator(None)
 
 # 4. Visualize the results, save to files
 visualizer = ScholarVisualizer(filename_prefix)
+
+
