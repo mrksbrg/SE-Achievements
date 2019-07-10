@@ -15,23 +15,28 @@ class TestClass:
     def setup_method(self, module):
         self.scholars = None
         self.filename_prefix = str(date.today()) + "_swese_"        
-        self.test_nonsense = {"ABCDEFGH":False}
-        self.test_scholar = {"David Notkin":False}
-        self.test_scholars = {"Simon M. Poulding":False, "Richard C. Holt":False}
+        self.test_nonsense = ["ABCDEFGH"]
+        self.test_scholar = ["David Notkin"]
+        self.test_scholars = ["Simon M. Poulding", "Richard C. Holt"]
         
     def test_nonsense(self):
         self.miner = ScholarMiner(self.test_nonsense, self.filename_prefix)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
         
-        with pytest.raises(Exception):
-            assert self.scholars["ABCDEFGH"]
+        assert len(self.scholars) == 0
         
     def test_david_notkin(self):
         self.miner = ScholarMiner(self.test_scholar, self.filename_prefix)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
-        david = self.scholars["David Notkin"]
+        print(type(self.scholars))
+        print(len(self.scholars))
+        print(type(self.scholars[0]))
+        david = None
+        for scholar in self.scholars:
+            if scholar.name == "David Notkin":
+                david = scholar
 
         # TC1: Test that DBLP returns a result
         assert self.scholars != None
@@ -68,7 +73,7 @@ class TestClass:
         assert file_stats_csv.st_size == pytest.approx(67, 1)
 
     def test_simon_poulding(self):
-        self.miner = ScholarMiner(self.test_scholars)
+        self.miner = ScholarMiner(self.test_scholars, self.filename_prefix)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
         simon = self.scholars["Simon M. Poulding"]

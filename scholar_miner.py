@@ -16,11 +16,8 @@ class ScholarMiner:
     
     def __init__(self, process_list, filename_prefix):
         self.swese_scholars = process_list
-        self.se_scholars = {}
+        #self.se_scholars = {}
         self.coauthors = Counter()
-        self.processed = []
-        for i in process_list:
-            self.processed.append(False)
         self.filename_prefix = filename_prefix
         
     def process_group(self):
@@ -40,9 +37,7 @@ class ScholarMiner:
 
                 dblp_entries = len(search_res.publications)
                 print("DBLP entries: ", dblp_entries)
-                #current_scholar = SWESEScholar(scholar)
                 scholar.dblp_entries = dblp_entries
-                self.se_scholars[scholar] = scholar
 
                 # traverse publications
                 i = 0
@@ -79,14 +74,14 @@ class ScholarMiner:
             
     def write_results(self):
         tmp = open(self.filename_prefix + "1_miner.txt","w+")
-        for key, value in self.se_scholars.items():
-            tmp.write(value.to_string() + "\n")
-            tmp.write(value.sci_publications_to_string())
+        for scholar in self.swese_scholars:
+            tmp.write(scholar.name + "\n")
+            tmp.write(scholar.sci_publications_to_string())
         tmp.close()
         
         tmp = open(self.filename_prefix + "1_miner.csv","w+")
-        for key, value in self.se_scholars.items():
-            tmp.write(value.to_csv_line() + "\n")
+        for scholar in self.swese_scholars:
+            tmp.write(scholar.to_csv_line() + "\n")
         tmp.close()
         
         # Write concatenated titles per author and affiliation
@@ -95,8 +90,13 @@ class ScholarMiner:
         # Write co-authors to csv-file
         (pd.DataFrame.from_dict(data=self.coauthors, orient='index').to_csv(self.filename_prefix + "1_coauthors.csv", sep=';', header=False))
         
-        # Write co-authors that are not already among the mined Swedish scholars 
-        diff = dict(self.swese_scholars.items() ^ self.coauthors.items())
+        # Write co-authors that are not already among the mined Swedish scholars
+        diff = {}
+        for coauthor in self.coauthors:
+            for swese_scholar in self.swese_scholars:
+                if coauthor != swese_scholar.name:
+                    diff[coauthor] = self.coauthors[coauthor]
+
         (pd.DataFrame.from_dict(data=diff, orient='index').to_csv(self.filename_prefix + "1_candidates.csv", sep=';', header=False))
 
     def write_author_titles(self):
@@ -106,27 +106,20 @@ class ScholarMiner:
         titles_per_author = open(self.filename_prefix + "1_titles_per_author.csv","w+")
         titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv","w+")
         
-        for key, value in self.se_scholars.items():
-            tmp = key + "; "
-            for p in value.get_first_author_titles():
+        for scholar in self.swese_scholars:
+            tmp = scholar.name + "; "
+            for p in scholar.get_first_author_titles():
                 #titles_per_author2.write(key + ";" + p + "\n")
                 tmp += p + " "
             titles_per_author.write(tmp + "\n")
         titles_per_author.close()
-        titles_per_affiliation.close()    
-        
-    def get_process_list(self):
-        return self.swese_scholars
+        titles_per_affiliation.close()
 
     def get_scholars(self):
-        return self.se_scholars
+        return self.swese_scholars
     
     def get_coauthors(self):
         return self.coauthors
-        
-    def sort_and_print(self):
-        print(sorted(self.swese_scholars.items(), key =
-             lambda kv:(kv[1], kv[0])))
     
     # Print progress bar for scholar processing
     def print_progress_bar(self, iteration, total):

@@ -21,9 +21,10 @@ from sklearn.decomposition import NMF
 
 class ScholarAnalyzer:
 
-    def __init__(self, filename_prefix, se_scholars):
+    def __init__(self, filename_prefix, swese_scholars):
         self.filename_prefix = filename_prefix
-        self.se_scholars = se_scholars
+        self.swese_scholars = swese_scholars
+        self.se_scholars = None
         self.scholars_dict = {}
         self.tailored_stop_words = []
         self.stopped_corpus = {}
@@ -81,8 +82,8 @@ class ScholarAnalyzer:
 
     def write_results(self):
         tmp = open(self.filename_prefix + "2_analyzer_interests.csv", "w+")
-        for key, value in self.se_scholars.items():
-            tmp.write(str(key) + ";" + value.research_interests_to_string() + "\n")
+        for scholar in self.swese_scholars:
+            tmp.write(scholar.name + ";" + scholar.research_interests_to_string() + "\n")
         tmp.close()
     
     def analyze_individual_research_interests(self):
@@ -90,13 +91,15 @@ class ScholarAnalyzer:
         self.preprocess_titles()
         print("\n####### Apparent individual research interests #######")
 
-        for scholar, corpus in self.scholars_dict.items(): 
-            word_dist = nltk.FreqDist(self.stopped_corpus[scholar])   
+        for scholar, corpus in self.scholars_dict.items():
+            # Find the current scholar in the master list
+            curr = next((x for x in self.swese_scholars if scholar == x.name), None)
+            word_dist = nltk.FreqDist(self.stopped_corpus[scholar])
             top = word_dist.most_common(10)
             research_interests = ""
             for term in top:
                 research_interests += str(term[0]) + ", "
-                self.se_scholars[scholar].append_research_interest(str(term[0]))
+                curr.append_research_interest(str(term[0]))
             research_interests = research_interests[:-2] # remove two final chars
             print(scholar + ": " + research_interests)
 
