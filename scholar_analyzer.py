@@ -104,7 +104,10 @@ class ScholarAnalyzer:
             print(scholar + ": " + research_interests)
 
     def analyze_affiliation_topics(self):
-        
+        affiliation_corpora = {}
+        for scholar in self.swese_scholars:
+            affiliation_corpora[scholar.affiliation]
+
         tf_vec = CountVectorizer(stop_words=self.tailored_stop_words)
         tfidf_vec = TfidfVectorizer(stop_words=self.tailored_stop_words) 
         

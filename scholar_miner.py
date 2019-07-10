@@ -85,12 +85,12 @@ class ScholarMiner:
         tmp.close()
         
         # Write concatenated titles per author and affiliation
-        self.write_author_titles()
+        self.write_author_and_affiliation_titles()
         
         # Write co-authors to csv-file
         (pd.DataFrame.from_dict(data=self.coauthors, orient='index').to_csv(self.filename_prefix + "1_coauthors.csv", sep=';', header=False))
         
-        # Write co-authors that are not already among the mined Swedish scholars
+        # Write co-authors that are not already among the mined Swedish SE scholars
         diff = {}
         for coauthor in self.coauthors:
             for swese_scholar in self.swese_scholars:
@@ -99,7 +99,7 @@ class ScholarMiner:
 
         (pd.DataFrame.from_dict(data=diff, orient='index').to_csv(self.filename_prefix + "1_candidates.csv", sep=';', header=False))
 
-    def write_author_titles(self):
+    def write_author_and_affiliation_titles(self):
         """ 
         Write all titles from all first authors to csv
         """
@@ -109,7 +109,7 @@ class ScholarMiner:
         for scholar in self.swese_scholars:
             tmp = scholar.name + "; "
             for p in scholar.get_first_author_titles():
-                #titles_per_author2.write(key + ";" + p + "\n")
+                titles_per_author2.write(key + ";" + p + "\n")
                 tmp += p + " "
             titles_per_author.write(tmp + "\n")
         titles_per_author.close()

@@ -6,6 +6,7 @@ Created on Sat Jun 15 16:50:30 2019
 """
 
 import pytest
+from scholar import SWESEScholar
 from scholar_miner import ScholarMiner
 import os.path
 from datetime import date
@@ -13,21 +14,27 @@ from datetime import date
 class TestClass:
 
     def setup_method(self, module):
-        self.scholars = None
+        self.scholars = []
         self.filename_prefix = str(date.today()) + "_swese_"        
         self.test_nonsense = ["ABCDEFGH"]
         self.test_scholar = ["David Notkin"]
         self.test_scholars = ["Simon M. Poulding", "Richard C. Holt"]
-        
+
+    def add_swese_scholars(self, process_list, affiliation):
+        for name in process_list:
+            self.scholars.append(SWESEScholar(name, affiliation))
+
     def test_nonsense(self):
-        self.miner = ScholarMiner(self.test_nonsense, self.filename_prefix)
+        self.add_swese_scholars(self.test_nonsense, "N/A")
+        self.miner = ScholarMiner(self.scholars, self.filename_prefix)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
         
-        assert len(self.scholars) == 0
+        assert self.scholars[0].dblp_entries == -1
         
     def test_david_notkin(self):
-        self.miner = ScholarMiner(self.test_scholar, self.filename_prefix)
+        self.add_swese_scholars(self.test_scholar, "N/A")
+        self.miner = ScholarMiner(self.scholars, self.filename_prefix)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
         print(type(self.scholars))
@@ -73,10 +80,14 @@ class TestClass:
         assert file_stats_csv.st_size == pytest.approx(67, 1)
 
     def test_simon_poulding(self):
-        self.miner = ScholarMiner(self.test_scholars, self.filename_prefix)
+        self.add_swese_scholars(self.test_scholars, "N/A")
+        self.miner = ScholarMiner(self.scholars, self.filename_prefix)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
-        simon = self.scholars["Simon M. Poulding"]
+        simon = None
+        for scholar in self.scholars:
+            if scholar.name == "Simon M. Poulding":
+                simon = scholar
 
         # TC1: Test that DBLP returns a result
         assert self.scholars != None
