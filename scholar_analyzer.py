@@ -127,16 +127,28 @@ class ScholarAnalyzer:
             research_interests = research_interests[:-2] # remove two final chars
             print(scholar + ": " + research_interests)
 
+        print("\n####### Apparent research interests of the affiliations #######")
+
+        for affiliation, corpus in self.affiliations_dict.items():
+            # Find the current affiliation in the master list
+            word_dist = nltk.FreqDist(self.affiliations_stopped_corpus[affiliation])
+            top = word_dist.most_common(10)
+            research_interests = ""
+            for term in top:
+                research_interests += str(term[0]) + ", "
+            research_interests = research_interests[:-2]  # remove two final chars
+            print(affiliation + ": " + research_interests)
+
     def analyze_affiliation_topics(self):
         if self._nbr_affiliations > 1:
             tf_vec = CountVectorizer(stop_words=self.tailored_stop_words)
-            tfidf_vec = TfidfVectorizer(stop_words=self.tailored_stop_words)
+            #tfidf_vec = TfidfVectorizer(stop_words=self.tailored_stop_words)
 
             # TF and TFIDF
-            tf = tf_vec.fit_transform(self.affiliations_stopped_corpus)
+            tf = tf_vec.fit_transform(self.affiliations_dict)
             tf_feature_names = tf_vec.get_feature_names()
-            tfidf = tfidf_vec.fit_transform(self.affiliations_stopped_corpus)
-            tfidf_feature_names = tfidf_vec.get_feature_names()
+            #tfidf = tfidf_vec.fit_transform(self.affiliations_stopped_corpus)
+            #tfidf_feature_names = tfidf_vec.get_feature_names()
 
             nbr_topics = 8
             nbr_words = 7
