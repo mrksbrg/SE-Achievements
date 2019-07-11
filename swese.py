@@ -20,8 +20,10 @@ def add_swese_scholars(process_list, affiliation):
 		swese_scholars.append(SWESEScholar(name, affiliation))
 
 if (len(sys.argv) == 1):
-    fast_list = ["Stefan Cedergren", "Annabella Loconsole"]
-    add_swese_scholars(fast_list, "Mock University")
+    fast_list = ["Stefan Cedergren"]
+    add_swese_scholars(fast_list, "RISE")
+    fast_list2 = ["Annabella Loconsole"]
+    add_swese_scholars(fast_list2, "MAU")
     # rise_list = {"Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
     #               "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson", "Stefan Cedergren", "Stig Larsson", "Jakob Axelsson"}
     # add_swese_scholars(rise_list, "RISE Research Institutes of Sweden AB")
@@ -75,9 +77,10 @@ miner.write_results()
 swese_scholars = miner.get_scholars()
 
 # 2. Analyze the scholars, write the results
-print("####### Step 2 - Analyzing scholars #######")
+print("\n####### Step 2 - Analyzing scholars #######")
 analyzer = ScholarAnalyzer(filename_prefix, swese_scholars)
 analyzer.analyze_individual_research_interests()
+analyzer.analyze_affiliation_topics()
 analyzer.write_results()
 
 # 3. Tabulate the scholars, write the results

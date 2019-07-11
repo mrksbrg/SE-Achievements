@@ -114,7 +114,7 @@ class ScholarMiner:
             titles_per_author.write(tmp + "\n")
 
         for affiliation, titles in affiliation_titles.items():
-            titles_per_affiliation.write(affiliation + ";" + titles)
+            titles_per_affiliation.write(affiliation + ";" + titles + "\n")
         titles_per_author.close()
         titles_per_affiliation.close()
 
