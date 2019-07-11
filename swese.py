@@ -21,7 +21,7 @@ def add_swese_scholars(process_list, affiliation):
 
 if (len(sys.argv) == 1):
     fast_list = ["Stefan Cedergren", "Annabella Loconsole"]
-    add_swese_scholars(fast_list, "N/A")
+    add_swese_scholars(fast_list, "Mock University")
     # rise_list = {"Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
     #               "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson", "Stefan Cedergren", "Stig Larsson", "Jakob Axelsson"}
     # add_swese_scholars(rise_list, "RISE Research Institutes of Sweden AB")
@@ -68,12 +68,14 @@ except Exception:
 filename_prefix = os.path.join(subdirectory, str(date.today()) + "_swese_")
 
 # 1. Mine the scholars, write the results
+print("####### Step 1 - Mining scholars #######")
 miner = ScholarMiner(swese_scholars, filename_prefix)
 miner.process_group()
 miner.write_results()
 swese_scholars = miner.get_scholars()
 
 # 2. Analyze the scholars, write the results
+print("####### Step 2 - Analyzing scholars #######")
 analyzer = ScholarAnalyzer(filename_prefix, swese_scholars)
 analyzer.analyze_individual_research_interests()
 analyzer.write_results()

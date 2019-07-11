@@ -16,7 +16,6 @@ class ScholarMiner:
     
     def __init__(self, process_list, filename_prefix):
         self.swese_scholars = process_list
-        #self.se_scholars = {}
         self.coauthors = Counter()
         self.filename_prefix = filename_prefix
         
@@ -66,7 +65,6 @@ class ScholarMiner:
                 if dblp_entries > 0 and i < dblp_entries:
                     self.print_progress_bar(dblp_entries, dblp_entries)
                 scholar.calc_stats()
-                processed = True
                 nbr_remaining -= 1
                     
         if attempts >= 10:
@@ -103,15 +101,20 @@ class ScholarMiner:
         """ 
         Write all titles from all first authors to csv
         """
+
         titles_per_author = open(self.filename_prefix + "1_titles_per_author.csv","w+")
         titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv","w+")
-        
+        affiliation_titles = self.get_dict_of_affiliations()
+
         for scholar in self.swese_scholars:
             tmp = scholar.name + "; "
             for p in scholar.get_first_author_titles():
-                titles_per_author2.write(key + ";" + p + "\n")
+                affiliation_titles[scholar.affiliation] += p + " "
                 tmp += p + " "
             titles_per_author.write(tmp + "\n")
+
+        for affiliation, titles in affiliation_titles.items():
+            titles_per_affiliation.write(affiliation + ";" + titles)
         titles_per_author.close()
         titles_per_affiliation.close()
 
@@ -138,4 +141,12 @@ class ScholarMiner:
         print('\r%s |%s| %s%% %s' % ("Progress:", bar, percent, "Complete "), end = '\r')
         # Print New Line on Complete
         if iteration == total: 
-            print()    
+            print()
+
+    def get_dict_of_affiliations(self):
+        ''' Return a dict with affiliations as keys. All values are empty strings. '''
+        affiliations = {}
+        for scholar in self.swese_scholars:
+            if scholar.affiliation not in affiliations:
+                affiliations[scholar.affiliation] = ""
+        return affiliations
