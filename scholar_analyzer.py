@@ -7,17 +7,15 @@ Created on Fri Jul  5 11:21:15 2019
 
 import csv
 
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
 
 from nltk.tokenize import RegexpTokenizer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
+#from nltk.stem.porter import PorterStemmer
 import nltk
 
 from sklearn.decomposition import LatentDirichletAllocation as LDA
-from sklearn.decomposition import NMF
 
 class ScholarAnalyzer:
 
@@ -96,13 +94,6 @@ class ScholarAnalyzer:
             for word in corpus:
                 if word not in self.tailored_stop_words:
                     self.affiliations_stopped_corpus[affiliation].append(word)
-            
-#            stemmer = PorterStemmer()
-#            stemmed_corpus = []
-#            for word in stopped_corpus:
-#                stemmed_corpus.append(stemmer.stem(word))
-#                
-#            self.stemmed_corpus = stemmed_corpus
 
     def write_results(self):
         tmp = open(self.filename_prefix + "2_analyzer_interests.csv", "w+")
@@ -140,35 +131,36 @@ class ScholarAnalyzer:
             print(affiliation + ": " + research_interests)
 
     def analyze_affiliation_topics(self):
-        if self._nbr_affiliations > 1:
-            tf_vec = CountVectorizer(stop_words=self.tailored_stop_words)
-            #tfidf_vec = TfidfVectorizer(stop_words=self.tailored_stop_words)
+        print("\n### LDA topics ###")
+        tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2, stop_words='english')
+        for key, value in self.affiliations_stopped_corpus.items():
+            try:
+                print(key)
+                nbr_terms = len(value)
+                print("Corpus size: " + str(len(value)))
+                tf = tf_vectorizer.fit_transform(value)
+                tf_feature_names = tf_vectorizer.get_feature_names()
 
-            # TF and TFIDF
-            tf = tf_vec.fit_transform(self.affiliations_dict)
-            tf_feature_names = tf_vec.get_feature_names()
-            #tfidf = tfidf_vec.fit_transform(self.affiliations_stopped_corpus)
-            #tfidf_feature_names = tfidf_vec.get_feature_names()
+                nbr_topics = self.calc_nbr_topics(nbr_terms)
+                nbr_words = 7
 
-            nbr_topics = 8
-            nbr_words = 7
+                # LDA
+                lda = LDA(n_components=nbr_topics)
+                lda.fit(tf)
 
-            # LDA
-            lda = LDA(n_components=nbr_topics)
-            lda.fit(tf)
-
-            # NMF
-            #nmf = NMF(n_components=nbr_topics, random_state=1, alpha=.1, l1_ratio=.5, init='nndsvd').fit(tfidf)
-
-            print("\n### LDA topics ###")
-            self.display_topics(lda, tf_feature_names, nbr_words)
-            #print("\n### NMF topics ###")
-            #self.display_topics(nmf, tfidf_feature_names, nbr_words)
-        else:
-            print("Only one affiliation, skipping topic analysis.")
+                self.display_topics(lda, tf_feature_names, nbr_words)
+            except:
+                print("Too few publications - No topic model for this affiliation.")
        
     def display_topics(self, model, feature_names, no_top_words):
         for topic_idx, topic in enumerate(model.components_):
             print("Topic %d:" % (topic_idx))
             print(" ".join([feature_names[i] for i in topic.argsort()[:-no_top_words - 1:-1]]))
- 
+
+    def calc_nbr_topics(self, nbr_terms):
+        nbr_topics = 5
+        if nbr_terms < 40:
+            nbr_topics = 2
+        elif nbr_terms <80:
+            nbr_topics = 3
+        return nbr_topics
