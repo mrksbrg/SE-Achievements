@@ -141,26 +141,48 @@ class ScholarAnalyzer:
                 tf = tf_vectorizer.fit_transform(value)
                 tf_feature_names = tf_vectorizer.get_feature_names()
 
-                nbr_topics = self.calc_nbr_topics(nbr_terms)
-                nbr_words = 7
+                nbr_topics, nbr_words = self.calc_topics_tuple(nbr_terms)
 
                 # LDA
                 lda = LDA(n_components=nbr_topics)
                 lda.fit(tf)
 
                 self.display_topics(lda, tf_feature_names, nbr_words)
+                self.write_topics(lda, tf_feature_names, nbr_words)
             except:
                 print("Too few publications - No topic model for this affiliation.")
        
     def display_topics(self, model, feature_names, no_top_words):
         for topic_idx, topic in enumerate(model.components_):
-            print("Topic %d:" % (topic_idx))
+            print("Topic %d:" % (topic_idx+1))
             print(" ".join([feature_names[i] for i in topic.argsort()[:-no_top_words - 1:-1]]))
 
-    def calc_nbr_topics(self, nbr_terms):
-        nbr_topics = 5
-        if nbr_terms < 40:
-            nbr_topics = 2
-        elif nbr_terms <80:
-            nbr_topics = 3
-        return nbr_topics
+    def write_topics(self, model, feature_names, no_top_words):
+        tmp = open(self.filename_prefix + "2_analyzer_topics.csv", "w+")
+        for topic_idx, topic in enumerate(model.components_):
+            tmp.write("Topic %d:" % (topic_idx+1))
+            tmp.write(" ".join([feature_names[i] for i in topic.argsort()[:-no_top_words - 1:-1]]))
+        tmp.close()
+
+    def calc_topics_tuple(self, nbr_terms):
+        ''' Calculate a reasonable number of topics and words per topic. '''
+        topics_tuple = (5, 7)
+
+        # Take care of small corpora
+        if nbr_terms < 50:
+            topics_tuple = (2, 2)
+        elif nbr_terms < 100:
+            topics_tuple = (3, 3)
+        elif nbr_terms < 150:
+            topics_tuple = (3, 4)
+        elif nbr_terms < 200:
+            topics_tuple = (4, 4)
+        elif nbr_terms < 250:
+            topics_tuple = (4, 5)
+        elif nbr_terms < 300:
+            topics_tuple = (5, 5)
+        elif nbr_terms < 350:
+            topics_tuple = (5, 6)
+        elif nbr_terms < 400:
+            topics_tuple = (5, 7)
+        return topics_tuple
