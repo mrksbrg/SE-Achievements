@@ -87,7 +87,7 @@ analyzer.analyze_affiliation_topics()
 analyzer.write_results()
 
 # 3. Tabulate the scholars, write the results
-tabulator = ScholarTabulator(None)
+tabulator = ScholarTabulator(filename_prefix, swese_scholars)
 tabulator.write_table()
 
 # 4. Visualize the results, save to files

@@ -6,16 +6,19 @@ Created on Fri Jul  5 11:21:15 2019
 """
 
 import csv
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, PackageLoader, select_autoescape
+
 
 
 class ScholarTabulator:
-    def __init__(self, scholars):
-        self.scholars = scholars
+    def __init__(self, filename_prefix, swese_scholars):
+        self.filename_prefix = filename_prefix
+        self.swese_scholars = swese_scholars
 
     def write_table(self):
-
-        loader = FileSystemLoader('./index.html')
-        env = Environment(loader=loader)
-        #template = env.get_template('')
-        #print(template.render(date='2012-02-8', id='123', position='here', status='Waiting'))
+        env = Environment(
+            loader=PackageLoader('swese', 'templates'),
+            autoescape=select_autoescape(['html', 'xml'])
+        )
+        template = env.get_template('table.html')
+        print(template.render(swese_scholars=self.swese_scholars))

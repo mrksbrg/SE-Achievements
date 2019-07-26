@@ -79,6 +79,9 @@ class TestClass:
         assert file_stats_txt.st_size == pytest.approx(1149, 1)
         assert file_stats_csv.st_size == pytest.approx(67, 1)
 
+        # TC9: Test analyzer
+
+
     def test_simon_poulding(self):
         self.add_swese_scholars(self.test_scholars, "N/A")
         self.miner = ScholarMiner(self.scholars, self.filename_prefix)
