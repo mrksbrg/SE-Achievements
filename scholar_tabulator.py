@@ -16,9 +16,17 @@ class ScholarTabulator:
         self.swese_scholars = swese_scholars
 
     def write_table(self):
+        print("WRITE TABLE CALLED")
         env = Environment(
             loader=PackageLoader('swese', 'templates'),
             autoescape=select_autoescape(['html', 'xml'])
         )
         template = env.get_template('table.html')
-        print(template.render(swese_scholars=self.swese_scholars))
+        print("Time to call render!")
+        output = template.render(swese_scholars=self.swese_scholars)
+        print(output)
+        tmp = open(self.filename_prefix + "3_tabulator.html", "w+")
+        tmp.write(output)
+        tmp.close()
+
+

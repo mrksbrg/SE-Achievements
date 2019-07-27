@@ -1,22 +1,23 @@
- <table style="width:100%">
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+<table>
   <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
-    <th>Age</th>
+    <th>Scholar</th>
+    <th>Affiliation</th>
+    <th>#Publications</th>
+    <th>#SCI ratio</th>
+    <th>#1st ratio</th>
   </tr>
-  <tr>
-      <ul>
         {% for value in swese_scholars  %}
-        <dd>{{ value }}</dd>
+      <tr>
+        <td>{{ value.name }}</td>
+        <td>{{ value.affiliation }}</td>
+        <td>{{ value.nbr_publications }}</td>
+        <td>{{ value.sci_ratio }}</td>
+        <td>{{ value.first_ratio }}</td>
+      </tr>
         {% endfor %}
-        </dl>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
 </table>

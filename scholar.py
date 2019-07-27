@@ -6,8 +6,10 @@ class SWESEScholar:
         self.affiliation = affiliation
         self.research_interests = []
 
+        # Some extra variables for use with Jinja2
         self.dblp_entries = -1
         self.publications = set()
+        self.nbr_publications = -1
         self.first_ratio = -1
         self.sci_ratio = -1
         self.nbr_sci_listed = -1
@@ -26,14 +28,15 @@ class SWESEScholar:
     def add_publication(self, publ):
         if not isinstance(publ, SEPublication):
             raise TypeError("Error: do not add anything but instances of publication.SEPublication to the collection")
-        self.nbr_first_sci = 0
+        if self.nbr_first_sci == -1:
+            self.nbr_first_sci = 0
+        if self.nbr_publications == -1:
+            self.nbr_publications = 0
         self.publications.add(publ)
+        self.nbr_publications += 1
         if publ.sci_listed:
             self.nbr_first_sci += 1
-        
-    def get_nbr_publications(self):
-        return len(self.publications)
-    
+
     def get_nbr_sci_publications(self):
         nbr = 0
         for publ in self.publications:
@@ -82,9 +85,9 @@ class SWESEScholar:
             except:
                 print("No authors for the publication: " + publ.title)
                 
-        if self.get_nbr_publications() > 0:
-            self.first_ratio = nbr_first_author / self.get_nbr_publications()
-            self.sci_ratio = nbr_sci_listed / self.get_nbr_publications()
+        if self.nbr_publications > 0:
+            self.first_ratio = round(nbr_first_author / self.nbr_publications, 2)
+            self.sci_ratio = round(nbr_sci_listed / self.nbr_publications, 2)
         print(self.to_string())
 
     def to_string(self):
