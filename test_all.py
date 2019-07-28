@@ -42,7 +42,7 @@ class TestClass:
         for scholar in self.scholars:
             if scholar.name == "David Notkin":
                 david = scholar
-        david.calc_stats()
+        #david.calc_stats()
 
         # TC1: Test that DBLP returns a result
         assert self.scholars != None

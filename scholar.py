@@ -88,6 +88,7 @@ class SWESEScholar:
         if self.nbr_publications > 0:
             self.first_ratio = round(nbr_first_author / self.nbr_publications, 2)
             self.sci_ratio = round(nbr_sci_listed / self.nbr_publications, 2)
+            self.nbr_sci_listed = nbr_sci_listed
         print(self.to_string())
 
     def to_string(self):

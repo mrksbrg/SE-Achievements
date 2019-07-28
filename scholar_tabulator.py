@@ -24,7 +24,6 @@ class ScholarTabulator:
         template = env.get_template('table.html')
         print("Time to call render!")
         output = template.render(swese_scholars=self.swese_scholars)
-        print(output)
         tmp = open(self.filename_prefix + "3_tabulator.html", "w+")
         tmp.write(output)
         tmp.close()
