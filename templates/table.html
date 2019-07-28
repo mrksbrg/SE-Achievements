@@ -6,9 +6,10 @@
 <style>
 table, th, td {
   border: 1px solid black;
+  border-collapse: collapse;
 }
 </style>
-<table id="scholarTable">
+<table id="scholarTable" cellpadding="10">
   <tr>
     <th onclick="sortTable(0)">Scholar</th>
     <th onclick="sortTable(1)">Affiliation</th>
@@ -51,17 +52,33 @@ function sortTable(n) {
       y = rows[i + 1].getElementsByTagName("TD")[n];
       /* Check if the two rows should switch place,
       based on the direction, asc or desc: */
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          // If so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
+      if (n <= 1) {
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
         }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          // If so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
+      }
+      else {
+        if (dir == "asc") {
+          if (Number(x.innerHTML) > Number(y.innerHTML)) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+        else if (dir == "desc") {
+          if (Number(x.innerHTML) < Number(y.innerHTML)) {
+            shouldSwitch = true;
+            break;
+          }
         }
       }
     }

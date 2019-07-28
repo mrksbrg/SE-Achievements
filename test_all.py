@@ -55,16 +55,16 @@ class TestClass:
         assert david.name == "David Notkin"
         
         # TC4: Test that David Notkin has 151 publications after cleaning the list
-        assert david.get_nbr_publications() == 146
+        assert david.nbr_publications == 146
         
         # TC5: Test that David Notkin has 35 publications in SCI-listed journals
-        assert david.get_nbr_sci_publications() == 35
+        assert david.nbr_sci_publications == 35
         
         # TC6: Test that David Notkin has the correct ratios
         david.calc_stats()
         assert david.first_ratio == pytest.approx(0.2945, 0.001)
         assert david.sci_ratio == pytest.approx(0.2397, 0.001)
-        assert david.get_nbr_sci_publications() == 35       
+        assert david.nbr_sci_publications == 35
         
         # TC7: Test write results
         self.miner.write_results()
@@ -105,13 +105,13 @@ class TestClass:
 #        assert simon.get_nbr_publications() == 44
 #        
 #        # TC5: Test that Simon Poulding has 8 publications in SCI-listed journals
-#        assert simon.get_nbr_sci_publications() == 8
+#        assert simon.nbr_sci_publications == 8
 #    
 #        #TC6: Test that Simon Poulding has the correct ratios
 #        simon.calc_stats()
 #        assert simon._first_ratio == pytest.approx(0.364, 0.001)
 #        assert simon._sci_ratio == pytest.approx(0.182, 0.001)
-#        assert simon.get_nbr_sci_publications() == 8
+#        assert simon.nbr_sci_publications == 8
 #        
 #        # TC7: Test write to txt-file
 #        self.miner.write_scholars_txt()
@@ -152,13 +152,13 @@ class TestClass:
 #        assert richard.get_nbr_publications() == 137
 #        
 #        # TC5: Test that Simon Poulding has 8 publications in SCI-listed journals
-#        assert richard.get_nbr_sci_publications() == 8
+#        assert richard.nbr_sci_publications == 8
 #    
 #        #TC6: Test that Simon Poulding has the correct ratios
 #        richard.calc_stats()
 #        assert richard._first_ratio == pytest.approx(0.2117, 0.001)
 #        assert richard._sci_ratio == pytest.approx(0.0584, 0.001)
-#        assert richard.get_nbr_sci_publications() == 8
+#        assert richard.nbr_sci_publications == 8
 #        
 #        # TC7: Test write to txt-file
 #        self.miner.write_scholars_txt()
