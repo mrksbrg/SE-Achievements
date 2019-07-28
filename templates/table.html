@@ -10,12 +10,13 @@ table, th, td {
 }
 </style>
 <table id="scholarTable" cellpadding="10">
+  <caption>SweSE Scholars: Click on a header to sort the corresponding column.</caption>
   <tr>
     <th onclick="sortTable(0)">Scholar</th>
     <th onclick="sortTable(1)">Affiliation</th>
-    <th onclick="sortTable(2)">#Publications</th>
-    <th onclick="sortTable(3)">#SCI ratio</th>
-    <th onclick="sortTable(4)">#1st ratio</th>
+    <th onclick="sortTable(2)">#Publ.</th>
+    <th onclick="sortTable(3)">SCI ratio</th>
+    <th onclick="sortTable(4)">1st ratio</th>
   </tr>
         {% for value in swese_scholars  %}
       <tr>
