@@ -70,25 +70,24 @@ class SWESEScholar:
 
     def calc_stats(self):
         nbr_first_author = 0
-        nbr_sci_listed = 0
+        self.nbr_sci_listed = 0
         self.nbr_first_sci = 0
         for publ in self.publications:
             try:
                 if publ.sci_listed and publ.authors[0] == self.name:
                     nbr_first_author += 1
-                    nbr_sci_listed += 1
+                    self.nbr_sci_listed += 1
                     self.nbr_first_sci += 1
                 elif publ.authors[0] == self.name:
                     nbr_first_author += 1
                 elif publ.sci_listed:
-                    nbr_sci_listed += 1
+                    self.nbr_sci_listed += 1
             except:
                 print("No authors for the publication: " + publ.title)
-                
+
         if self.nbr_publications > 0:
             self.first_ratio = round(nbr_first_author / self.nbr_publications, 2)
-            self.sci_ratio = round(nbr_sci_listed / self.nbr_publications, 2)
-            self.nbr_sci_listed = nbr_sci_listed
+            self.sci_ratio = round(self.nbr_sci_listed / self.nbr_publications, 2)
         print(self.to_string())
 
     def to_string(self):
