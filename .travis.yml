@@ -5,11 +5,12 @@ python:
 # Command to install dependencies.
 install:
   - "pip install -r requirements.txt"
+  - "python -m nltk.downloader punkt"
   - "python -m nltk.downloader stopwords"
-  - "pip install coveralls"
+#  - "pip install coveralls"
 # Command to run tests.
 script: 
   - travis_wait 20 py.test
-  - pytest --cov=swese/
-after_success:
-  - "coveralls"
+#  - pytest --cov=swese/
+#after_success:
+#  - "coveralls"
