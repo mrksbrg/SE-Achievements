@@ -6,11 +6,11 @@ Created on Fri Jul  5 11:21:15 2019
 """
 
 import csv
-from datetime import date
+# from datetime import date
 
-import numpy as np
-from yellowbrick.text import FreqDistVisualizer
-from yellowbrick.text import TSNEVisualizer
+#import numpy as np
+#from yellowbrick.text import FreqDistVisualizer
+#from yellowbrick.text import TSNEVisualizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -20,12 +20,12 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 import nltk
 
-from wordcloud import WordCloud
+# from wordcloud import WordCloud
 
 from sklearn.decomposition import LatentDirichletAllocation as LDA
 from sklearn.decomposition import NMF
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 
 class ScholarVisualizer:
