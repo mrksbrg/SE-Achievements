@@ -123,9 +123,11 @@ class TestClass:
         self.add_swese_scholars(self.test_scholars, "N/A")
         self.miner = ScholarMiner(self.scholars, self.filename_prefix)
         self.miner.process_group()
-        self.scholars = self.miner.get_process_list()
-        richard = self.scholars["Richard C. Holt"]
-        richard.calc_stats()
+        self.scholars = self.miner.get_scholars()
+        richard = None
+        for scholar in self.scholars:
+            if scholar.name == "Richard C. Holt":
+                richard = scholar
 
         # TC1: Test that DBLP returns a result
         assert self.scholars != None
@@ -137,7 +139,7 @@ class TestClass:
         assert richard.name == "Richard C. Holt"
 
         # TC4: Test that Richard Holst has 137 publications after removing duplicates
-        assert richard.get_nbr_publications() == 137
+        assert richard.nbr_publications == 137
 
         # TC5: Test that Richard Holst has the correct ratios
         assert richard.first_ratio == pytest.approx(0.21, 0.01)
