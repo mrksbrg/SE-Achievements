@@ -26,7 +26,7 @@ class ScholarMiner:
             attempts += 1
             for scholar in self.swese_scholars:
                 try:
-                    print("\n####### Processing scholar: " + scholar.name + " #######")
+                    print("\n### Processing scholar: " + scholar.name + " ###")
                     authors = dblp.search(scholar.name)
                     search_res = authors[0]
                 except:

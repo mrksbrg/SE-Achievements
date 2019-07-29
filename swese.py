@@ -24,8 +24,8 @@ if (len(sys.argv) == 1):
     add_swese_scholars(fast_list, "RISE")
     fast_list2 = ["Annabella Loconsole"]
     add_swese_scholars(fast_list2, "MAU")
-    #fast_list_3 = ["Kristian Sandahl"]
-    #add_swese_scholars(fast_list_3, "Linköping University")
+    fast_list_3 = ["Kristian Sandahl"]
+    add_swese_scholars(fast_list_3, "Linköping University")
 
     # rise_list = ["Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
     #              "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson", "Stefan Cedergren", "Stig Larsson", "Jakob Axelsson"]
@@ -87,6 +87,7 @@ analyzer.analyze_affiliation_topics()
 analyzer.write_results()
 
 # 3. Tabulate the scholars, write the results
+print("\n####### Step 3 - Tabulating scholars #######")
 tabulator = ScholarTabulator(filename_prefix, swese_scholars)
 tabulator.write_table()
 
