@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sort a HTML Table Alphabetically</title>
+<title>SweSE Scholars</title>
 
 <style>
 table, th, td {
@@ -17,6 +17,8 @@ table, th, td {
     <th onclick="sortTable(2)">#Publ.</th>
     <th onclick="sortTable(3)">SCI ratio</th>
     <th onclick="sortTable(4)">1st ratio</th>
+    <th onclick="sortTable(5)">Apparent research interests</th>
+    <th onclick="sortTable(6)">Signature papers</th>
   </tr>
         {% for value in swese_scholars  %}
       <tr>
@@ -25,6 +27,8 @@ table, th, td {
         <td>{{ value.nbr_publications }}</td>
         <td>{{ value.sci_ratio }}</td>
         <td>{{ value.first_ratio }}</td>
+        <td>{{ value.research_interests }}</td>
+        <td>{{ value.signature_papers }}</td>
       </tr>
         {% endfor %}
 </table>

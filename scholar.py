@@ -5,6 +5,7 @@ class SWESEScholar:
         self.name = name
         self.affiliation = affiliation
         self.research_interests = []
+        self.signature_papers = []
 
         # Some extra variables for use with Jinja2
         self.dblp_entries = -1
@@ -89,6 +90,8 @@ class SWESEScholar:
             self.first_ratio = round(nbr_first_author / self.nbr_publications, 2)
             self.sci_ratio = round(self.nbr_sci_listed / self.nbr_publications, 2)
         print(self.to_string())
+
+        self.signature_papers = self.sci_publications_to_string()
 
     def to_string(self):
         return self.name + " (" + str(len(self.publications)) + " publications. First-ratio: " + str(round(self.first_ratio, 2)) + " SCI-ratio: " + str(round(self.sci_ratio, 2)) + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"
