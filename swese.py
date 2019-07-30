@@ -43,7 +43,7 @@ if (len(sys.argv) == 1):
     add_swese_scholars(kth_list, "KTH Royal Institute of Technology")
     su_list = []
     add_swese_scholars(su_list, "Stockholm University")
-    malmo_list = ["Helena Holmström Olsson", "Annabella Loconsole"]
+    malmo_list = ["Helena Holmström Olsson", "Annabella Loconsole", "Carl Magnus Ohlsson"]
     add_swese_scholars(malmo_list, "Malmö University")
     linkoping_list = ["Kristian Sandahl"]
     add_swese_scholars(linkoping_list, "Linköping University")

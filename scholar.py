@@ -2,12 +2,17 @@ from publication import SEPublication
 
 class SWESEScholar:
     def __init__(self, name, affiliation):
+        # Some redundancy needed for use with Jinja2
         self.name = name
         self.affiliation = affiliation
         self.research_interests = []
-        self.signature_papers = []
+        self.research_interests_string = ""
 
-        # Some extra variables for use with Jinja2
+        self.signature_works = []
+        self.swese_rating = -1
+        self.swese_a = -1
+        self.swese_b = -1
+
         self.dblp_entries = -1
         self.publications = set()
         self.nbr_publications = -1
@@ -91,7 +96,13 @@ class SWESEScholar:
             self.sci_ratio = round(self.nbr_sci_listed / self.nbr_publications, 2)
         print(self.to_string())
 
-        self.signature_papers = self.sci_publications_to_string()
+        self.research_interests_string = self.research_interests_to_string()
+        self.signature_works = self.sci_publications_to_string()
+        self.swese_a = self.nbr_publications * self.sci_ratio * self.first_ratio
+        self.swese_b = self.nbr_publications * ((self.sci_ratio+self.first_ratio)/2)
+
+        self.swese_rating = self.nbr_publications / 25 + self.nbr_first_sci
+
 
     def to_string(self):
         return self.name + " (" + str(len(self.publications)) + " publications. First-ratio: " + str(round(self.first_ratio, 2)) + " SCI-ratio: " + str(round(self.sci_ratio, 2)) + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"
