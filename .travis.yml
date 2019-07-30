@@ -12,7 +12,7 @@ install:
   - pip install python-coveralls
 # Command to run tests.
 script:
-  - travis_wait 20 pytest --cov=SE-Achievements/
+  - travis_wait 25 pytest --cov
 #  - travis_wait 20 py.test
 #after_success:
   - coveralls
