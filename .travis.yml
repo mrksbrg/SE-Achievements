@@ -4,13 +4,16 @@ python:
   
 # Command to install dependencies.
 install:
-  - "pip install -r requirements.txt"
-  - "python -m nltk.downloader punkt"
-  - "python -m nltk.downloader stopwords"
-#  - "pip install coveralls"
+  - pip install -r requirements.txt
+  - python -m nltk.downloader punkt
+  - python -m nltk.downloader stopwords
+  - pip install python-coveralls
+  - pip install coverage
+  - pip install nose
 # Command to run tests.
-script: 
-  - travis_wait 20 py.test
+script:
+  - nosetests --with-coverage
+#  - travis_wait 20 py.test
 #  - pytest --cov=swese/
 #after_success:
-#  - "coveralls"
+  - coveralls
