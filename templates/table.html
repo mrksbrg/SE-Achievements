@@ -17,11 +17,10 @@ table, th, td {
     <th onclick="sortTable(2)">#Publ.</th>
     <th onclick="sortTable(3)">SCI ratio</th>
     <th onclick="sortTable(4)">1st ratio</th>
-    <th onclick="sortTable(5)">SweSE rating</th>
-    <th onclick="sortTable(6)">SweSE a</th>
-    <th onclick="sortTable(7)">SweSE b</th>
-    <th onclick="sortTable(8)">Apparent research interests</th>
-    <th onclick="sortTable(9)">Signature works</th>
+    <th onclick="sortTable(5)">SweSE Contrib.</th>
+    <th onclick="sortTable(6)">SweSE Rating</th>
+    <th onclick="sortTable(7)">Apparent research interests</th>
+    <th onclick="sortTable(8)">Signature works</th>
   </tr>
         {% for value in swese_scholars  %}
       <tr>
@@ -30,9 +29,8 @@ table, th, td {
         <td>{{ value.nbr_publications }}</td>
         <td>{{ value.sci_ratio }}</td>
         <td>{{ value.first_ratio }}</td>
+        <td>{{ value.swese_contrib }}</td>
         <td>{{ value.swese_rating }}</td>
-        <td>{{ value.swese_a }}</td>
-        <td>{{ value.swese_b }}</td>
         <td>{{ value.research_interests }}</td>
         <td>{{ value.signature_works }}</td>
       </tr>
