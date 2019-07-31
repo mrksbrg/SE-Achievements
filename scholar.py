@@ -98,9 +98,9 @@ class SWESEScholar:
         self.research_interests_string = self.research_interests_to_string()
         self.signature_works = self.sci_publications_to_string()
 
-        self.swese_contrib = self.nbr_publications / 25 + self.nbr_first_sci
+        self.swese_contrib = round(self.nbr_publications / 25 + self.nbr_first_sci, 2)
         if self.sci_ratio+self.first_ratio != 0:
-            self.swese_rating = self.nbr_publications * ((self.sci_ratio*self.first_ratio)/(self.sci_ratio+self.first_ratio))
+            self.swese_rating = round(self.nbr_publications * ((self.sci_ratio*self.first_ratio)/(self.sci_ratio+self.first_ratio)), 2)
         else:
             self.swese_rating = 0
 
