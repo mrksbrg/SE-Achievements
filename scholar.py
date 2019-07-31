@@ -77,7 +77,9 @@ class SWESEScholar:
         nbr_first_author = 0
         self.nbr_sci_listed = 0
         self.nbr_first_sci = 0
+        print(self.name)
         for publ in self.publications:
+            #print(str(publ))
             try:
                 if publ.sci_listed and publ.authors[0] == self.name:
                     nbr_first_author += 1
@@ -91,8 +93,21 @@ class SWESEScholar:
                 print("No authors for the publication: " + publ.title)
 
         if self.nbr_publications > 0:
-            self.first_ratio = round(nbr_first_author / self.nbr_publications, 2)
-            self.sci_ratio = round(self.nbr_sci_listed / self.nbr_publications, 2)
+            # Calculate SCI ratio. Round up to 0.01 if needed.
+            tmp_ratio = self.nbr_sci_listed / self.nbr_publications
+            if tmp_ratio > 0 and tmp_ratio < 0.01:
+                self.sci_ratio = 0.01
+            else:
+                self.sci_ratio = round(self.nbr_sci_listed / self.nbr_publications, 2)
+
+            # Calculate 1st author ratio. Round up to 0.01 if needed.
+            tmp_ratio = nbr_first_author / self.nbr_publications
+            print(tmp_ratio)
+            if tmp_ratio > 0 and tmp_ratio < 0.01:
+                self.first_ratio = 0.01
+            else:
+                self.first_ratio = round(nbr_first_author / self.nbr_publications, 2)
+
         print(self.to_string())
 
         self.research_interests_string = self.research_interests_to_string()
