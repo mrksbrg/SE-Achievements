@@ -12,7 +12,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from nltk.tokenize import RegexpTokenizer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-#from nltk.stem.porter import PorterStemmer
 import nltk
 
 from sklearn.decomposition import LatentDirichletAllocation as LDA

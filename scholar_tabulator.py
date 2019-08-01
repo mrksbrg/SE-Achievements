@@ -19,7 +19,7 @@ class ScholarTabulator:
         env = Environment(
             loader=FileSystemLoader("templates")
         )
-        template = env.get_template('table.html')
+        template = env.get_template('tables.html')
         output = template.render(swese_scholars=self.swese_scholars)
         tmp = open(self.filename_prefix + "3_tabulator.html", "w+")
         tmp.write(output)

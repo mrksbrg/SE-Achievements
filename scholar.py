@@ -79,8 +79,8 @@ class SWESEScholar:
         self.nbr_first_sci = 0
         print(self.name)
         for publ in self.publications:
-            #print(str(publ))
             try:
+                print(publ.title + " - " + publ.authors[0])
                 if publ.sci_listed and publ.authors[0] == self.name:
                     nbr_first_author += 1
                     self.nbr_sci_listed += 1
