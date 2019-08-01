@@ -28,7 +28,7 @@ class SSSScholar:
                + "SCI-ratio: " + str(self.sci_ratio) + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + ") "
 
     def __lt__(self, other):
-        return self.first_ratio < other._first_ratio
+        return self.sss_rating < other.sss_rating
     
     def add_publication(self, publ):
         if not isinstance(publ, SSSPublication):

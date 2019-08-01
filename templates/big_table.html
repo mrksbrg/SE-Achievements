@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SweSESCI Scholars</title>
+<title>Swe-SE-SCI Scholars</title>
 </head>
 
 <style type="text/css">
@@ -30,7 +30,7 @@ tr:hover {
 
 <body>
 <table id="scholarTable" cellpadding="10">
-  <caption>SweSESCI scholars: Click on a header to sort by the corresponding column.</caption>
+  <caption>Swe-SE-SCI scholars: Click on a header to sort by the corresponding column.</caption>
   <tr>
     <th></th>
     <th onclick="sortTable(1)">Scholar</th>
@@ -43,7 +43,7 @@ tr:hover {
     <th onclick="sortTable(8)">Apparent research interests</th>
     <th onclick="sortTable(9)">Signature works</th>
   </tr>
-        {% for value in swese_scholars  %}
+        {% for value in sss_scholars  %}
       <tr>
         <td></td>
         <td>{{ value.name }}</td>
