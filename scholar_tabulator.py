@@ -18,7 +18,19 @@ class ScholarTabulator:
         )
         template = env.get_template('big_table.html')
         output = template.render(swese_scholars=self.swese_scholars)
-        tmp = open(self.filename_prefix + "3_tabulator.html", "w+")
+        tmp = open(self.filename_prefix + "3_tabulator_big.html", "w+")
+        tmp.write(output)
+        tmp.close()
+
+        template = env.get_template('details_table.html')
+        output = template.render(swese_scholars=self.swese_scholars)
+        tmp = open(self.filename_prefix + "3_tabulator_details.html", "w+")
+        tmp.write(output)
+        tmp.close()
+
+        template = env.get_template('stats_table.html')
+        output = template.render(swese_scholars=self.swese_scholars)
+        tmp = open(self.filename_prefix + "3_tabulator_stats.html", "w+")
         tmp.write(output)
         tmp.close()
 
