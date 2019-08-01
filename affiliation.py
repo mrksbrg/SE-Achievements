@@ -10,3 +10,6 @@ class SSSAffiliation:
     def __eq__(self, other):
         return self.name == other.name
 
+    def add_topics(self, topic_list):
+        self.topics.extend(topic_list)
+        print("Topics now: " + topic_list)

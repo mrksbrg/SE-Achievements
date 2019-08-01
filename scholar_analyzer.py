@@ -18,17 +18,18 @@ from sklearn.decomposition import LatentDirichletAllocation as LDA
 
 class ScholarAnalyzer:
 
-    def __init__(self, filename_prefix, swese_scholars):
+    def __init__(self, filename_prefix, sss_scholars, sss_affiliations):
         self.filename_prefix = filename_prefix
-        self.swese_scholars = swese_scholars
-        self.se_scholars = None
+        self.sss_scholars = sss_scholars
+        self.sss_affiliations = sss_affiliations
+
         self.scholars_dict = {}
         self.affiliations_dict = {}
         self.tailored_stop_words = []
         self.scholars_stopped_corpus = {}
         self.affiliations_stopped_corpus = {}
 
-        self._nbr_swese_scholar = -1
+        self._nbr_sss_scholar = -1
         self._nbr_affiliations = -1
         self.parse_csv()    
         self.preprocess_titles()
@@ -38,7 +39,7 @@ class ScholarAnalyzer:
             csv_reader = csv.reader(csv_file, delimiter=';')
             for row in csv_reader:
                 self.scholars_dict[row[0]] = row[1]
-        self._nbr_swese_scholar = len(self.scholars_dict)
+        self._nbr_sss_scholar = len(self.scholars_dict)
 
 
         with open(self.filename_prefix + "1_titles_per_affiliation.csv") as csv_file:
@@ -96,7 +97,7 @@ class ScholarAnalyzer:
 
     def write_results(self):
         tmp = open(self.filename_prefix + "2_analyzer_interests.csv", "w+")
-        for scholar in self.swese_scholars:
+        for scholar in self.sss_scholars:
             tmp.write(scholar.name + ";" + scholar.research_interests_to_string() + "\n")
         tmp.close()
     
@@ -107,7 +108,7 @@ class ScholarAnalyzer:
 
         for scholar, corpus in self.scholars_dict.items():
             # Find the current scholar in the master list
-            curr = next((x for x in self.swese_scholars if scholar == x.name), None)
+            curr = next((x for x in self.sss_scholars if scholar == x.name), None)
             word_dist = nltk.FreqDist(self.scholars_stopped_corpus[scholar])
             top = word_dist.most_common(10)
             research_interests = ""
@@ -149,6 +150,8 @@ class ScholarAnalyzer:
 
                 self.display_topics(lda, tf_feature_names, nbr_words)
                 self.write_topics(lda, tf_feature_names, nbr_words)
+                #print("here")
+                #self.sss_affiliations[key].add_topics(tf_feature_names)
             except:
                 print("Too few publications - No topic model for this affiliation.")
        

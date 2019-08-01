@@ -6,7 +6,7 @@ Created on Sun Jul  7 17:19:46 2019
 """
 
 from scholar import SSSScholar
-import SSSAffiliation
+from affiliation import SSSAffiliation
 from scholar_miner import ScholarMiner
 from scholar_analyzer import ScholarAnalyzer
 from scholar_tabulator import ScholarTabulator
@@ -21,7 +21,7 @@ sss_affiliations = []
 def add_swese_scholars(process_list, affiliation):
     for name in process_list:
         sss_scholars.append(SSSScholar(name, affiliation))
-        tmp_aff = SSSAffiliation.SSSAffiliation(affiliation)
+        tmp_aff = SSSAffiliation(affiliation)
         if tmp_aff not in sss_affiliations:
             sss_affiliations.append(tmp_aff)
 
@@ -89,7 +89,7 @@ sss_scholars = miner.get_scholars()
 
 # 2. Analyze the scholars, write the results
 print("\n####### Step 2 - Analyzing scholars #######")
-analyzer = ScholarAnalyzer(filename_prefix, sss_scholars)
+analyzer = ScholarAnalyzer(filename_prefix, sss_scholars, sss_affiliations)
 analyzer.analyze_individual_research_interests()
 analyzer.analyze_affiliation_topics()
 analyzer.write_results()
