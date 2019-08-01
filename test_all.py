@@ -77,7 +77,7 @@ class TestClass:
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar)
-        tabulator.write_table()
+        tabulator.write_tables()
 
     def test_simon_poulding(self):
         self.add_swese_scholars(self.test_scholars, "N/A")
@@ -119,6 +119,10 @@ class TestClass:
         assert file_stats_txt.st_size == pytest.approx(476, 1)
         assert file_stats_csv.st_size == pytest.approx(139, 1)
 
+        # TC10: Test tabulator
+        tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar)
+        tabulator.write_tables()
+
     def test_richard_holst(self):
         self.add_swese_scholars(self.test_scholars, "N/A")
         self.miner = ScholarMiner(self.scholars, self.filename_prefix)
@@ -158,3 +162,7 @@ class TestClass:
         file_stats_csv = os.stat(filename_csv)
         assert file_stats_txt.st_size == pytest.approx(476, 1)
         assert file_stats_csv.st_size == pytest.approx(139, 1)
+
+        # TC10: Test tabulator
+        tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar)
+        tabulator.write_tables()

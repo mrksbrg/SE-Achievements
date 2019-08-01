@@ -59,19 +59,6 @@ tr:hover {
         {% endfor %}
 </table>
 
-<table id="affiliationTable" cellpadding="10">
-  <caption>Apparent research topics of Swedish affiliations</caption>
-  <tr>
-    <th>Affiliation</th>
-    <th>Research topics</th>
-  </tr>
-        {% for value in swese_scholars  %}
-      <tr>
-        <td>{{ value.name }}</td>
-      </tr>
-        {% endfor %}
-</table>
-
 <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -96,7 +83,7 @@ function sortTable(n) {
       y = rows[i + 1].getElementsByTagName("TD")[n];
       /* Check if the two rows should switch place,
       based on the direction, asc or desc: */
-      if (n <= 1) {
+      if (n <= 2) {
         if (dir == "asc") {
           if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
             // If so, mark as a switch and break the loop:
