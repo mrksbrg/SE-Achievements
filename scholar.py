@@ -9,8 +9,8 @@ class SWESEScholar:
         self.research_interests_string = ""
 
         self.signature_works = []
-        self.swese_contrib = -1
-        self.swese_rating = -1
+        self.sss_contrib = -1
+        self.sss_rating = -1
 
         self.dblp_entries = -1
         self.publications = set()
@@ -77,10 +77,8 @@ class SWESEScholar:
         nbr_first_author = 0
         self.nbr_sci_listed = 0
         self.nbr_first_sci = 0
-        print(self.name)
         for publ in self.publications:
             try:
-                print(publ.title + " - " + publ.authors[0])
                 if publ.sci_listed and publ.authors[0] == self.name:
                     nbr_first_author += 1
                     self.nbr_sci_listed += 1
@@ -111,13 +109,14 @@ class SWESEScholar:
         print(self.to_string())
 
         self.research_interests_string = self.research_interests_to_string()
+        print("Interests: " + self.research_interests_string)
         self.signature_works = self.sci_publications_to_string()
 
-        self.swese_contrib = round(self.nbr_publications / 25 + self.nbr_first_sci, 2)
+        self.sss_contrib = round(self.nbr_publications / 25 + self.nbr_first_sci, 2)
         if self.sci_ratio+self.first_ratio != 0:
-            self.swese_rating = round(self.nbr_publications * ((self.sci_ratio*self.first_ratio)/(self.sci_ratio+self.first_ratio)), 2)
+            self.sss_rating = round(self.nbr_publications * ((self.sci_ratio * self.first_ratio) / (self.sci_ratio + self.first_ratio)), 2)
         else:
-            self.swese_rating = 0
+            self.sss_rating = 0
 
 
     def to_string(self):
