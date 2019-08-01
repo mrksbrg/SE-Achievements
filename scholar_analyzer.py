@@ -116,6 +116,7 @@ class ScholarAnalyzer:
                 curr.append_research_interest(str(term[0]))
             research_interests = research_interests[:-2] # remove two final chars
             print(scholar + ": " + research_interests)
+            curr.calc_titles()
 
         print("\n####### Apparent research interests of the affiliations #######")
 
