@@ -66,13 +66,12 @@ if (len(sys.argv) == 1):
 #     add_swese_scholars(karlstad_list, "Karlstad University")
 #     jonkoping_list = ["Anders Adlemo"]
 #     add_swese_scholars(jonkoping_list, "Jönköping University")
-# else:
-#     custom_list = []
-#     custom_list.append(sys.argv[1])
-#     add_swese_scholars(custom_list, "N/A")
+else:
+    custom_list = []
+    custom_list.append(sys.argv[1])
+    add_swese_scholars(custom_list, "N/A")
 
-# Prepare the process    
-#process_list = fast_list
+# Prepare the process
 subdirectory = "db"
 try:
     os.mkdir(subdirectory)

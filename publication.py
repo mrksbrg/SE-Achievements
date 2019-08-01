@@ -25,7 +25,7 @@ class SSSPublication:
         return self.title == other.title
 
     def __lt__(self, other):
-        return self.year < other.year
+        return self.year > other.year
     
     def __hash__(self):
         return id(self)

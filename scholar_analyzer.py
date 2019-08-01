@@ -164,7 +164,7 @@ class ScholarAnalyzer:
     def display_topics(self, model, feature_names, no_top_words):
         for topic_idx, topic in enumerate(model.components_):
             print("Topic %d:" % (topic_idx+1))
-            #print(" ".join([feature_names[i] for i in topic.argsort()[:-no_top_words - 1:-1]]))
+            print(" ".join([feature_names[i] for i in topic.argsort()[:-no_top_words - 1:-1]]))
 
     def write_topics(self, model, feature_names, no_top_words):
         tmp = open(self.filename_prefix + "2_analyzer_topics.csv", "w+")
