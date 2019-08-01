@@ -5,7 +5,8 @@ Created on Sun Jul  7 17:19:46 2019
 @author: Markus Borg
 """
 
-from scholar import SWESEScholar
+from scholar import SSSScholar
+import SSSAffiliation
 from scholar_miner import ScholarMiner
 from scholar_analyzer import ScholarAnalyzer
 from scholar_tabulator import ScholarTabulator
@@ -14,10 +15,15 @@ import sys
 import os.path
 from datetime import date
 
-swese_scholars = []
+sss_scholars = []
+sss_affiliations = []
+
 def add_swese_scholars(process_list, affiliation):
-	for name in process_list:
-		swese_scholars.append(SWESEScholar(name, affiliation))
+    for name in process_list:
+        sss_scholars.append(SSSScholar(name, affiliation))
+        tmp_aff = SSSAffiliation.SSSAffiliation(affiliation)
+        if tmp_aff not in sss_affiliations:
+            sss_affiliations.append(tmp_aff)
 
 if (len(sys.argv) == 1):
     # fast_list = ["Stefan Cedergren", "Joakim Fröberg"]
@@ -26,6 +32,8 @@ if (len(sys.argv) == 1):
     # add_swese_scholars(fast_list2, "MAU")
     # fast_list_3 = ["Kristian Sandahl"]
     # add_swese_scholars(fast_list_3, "Linköping University")
+    # big_names = ["Lionel C. Briand"]
+    # add_swese_scholars(big_names, "Misc.")
 
     rise_list = ["Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
                  "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson", "Stefan Cedergren", "Stig Larsson", "Jakob Axelsson"]
@@ -74,22 +82,24 @@ filename_prefix = os.path.join(subdirectory, str(date.today()) + "_swese_")
 
 # 1. Mine the scholars, write the results
 print("####### Step 1 - Mining scholars #######")
-miner = ScholarMiner(swese_scholars, filename_prefix)
+miner = ScholarMiner(sss_scholars, filename_prefix)
 miner.process_group()
 miner.write_results()
-swese_scholars = miner.get_scholars()
+sss_scholars = miner.get_scholars()
 
 # 2. Analyze the scholars, write the results
 print("\n####### Step 2 - Analyzing scholars #######")
-analyzer = ScholarAnalyzer(filename_prefix, swese_scholars)
+analyzer = ScholarAnalyzer(filename_prefix, sss_scholars)
 analyzer.analyze_individual_research_interests()
 analyzer.analyze_affiliation_topics()
 analyzer.write_results()
 
 # 3. Tabulate the scholars, write the results
 print("\n####### Step 3 - Tabulating scholars #######")
-tabulator = ScholarTabulator(filename_prefix, swese_scholars)
-tabulator.write_table()
+tabulator = ScholarTabulator(filename_prefix, sss_scholars)
+tabulator.write_tables()
+
+print("Aff: " + str(sss_affiliations[0]))
 
 # 4. Visualize the results, save to files
 #visualizer = ScholarVisualizer(filename_prefix)

@@ -6,7 +6,7 @@ Created on Sat Jun 15 16:50:30 2019
 """
 
 import pytest
-from scholar import SWESEScholar
+from scholar import SSSScholar
 from scholar_miner import ScholarMiner
 from scholar_tabulator import ScholarTabulator
 import os.path
@@ -23,7 +23,7 @@ class TestClass:
 
     def add_swese_scholars(self, process_list, affiliation):
         for name in process_list:
-            self.scholars.append(SWESEScholar(name, affiliation))
+            self.scholars.append(SSSScholar(name, affiliation))
 
     def test_nonsense(self):
         self.add_swese_scholars(self.test_nonsense, "N/A")

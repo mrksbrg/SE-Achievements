@@ -1,6 +1,6 @@
-from publication import SEPublication
+from publication import SSSPublication
 
-class SWESEScholar:
+class SSSScholar:
     def __init__(self, name, affiliation):
         # Some redundancy needed for use with Jinja2
         self.name = name
@@ -31,7 +31,7 @@ class SWESEScholar:
         return self.first_ratio < other._first_ratio
     
     def add_publication(self, publ):
-        if not isinstance(publ, SEPublication):
+        if not isinstance(publ, SSSPublication):
             raise TypeError("Error: do not add anything but instances of publication.SEPublication to the collection")
         if self.nbr_first_sci == -1:
             self.nbr_first_sci = 0

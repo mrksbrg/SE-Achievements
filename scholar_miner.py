@@ -5,8 +5,8 @@ Created on Sat Jun 15 21:18:26 2019
 @author: Markus Borg
 """
 
-from scholar import SWESEScholar
-from publication import SEPublication
+from scholar import SSSScholar
+from publication import SSSPublication
 from collections import Counter
 import pandas as pd
 import time
@@ -51,7 +51,7 @@ class ScholarMiner:
                                 continue
                                 # elif p.type == "inproceedings": # This is what conference proceedings look like
                             # print(p.booktitle)
-                        current_publication = SEPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
+                        current_publication = SSSPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
                         scholar.add_publication(current_publication)
                         self.coauthors = self.coauthors + Counter(p.authors)
 
