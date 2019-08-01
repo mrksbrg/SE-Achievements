@@ -23,6 +23,9 @@ class SSSPublication:
         
     def __eq__ (self, other):
         return self.title == other.title
+
+    def __lt__(self, other):
+        return self.year < other.year
     
     def __hash__(self):
         return id(self)

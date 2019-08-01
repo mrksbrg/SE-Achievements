@@ -92,18 +92,16 @@ print("\n####### Step 2 - Analyzing scholars #######")
 analyzer = ScholarAnalyzer(filename_prefix, sss_scholars, sss_affiliations)
 analyzer.analyze_individual_research_interests()
 analyzer.analyze_affiliation_topics()
-sss_scholars.sort(reverse=True)
-for scholar in sss_scholars:
-    if scholar.sci_ratio <= 0:
-        sss_scholars.remove(scholar)
 analyzer.write_results()
 
 # 3. Tabulate the scholars, write the results
 print("\n####### Step 3 - Tabulating scholars #######")
+sss_scholars.sort(reverse=True)
+for scholar in sss_scholars:
+    if scholar.sci_ratio <= 0:
+        sss_scholars.remove(scholar)
 tabulator = ScholarTabulator(filename_prefix, sss_scholars)
 tabulator.write_tables()
-
-print("Aff: " + str(sss_affiliations[0]))
 
 # 4. Visualize the results, save to files
 #visualizer = ScholarVisualizer(filename_prefix)

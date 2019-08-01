@@ -123,11 +123,13 @@ class ScholarAnalyzer:
 
         for affiliation, corpus in self.affiliations_dict.items():
             # Find the current affiliation in the master list
+            curr = next((x for x in self.sss_affiliations if affiliation == x.name), None)
             word_dist = nltk.FreqDist(self.affiliations_stopped_corpus[affiliation])
             top = word_dist.most_common(10)
             research_interests = ""
             for term in top:
                 research_interests += str(term[0]) + ", "
+                curr.add_term(str(term[0]))
             research_interests = research_interests[:-2]  # remove two final chars
             print(affiliation + ": " + research_interests)
 
@@ -149,16 +151,20 @@ class ScholarAnalyzer:
                 lda.fit(tf)
 
                 self.display_topics(lda, tf_feature_names, nbr_words)
-                self.write_topics(lda, tf_feature_names, nbr_words)
-                #print("here")
-                #self.sss_affiliations[key].add_topics(tf_feature_names)
+                #print("?")
+                #self.write_topics(lda, tf_feature_names, nbr_words)
+
+                # Find the current affiliation in the master list
+                print("Adding topics: " + tf_feature_names)
+                curr = next((x for x in self.sss_affiliations if key == x.name), None)
+                curr.add_topics(tf_feature_names)
             except:
                 print("Too few publications - No topic model for this affiliation.")
        
     def display_topics(self, model, feature_names, no_top_words):
         for topic_idx, topic in enumerate(model.components_):
             print("Topic %d:" % (topic_idx+1))
-            print(" ".join([feature_names[i] for i in topic.argsort()[:-no_top_words - 1:-1]]))
+            #print(" ".join([feature_names[i] for i in topic.argsort()[:-no_top_words - 1:-1]]))
 
     def write_topics(self, model, feature_names, no_top_words):
         tmp = open(self.filename_prefix + "2_analyzer_topics.csv", "w+")

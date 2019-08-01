@@ -1,4 +1,5 @@
 from publication import SSSPublication
+from sortedcontainers import SortedSet
 
 class SSSScholar:
     def __init__(self, name, affiliation):
@@ -13,7 +14,7 @@ class SSSScholar:
         self.sss_rating = -1
 
         self.dblp_entries = -1
-        self.publications = set()
+        self.publications = SortedSet()
         self.nbr_publications = -1
         self.first_ratio = -1
         self.sci_ratio = -1
