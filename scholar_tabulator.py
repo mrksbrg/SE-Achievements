@@ -8,9 +8,10 @@ Created on Fri Jul  5 11:21:15 2019
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 class ScholarTabulator:
-    def __init__(self, filename_prefix, sss_scholars):
+    def __init__(self, filename_prefix, sss_scholars, sss_affiliations):
         self.filename_prefix = filename_prefix
         self.sss_scholars = sss_scholars
+        self.sss_affiliations = sss_affiliations
 
     def write_tables(self):
         env = Environment(
@@ -34,4 +35,8 @@ class ScholarTabulator:
         tmp.write(output)
         tmp.close()
 
-
+        template = env.get_template('topics_table.html')
+        output = template.render(sss_affiliations=self.sss_affiliations)
+        tmp = open(self.filename_prefix + "3_tabulator_topics.html", "w+")
+        tmp.write(output)
+        tmp.close()

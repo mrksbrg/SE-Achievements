@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Swe-SE-SCI Affiliations - Topics</title>
+</head>
+
+<style type="text/css">
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th {
+  border: 1px solid black;
+  background: #6c7ae0;
+}
+td {
+  border: 1px solid black;
+}
+tr:not(:first-child) {
+  counter-increment: row-num;
+}
+td:first-child::before {
+  content: counter(row-num) ". ";
+}
+tr:hover {
+  background-color: #ececff;
+  cursor: pointer;
+}
+</style>
+
+<body>
+<table id="affiliationTable" cellpadding="10">
+  <caption>Swe-SE-SCI Affiliations</caption>
+  <tr>
+    <th></th>
+    <th>Affiliation</th>
+    <th>#Scholars</th>
+    <th>Apparent research topics</th>
+  </tr>
+        {% for value in sss_affiliations  %}
+      <tr>
+        <td></td>
+        <td>{{ value.name }}</td>
+        <td>{{ value.nbr_scholars }}</td>
+        <td>{{ value.topics_string }}</td>
+      </tr>
+        {% endfor %}
+</table>
+</body>
+</html>
