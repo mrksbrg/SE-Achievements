@@ -129,7 +129,7 @@ class TestClass:
         assert file_stats_csv.st_size == pytest.approx(139, 1)
 
         # TC10: Test tabulator
-        tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar)
+        tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
         tabulator.write_tables()
 
     def test_richard_holst(self):
@@ -173,5 +173,5 @@ class TestClass:
         assert file_stats_csv.st_size == pytest.approx(139, 1)
 
         # TC10: Test tabulator
-        tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar)
+        tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
         tabulator.write_tables()
