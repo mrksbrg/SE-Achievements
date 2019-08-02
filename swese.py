@@ -101,9 +101,13 @@ analyzer.write_results()
 print("\n####### Step 3 - Tabulating scholars #######")
 sss_scholars.sort(reverse=True)
 sss_affiliations.sort()
+tmp_scholars = []
 for scholar in sss_scholars:
-    if scholar.sci_ratio <= 0:
-        sss_scholars.remove(scholar)
+    if scholar.sci_ratio > 0:
+        tmp_scholars.append(scholar)
+    else:
+        print("\tRemoving " + scholar.name + " (SCI-ratio <= 0)")
+sss_scholars = tmp_scholars
 tabulator = ScholarTabulator(filename_prefix, sss_scholars, sss_affiliations)
 tabulator.write_tables()
 
