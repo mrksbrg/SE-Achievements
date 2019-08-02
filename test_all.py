@@ -7,6 +7,7 @@ Created on Sat Jun 15 16:50:30 2019
 
 import pytest
 from scholar import SSSScholar
+from affiliation import SSSAffiliation
 from scholar_miner import ScholarMiner
 from scholar_tabulator import ScholarTabulator
 import os.path
@@ -25,7 +26,7 @@ class TestClass:
     def add_swese_scholars(self, process_list, affiliation):
         for name in process_list:
             self.scholars.append(SSSScholar(name, affiliation))
-            tmp_aff = self.affiliations(affiliation)
+            tmp_aff = SSSAffiliation(affiliation)
             if tmp_aff not in self.affiliations:
                 tmp_aff.nbr_scholars += 1
                 self.affiliations.append(tmp_aff)

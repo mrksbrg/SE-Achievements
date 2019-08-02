@@ -68,7 +68,7 @@ class SSSScholar:
         result = ""
         for publ in self.publications:
             if publ.sci_listed and publ.authors[0] == self.name:
-                result += "\t" + str(publ.year) + ": " + publ.title + " (" + str(publ.journal) + ")" + "\n"
+                result += str(publ.year) + ": " + publ.title + " (" + str(publ.journal) + ")" + "\n"
         return result
 
     def append_research_interest(self, research_interest):
