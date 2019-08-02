@@ -16,6 +16,7 @@ class TestClass:
 
     def setup_method(self, module):
         self.scholars = []
+        self.affiliations = []
         self.filename_prefix = str(date.today()) + "_swese_"
         self.test_nonsense = ["ABCDEFGH"]
         self.test_scholar = ["David Notkin"]
@@ -24,6 +25,13 @@ class TestClass:
     def add_swese_scholars(self, process_list, affiliation):
         for name in process_list:
             self.scholars.append(SSSScholar(name, affiliation))
+            tmp_aff = self.affiliations(affiliation)
+            if tmp_aff not in self.affiliations:
+                tmp_aff.nbr_scholars += 1
+                self.affiliations.append(tmp_aff)
+            else:
+                curr = next((x for x in self.affiliations if affiliation == x.name), None)
+                curr.nbr_scholars += 1
 
     def test_nonsense(self):
         self.add_swese_scholars(self.test_nonsense, "N/A")
@@ -76,7 +84,7 @@ class TestClass:
         # TC9: Test analyzer
 
         # TC10: Test tabulator
-        tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar)
+        tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
         tabulator.write_tables()
 
     def test_simon_poulding(self):
