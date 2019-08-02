@@ -18,9 +18,15 @@ class ScholarTabulator:
             loader=FileSystemLoader("templates")
         )
 
-        template = env.get_template('big_table.html')
-        output = template.render(sss_scholars=self.sss_scholars)
+        template = env.get_template('Swe-SE-SCI.html')
+        output = template.render(sss_scholars=self.sss_scholars, sss_affiliations=self.sss_affiliations)
         tmp = open(self.filename_prefix + "3_tabulator_big.html", "w+")
+        tmp.write(output)
+        tmp.close()
+
+        template = env.get_template('raw_tables.html')
+        output = template.render(sss_scholars=self.sss_scholars, sss_affiliations=self.sss_affiliations)
+        tmp = open(self.filename_prefix + "3_tabulator_raw.html", "w+")
         tmp.write(output)
         tmp.close()
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>SweSESCI Scholars - Statistics</title>
+  <title>SweSESCI Scholars - Statistics</title>
 </head>
 
 <style type="text/css">
@@ -41,18 +41,18 @@ tr:hover {
     <th onclick="sortTable(6)">SSS contrib.</th>
     <th onclick="sortTable(7)">SSS rating</th>
   </tr>
-        {% for value in sss_scholars  %}
-      <tr>
-        <td></td>
-        <td>{{ value.name }}</td>
-        <td>{{ value.affiliation }}</td>
-        <td>{{ value.nbr_publications }}</td>
-        <td>{{ value.sci_ratio }}</td>
-        <td>{{ value.first_ratio }}</td>
-        <td>{{ value.sss_contrib }}</td>
-        <td>{{ value.sss_rating }}</td>
-      </tr>
-        {% endfor %}
+  {% for value in sss_scholars  %}
+  <tr>
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.nbr_publications }}</td>
+    <td>{{ value.sci_ratio }}</td>
+    <td>{{ value.first_ratio }}</td>
+    <td>{{ value.sss_contrib }}</td>
+    <td>{{ value.sss_rating }}</td>
+  </tr>
+  {% endfor %}
 </table>
 
 <script>

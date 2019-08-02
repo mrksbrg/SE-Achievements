@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Swe-SE-SCI Affiliations - Topics</title>
+    <title>Swe-SE-SCI Affiliations - Topics</title>
 </head>
 
 <style type="text/css">
@@ -30,21 +30,21 @@ tr:hover {
 
 <body>
 <table id="affiliationTable" cellpadding="10">
-  <caption>Apparent research topics at Swe-SE-SCI affiliations</caption>
-  <tr>
-    <th></th>
-    <th>Affiliation</th>
-    <th>#Scholars</th>
-    <th>Research topics</th>
-  </tr>
-        {% for value in sss_affiliations  %}
-      <tr>
+    <caption>Apparent research topics at Swe-SE-SCI affiliations</caption>
+    <tr>
+        <th></th>
+        <th>Affiliation</th>
+        <th>#Scholars</th>
+        <th>Research topics</th>
+    </tr>
+    {% for value in sss_affiliations  %}
+    <tr>
         <td></td>
         <td>{{ value.name }}</td>
         <td>{{ value.nbr_scholars }}</td>
         <td>{{ value.topics_string }}</td>
-      </tr>
-        {% endfor %}
+    </tr>
+    {% endfor %}
 </table>
 </body>
 </html>

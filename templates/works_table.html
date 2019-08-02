@@ -30,7 +30,7 @@ tr:hover {
 
 <body>
 <table id="scholarTable" cellpadding="10">
-  <caption>Significant works by Swe-SE-SCI scholars: Click on a header to sort by the corresponding column.</caption>
+  <caption>Signature works by Swe-SE-SCI scholars, i.e., first-authored SCI publications.</caption>
   <tr>
     <th></th>
     <th onclick="sortTable(1)">Scholar</th>
@@ -38,15 +38,15 @@ tr:hover {
     <th onclick="sortTable(3)">SSS rating</th>
     <th onclick="sortTable(5)">Signature works</th>
   </tr>
-        {% for value in sss_scholars  %}
-      <tr>
-        <td></td>
-        <td>{{ value.name }}</td>
-        <td>{{ value.affiliation }}</td>
-        <td>{{ value.sss_rating }}</td>
-        <td>{{ value.signature_works }}</td>
-      </tr>
-        {% endfor %}
+  {% for value in sss_scholars  %}
+  <tr>
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.sss_rating }}</td>
+    <td>{{ value.signature_works }}</td>
+  </tr>
+  {% endfor %}
 </table>
 
 <script>
