@@ -17,15 +17,28 @@ class ScholarTabulator:
         env = Environment(
             loader=FileSystemLoader("templates")
         )
+
         template = env.get_template('big_table.html')
         output = template.render(sss_scholars=self.sss_scholars)
         tmp = open(self.filename_prefix + "3_tabulator_big.html", "w+")
         tmp.write(output)
         tmp.close()
 
-        template = env.get_template('details_table.html')
+        template = env.get_template('topics_table.html')
+        output = template.render(sss_affiliations=self.sss_affiliations)
+        tmp = open(self.filename_prefix + "3_tabulator_topics.html", "w+")
+        tmp.write(output)
+        tmp.close()
+
+        template = env.get_template('scholars_table.html')
         output = template.render(sss_scholars=self.sss_scholars)
-        tmp = open(self.filename_prefix + "3_tabulator_details.html", "w+")
+        tmp = open(self.filename_prefix + "3_tabulator_scholars.html", "w+")
+        tmp.write(output)
+        tmp.close()
+
+        template = env.get_template('works_table.html')
+        output = template.render(sss_scholars=self.sss_scholars)
+        tmp = open(self.filename_prefix + "3_tabulator_works.html", "w+")
         tmp.write(output)
         tmp.close()
 
@@ -35,8 +48,4 @@ class ScholarTabulator:
         tmp.write(output)
         tmp.close()
 
-        template = env.get_template('topics_table.html')
-        output = template.render(sss_affiliations=self.sss_affiliations)
-        tmp = open(self.filename_prefix + "3_tabulator_topics.html", "w+")
-        tmp.write(output)
-        tmp.close()
+
