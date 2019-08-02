@@ -9,6 +9,7 @@ import pytest
 from scholar import SSSScholar
 from affiliation import SSSAffiliation
 from scholar_miner import ScholarMiner
+from scholar_analyzer import ScholarAnalyzer
 from scholar_tabulator import ScholarTabulator
 import os.path
 from datetime import date
@@ -82,7 +83,11 @@ class TestClass:
         assert file_stats_txt.st_size == pytest.approx(1149, 1)
         assert file_stats_csv.st_size == pytest.approx(67, 1)
 
-        # TC9: Test analyzer
+        # TC8: Test analyzer
+        analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
+        analyzer.analyze_individual_research_interests()
+        assert david.sss_contrib == 17.21
+        assert david.sss_rating == 19.17
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
@@ -128,6 +133,12 @@ class TestClass:
         assert file_stats_txt.st_size == pytest.approx(476, 1)
         assert file_stats_csv.st_size == pytest.approx(139, 1)
 
+        # TC8: Test analyzer
+        analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
+        analyzer.analyze_individual_research_interests()
+        assert simon.sss_contrib == 2.96
+        assert simon.sss_rating == 5.28
+
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
         tabulator.write_tables()
@@ -171,6 +182,12 @@ class TestClass:
         file_stats_csv = os.stat(filename_csv)
         assert file_stats_txt.st_size == pytest.approx(476, 1)
         assert file_stats_csv.st_size == pytest.approx(139, 1)
+
+        # TC8: Test analyzer
+        analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
+        analyzer.analyze_individual_research_interests()
+        assert richard.sss_contrib == 2.09
+        assert richard.sss_rating == 6.39
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)

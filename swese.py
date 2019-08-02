@@ -51,7 +51,7 @@ if (len(sys.argv) == 1):
                      "Richard Berntsson-Svensson", "Francisco Gomes", "Gregory Gay", "Michel Chaudron", "Jan Bosch", "Jennifer Horkoff",
                      "Eric Knauss", "Thorsten Berger", "Gul Calikli", "Regina Hebig", "Philipp Leitner", "Agneta Nilsson"]
     add_swese_scholars(gbg_list, "Chalmers / Gothenburg University")
-    kth_list = ["Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt"]
+    kth_list = ["Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt", "Martin Törngren"]
     add_swese_scholars(kth_list, "KTH Royal Institute of Technology")
     su_list = ["Janis Stirna", "Jelena Zdravkovic"]
     add_swese_scholars(su_list, "Stockholm University")
@@ -113,5 +113,3 @@ tabulator.write_tables()
 
 # 4. Visualize the results, save to files
 #visualizer = ScholarVisualizer(filename_prefix)
-
-
