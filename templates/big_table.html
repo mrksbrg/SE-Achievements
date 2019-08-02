@@ -59,6 +59,24 @@ tr:hover {
         {% endfor %}
 </table>
 
+<table id="affiliationTable" cellpadding="10">
+  <caption>Apparent research topics at Swe-SE-SCI affiliations</caption>
+  <tr>
+    <th></th>
+    <th>Affiliation</th>
+    <th>#Scholars</th>
+    <th>Research topics</th>
+  </tr>
+        {% for value in sss_affiliations  %}
+      <tr>
+        <td></td>
+        <td>{{ value.name }}</td>
+        <td>{{ value.nbr_scholars }}</td>
+        <td>{{ value.topics_string }}</td>
+      </tr>
+        {% endfor %}
+</table>
+
 <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
