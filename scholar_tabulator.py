@@ -20,7 +20,7 @@ class ScholarTabulator:
 
         template = env.get_template('Swe-SE-SCI.html')
         output = template.render(sss_scholars=self.sss_scholars, sss_affiliations=self.sss_affiliations)
-        tmp = open(self.filename_prefix + "3_tabulator_big.html", "w+")
+        tmp = open(self.filename_prefix + "3_tabulator_Swe-SE-SCI.html", "w+")
         tmp.write(output)
         tmp.close()
 

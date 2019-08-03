@@ -87,7 +87,7 @@ class TestClass:
         analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
         analyzer.analyze_individual_research_interests()
         assert david.sss_contrib == 17.21
-        assert david.sss_rating == 19.17
+        assert david.sss_rating == 38.35
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
@@ -137,7 +137,7 @@ class TestClass:
         analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
         analyzer.analyze_individual_research_interests()
         assert simon.sss_contrib == 2.96
-        assert simon.sss_rating == 5.28
+        assert simon.sss_rating == 10.56
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
@@ -187,7 +187,7 @@ class TestClass:
         analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
         analyzer.analyze_individual_research_interests()
         assert richard.sss_contrib == 2.09
-        assert richard.sss_rating == 6.39
+        assert richard.sss_rating == 12.79
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)

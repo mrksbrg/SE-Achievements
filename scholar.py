@@ -109,13 +109,14 @@ class SSSScholar:
 
         print(self.to_string())
 
-        # SSS Contribution = first-authored SCI + 0.1*co-authored SCI + 0.01*others
+        # SSS Contribution = first-authored SCI + 0.1 * co-authored SCI + 0.01*others
         self.sss_contrib = self.nbr_first_sci + 0.1 * (self.nbr_sci_listed - self.nbr_first_sci) + 0.01 * (self.nbr_publications-self.nbr_sci_listed)
-        #self.sss_contrib = round(self.nbr_publications / 25 + self.nbr_first_sci, 2)
+        self.sss_contrib = round(self.sss_contrib, 2)
 
         # SSS Rating = #publications * harmonic mean of sci-ratio and 1st-ratio
         if self.sci_ratio+self.first_ratio != 0:
-            self.sss_rating = round(self.nbr_publications * ((self.sci_ratio * self.first_ratio) / (self.sci_ratio + self.first_ratio)), 2)
+            harmonic_mean = (2* self.sci_ratio * self.first_ratio) / (self.sci_ratio + self.first_ratio)
+            self.sss_rating = round(self.nbr_publications * harmonic_mean, 2)
         else:
             self.sss_rating = 0
 
