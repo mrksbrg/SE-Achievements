@@ -36,7 +36,7 @@ if (len(sys.argv) == 1):
     # add_swese_scholars(fast_list2, "MAU")
     # fast_list_3 = ["Kristian Sandahl"]
     # add_swese_scholars(fast_list_3, "Linköping University")
-    # big_names = ["Lionel C. Briand"]
+    # big_names = ["Lionel C. Briand", "Barry W. Boehm", "David Lorge Parnas", "Barbara A. Kitchenham", "Brad A. Myers", "Marlon Dumas", "Mark Harman"]
     # add_swese_scholars(big_names, "Misc.")
 
     rise_list = ["Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
