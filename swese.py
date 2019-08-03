@@ -40,9 +40,9 @@ if (len(sys.argv) == 1):
     # add_swese_scholars(big_names, "Misc.")
 
     rise_list = ["Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
-                 "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson", "Stefan Cedergren", "Stig Larsson", "Jakob Axelsson"]
+                 "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson", "Stefan Cedergren", "Stig Larsson", "Jakob Axelsson", "Markus Bohlin"]
     add_swese_scholars(rise_list, "RISE Research Institutes of Sweden AB")
-    lu_list = ["Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström"]
+    lu_list = ["Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström", "Christoph Reichenbach", "Görel Hedin", "Boris Magnusson"]
     add_swese_scholars(lu_list, "Lund University")
     bth_list = ["Claes Wohlin", "Tony Gorschek", "Krzysztof Wnuk", "Michael Unterkalmsteiner", "Michael Mattsson",
                 "Mikael Svahnberg", "Darja Smite", "Michael Felderer", "Jürgen Börstler", "Emil Alégroth", "Ali Nauman", "Fabian Fagerholm", "Javier Gonzalez Huerta", "Muhammad Usman"]
@@ -51,13 +51,13 @@ if (len(sys.argv) == 1):
                      "Richard Berntsson-Svensson", "Francisco Gomes", "Gregory Gay", "Michel Chaudron", "Jan Bosch", "Jennifer Horkoff",
                      "Eric Knauss", "Thorsten Berger", "Gul Calikli", "Regina Hebig", "Philipp Leitner", "Agneta Nilsson"]
     add_swese_scholars(gbg_list, "Chalmers / Gothenburg University")
-    kth_list = ["Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt", "Martin Törngren"]
+    kth_list = ["Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt", "Martin Törngren", "David Broman"]
     add_swese_scholars(kth_list, "KTH Royal Institute of Technology")
     su_list = ["Janis Stirna", "Jelena Zdravkovic"]
     add_swese_scholars(su_list, "Stockholm University")
     malmo_list = ["Helena Holmström Olsson", "Annabella Loconsole", "Carl Magnus Olsson"]
     add_swese_scholars(malmo_list, "Malmö University")
-    linkoping_list = ["Kristian Sandahl"]
+    linkoping_list = ["Kristian Sandahl", "Peter Fritzson", "Mariam Kamkar"]
     add_swese_scholars(linkoping_list, "Linköping University")
     mdh_list = ["Markus Bohlin", "Raffaela Mirandola", "Alessio Bucaioni", "Hans Hansson", "Jan Carlsson", "Antonio Cicchetti", "Federico Ciccozzi", "Séverine Sentilles",
                 "Kristina Lundqvist", "Daniel Sundmark", "Wasif Afzal", "Adnan Causevic", "Eduard Paul Enoiu", "Barbara Gallina", "Mikael Sjödin"]
