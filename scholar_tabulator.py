@@ -30,9 +30,9 @@ class ScholarTabulator:
         tmp.write(output)
         tmp.close()
 
-        template = env.get_template('topics_table.html')
+        template = env.get_template('affiliations_table.html')
         output = template.render(sss_affiliations=self.sss_affiliations)
-        tmp = open(self.filename_prefix + "3_tabulator_topics.html", "w+")
+        tmp = open(self.filename_prefix + "3_tabulator_affiliations.html", "w+")
         tmp.write(output)
         tmp.close()
 
