@@ -111,6 +111,8 @@ for scholar in sss_scholars:
         print("Removing " + scholar.name + " (SCI-ratio <= 0)")
         curr.nbr_scholars -= 1
 sss_scholars = tmp_scholars
+for affiliation in sss_affiliations:
+    affiliation.total_sss_contrib = round(affiliation.total_sss_contrib, 2)
 sss_affiliations.sort(reverse=True)
 tabulator = ScholarTabulator(filename_prefix, sss_scholars, sss_affiliations)
 tabulator.write_tables()
