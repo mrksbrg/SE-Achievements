@@ -68,7 +68,7 @@ class TestClass:
         # TC5: Test that David Notkin has the correct ratios
         assert david.first_ratio == pytest.approx(0.29, 0.01)
         assert david.sci_ratio == pytest.approx(0.24, 0.01)
-        assert david.nbr_sci_listed == 35
+        assert david.nbr_sci_publications == 35
 
         # TC6: Test write results
         self.miner.write_results()
@@ -118,7 +118,7 @@ class TestClass:
         # TC5: Test that Simon Poulding has the correct ratios
         assert simon.first_ratio == pytest.approx(0.36, 0.01)
         assert simon.sci_ratio == pytest.approx(0.18, 0.01)
-        assert simon.nbr_sci_listed == 8
+        assert simon.nbr_sci_publications == 8
 
         # TC6: Test write to txt-file
         self.miner.write_results()
@@ -168,7 +168,7 @@ class TestClass:
         # TC5: Test that Richard Holst has the correct ratios
         assert richard.first_ratio == pytest.approx(0.21, 0.01)
         assert richard.sci_ratio == pytest.approx(0.06, 0.01)
-        assert richard.nbr_sci_listed == 8
+        assert richard.nbr_sci_publications == 8
 
         # TC6: Test write to files
         self.miner.write_results()
