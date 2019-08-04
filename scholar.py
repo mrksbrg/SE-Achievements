@@ -110,7 +110,7 @@ class SSSScholar:
         print(self.to_string())
 
         # SSS Contribution = first-authored SCI + 0.1 * first-authored non-SCI
-        self.sss_contrib = self.nbr_first_sci + 0.1 * (nbr_first_author - self.nbr_first_sci)
+        self.sss_contrib = self.nbr_first_sci + 0.1 * (self.nbr_sci_listed - self.nbr_first_sci) + 0.01 * (self.nbr_publications - self.nbr_sci_listed)
         self.sss_contrib = round(self.sss_contrib, 2)
 
         # SSS Rating = #publications * harmonic mean of sci-ratio and 1st-ratio
