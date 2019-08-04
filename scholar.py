@@ -18,7 +18,7 @@ class SSSScholar:
         self.nbr_publications = -1
         self.first_ratio = -1
         self.sci_ratio = -1
-        self.nbr_sci_listed = -1
+        self.nbr_sci_publications = -1
         self.nbr_first_sci = -1
                 
     def __str__(self):
@@ -42,13 +42,6 @@ class SSSScholar:
         self.nbr_publications += 1
         if publ.sci_listed:
             self.nbr_first_sci += 1
-
-    def get_nbr_sci_publications(self):
-        nbr = 0
-        for publ in self.publications:
-            if publ.sci_listed:
-                nbr += 1
-        return nbr
     
     def get_nbr_main_confs(self):
         nbr = 0
@@ -77,28 +70,28 @@ class SSSScholar:
     def calc_stats(self):
         ''' Calculating statistics for the scholar. Shall be called after ScholarMiner is done. '''
         nbr_first_author = 0
-        self.nbr_sci_listed = 0
+        self.nbr_sci_publications = 0
         self.nbr_first_sci = 0
         for publ in self.publications:
             try:
                 if publ.sci_listed and publ.authors[0] == self.name:
                     nbr_first_author += 1
-                    self.nbr_sci_listed += 1
+                    self.nbr_sci_publications += 1
                     self.nbr_first_sci += 1
                 elif publ.authors[0] == self.name:
                     nbr_first_author += 1
                 elif publ.sci_listed:
-                    self.nbr_sci_listed += 1
+                    self.nbr_sci_publications += 1
             except:
                 print("No authors for the publication: " + publ.title)
 
         if self.nbr_publications > 0:
             # Calculate SCI ratio. Round up to 0.01 if needed.
-            tmp_ratio = self.nbr_sci_listed / self.nbr_publications
+            tmp_ratio = self.nbr_sci_publications / self.nbr_publications
             if tmp_ratio > 0 and tmp_ratio < 0.01:
                 self.sci_ratio = 0.01
             else:
-                self.sci_ratio = round(self.nbr_sci_listed / self.nbr_publications, 2)
+                self.sci_ratio = round(self.nbr_sci_publications / self.nbr_publications, 2)
 
             # Calculate 1st author ratio. Round up to 0.01 if needed.
             tmp_ratio = nbr_first_author / self.nbr_publications
@@ -110,7 +103,7 @@ class SSSScholar:
         print(self.to_string())
 
         # SSS Contribution = first-authored SCI + 0.1 * first-authored non-SCI
-        self.sss_contrib = self.nbr_first_sci + 0.1 * (self.nbr_sci_listed - self.nbr_first_sci) + 0.01 * (self.nbr_publications - self.nbr_sci_listed)
+        self.sss_contrib = self.nbr_first_sci + 0.1 * (self.nbr_sci_publications - self.nbr_first_sci) + 0.01 * (self.nbr_publications - self.nbr_sci_publications)
         self.sss_contrib = round(self.sss_contrib, 2)
 
         # SSS Rating = #publications * harmonic mean of sci-ratio and 1st-ratio

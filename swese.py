@@ -106,13 +106,13 @@ for scholar in sss_scholars:
     curr = next((x for x in sss_affiliations if scholar.affiliation == x.name), None)
     if scholar.sci_ratio > 0:
         tmp_scholars.append(scholar)
-        curr.total_sss_contrib += scholar.sss_contrib
+        curr.nbr_sci_publications += scholar.nbr_sci_publications
     else:
         print("Removing " + scholar.name + " (SCI-ratio <= 0)")
         curr.nbr_scholars -= 1
 sss_scholars = tmp_scholars
 for affiliation in sss_affiliations:
-    affiliation.total_sss_contrib = round(affiliation.total_sss_contrib, 2)
+    affiliation.total_sss_contrib = affiliation.nbr_sci_publications
 sss_affiliations.sort(reverse=True)
 tabulator = ScholarTabulator(filename_prefix, sss_scholars, sss_affiliations)
 tabulator.write_tables()
