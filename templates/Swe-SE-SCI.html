@@ -41,7 +41,7 @@ tr:hover {
     <th onclick="sortTable(6)">SSS contrib.</th>
     <th onclick="sortTable(7)">SSS rating</th>
     <th onclick="sortTable(8)">Apparent research interests</th>
-    <th onclick="sortTable(9)">Signature works</th>
+    <th onclick="sortTable(9)">Signature SSS works</th>
   </tr>
   {% for value in sss_scholars %}
   <tr>
@@ -65,7 +65,7 @@ tr:hover {
         <th></th>
         <th>Affiliation</th>
         <th>#SSS scholars</th>
-        <th>#SCI publlications</th>
+        <th>#SCI publications</th>
         <th>Research topics</th>
     </tr>
     {% for value in sss_affiliations  %}
@@ -73,7 +73,7 @@ tr:hover {
         <td></td>
         <td>{{ value.name }}</td>
         <td>{{ value.nbr_scholars }}</td>
-        <td>{{ value.nbr_sci_publications }}</td>
+        <td>{{ value.nbr_first_sci }}</td>
         <td>{{ value.topics_string }}</td>
     </tr>
     {% endfor %}

@@ -12,7 +12,7 @@
         <td></td>
         <td>{{ value.name }}</td>
         <td>{{ value.nbr_scholars }}</td>
-        <td>{{ value.nbr_sci_publications }}</td>
+        <td>{{ value.nbr_first_sci }}</td>
         <td>{{ value.topics_string }}</td>
     </tr>
     {% endfor %}
@@ -45,7 +45,7 @@
         <th onclick="sortTable(1)">Scholar</th>
         <th onclick="sortTable(2)">Affiliation</th>
         <th onclick="sortTable(3)">SSS rating</th>
-        <th onclick="sortTable(5)">Signature works</th>
+        <th onclick="sortTable(5)">Signature SSS works</th>
     </tr>
     {% for value in sss_scholars  %}
     <tr>

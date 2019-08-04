@@ -3,7 +3,7 @@ class SSSAffiliation:
     def __init__(self, name):
         self.name = name
         self.nbr_scholars = 0
-        self.nbr_sci_publications = 0
+        self.nbr_first_sci = 0
         self.top_terms = []
         self.top_terms_string = ""
         self.nbr_topics = 0
@@ -17,7 +17,7 @@ class SSSAffiliation:
         return self.name == other.name
 
     def __lt__(self, other):
-        return self.nbr_sci_publications < other.nbr_sci_publications
+        return self.nbr_first_sci < other.nbr_first_sci
 
     def add_term(self, term):
         self.top_terms.append(term)

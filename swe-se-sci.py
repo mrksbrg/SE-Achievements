@@ -68,8 +68,11 @@ if (len(sys.argv) == 1):
     add_swese_scholars(skovde_list, "Skövde University")
     karlstad_list = ["Sebastian Herold"]
     add_swese_scholars(karlstad_list, "Karlstad University")
-    jonkoping_list = ["Anders Adlemo"]
+    jonkoping_list = ["Anders Adlemo", "Niklas Lavesson"]
     add_swese_scholars(jonkoping_list, "Jönköping University")
+    orebro_list = ["Panagiota Chatzipetrou"]
+    add_swese_scholars(orebro_list, "Örebro University")
+
 else:
     custom_list = []
     custom_list.append(sys.argv[1])
@@ -104,15 +107,15 @@ tmp_scholars = []
 for scholar in sss_scholars:
     # remove scholars with SCI-ratio <= 0, otherwise add their SSS contrib to corresponding affilation
     curr = next((x for x in sss_affiliations if scholar.affiliation == x.name), None)
-    if scholar.sci_ratio > 0:
+    if scholar.nbr_first_sci > 0:
         tmp_scholars.append(scholar)
-        curr.nbr_sci_publications += scholar.nbr_sci_publications
+        curr.nbr_first_sci += scholar.nbr_first_sci
     else:
         print("Removing " + scholar.name + " (SCI-ratio <= 0)")
         curr.nbr_scholars -= 1
 sss_scholars = tmp_scholars
 for affiliation in sss_affiliations:
-    affiliation.total_sss_contrib = affiliation.nbr_sci_publications
+    affiliation.total_sss_contrib = affiliation.nbr_first_sci
 sss_affiliations.sort(reverse=True)
 tabulator = ScholarTabulator(filename_prefix, sss_scholars, sss_affiliations)
 tabulator.write_tables()

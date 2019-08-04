@@ -15,16 +15,16 @@ import dblp
 class ScholarMiner:
     
     def __init__(self, process_list, filename_prefix):
-        self.swese_scholars = process_list
+        self.sss_scholars = process_list
         self.coauthors = Counter()
         self.filename_prefix = filename_prefix
         
     def process_group(self):
-        nbr_remaining = len(self.swese_scholars)
+        nbr_remaining = len(self.sss_scholars)
         attempts = 0
         while nbr_remaining > 0 and attempts < 10: # an extra loop to tackle DBLP flakiness
             attempts += 1
-            for scholar in self.swese_scholars:
+            for scholar in self.sss_scholars:
                 try:
                     print("\n### Processing scholar: " + scholar.name + " ###")
                     authors = dblp.search(scholar.name)
@@ -72,13 +72,13 @@ class ScholarMiner:
             
     def write_results(self):
         tmp = open(self.filename_prefix + "1_miner.txt","w+")
-        for scholar in self.swese_scholars:
+        for scholar in self.sss_scholars:
             tmp.write(scholar.name + "\n")
             tmp.write(scholar.sci_publications_to_string())
         tmp.close()
         
         tmp = open(self.filename_prefix + "1_miner.csv","w+")
-        for scholar in self.swese_scholars:
+        for scholar in self.sss_scholars:
             tmp.write(scholar.to_csv_line() + "\n")
         tmp.close()
         
@@ -91,7 +91,7 @@ class ScholarMiner:
         # Write co-authors that are not already among the mined Swedish SE scholars
         diff = {}
         for coauthor in self.coauthors:
-            for swese_scholar in self.swese_scholars:
+            for swese_scholar in self.sss_scholars:
                 if coauthor != swese_scholar.name:
                     diff[coauthor] = self.coauthors[coauthor]
 
@@ -106,7 +106,7 @@ class ScholarMiner:
         titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv","w+")
         affiliation_titles = self.get_dict_of_affiliations()
 
-        for scholar in self.swese_scholars:
+        for scholar in self.sss_scholars:
             tmp = scholar.name + "; "
             for p in scholar.get_first_author_titles():
                 affiliation_titles[scholar.affiliation] += p + " "
@@ -119,7 +119,7 @@ class ScholarMiner:
         titles_per_affiliation.close()
 
     def get_scholars(self):
-        return self.swese_scholars
+        return self.sss_scholars
     
     def get_coauthors(self):
         return self.coauthors
@@ -146,7 +146,7 @@ class ScholarMiner:
     def get_dict_of_affiliations(self):
         ''' Return a dict with affiliations as keys. All values are empty strings. '''
         affiliations = {}
-        for scholar in self.swese_scholars:
+        for scholar in self.sss_scholars:
             if scholar.affiliation not in affiliations:
                 affiliations[scholar.affiliation] = ""
         return affiliations
