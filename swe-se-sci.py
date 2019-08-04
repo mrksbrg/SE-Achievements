@@ -42,7 +42,7 @@ if (len(sys.argv) == 1):
     rise_list = ["Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
                  "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson", "Stefan Cedergren", "Stig Larsson", "Jakob Axelsson", "Markus Bohlin"]
     add_swese_scholars(rise_list, "RISE Research Institutes of Sweden AB")
-    lu_list = ["Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström", "Christoph Reichenbach", "Görel Hedin", "Boris Magnusson"]
+    lu_list = ["Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström", "Christine Lindholm", "Christoph Reichenbach", "Görel Hedin", "Martina Maggio"]
     add_swese_scholars(lu_list, "Lund University")
     bth_list = ["Claes Wohlin", "Tony Gorschek", "Krzysztof Wnuk", "Michael Unterkalmsteiner", "Michael Mattsson",
                 "Mikael Svahnberg", "Darja Smite", "Michael Felderer", "Jürgen Börstler", "Emil Alégroth", "Ali Nauman", "Fabian Fagerholm", "Javier Gonzalez Huerta", "Muhammad Usman"]
@@ -55,7 +55,7 @@ if (len(sys.argv) == 1):
     add_swese_scholars(kth_list, "KTH Royal Institute of Technology")
     su_list = ["Janis Stirna", "Jelena Zdravkovic"]
     add_swese_scholars(su_list, "Stockholm University")
-    malmo_list = ["Helena Holmström Olsson", "Annabella Loconsole", "Carl Magnus Olsson"]
+    malmo_list = ["Helena Holmström Olsson", "Annabella Loconsole", "Patrik Berander", "Carl Magnus Olsson", "Jeanette Eriksson"]
     add_swese_scholars(malmo_list, "Malmö University")
     linkoping_list = ["Kristian Sandahl", "Peter Fritzson", "Mariam Kamkar"]
     add_swese_scholars(linkoping_list, "Linköping University")
@@ -93,16 +93,8 @@ miner.process_group()
 miner.write_results()
 sss_scholars = miner.get_scholars()
 
-# 2. Analyze the scholars, write the results
+# 2. Analyze the scholars, remove non-SCI first-authors, write the results
 print("\n####### Step 2 - Analyzing scholars #######")
-analyzer = ScholarAnalyzer(filename_prefix, sss_scholars, sss_affiliations)
-analyzer.analyze_individual_research_interests()
-analyzer.analyze_affiliation_topics()
-analyzer.write_results()
-
-# 3. Tabulate the scholars, write the results
-print("\n####### Step 3 - Tabulating scholars #######")
-sss_scholars.sort(reverse=True)
 tmp_scholars = []
 for scholar in sss_scholars:
     # remove scholars with SCI-ratio <= 0, otherwise add their SSS contrib to corresponding affilation
@@ -114,8 +106,22 @@ for scholar in sss_scholars:
         print("Removing " + scholar.name + " (SCI-ratio <= 0)")
         curr.nbr_scholars -= 1
 sss_scholars = tmp_scholars
+tmp_affiliations = []
 for affiliation in sss_affiliations:
-    affiliation.total_sss_contrib = affiliation.nbr_first_sci
+    # remove affiliations without SSS scholars
+    curr = next((x for x in sss_affiliations if scholar.affiliation == x.name), None)
+    if affiliation.nbr_first_sci > 0:
+        tmp_affiliations.append(affiliation)
+sss_affiliations = tmp_affiliations
+if len(tmp_scholars) > 0:
+    analyzer = ScholarAnalyzer(filename_prefix, sss_scholars, sss_affiliations)
+    analyzer.analyze_individual_research_interests()
+    analyzer.analyze_affiliation_topics()
+    analyzer.write_results()
+
+# 3. Tabulate the scholars, write the results
+print("\n####### Step 3 - Tabulating scholars #######")
+sss_scholars.sort(reverse=True)
 sss_affiliations.sort(reverse=True)
 tabulator = ScholarTabulator(filename_prefix, sss_scholars, sss_affiliations)
 tabulator.write_tables()

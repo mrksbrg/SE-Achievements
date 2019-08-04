@@ -5,7 +5,6 @@ Created on Sat Jun 15 21:18:26 2019
 @author: Markus Borg
 """
 
-from scholar import SSSScholar
 from publication import SSSPublication
 from collections import Counter
 import pandas as pd
