@@ -37,7 +37,7 @@ class TestClass:
 
     def test_nonsense(self):
         self.add_swese_scholars(self.test_nonsense, "N/A")
-        self.miner = ScholarMiner(self.scholars, self.filename_prefix)
+        self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
 
@@ -45,7 +45,7 @@ class TestClass:
 
     def test_david_notkin(self):
         self.add_swese_scholars(self.test_scholar, "N/A")
-        self.miner = ScholarMiner(self.scholars, self.filename_prefix)
+        self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
         david = None
@@ -95,7 +95,7 @@ class TestClass:
 
     def test_simon_poulding(self):
         self.add_swese_scholars(self.test_scholars, "N/A")
-        self.miner = ScholarMiner(self.scholars, self.filename_prefix)
+        self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
         simon = None
@@ -145,7 +145,7 @@ class TestClass:
 
     def test_richard_holst(self):
         self.add_swese_scholars(self.test_scholars, "N/A")
-        self.miner = ScholarMiner(self.scholars, self.filename_prefix)
+        self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
         richard = None

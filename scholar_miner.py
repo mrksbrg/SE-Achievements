@@ -13,11 +13,12 @@ import dblp
 
 class ScholarMiner:
     
-    def __init__(self, process_list, filename_prefix):
-        self.sss_scholars = process_list
-        self.coauthors = Counter()
+    def __init__(self, filename_prefix, sss_scholars, sss_affiliations):
         self.filename_prefix = filename_prefix
-        
+        self.sss_scholars = sss_scholars
+        self.sss_affiliations = sss_affiliations
+        self.coauthors = Counter()
+
     def process_group(self):
         nbr_remaining = len(self.sss_scholars)
         attempts = 0
@@ -75,7 +76,8 @@ class ScholarMiner:
             if scholar.nbr_first_sci > 0:
                 tmp_scholars.append(scholar)
             else:
-                print("Removing " + scholar.name + " (No first-authored SCI publications)")
+                curr = next((x for x in self.sss_affiliations if scholar.affiliation == x.name), None)
+                curr.nbr_scholars -= 1
         self.sss_scholars = tmp_scholars
 
     def write_results(self):
