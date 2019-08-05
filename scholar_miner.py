@@ -68,7 +68,16 @@ class ScholarMiner:
                     
         if attempts >= 10:
             print("Failed to process scholars")
-            
+
+        # Remove scholars with no first-authored SCI publications
+        tmp_scholars = []
+        for scholar in self.sss_scholars:
+            if scholar.nbr_first_sci > 0:
+                tmp_scholars.append(scholar)
+            else:
+                print("Removing " + scholar.name + " (No first-authored SCI publications)")
+        self.sss_scholars = tmp_scholars
+
     def write_results(self):
         tmp = open(self.filename_prefix + "1_miner.txt","w+")
         for scholar in self.sss_scholars:
