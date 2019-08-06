@@ -4,7 +4,7 @@
         <th></th>
         <th>Affiliation</th>
         <th>#SSS scholars</th>
-        <th>#SCI publlications</th>
+        <th>#SCI publications</th>
         <th>Research topics</th>
     </tr>
     {% for value in sss_affiliations  %}
@@ -18,14 +18,14 @@
     {% endfor %}
 </table>
 
-<table id="scholarTable-interests" cellpadding="10">
+<table id="scholarTableInterests" cellpadding="10">
     <caption>Swe-SE-SCI scholars: Click on a header to sort by the corresponding column.</caption>
     <tr>
         <th></th>
-        <th onclick="sortTable(1)">Scholar</th>
-        <th onclick="sortTable(2)">Affiliation</th>
-        <th onclick="sortTable(3)">SSS rating</th>
-        <th onclick="sortTable(4)">Apparent research interests</th>
+        <th onclick="sortTableInterests(1)">Scholar</th>
+        <th onclick="sortTableInterests(2)">Affiliation</th>
+        <th onclick="sortTableInterests(3)">SSS rating</th>
+        <th onclick="sortTableInterests(4)">Apparent research interests</th>
     </tr>
     {% for value in sss_scholars %}
     <tr>
@@ -38,14 +38,14 @@
     {% endfor %}
 </table>
 
-<table id="scholarTable-works" cellpadding="10">
+<table id="scholarTableWorks" cellpadding="10">
     <caption>Signature works by Swe-SE-SCI scholars: Click on a header to sort by the corresponding column.</caption>
     <tr>
         <th></th>
-        <th onclick="sortTable(1)">Scholar</th>
-        <th onclick="sortTable(2)">Affiliation</th>
-        <th onclick="sortTable(3)">SSS rating</th>
-        <th onclick="sortTable(5)">Signature SSS works</th>
+        <th onclick="sortTableWorks(1)">Scholar</th>
+        <th onclick="sortTableWorks(2)">Affiliation</th>
+        <th onclick="sortTableWorks(3)">SSS rating</th>
+        <th onclick="sortTableWorks(4)">Signature SSS works</th>
     </tr>
     {% for value in sss_scholars  %}
     <tr>
@@ -58,17 +58,17 @@
     {% endfor %}
 </table>
 
-<table id="scholarTable-metrics" cellpadding="10">
+<table id="scholarTableMetrics" cellpadding="10">
     <caption>Bibliometrics for Swe-SE-SCI scholars: Click on a header to sort by the corresponding column.</caption>
     <tr>
         <th></th>
-        <th onclick="sortTable(1)">Scholar</th>
-        <th onclick="sortTable(2)">Affiliation</th>
-        <th onclick="sortTable(3)">#Publ.</th>
-        <th onclick="sortTable(4)">SCI ratio</th>
-        <th onclick="sortTable(5)">1st ratio</th>
-        <th onclick="sortTable(6)">SSS contrib.</th>
-        <th onclick="sortTable(7)">SSS rating</th>
+        <th onclick="sortTableMetrics(1)">Scholar</th>
+        <th onclick="sortTableMetrics(2)">Affiliation</th>
+        <th onclick="sortTableMetrics(3)">#Publ.</th>
+        <th onclick="sortTableMetrics(4)">SCI ratio</th>
+        <th onclick="sortTableMetrics(5)">1st ratio</th>
+        <th onclick="sortTableMetrics(6)">SSS contrib.</th>
+        <th onclick="sortTableMetrics(7)">SSS rating</th>
     </tr>
     {% for value in sss_scholars  %}
     <tr>
