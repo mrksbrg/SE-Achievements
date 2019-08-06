@@ -41,7 +41,8 @@ class TestClass:
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
 
-        assert self.scholars[0].dblp_entries == -1
+        # TC1: Test that DBLP does not return anything
+        assert len(self.scholars) == 0
 
     def test_david_notkin(self):
         self.add_swese_scholars(self.test_scholar, "N/A")
@@ -55,6 +56,7 @@ class TestClass:
 
         # TC1: Test that DBLP returns a result
         assert self.scholars != None
+        assert len(self.scholars) == 1
 
         # TC2: Test that David Notkin has 151 DBLP entries
         assert david.dblp_entries == 151
@@ -104,7 +106,7 @@ class TestClass:
                 simon = scholar
 
         # TC1: Test that DBLP returns a result
-        assert self.scholars != None
+        assert len(self.scholars) == 1
 
         # TC2: Test that Simon Poulding has 48 DBLP entries
         assert simon.dblp_entries == 48
@@ -153,11 +155,9 @@ class TestClass:
             if scholar.name == "Richard C. Holt":
                 richard = scholar
 
-        # TC1: Test that DBLP returns a result
+        # TC1: Test that Richard is removed as a non-SCI first-author
         assert self.scholars != None
-
-        print(type(self.scholars))
-        print(str(self.scholars))
+        assert len(self.scholars) == 1
 
         # TC2: Test that Richard Holst has 138 entries
         # assert richard.dblp_entries == 138
