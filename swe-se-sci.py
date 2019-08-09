@@ -64,7 +64,7 @@ if (len(sys.argv) == 1):
     add_sss_scholars(mdh_list, "Mälardalen University")
     linne_list = ["Jesper Andersson", "Morgan Ericsson", "Narges Khakpour", "Danny Weyns", "Welf Löwe", "Francesco Flammini", "Francis Palma", "Andreas Kerren", "Rafael Messias Martins"]
     add_sss_scholars(linne_list, "Linneaus Univerity")
-    skovde_list = ["Björn Lundell", "Sten Andler", "Birgitta Lindström"]
+    skovde_list = ["Björn Lundell", "Sten Andler", "Birgitta Lindström", "Henrik Gustavsson", "Jonas Gamalielsson", "Simon Butler"]
     add_sss_scholars(skovde_list, "Skövde University")
     karlstad_list = ["Sebastian Herold"]
     add_sss_scholars(karlstad_list, "Karlstad University")
@@ -73,7 +73,7 @@ if (len(sys.argv) == 1):
     orebro_list = ["Panagiota Chatzipetrou"]
     add_sss_scholars(orebro_list, "Örebro University")
     halmstad_university = ["Walid Taha"]
-    add_sss_scholars(orebro_list, "Halmstad University")
+    add_sss_scholars(halmstad_university, "Halmstad University")
 
 else:
     custom_list = []
