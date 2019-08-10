@@ -30,7 +30,21 @@ class SSSScholar:
 
     def __lt__(self, other):
         return self.sss_rating < other.sss_rating
-    
+
+    def clear(self):
+        self.research_interests = []
+        self.research_interests_string = ""
+        self.signature_works = []
+        self.sss_contrib = -1
+        self.sss_rating = -1
+        self.dblp_entries = -1
+        self.publications = SortedSet()
+        self.nbr_publications = -1
+        self.first_ratio = -1
+        self.sci_ratio = -1
+        self.nbr_sci_publications = -1
+        self.nbr_first_sci = -1
+
     def add_publication(self, publ):
         if not isinstance(publ, SSSPublication):
             raise TypeError("Error: do not add anything but instances of publication.SEPublication to the collection")

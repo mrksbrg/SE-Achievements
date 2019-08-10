@@ -31,6 +31,7 @@ class ScholarMiner:
                     search_res = authors[0]
                 except:
                     print("ERROR: Invalid search result from DBLP. Waiting...")
+                    self.clear_all_scholars()
                     time.sleep(5)
                     break
 
@@ -79,6 +80,10 @@ class ScholarMiner:
                 curr = next((x for x in self.sss_affiliations if scholar.affiliation == x.name), None)
                 curr.nbr_scholars -= 1
         self.sss_scholars = tmp_scholars
+
+    def clear_all_scholars(self):
+        for scholar in self.sss_scholars:
+            scholar.clear()
 
     def write_results(self):
         tmp = open(self.filename_prefix + "1_miner.txt","w+")
