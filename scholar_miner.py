@@ -44,7 +44,7 @@ class ScholarMiner:
                 for p in search_res.publications:
                     self.print_progress_bar(i + 1, dblp_entries)
                     try:
-                        time.sleep(0.5)  # There appears to be some race condition in the dblp package
+                        #time.sleep(0.5)  # There appears to be some race condition in the dblp package
                         if len(p.authors) == 0:  # skip papers with 0 authors
                             continue
                         elif p.type == "article":
@@ -58,7 +58,8 @@ class ScholarMiner:
 
                         # TODO: Cache the search_res locally
                         i += 1
-                    except:
+                    except Exception as e:
+                        print(e)
                         print("ERROR. Processing one of the papers failed. Waiting...")
                         time.sleep(5)
                         break
