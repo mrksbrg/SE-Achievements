@@ -28,7 +28,6 @@ class ScholarMiner:
                 try:
                     print("\n### Processing scholar: " + scholar.name + " ###")
                     authors = dblp.search(scholar.name)
-                    print(authors)
                     search_res = authors[0]
                 except:
                     print("ERROR: Invalid search result from DBLP. Waiting...")
