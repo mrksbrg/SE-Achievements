@@ -28,6 +28,7 @@ class ScholarMiner:
                 try:
                     print("\n### Processing scholar: " + scholar.name + " ###")
                     authors = dblp.search(scholar.name)
+                    print(authors)
                     search_res = authors[0]
                 except:
                     print("ERROR: Invalid search result from DBLP. Waiting...")
@@ -44,7 +45,7 @@ class ScholarMiner:
                 for p in search_res.publications:
                     self.print_progress_bar(i + 1, dblp_entries)
                     try:
-                        #time.sleep(0.5)  # There appears to be some race condition in the dblp package
+                        time.sleep(0.5)  # There appears to be some race condition in the dblp package
                         if len(p.authors) == 0:  # skip papers with 0 authors
                             continue
                         elif p.type == "article":
@@ -80,6 +81,7 @@ class ScholarMiner:
             else:
                 curr = next((x for x in self.sss_affiliations if scholar.affiliation == x.name), None)
                 curr.nbr_scholars -= 1
+                print("Removed scholar with no first-authored SCI publications: " + scholar.name)
         self.sss_scholars = tmp_scholars
 
     def clear_all_scholars(self):
