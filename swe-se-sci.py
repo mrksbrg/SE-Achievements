@@ -95,7 +95,7 @@ miner.process_group()
 miner.write_results()
 sss_scholars = miner.get_scholars()
 
-# 2. Analyze the scholars, remove non-SCI first-authors, write the results
+# 2. Analyze the scholars, remove affiliations with no first-authored SCI publications, write the results
 print("\n####### Step 2 - Analyzing scholars #######")
 for scholar in sss_scholars:
     curr = next((x for x in sss_affiliations if scholar.affiliation == x.name), None)
