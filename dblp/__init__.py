@@ -41,10 +41,6 @@ class Author(LazyAPIData):
         self.xml = None
         super(Author, self).__init__(['name','publications','homepages',
                                       'homonyms'])
-    
-        self.cleaned_publications = -1
-        self.first_ratio = -1
-        self.quality_ratio = -1
 
     def load_data(self):
         resp = requests.get(DBLP_PERSON_URL.format(urlpt=self.urlpt))
@@ -60,8 +56,10 @@ class Author(LazyAPIData):
                 '/dblpperson/dblpkey[@type="person record"]/text()'),
             'homonyms':root.xpath('/dblpperson/homonym/text()')
         }
-
         self.data = data
+
+    def __str__(self):
+        return self.name + " - " + self.urlpt
 
 def first_or_none(seq):
     try:
@@ -147,7 +145,39 @@ class Publication(LazyAPIData):
         self.data = data
 
 def search(author_str):
-    resp = requests.get(DBLP_AUTHOR_SEARCH_URL, params={'xauthor':author_str})
+    #if author_str == "Thomas Olsson":
+    #    resp = requests.get("https://dblp.org/pid/31/5587-1.xml")
+    #elif author_str == "Annabella Loconsole2":
+    #    resp = requests.get("https://dblp.org/pid/69/4553.xml")
+    #else:
+
+    #req = requests.Request('GET', DBLP_AUTHOR_SEARCH_URL, params={'xauthor':author_str})
+    #prepared = req.prepare()
+    #pretty_print_POST(prepared)
+
+    resp = requests.get(DBLP_AUTHOR_SEARCH_URL, params={'xauthor': author_str})
+
     #TODO error handling
+    #try:
     root = etree.fromstring(resp.content)
-    return [Author(urlpt) for urlpt in root.xpath('/authors/author/@urlpt')]
+    result = [Author(urlpt) for urlpt in root.xpath('/authors/author/@urlpt')]
+    #print("Here is the result: " + str(result[0]))
+    #except Exception as e:
+    #   print(e)
+    return result
+
+def pretty_print_POST(req):
+    """
+    At this point it is completely built and ready
+    to be fired; it is "prepared".
+
+    However pay attention at the formatting used in
+    this function because it is programmed to be pretty
+    printed and may differ from the actual request.
+    """
+    print('{}\n{}\n{}\n\n{}'.format(
+        '-----------START-----------',
+        req.method + ' ' + req.url,
+        '\n'.join('{}: {}'.format(k, v) for k, v in req.headers.items()),
+        req.body,
+    ))
