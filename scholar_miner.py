@@ -48,6 +48,7 @@ class ScholarMiner:
                         if len(p.authors) == 0:  # skip papers with 0 authors
                             continue
                         elif p.type == "article":
+                            # todo: remove titles with "special issue, special section, editorial, and erratum"
                             if p.journal == "CoRR":  # skip ArXiv preprints
                                 continue
                                 # elif p.type == "inproceedings": # This is what conference proceedings look like
@@ -128,7 +129,10 @@ class ScholarMiner:
             for p in scholar.get_first_author_titles():
                 affiliation_titles[scholar.affiliation] += p + " "
                 tmp += p + " "
-            titles_per_author.write(tmp + "\n")
+            try:
+                titles_per_author.write(tmp + "\n")
+            except UnicodeEncodeError as e:
+                titles_per_author.write("ERROR: This scholar used an illegal character in a paper title\n")
 
         for affiliation, titles in affiliation_titles.items():
             titles_per_affiliation.write(affiliation + ";" + titles + "\n")
