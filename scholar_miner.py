@@ -120,8 +120,8 @@ class ScholarMiner:
         Write all titles from all first authors to csv
         """
 
-        titles_per_author = open(self.filename_prefix + "1_titles_per_author.csv","w+")
-        titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv","w+")
+        titles_per_author = open(self.filename_prefix + "1_titles_per_author.csv", "w+", encoding="utf-8")
+        titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv", "w+", encoding="utf-8")
         affiliation_titles = self.get_dict_of_affiliations()
 
         for scholar in self.sss_scholars:
@@ -129,10 +129,7 @@ class ScholarMiner:
             for p in scholar.get_first_author_titles():
                 affiliation_titles[scholar.affiliation] += p + " "
                 tmp += p + " "
-            try:
                 titles_per_author.write(tmp + "\n")
-            except UnicodeEncodeError as e:
-                titles_per_author.write("ERROR: This scholar used an illegal character in a paper title\n")
 
         for affiliation, titles in affiliation_titles.items():
             titles_per_affiliation.write(affiliation + ";" + titles + "\n")
@@ -157,8 +154,8 @@ class ScholarMiner:
         decimals = 1 # number of decimals in percent complete
         fill = '█' # bar fill character (Str)
         percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
-        filledLength = int(length * iteration // total)
-        bar = fill * filledLength + '-' * (length - filledLength)
+        filled_length = int(length * iteration // total)
+        bar = fill * filled_length + '-' * (length - filled_length)
         print('\r%s |%s| %s%% %s' % ("Progress:", bar, percent, "Complete "), end = '\r')
         # Print New Line on Complete
         if iteration == total: 
