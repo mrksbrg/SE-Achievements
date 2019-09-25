@@ -23,6 +23,7 @@ class TestClass:
         self.test_nonsense = ["ABCDEFGH"]
         self.test_scholar = ["David Notkin"]
         self.test_scholars = ["Simon M. Poulding", "Richard C. Holt"]
+        self.test_nonascii_scholar = ["Danny Weyns"]
 
     def add_swese_scholars(self, process_list, affiliation):
         for name in process_list:
@@ -150,16 +151,14 @@ class TestClass:
         self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
-        richard = None
-        for scholar in self.scholars:
-            if scholar.name == "Richard C. Holt":
-                richard = scholar
 
         # TC1: Test that Richard is removed as a non-SCI first-author
-        assert self.scholars != None
-        assert len(self.scholars) == 1
+        assert len(self.scholars) == 0
 
-        # TC2: Test that Richard Holst has 138 entries
+        # This part is only relevant if non-SCI first-authors are kept
+        # assert len(self.scholars) == 1
+        #
+        # # TC2: Test that Richard Holst has 138 entries
         # assert richard.dblp_entries == 138
         #
         # # TC3: Test that the name is correctly processed
@@ -195,3 +194,22 @@ class TestClass:
         # # TC10: Test tabulator
         # tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
         # tabulator.write_tables()
+
+    def test_danny_weyns(self):
+        self.add_swese_scholars(self.test_nonascii_scholar, "N/A")
+        self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
+        self.miner.process_group()
+        self.scholars = self.miner.get_scholars()
+        danny = None
+        for scholar in self.scholars:
+            if scholar.name == "Danny Weyns":
+                danny = scholar
+
+        # TC1: Test that DBLP returns a result
+        assert len(self.scholars) == 1
+
+        # TC2: Test that Danny Weyns has at least 100 DBLP entries
+        assert danny.dblp_entries >= 100
+
+        # TC3: Test that the name is correctly processed
+        assert danny.name == "Danny Weyns"

@@ -120,8 +120,8 @@ class ScholarMiner:
         Write all titles from all first authors to csv
         """
 
-        titles_per_author = open(self.filename_prefix + "1_titles_per_author.csv", "w+", encoding="utf-8")
-        titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv", "w+", encoding="utf-8")
+        titles_per_author = open(self.filename_prefix + "1_titles_per_author.csv", "w+")
+        titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv", "w+")
         affiliation_titles = self.get_dict_of_affiliations()
 
         for scholar in self.sss_scholars:
