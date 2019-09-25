@@ -151,9 +151,13 @@ class TestClass:
         self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
+        richard = None
+        for scholar in self.scholars:
+            if scholar.name == "Richard C. Holt":
+                richard = scholar
 
         # TC1: Test that Richard is removed as a non-SCI first-author
-        assert len(self.scholars) == 0
+        assert richard is None
 
         # This part is only relevant if non-SCI first-authors are kept
         # assert len(self.scholars) == 1
