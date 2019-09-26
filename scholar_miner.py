@@ -93,7 +93,7 @@ class ScholarMiner:
                 print("Removed scholar with no first-authored SCI publications: " + scholar.name)
         self.sss_scholars = tmp_scholars
         if counter > 0:
-            print("Done! " + counter + " scholars removed.")
+            print("Done! " + str(counter) + " scholars removed.")
         else:
             print("Done! No scholars were removed.")
 
