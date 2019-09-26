@@ -48,7 +48,13 @@ class ScholarMiner:
                         if len(p.authors) == 0:  # skip papers with 0 authors
                             continue
                         elif p.type == "article":
-                            # todo: remove titles with "special issue, special section, editorial, and erratum"
+                            # Remove titles containing any of the substrings indicating editorial work
+                            title_to_check = str(p.title).lower()
+                            if title_to_check.find("special issue") >= 0 or title_to_check.find("special section") >= 0 or \
+                               title_to_check.find("editorial") >= 0 or title_to_check.find("erratum") >= 0:
+                                print("Removed: " + p.title)
+                                continue
+
                             if p.journal == "CoRR":  # skip ArXiv preprints
                                 continue
                                 # elif p.type == "inproceedings": # This is what conference proceedings look like
