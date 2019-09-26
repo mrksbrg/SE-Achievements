@@ -65,13 +65,13 @@ class TestClass:
         # TC3: Test that the name is correctly processed
         assert david.name == "David Notkin"
 
-        # TC4: Test that David Notkin has 146 publications after cleaning the list
-        assert david.nbr_publications == 146
+        # TC4: Test that David Notkin has 134 publications after cleaning the list
+        assert david.nbr_publications == 134
 
         # TC5: Test that David Notkin has the correct ratios
-        assert david.first_ratio == pytest.approx(0.29, 0.01)
-        assert david.sci_ratio == pytest.approx(0.24, 0.01)
-        assert david.nbr_sci_publications == 35
+        assert david.first_ratio == pytest.approx(0.24, 0.01)
+        assert david.sci_ratio == pytest.approx(0.17, 0.01)
+        assert david.nbr_sci_publications == 23
 
         # TC6: Test write results
         self.miner.write_results()
@@ -115,13 +115,13 @@ class TestClass:
         # TC3: Test that the name is correctly processed
         assert simon.name == "Simon M. Poulding"
 
-        # TC4: Test that Simon Poulding has 44 publications after removing duplicates
-        assert simon.nbr_publications == 44
+        # TC4: Test that Simon Poulding has 42 publications after cleaning the list
+        assert simon.nbr_publications == 42
 
         # TC5: Test that Simon Poulding has the correct ratios
-        assert simon.first_ratio == pytest.approx(0.36, 0.01)
-        assert simon.sci_ratio == pytest.approx(0.18, 0.01)
-        assert simon.nbr_sci_publications == 8
+        assert simon.first_ratio == pytest.approx(0.38, 0.01)
+        assert simon.sci_ratio == pytest.approx(0.14, 0.01)
+        assert simon.nbr_sci_publications == 6
 
         # TC6: Test write to txt-file
         self.miner.write_results()
@@ -202,18 +202,12 @@ class TestClass:
     def test_danny_weyns(self):
         self.add_swese_scholars(self.test_nonascii_scholar, "N/A")
         self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
-        self.miner.process_group()
+        self.miner.process_group() # This involves dealing with non-ASCII characters
         self.scholars = self.miner.get_scholars()
         danny = None
         for scholar in self.scholars:
             if scholar.name == "Danny Weyns":
                 danny = scholar
 
-        # TC1: Test that DBLP returns a result
-        assert len(self.scholars) == 1
-
-        # TC2: Test that Danny Weyns has at least 100 DBLP entries
-        assert danny.dblp_entries >= 100
-
-        # TC3: Test that the name is correctly processed
-        assert danny.name == "Danny Weyns"
+        # TC1: Test that Danny is removed as he is a non-SCI first-author
+        assert danny is None

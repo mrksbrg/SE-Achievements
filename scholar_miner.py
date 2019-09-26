@@ -52,7 +52,7 @@ class ScholarMiner:
                             title_to_check = str(p.title).lower()
                             if title_to_check.find("special issue") >= 0 or title_to_check.find("special section") >= 0 or \
                                title_to_check.find("editorial") >= 0 or title_to_check.find("erratum") >= 0:
-                                print("Removed: " + p.title)
+                                print("Skipping editorial work: " + p.title)
                                 continue
 
                             if p.journal == "CoRR":  # skip ArXiv preprints
