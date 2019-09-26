@@ -74,15 +74,22 @@ class ScholarMiner:
             print("Failed to process scholars")
 
         # Remove scholars with no first-authored SCI publications
+        print("\nRemoving scholars that have no first-authored SCI publication...")
         tmp_scholars = []
+        counter = 0
         for scholar in self.sss_scholars:
             if scholar.nbr_first_sci > 0:
                 tmp_scholars.append(scholar)
             else:
                 curr = next((x for x in self.sss_affiliations if scholar.affiliation == x.name), None)
                 curr.nbr_scholars -= 1
+                counter = counter + 1
                 print("Removed scholar with no first-authored SCI publications: " + scholar.name)
         self.sss_scholars = tmp_scholars
+        if counter > 0:
+            print("Done! " + counter + " scholars removed.")
+        else:
+            print("Done! No scholars were removed.")
 
     def clear_all_scholars(self):
         for scholar in self.sss_scholars:
