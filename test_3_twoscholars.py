@@ -14,9 +14,9 @@ from scholar_tabulator import ScholarTabulator
 import os.path
 from datetime import date
 
-class TestClass:
+class TestClass_TwoScholars:
 
-    def setup_method(self, module):
+    def setup_method(self):
         self.scholars = []
         self.affiliations = []
         self.filename_prefix = str(date.today()) + "_swese_"

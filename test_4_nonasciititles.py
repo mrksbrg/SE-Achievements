@@ -5,18 +5,14 @@ Created on Sat Jun 15 16:50:30 2019
 @author: Markus Borg
 """
 
-import pytest
 from scholar import SSSScholar
 from affiliation import SSSAffiliation
 from scholar_miner import ScholarMiner
-from scholar_analyzer import ScholarAnalyzer
-from scholar_tabulator import ScholarTabulator
-import os.path
 from datetime import date
 
-class TestClass:
+class TestClass_NonASCIITitles:
 
-    def setup_method(self, module):
+    def setup_method(self):
         self.scholars = []
         self.affiliations = []
         self.filename_prefix = str(date.today()) + "_swese_"
