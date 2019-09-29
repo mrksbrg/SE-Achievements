@@ -5,18 +5,18 @@ Created on Sat Jun 15 16:50:30 2019
 @author: Markus Borg
 """
 
-from scholar import SSSScholar
-from affiliation import SSSAffiliation
-from scholar_miner import ScholarMiner
 from datetime import date
+from swesesci.scholar import SSSScholar
+from swesesci.affiliation import SSSAffiliation
+from swesesci.scholar_miner import ScholarMiner
 
-class TestClass_NonASCIITitles:
+class TestClass_NonSense:
 
     def setup_method(self):
         self.scholars = []
         self.affiliations = []
         self.filename_prefix = str(date.today()) + "_swese_"
-        self.test_nonascii_scholar = ["Danny Weyns"]
+        self.test_nonsense = ["ABCDEFGH", "A¿£$‰"]
 
     def add_swese_scholars(self, process_list, affiliation):
         for name in process_list:
@@ -29,15 +29,11 @@ class TestClass_NonASCIITitles:
                 curr = next((x for x in self.affiliations if affiliation == x.name), None)
                 curr.nbr_scholars += 1
 
-    def test_danny_weyns(self):
-        self.add_swese_scholars(self.test_nonascii_scholar, "N/A")
+    def test_nonsense(self):
+        self.add_swese_scholars(self.test_nonsense, "N/A")
         self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
-        self.miner.process_group() # This involves dealing with non-ASCII characters
+        self.miner.process_group()
         self.scholars = self.miner.get_scholars()
-        danny = None
-        for scholar in self.scholars:
-            if scholar.name == "Danny Weyns":
-                danny = scholar
 
-        # TC1: Test that Danny is removed as he is a non-SCI first-author
-        assert danny is None
+        # TC1: Test that DBLP does not return anything
+        assert len(self.scholars) == 0

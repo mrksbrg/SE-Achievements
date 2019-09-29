@@ -5,14 +5,15 @@ Created on Sun Jul  7 17:19:46 2019
 @author: Markus Borg
 """
 
-from scholar import SSSScholar
-from affiliation import SSSAffiliation
-from scholar_miner import ScholarMiner
-from scholar_analyzer import ScholarAnalyzer
-from scholar_tabulator import ScholarTabulator
 import sys
 import os.path
 from datetime import date
+from swesesci.scholar import SSSScholar
+from swesesci.affiliation import SSSAffiliation
+from swesesci.scholar_miner import ScholarMiner
+from swesesci.scholar_analyzer import ScholarAnalyzer
+from swesesci.scholar_tabulator import ScholarTabulator
+
 
 sss_scholars = []
 sss_affiliations = []
@@ -33,7 +34,7 @@ if (len(sys.argv) == 1):
     # add_sss_scholars(fast_list, "RISE")
     # fast_list2 = ["Annabella Loconsole"]
     # add_sss_scholars(fast_list2, "MAU")
-    # fast_list_3 = ["Kristian Sandahl"]
+    # bfast_list_3 = ["Danny Weyns"]
     # add_sss_scholars(fast_list_3, "Linköping University")
     # big_names = ["Lionel C. Briand", "Barry W. Boehm", "David Lorge Parnas", "Barbara A. Kitchenham", "Brad A. Myers", "Marlon Dumas", "Mark Harman"]
     # add_sss_scholars(big_names, "Misc.")
@@ -59,7 +60,7 @@ if (len(sys.argv) == 1):
     add_sss_scholars(malmo_list, "Malmö University")
     linkoping_list = ["Kristian Sandahl", "Peter Fritzson", "Mariam Kamkar"]
     add_sss_scholars(linkoping_list, "Linköping University")
-    mdh_list = ["Markus Bohlin", "Raffaela Mirandola", "Alessio Bucaioni", "Hans Hansson", "Jan Carlsson", "Antonio Cicchetti", "Federico Ciccozzi", "Séverine Sentilles",
+    mdh_list = ["Raffaela Mirandola", "Alessio Bucaioni", "Hans Hansson", "Jan Carlsson", "Antonio Cicchetti", "Federico Ciccozzi", "Séverine Sentilles",
                 "Kristina Lundqvist", "Daniel Sundmark", "Wasif Afzal", "Adnan Causevic", "Eduard Paul Enoiu", "Barbara Gallina", "Mikael Sjödin", "Daniel Flemström", "Saad Mubeen"]
     add_sss_scholars(mdh_list, "Mälardalen University")
     linne_list = ["Jesper Andersson", "Morgan Ericsson", "Narges Khakpour", "Danny Weyns", "Welf Löwe", "Francesco Flammini", "Francis Palma", "Andreas Kerren", "Rafael Messias Martins", "Anna Wingkvist", "Francis Palma", "Jonas Lundberg"]

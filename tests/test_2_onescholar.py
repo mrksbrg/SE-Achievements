@@ -6,13 +6,13 @@ Created on Sat Jun 15 16:50:30 2019
 """
 
 import pytest
-from scholar import SSSScholar
-from affiliation import SSSAffiliation
-from scholar_miner import ScholarMiner
-from scholar_analyzer import ScholarAnalyzer
-from scholar_tabulator import ScholarTabulator
 import os.path
 from datetime import date
+from swesesci.scholar import SSSScholar
+from swesesci.affiliation import SSSAffiliation
+from swesesci.scholar_miner import ScholarMiner
+from swesesci.scholar_analyzer import ScholarAnalyzer
+from swesesci.scholar_tabulator import ScholarTabulator
 
 class TestClass_OneScholar:
 

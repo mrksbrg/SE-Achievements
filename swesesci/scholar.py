@@ -1,5 +1,5 @@
-from publication import SSSPublication
 from sortedcontainers import SortedSet
+from .publication import SSSPublication
 
 class SSSScholar:
     def __init__(self, name, affiliation):
