@@ -54,7 +54,8 @@ class ScholarMiner:
                             title_to_check = str(p.title).lower()
                             if title_to_check.find("special issue") >= 0 or title_to_check.find("special section") >= 0 or \
                                title_to_check.find("editorial") >= 0 or title_to_check.find("erratum") >= 0 or \
-                               title_to_check.find("introduction to section") >= 0 or title_to_check.find("editor's introduction") >= 0:
+                               title_to_check.find("introduction to section") >= 0 or title_to_check.find("editor's introduction") >= 0 or\
+                               title_to_check.find("in this issue") >= 0 or title_to_check.find("foreword to the") >= 0:
                                 print("Skipping editorial work: " + p.title)
                                 continue
 
