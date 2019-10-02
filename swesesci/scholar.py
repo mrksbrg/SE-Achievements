@@ -122,7 +122,8 @@ class SSSScholar:
         self.sss_contrib = round(self.sss_contrib, 2)
 
         # SSS Rating = #publications * harmonic mean of sci-ratio and 1st-ratio
-        if self.sci_ratio+self.first_ratio != 0:
+        if self.sci_ratio+self.first_ratio >= 0:
+
             harmonic_mean = statistics.harmonic_mean([self.sci_ratio, self.first_ratio])
             #weight_sci = 2
             #weight_first = 1
