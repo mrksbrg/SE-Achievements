@@ -1,3 +1,4 @@
+import statistics
 from sortedcontainers import SortedSet
 from .publication import SSSPublication
 
@@ -122,7 +123,9 @@ class SSSScholar:
 
         # SSS Rating = #publications * harmonic mean of sci-ratio and 1st-ratio
         if self.sci_ratio+self.first_ratio != 0:
-            harmonic_mean = (2 * self.sci_ratio * self.first_ratio) / (self.sci_ratio + self.first_ratio)
+            harmonic_mean = statistics.harmonic_mean(self.sci_ratio, self.first_ratio)
+            #weighted_harmonic_mean = (2 * self.sci_ratio * self.first_ratio) / (self.sci_ratio + self.first_ratio)
+            #statistics.harmonic_mean(self.sci_ratio, self.first_ratio)
             self.sss_rating = round(self.nbr_publications * harmonic_mean, 2)
         else:
             self.sss_rating = 0
