@@ -121,16 +121,11 @@ class SSSScholar:
         self.sss_contrib = self.nbr_first_sci + 0.1 * (self.nbr_sci_publications - self.nbr_first_sci) + 0.01 * (self.nbr_publications - self.nbr_sci_publications)
         self.sss_contrib = round(self.sss_contrib, 2)
 
-        # SSS Rating = #publications * harmonic mean of sci-ratio and 1st-ratio
-        if self.sci_ratio+self.first_ratio > 0:
-
-            #harmonic_mean = statistics.harmonic_mean([self.sci_ratio, self.first_ratio])
+        # SSS Rating = #publications * weighted harmonic mean of sci-ratio (w=2) and 1st-ratio (w=1)
+        if self.sci_ratio > 0 and self.first_ratio > 0:
             weight_sci = 2
             weight_first = 1
-
             weighted_harmonic_mean = (weight_sci+weight_first) / ((weight_sci/self.sci_ratio) + (weight_first/self.first_ratio))
-            #statistics.harmonic_mean(self.sci_ratio, self.first_ratio)
-
             self.sss_rating = round(self.nbr_publications * weighted_harmonic_mean, 2)
         else:
             self.sss_rating = 0

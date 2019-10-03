@@ -78,7 +78,7 @@ class TestClass_OneScholar:
         analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
         analyzer.analyze_individual_research_interests()
         assert david.sss_contrib == 6.11
-        assert david.sss_rating == 26.67
+        assert david.sss_rating == 25.23
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
