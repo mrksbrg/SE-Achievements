@@ -135,10 +135,10 @@ class SSSScholar:
         self.signature_works = self.sci_publications_to_string()
 
     def to_string(self):
-        return self.name + " (" + str(len(self.publications)) + " publications. First-ratio: " + str(round(self.first_ratio, 2)) + " SCI-ratio: " + str(round(self.sci_ratio, 2)) + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"
+        return self.name + " (" + str(len(self.publications)) + " publications. SCI-ratio: " + str(round(self.sci_ratio, 2)) + " 1st-ratio: " + str(round(self.first_ratio, 2))  + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"
     
     def to_csv_line(self):
-        return self.name + ";" + str(self.dblp_entries) + ";" + str(len(self.publications)) + ";" + str(self.first_ratio) + ";" + str(self.sci_ratio) + ";" + str(self.nbr_first_sci) + ";" + str(self.get_nbr_main_confs())
+        return self.name + ";" + str(self.dblp_entries) + ";" + str(len(self.publications)) + ";" + str(self.sci_ratio) + ";" + str(self.first_ratio) + ";" + str(self.nbr_first_sci) + ";" + str(self.get_nbr_main_confs())
     
     def research_interests_to_string(self):
         ''' Return a comma separated string by concatenating research interests. '''
