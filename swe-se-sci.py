@@ -50,7 +50,7 @@ if (len(sys.argv) == 1):
     add_sss_scholars(bth_list, "Blekinge Institute of Technology")
     gbg_list = ["Rogardt Heldal", "Kenneth Lind", "Patrizio Pelliccione", "Riccardo Scandariato", "Miroslaw Staron", "Jan-Philipp Steghöfer", "Christian Berger", "Robert Feldt", "Richard Torkar", "Ivica Crnkovic",
                      "Richard Berntsson-Svensson", "Francisco Gomes de Oliveira Neto", "Gregory Gay", "Michel Chaudron", "Jan Bosch", "Jennifer Horkoff",
-                     "Eric Knauss", "Thorsten Berger", "Gul Calikli", "Regina Hebig", "Philipp Leitner", "Agneta Nilsson", "Imed Hammouda"]
+                     "Eric Knauss", "Thorsten Berger", "Gul Calikli", "Regina Hebig", "Philipp Leitner", "Agneta Nilsson", "Imed Hammouda", "Birgit Penzenstadler"]
     add_sss_scholars(gbg_list, "Chalmers / Gothenburg University")
     kth_list = ["Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt", "Martin Törngren", "Hannes Holm"]
     add_sss_scholars(kth_list, "KTH Royal Institute of Technology")
