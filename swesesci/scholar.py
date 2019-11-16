@@ -68,7 +68,7 @@ class SSSScholar:
     def get_first_author_titles(self):
         first_author_titles = []
         for p in self.publications:
-            if (p.authors[0] == self.name):
+            if p.authors[0] == self.name:
                 first_author_titles.append(p.title)
         return first_author_titles
         
@@ -89,6 +89,7 @@ class SSSScholar:
         self.nbr_first_sci = 0
         for publ in self.publications:
             try:
+                print("Me: " + str(self.name) + " vs. " + str(publ.authors[0]))
                 if publ.sci_listed and publ.authors[0] == self.name:
                     nbr_first_author += 1
                     self.nbr_sci_publications += 1
