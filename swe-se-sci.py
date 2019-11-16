@@ -20,6 +20,8 @@ sss_affiliations = []
 
 def add_sss_scholars(process_list, affiliation):
     for name in process_list:
+        words = name.split()
+
         sss_scholars.append(SSSScholar(name, affiliation))
         tmp_aff = SSSAffiliation(affiliation)
         if tmp_aff not in sss_affiliations:
@@ -40,7 +42,7 @@ if (len(sys.argv) == 1):
     # add_sss_scholars(big_names, "Misc.")
 
     rise_list = ["Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
-                  "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson", "Stefan Cedergren", "Stig Larsson", "Jakob Axelsson", "Markus Bohlin", "Håkan Burden"]
+                  "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson 0001", "Stefan Cedergren", "Stig Larsson 0002", "Jakob Axelsson", "Markus Bohlin", "Håkan Burden"]
     add_sss_scholars(rise_list, "RISE Research Institutes of Sweden AB")
     lu_list = ["Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström", "Christin Lindholm", "Christoph Reichenbach", "Görel Hedin", "Martina Maggio"]
     add_sss_scholars(lu_list, "Lund University")
@@ -48,7 +50,7 @@ if (len(sys.argv) == 1):
                 "Mikael Svahnberg", "Darja Smite", "Michael Felderer", "Jürgen Börstler", "Emil Alégroth", "Ali Nauman", "Fabian Fagerholm", "Javier Gonzalez-Huerta", "Muhammad Usman",
                 "Davide Fucci", "Daniel Méndez Fernández", "Nauman Bin Ali", "Deepika Badampudi", "Emilia Mendes"]
     add_sss_scholars(bth_list, "Blekinge Institute of Technology")
-    gbg_list = ["Rogardt Heldal", "Kenneth Lind", "Patrizio Pelliccione", "Riccardo Scandariato", "Miroslaw Staron", "Jan-Philipp Steghöfer", "Christian Berger", "Robert Feldt", "Richard Torkar", "Ivica Crnkovic",
+    gbg_list = ["Rogardt Heldal", "Kenneth Lind", "Patrizio Pelliccione", "Riccardo Scandariato", "Miroslaw Staron", "Jan-Philipp Steghöfer", "Christian Berger 0001", "Robert Feldt", "Richard Torkar", "Ivica Crnkovic",
                      "Richard Berntsson-Svensson", "Francisco Gomes de Oliveira Neto", "Gregory Gay", "Michel Chaudron", "Jan Bosch", "Jennifer Horkoff",
                      "Eric Knauss", "Thorsten Berger", "Gul Calikli", "Regina Hebig", "Philipp Leitner", "Agneta Nilsson", "Imed Hammouda", "Birgit Penzenstadler"]
     add_sss_scholars(gbg_list, "Chalmers / Gothenburg University")
