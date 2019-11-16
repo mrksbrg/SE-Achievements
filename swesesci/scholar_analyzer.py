@@ -65,10 +65,10 @@ class ScholarAnalyzer:
                                                           "experiments", "toward", "s", "1st", 
                                                           "ieee", "conference", "articles", 
                                                           "international", "cited", "towards",
-                                                          "problems", "via"])
+                                                          "problems", "via", "ein"])
 
         # Preprocessing of authors' titles
-        for scholar, corpus in self.scholars_dict.items():    
+        for scholar, corpus in self.scholars_dict.items():
             self.scholars_stopped_corpus[scholar] = []
             
             corpus = word_tokenize(str(self.scholars_dict[scholar]))
@@ -78,7 +78,7 @@ class ScholarAnalyzer:
             corpus = tokenizer.tokenize(str(corpus))
         
             for word in corpus:
-                if word not in self.tailored_stop_words:
+                if len(word) >= 3 and word not in self.tailored_stop_words:
                     self.scholars_stopped_corpus[scholar].append(word)
 
         # Preprocessing of affiliation' titles
@@ -92,7 +92,7 @@ class ScholarAnalyzer:
             corpus = tokenizer.tokenize(str(corpus))
 
             for word in corpus:
-                if word not in self.tailored_stop_words:
+                if len(word) >= 3 and word not in self.tailored_stop_words:
                     self.affiliations_stopped_corpus[affiliation].append(word)
 
     def write_results(self):

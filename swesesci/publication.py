@@ -37,7 +37,10 @@ class SSSPublication:
         return cleaned_string
 
     def __str__(self):
-        return self.title + " (" + self.journal + ")"
+        if not self.journal is None:
+            return self.title + " (" + self.journal + ")"
+        else:
+            return self.title
         
     def __eq__ (self, other):
         return self.title == other.title

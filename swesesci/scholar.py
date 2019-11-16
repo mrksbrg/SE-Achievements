@@ -3,9 +3,12 @@ from sortedcontainers import SortedSet
 from .publication import SSSPublication
 
 class SSSScholar:
-    def __init__(self, name, affiliation):
+
+    def __init__(self, name, running_number, affiliation):
         # Some redundancy needed for use with Jinja2
         self.name = name
+        self.running_number = running_number
+        print(self.running_number)
         self.affiliation = affiliation
         self.research_interests = []
         self.research_interests_string = ""
@@ -23,7 +26,10 @@ class SSSScholar:
         self.nbr_first_sci = -1
                 
     def __str__(self):
-        return self.name + " (" + str(len(self.publications)) + " publications)"
+        if self.running_number == -1:
+            return self.name + " (" + str(len(self.publications)) + " publications)"
+        else:
+            return self.name + " " + self.running_number + " (" + str(len(self.publications)) + " publications)"
     
     def __repr__(self):
         return self.name + " (" + str(len(self.publications)) + " publications. First-ratio: " + str(self.first_ratio)\
@@ -67,16 +73,24 @@ class SSSScholar:
     
     def get_first_author_titles(self):
         first_author_titles = []
-        for p in self.publications:
-            if p.authors[0] == self.name:
-                first_author_titles.append(p.title)
+        for publ in self.publications:
+            if self.running_number == -1:
+                if publ.authors[0] == self.name:
+                    first_author_titles.append(publ.title)
+            else:
+                if publ.authors[0] == str(self.name + " " + self.running_number):
+                    first_author_titles.append(publ.title)
         return first_author_titles
         
     def sci_publications_to_string(self):
         result = ""
         for publ in self.publications:
-            if publ.sci_listed and publ.authors[0] == self.name:
-                result += str(publ.year) + ": " + publ.title + " (" + str(publ.journal) + ")" + "\n"
+            if self.running_number == -1:
+                if publ.sci_listed and publ.authors[0] == self.name:
+                    result += str(publ.year) + ": " + publ.title + " (" + str(publ.journal) + ")" + "\n"
+            else:
+                if publ.sci_listed and publ.authors[0] == str(self.name + " " + self.running_number):
+                    result += str(publ.year) + ": " + publ.title + " (" + str(publ.journal) + ")" + "\n"
         return result
 
     def append_research_interest(self, research_interest):
@@ -89,16 +103,26 @@ class SSSScholar:
         self.nbr_first_sci = 0
         for publ in self.publications:
             try:
-                print("Me: " + str(self.name) + " vs. " + str(publ.authors[0]))
-                if publ.sci_listed and publ.authors[0] == self.name:
-                    nbr_first_author += 1
-                    self.nbr_sci_publications += 1
-                    self.nbr_first_sci += 1
-                elif publ.authors[0] == self.name:
-                    nbr_first_author += 1
-                elif publ.sci_listed:
-                    self.nbr_sci_publications += 1
-            except:
+                if self.running_number == -1:  # author has no running number
+                    if publ.sci_listed and publ.authors[0] == self.name:
+                        nbr_first_author += 1
+                        self.nbr_sci_publications += 1
+                        self.nbr_first_sci += 1
+                    elif publ.authors[0] == self.name:
+                        nbr_first_author += 1
+                    elif publ.sci_listed:
+                        self.nbr_sci_publications += 1
+                else:  # author has a running number
+                    if publ.sci_listed and publ.authors[0] == str(self.name + " " + self.running_number):
+                        nbr_first_author += 1
+                        self.nbr_sci_publications += 1
+                        self.nbr_first_sci += 1
+                    elif publ.authors[0] == str(self.name + " " + self.running_number):
+                        nbr_first_author += 1
+                    elif publ.sci_listed:
+                        self.nbr_sci_publications += 1
+            except Exception as e:
+                print(e)
                 print("No authors for the publication: " + publ.title)
 
         if self.nbr_publications > 0:

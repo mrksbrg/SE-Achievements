@@ -29,8 +29,12 @@ class ScholarMiner:
             for scholar in self.sss_scholars:
                 try:
                     print("\n### Processing scholar: " + scholar.name + " ###")
-                    authors = search(scholar.name)
-                    search_res = authors[0]
+                    if scholar.running_number == -1:
+                        authors = search(scholar.name, -1)
+                        search_res = authors[0]
+                    else:
+                        authors = search(scholar.name, scholar.running_number)
+                        search_res = authors[0]
                 except:
                     print("ERROR: Invalid search result from DBLP. Waiting...")
                     self.clear_all_scholars()
@@ -52,13 +56,12 @@ class ScholarMiner:
                         elif p.type == "article":
                             # Remove titles containing any of the substrings indicating editorial work
                             title_to_check = str(p.title).lower()
-                            print(title_to_check)
 
                             if title_to_check.find("special issue") >= 0 or title_to_check.find("special section") >= 0 or \
-                               title_to_check.find("editorial") >= 0 or title_to_check.find("erratum") >= 0 or \
+                               title_to_check.find("editorial") >= 0 or title_to_check.find("commentaries on") >= 0 or \
                                title_to_check.find("introduction to section") >= 0 or title_to_check.find("editor's introduction") >= 0 or\
                                title_to_check.find("in this issue") >= 0 or title_to_check.find("foreword to the") >= 0 or \
-                               title_to_check.find("commentaries on") >= 0 or title_to_check.find("corrigendum") >= 0:
+                               title_to_check.find("erratum") >= 0 or title_to_check.find("corrigendum") >= 0:
                                 print("Skipping editorial work: " + p.title)
                                 continue
 
@@ -329,43 +332,27 @@ class Publication(LazyAPIData):
 
         self.data = data
 
-# def search(author_str):
-#     #if author_str == "Thomas Olsson":
-#     #    resp = requests.get("https://dblp.org/pid/31/5587-1.xml")
-#     #elif author_str == "Annabella Loconsole2":
-#     #    resp = requests.get("https://dblp.org/pid/69/4553.xml")
-#     #else:
-#
-#     #req = requests.Request('GET', DBLP_AUTHOR_SEARCH_URL, params={'xauthor':author_str})
-#     #prepared = req.prepare()
-#     #pretty_print_POST(prepared)
-#
-#     resp = requests.get(DBLP_AUTHOR_SEARCH_URL, params={'xauthor': author_str})
-#
-#     #TODO error handling
-#     #try:
-#     root = etree.fromstring(resp.content)
-#     result = [Author(urlpt) for urlpt in root.xpath('/authors/author/@urlpt')]
-#     #print("Here is the result: " + str(result[0]))
-#     #except Exception as e:
-#     #   print(e)
-#     return result
-
-def search(author_str):
+def search(author_str, running_number):
     resp = requests.get(DBLP_AUTHOR_SEARCH_URL, params={'xauthor': author_str})
-    #TODO error handling
-    root = etree.fromstring(resp.content)
-    arr_of_authors = []
-    for urlpt in root.xpath('/authors/author/@urlpt'):
-        resp1 = requests.get(DBLP_PERSON_URL.format(urlpt=urlpt))
-        xml = resp1.content
-        root1 = etree.fromstring(xml)
-        if root1.xpath('/dblpperson/homonym/text()'):
-            for hom_urlpt in root1.xpath('/dblpperson/homonym/text()'):
-                arr_of_authors.append(Author(hom_urlpt))
-        else:
-            arr_of_authors.append(Author(urlpt))
-    return arr_of_authors
+    if running_number == -1:  # author without running number
+        #TODO error handling
+        root = etree.fromstring(resp.content)
+        result = [Author(urlpt) for urlpt in root.xpath('/authors/author/@urlpt')]
+        return result
+    else:  # author with running number
+        #TODO error handling
+        root = etree.fromstring(resp.content)
+        arr_of_authors = []
+        for urlpt in root.xpath('/authors/author/@urlpt'):
+            resp1 = requests.get(DBLP_PERSON_URL.format(urlpt=urlpt))
+            xml = resp1.content
+            root1 = etree.fromstring(xml)
+            if root1.xpath('/dblpperson/homonym/text()'):
+                for hom_urlpt in root1.xpath('/dblpperson/homonym/text()'):
+                    arr_of_authors.append(Author(hom_urlpt))
+            else:
+                arr_of_authors.append(Author(urlpt))
+        return arr_of_authors
 
 def pretty_print_POST(req):
     """

@@ -21,15 +21,28 @@ sss_affiliations = []
 def add_sss_scholars(process_list, affiliation):
     for name in process_list:
         words = name.split()
-
-        sss_scholars.append(SSSScholar(name, affiliation))
-        tmp_aff = SSSAffiliation(affiliation)
-        if tmp_aff not in sss_affiliations:
-            tmp_aff.nbr_scholars += 1
-            sss_affiliations.append(tmp_aff)
+        # check if author has a running number
+        if not words[len(words)-1].isdigit():
+            sss_scholars.append(SSSScholar(name, -1, affiliation))
+            tmp_aff = SSSAffiliation(affiliation)
+            if tmp_aff not in sss_affiliations:
+                tmp_aff.nbr_scholars += 1
+                sss_affiliations.append(tmp_aff)
+            else:
+                curr = next((x for x in sss_affiliations if affiliation == x.name), None)
+                curr.nbr_scholars += 1
         else:
-            curr = next((x for x in sss_affiliations if affiliation == x.name), None)
-            curr.nbr_scholars += 1
+            # author has a running number
+            tmp_scholar = SSSScholar(' '.join(map(str, words[0:len(words)-1])), str(words[len(words)-1]), affiliation)
+            print(tmp_scholar)
+            sss_scholars.append(tmp_scholar)
+            tmp_aff = SSSAffiliation(affiliation)
+            if tmp_aff not in sss_affiliations:
+                tmp_aff.nbr_scholars += 1
+                sss_affiliations.append(tmp_aff)
+            else:
+                curr = next((x for x in sss_affiliations if affiliation == x.name), None)
+                curr.nbr_scholars += 1
 
 if (len(sys.argv) == 1):
     # fast_list = ["Stefan Cedergren", "Joakim Fröberg", "Thomas Olsson"]
