@@ -14,7 +14,6 @@ from swesesci.scholar_miner import ScholarMiner
 from swesesci.scholar_analyzer import ScholarAnalyzer
 from swesesci.scholar_tabulator import ScholarTabulator
 
-
 sss_scholars = []
 sss_affiliations = []
 
@@ -34,7 +33,6 @@ def add_sss_scholars(process_list, affiliation):
         else:
             # author has a running number
             tmp_scholar = SSSScholar(' '.join(map(str, words[0:len(words)-1])), str(words[len(words)-1]), affiliation)
-            print(tmp_scholar)
             sss_scholars.append(tmp_scholar)
             tmp_aff = SSSAffiliation(affiliation)
             if tmp_aff not in sss_affiliations:
@@ -55,7 +53,7 @@ if (len(sys.argv) == 1):
     # add_sss_scholars(big_names, "Misc.")
 
     rise_list = ["Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
-                  "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson 0001", "Stefan Cedergren", "Stig Larsson 0002", "Jakob Axelsson", "Markus Bohlin", "Håkan Burden"]
+                  "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson 0001", "Stefan Cedergren", "Stig Larsson 0002", "Jakob Axelsson", "Markus Bohlin", "Håkan Burden", "Peter Wallin"]
     add_sss_scholars(rise_list, "RISE Research Institutes of Sweden AB")
     lu_list = ["Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström", "Christin Lindholm", "Christoph Reichenbach", "Görel Hedin", "Martina Maggio"]
     add_sss_scholars(lu_list, "Lund University")
