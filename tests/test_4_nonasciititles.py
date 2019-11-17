@@ -45,7 +45,7 @@ class TestClass_NonASCIITitles:
                     curr.nbr_scholars += 1
 
     def test_danny_weyns(self):
-        self.add_swese_scholars(self.test_nonascii_scholar, "N/A")
+        self.add_sss_scholars(self.test_nonascii_scholar, "N/A")
         self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
         self.miner.process_group() # This involves dealing with non-ASCII characters
         self.scholars = self.miner.get_scholars()

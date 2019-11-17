@@ -49,7 +49,7 @@ class TestClass_RunningNumber:
                     curr.nbr_scholars += 1
 
     def test_thomas_olsson(self):
-        self.add_swese_scholars(self.test_scholar, "N/A")
+        self.add_sss_scholars(self.test_scholar, "N/A")
         self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
         self.miner.process_group()
         self.scholars = self.miner.get_scholars()
