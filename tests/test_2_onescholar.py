@@ -22,16 +22,31 @@ class TestClass_OneScholar:
         self.filename_prefix = str(date.today()) + "_swese_"
         self.test_scholar = ["David Notkin"]
 
-    def add_swese_scholars(self, process_list, affiliation):
+    def add_sss_scholars(self, process_list, affiliation):
         for name in process_list:
-            self.scholars.append(SSSScholar(name, -1, affiliation))
-            tmp_aff = SSSAffiliation(affiliation)
-            if tmp_aff not in self.affiliations:
-                tmp_aff.nbr_scholars += 1
-                self.affiliations.append(tmp_aff)
+            words = name.split()
+            # check if author has a running number
+            if not words[len(words) - 1].isdigit():
+                self.scholars.append(SSSScholar(name, -1, affiliation))
+                tmp_aff = SSSAffiliation(affiliation)
+                if tmp_aff not in self.affiliations:
+                    tmp_aff.nbr_scholars += 1
+                    self.scholars.append(tmp_aff)
+                else:
+                    curr = next((x for x in self.affiliations if affiliation == x.name), None)
+                    curr.nbr_scholars += 1
             else:
-                curr = next((x for x in self.affiliations if affiliation == x.name), None)
-                curr.nbr_scholars += 1
+                # author has a running number
+                tmp_scholar = SSSScholar(' '.join(map(str, words[0:len(words) - 1])), str(words[len(words) - 1]),
+                                         affiliation)
+                self.scholars.append(tmp_scholar)
+                tmp_aff = SSSAffiliation(affiliation)
+                if tmp_aff not in self.affiliations:
+                    tmp_aff.nbr_scholars += 1
+                    self.scholars.append(tmp_aff)
+                else:
+                    curr = next((x for x in self.affiliations if affiliation == x.name), None)
+                    curr.nbr_scholars += 1
 
     def test_david_notkin(self):
         self.add_swese_scholars(self.test_scholar, "N/A")
