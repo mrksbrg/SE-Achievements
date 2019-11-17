@@ -20,7 +20,7 @@ class TestClass_NonASCIITitles:
 
     def add_swese_scholars(self, process_list, affiliation):
         for name in process_list:
-            self.scholars.append(SSSScholar(name, affiliation))
+            self.scholars.append(SSSScholar(name, -1, affiliation))
             tmp_aff = SSSAffiliation(affiliation)
             if tmp_aff not in self.affiliations:
                 tmp_aff.nbr_scholars += 1
