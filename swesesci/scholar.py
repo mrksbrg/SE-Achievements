@@ -8,7 +8,6 @@ class SSSScholar:
         # Some redundancy needed for use with Jinja2
         self.name = name
         self.running_number = running_number
-        print(self.running_number)
         self.affiliation = affiliation
         self.research_interests = []
         self.research_interests_string = ""
