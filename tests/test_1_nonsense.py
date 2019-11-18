@@ -27,7 +27,7 @@ class TestClass_NonSense:
                 tmp_aff = SSSAffiliation(affiliation)
                 if tmp_aff not in self.affiliations:
                     tmp_aff.nbr_scholars += 1
-                    self.scholars.append(tmp_aff)
+                    self.affiliations.append(tmp_aff)
                 else:
                     curr = next((x for x in self.affiliations if affiliation == x.name), None)
                     curr.nbr_scholars += 1
