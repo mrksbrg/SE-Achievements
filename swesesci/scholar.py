@@ -1,4 +1,3 @@
-import statistics
 from sortedcontainers import SortedSet
 from .publication import SSSPublication
 

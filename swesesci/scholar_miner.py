@@ -14,7 +14,7 @@ from collections import namedtuple
 from .publication import SSSPublication
 
 class ScholarMiner:
-    
+
     def __init__(self, filename_prefix, sss_scholars, sss_affiliations):
         self.filename_prefix = filename_prefix
         self.sss_scholars = sss_scholars
@@ -24,7 +24,7 @@ class ScholarMiner:
     def process_group(self):
         nbr_remaining = len(self.sss_scholars)
         attempts = 0
-        while nbr_remaining > 0 and attempts < 10: # an extra loop to tackle DBLP flakiness
+        while nbr_remaining > 0 and attempts < 10:  # an extra loop to tackle DBLP flakiness
             attempts += 1
             for scholar in self.sss_scholars:
                 try:
@@ -85,7 +85,7 @@ class ScholarMiner:
                     self.print_progress_bar(dblp_entries, dblp_entries)
                 scholar.calc_stats()
                 nbr_remaining -= 1
-                    
+
         if attempts >= 10:
             print("Failed to process scholars")
 
@@ -117,18 +117,18 @@ class ScholarMiner:
             tmp.write(scholar.name + "\n")
             tmp.write(scholar.sci_publications_to_string())
         tmp.close()
-        
+
         tmp = open(self.filename_prefix + "1_miner.csv","w+")
         for scholar in self.sss_scholars:
             tmp.write(scholar.to_csv_line() + "\n")
         tmp.close()
-        
+
         # Write concatenated titles per author and affiliation
         self.write_author_and_affiliation_titles()
-        
+
         # Write co-authors to csv-file
         (pd.DataFrame.from_dict(data=self.coauthors, orient='index').to_csv(self.filename_prefix + "1_coauthors.csv", sep=';', header=False))
-        
+
         # Write co-authors that are not already among the mined Swedish SE scholars
         diff = {}
         for coauthor in self.coauthors:
@@ -161,10 +161,10 @@ class ScholarMiner:
 
     def get_scholars(self):
         return self.sss_scholars
-    
+
     def get_coauthors(self):
         return self.coauthors
-    
+
     # Print progress bar for scholar processing
     def print_progress_bar(self, iteration, total):
         """
@@ -179,9 +179,10 @@ class ScholarMiner:
         percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
         filled_length = int(length * iteration // total)
         bar = fill * filled_length + '-' * (length - filled_length)
+
         print('\r%s |%s| %s%% %s' % ("Progress:", bar, percent, "Complete "), end = '\r')
         # Print New Line on Complete
-        if iteration == total: 
+        if iteration == total:
             print()
 
     def get_dict_of_affiliations(self):
