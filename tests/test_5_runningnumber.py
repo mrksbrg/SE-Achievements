@@ -55,14 +55,14 @@ class TestClass_RunningNumber:
         self.scholars = self.miner.get_scholars()
         thomas = None
         for scholar in self.scholars:
-            if scholar.name == "Thomas Olsson 0001":
+            if scholar.name == "Thomas Olsson":
                 thomas = scholar
 
         # TC1: Test that DBLP returns a result
         assert self.scholars != None
         assert len(self.scholars) == 1
 
-        # TC2: Test that David Notkin has at least 40 DBLP entries
+        # TC2: Test that Thomas Olsson has at least 40 DBLP entries
         assert thomas.dblp_entries >= 40
 
         # TC3: Test that the name is correctly processed
@@ -92,7 +92,7 @@ class TestClass_RunningNumber:
         # TC8: Test analyzer
         analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
         analyzer.analyze_individual_research_interests()
-        assert thomas.sss_contrib >= 2.00
+        assert thomas.sss_contrib >= 1.50
         assert thomas.sss_rating >= 1.00
 
         # TC10: Test tabulator
