@@ -67,6 +67,8 @@ class ScholarMiner:
 
                             if p.journal == "CoRR":  # skip ArXiv preprints
                                 continue
+                            if p.journal == "ACM SIGSOFT Software Engineering Notes":  # skip SE Notes
+                                continue
                                 # elif p.type == "inproceedings": # This is what conference proceedings look like
                             # print(p.booktitle)
                         current_publication = SSSPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
