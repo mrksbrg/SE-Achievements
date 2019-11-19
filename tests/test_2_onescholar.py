@@ -68,12 +68,12 @@ class TestClass_OneScholar:
         # TC3: Test that the name is correctly processed
         assert david.name == "David Notkin"
 
-        # TC4: Test that David Notkin has 134 publications after cleaning the list
-        assert david.nbr_publications == 134
+        # TC4: Test that David Notkin has 123 publications after cleaning the list
+        assert david.nbr_publications == 123
 
         # TC5: Test that David Notkin has the correct ratios
-        assert david.first_ratio == pytest.approx(0.24, 0.01)
-        assert david.sci_ratio == pytest.approx(0.17, 0.01)
+        assert david.first_ratio == pytest.approx(0.18, 0.01)
+        assert david.sci_ratio == pytest.approx(0.19, 0.01)
         assert david.nbr_sci_publications == 23
 
         # TC6: Test write results
@@ -92,8 +92,8 @@ class TestClass_OneScholar:
         # TC8: Test analyzer
         analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
         analyzer.analyze_individual_research_interests()
-        assert david.sss_contrib == 6.11
-        assert david.sss_rating == 25.23
+        assert david.sss_contrib == 6.0
+        assert david.sss_rating == 22.95
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
