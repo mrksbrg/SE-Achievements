@@ -8,6 +8,7 @@ install:
   - python -m nltk.downloader punkt
   - python -m nltk.downloader stopwords
   - pip install pytest
+  - pip install coverage==4.5.4
   - pip install pytest-cov
   - pip install python-coveralls
 # Command to run tests.
