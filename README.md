@@ -6,6 +6,4 @@ Navigating the academic Swedish software engineering landscape can be difficult.
 
 A reliable and updated index of academic SE in Sweden could bring several benefits. The primary goal is to constitute a gateway for industry to find expertise among researchers – hopefully supporting knowledge transfer, industry-academia collaboration, and more relevant research. Swe-SE-SCI can also be used to find academic partners in new research projects and suitable PhD committee members.
 
-Affiliations are ranked by the number of first-authored SCI publications by SSS scholars. Individual SSS scholars are ranked by their SSS rating – our in-house metric. In contrast to non-decreasing citation-based metrics, the SSS rating fluctuates as it promotes active research with a focus to publish in SCI-listed SE journals. A detailed description is available at the bottom of this page.
-
-Further information: http://mrksbrg.com/swesesci/
+Affiliations are ranked by the number of first-authored SCI publications by SSS scholars. Individual SSS scholars are ranked by their SSS rating – our in-house metric. In contrast to non-decreasing citation-based metrics, the SSS rating fluctuates as it promotes active research with a focus to publish in SCI-listed SE journals. A detailed description is available at http://mrksbrg.com/swesesci/
