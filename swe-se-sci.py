@@ -59,7 +59,7 @@ if (len(sys.argv) == 1):
     add_sss_scholars(lu_list, "Lund University")
     bth_list = ["Claes Wohlin", "Tony Gorschek", "Krzysztof Wnuk", "Michael Unterkalmsteiner", "Michael Mattsson",
                 "Mikael Svahnberg", "Darja Smite", "Michael Felderer", "Jürgen Börstler", "Emil Alégroth", "Ali Nauman", "Fabian Fagerholm", "Javier Gonzalez-Huerta", "Muhammad Usman",
-                "Davide Fucci", "Daniel Méndez Fernández", "Nauman Bin Ali", "Deepika Badampudi", "Emilia Mendes"]
+                "Davide Fucci", "Daniel Méndez Fernández", "Nauman Bin Ali", "Deepika Badampudi", "Emilia Mendes", "Ludwik Kuzniarz"]
     add_sss_scholars(bth_list, "Blekinge Institute of Technology")
     gbg_list = ["Rogardt Heldal", "Kenneth Lind", "Patrizio Pelliccione", "Riccardo Scandariato", "Miroslaw Staron", "Jan-Philipp Steghöfer", "Christian Berger 0001", "Robert Feldt", "Richard Torkar", "Ivica Crnkovic",
                      "Richard Berntsson-Svensson", "Francisco Gomes de Oliveira Neto", "Gregory Gay", "Michel Chaudron", "Jan Bosch", "Jennifer Horkoff",
@@ -73,14 +73,14 @@ if (len(sys.argv) == 1):
     add_sss_scholars(malmo_list, "Malmö University")
     linkoping_list = ["Kristian Sandahl", "Peter Fritzson", "Mariam Kamkar"]
     add_sss_scholars(linkoping_list, "Linköping University")
-    mdh_list = ["Raffaela Mirandola", "Alessio Bucaioni", "Hans Hansson", "Jan Carlsson", "Antonio Cicchetti", "Federico Ciccozzi", "Séverine Sentilles",
+    mdh_list = ["Raffaela Mirandola", "Alessio Bucaioni", "Hans A. Hansson", "Jan Carlsson", "Antonio Cicchetti", "Federico Ciccozzi", "Séverine Sentilles",
                 "Kristina Lundqvist", "Daniel Sundmark", "Wasif Afzal", "Adnan Causevic", "Eduard Paul Enoiu", "Barbara Gallina", "Mikael Sjödin", "Daniel Flemström", "Saad Mubeen"]
     add_sss_scholars(mdh_list, "Mälardalen University")
     linne_list = ["Jesper Andersson", "Morgan Ericsson", "Narges Khakpour", "Danny Weyns", "Welf Löwe", "Francesco Flammini", "Francis Palma", "Andreas Kerren", "Rafael Messias Martins", "Anna Wingkvist", "Jonas Lundberg"]
     add_sss_scholars(linne_list, "Linneaus Univerity")
     skovde_list = ["Björn Lundell", "Sten Andler", "Birgitta Lindström", "Henrik Gustavsson", "Jonas Gamalielsson", "Simon Butler"]
     add_sss_scholars(skovde_list, "Skövde University")
-    karlstad_list = ["Sebastian Herold"]
+    karlstad_list = ["Sebastian Herold", "Bestoun S. Ahmed", "Martin Blom", "Muhammad Ovais Ahmad"]
     add_sss_scholars(karlstad_list, "Karlstad University")
     jonkoping_list = ["Anders Adlemo", "Niklas Lavesson"]
     add_sss_scholars(jonkoping_list, "Jönköping University")
