@@ -1,6 +1,6 @@
 class SSSPublication:
     
-    sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM Trans. Softw. Eng. Methodol.", "Autom. Softw. Eng.", "Inf. Softw. Technol.", "Requir. Eng.", "Software and System Modeling", "Software Quality Journal", "J. Syst. Softw.", "J. Softw. Evol. Process.", "Journal of Software Maintenance", "Softw. Test. Verification Reliab.", "Softw., Pract. Exper.", "IET Software", "International Journal of Software Engineering and Knowledge Engineering"]
+    sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM Trans. Softw. Eng. Methodol.", "Autom. Softw. Eng.", "Inf. Softw. Technol.", "Requir. Eng.", "Software and Systems Modeling", "Software Quality Journal", "J. Syst. Softw.", "J. Softw. Evol. Process.", "Journal of Software Maintenance", "Softw. Test. Verification Reliab.", "Softw., Pract. Exper.", "IET Software", "International Journal of Software Engineering and Knowledge Engineering"]
     conf_list = ["ICSE", "FSE"]
 
     def __init__(self, title, journal, booktitle, year, authors):
