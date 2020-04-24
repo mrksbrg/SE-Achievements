@@ -72,8 +72,8 @@ class TestClass_TwoScholars:
 
         # TC5: Test that Simon Poulding has the correct ratios
         assert simon.first_ratio == pytest.approx(0.38, 0.01)
-        assert simon.sci_ratio == pytest.approx(0.14, 0.01)
-        assert simon.nbr_sci_publications == 6
+        assert simon.sci_ratio == pytest.approx(0.17, 0.01)
+        assert simon.nbr_sci_publications == 7
 
         # TC6: Test write to txt-file
         self.miner.write_results()
@@ -91,8 +91,8 @@ class TestClass_TwoScholars:
         # TC8: Test analyzer
         analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
         analyzer.analyze_individual_research_interests()
-        assert simon.sss_contrib == 2.76
-        assert simon.sss_rating == 7.45
+        assert simon.sss_contrib == 2.85
+        assert simon.sss_rating == 8.75
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.test_scholars, self.affiliations)
