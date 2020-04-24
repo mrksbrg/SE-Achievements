@@ -31,7 +31,7 @@ class SSSScholar:
     
     def __repr__(self):
         return self.name + " (" + str(len(self.publications)) + " publications. First-ratio: " + str(self.first_ratio)\
-               + "SCI-ratio: " + str(self.sci_ratio) + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + ") "
+               + " SCI-ratio: " + str(self.sci_ratio) + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + ") "
 
     def __lt__(self, other):
         return self.sss_rating < other.sss_rating
