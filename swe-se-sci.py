@@ -76,7 +76,7 @@ if (len(sys.argv) == 1):
     mdh_list = ["Luciana Provenzano", "Alessio Bucaioni", "Hans A. Hansson", "Jan Carlsson", "Antonio Cicchetti", "Federico Ciccozzi", "Séverine Sentilles",
                 "Kristina Lundqvist", "Daniel Sundmark", "Wasif Afzal", "Adnan Causevic", "Eduard Paul Enoiu", "Barbara Gallina", "Mikael Sjödin", "Daniel Flemström", "Saad Mubeen"]
     add_sss_scholars(mdh_list, "Mälardalen University")
-    linne_list = ["Jesper Andersson", "Morgan Ericsson", "Narges Khakpour", "Danny Weyns", "Welf Löwe", "Francesco Flammini", "Francis Palma", "Andreas Kerren", "Rafael Messias Martins", "Anna Wingkvist", "Jonas Lundberg"]
+    linne_list = ["Jesper Andersson", "Morgan Ericsson", "Narges Khakpour", "Danny Weyns", "Welf Löwe", "Francesco Flammini", "Francis Palma", "Andreas Kerren", "Rafael Messias Martins", "Anna Wingkvist", "Jonas Lundberg", "Mauro Caporuscio"]
     add_sss_scholars(linne_list, "Linneaus Univerity")
     skovde_list = ["Björn Lundell", "Sten Andler", "Birgitta Lindström", "Henrik Gustavsson", "Jonas Gamalielsson", "Simon Butler"]
     add_sss_scholars(skovde_list, "Skövde University")
