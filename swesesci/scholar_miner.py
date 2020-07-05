@@ -126,7 +126,7 @@ class ScholarMiner:
             string_to_check.encode('ascii')
             cleaned_string = str(string_to_check)
         except Exception:
-            print("Non-ASCII characters in the title: " + string_to_check)
+            print("Non-ASCII characters in the string: " + string_to_check)
             for i in string_to_check:
                 try:
                     i.encode('ascii')

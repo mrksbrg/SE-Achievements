@@ -5,10 +5,14 @@ Created on Sat Jun 15 16:50:30 2019
 @author: Markus Borg
 """
 
+import pytest
+import os.path
 from datetime import date
 from swesesci.scholar import SSSScholar
 from swesesci.affiliation import SSSAffiliation
 from swesesci.scholar_miner import ScholarMiner
+from swesesci.scholar_analyzer import ScholarAnalyzer
+from swesesci.scholar_tabulator import ScholarTabulator
 
 class TestClass_NonASCIITitles:
 
@@ -16,7 +20,7 @@ class TestClass_NonASCIITitles:
         self.scholars = []
         self.affiliations = []
         self.filename_prefix = str(date.today()) + "_swese_"
-        self.test_nonascii_scholar = ["Danny Weyns"]
+        self.test_nonascii_scholar = ["Mauro Caporuscio"]
 
     def add_sss_scholars(self, process_list, affiliation):
         for name in process_list:
@@ -44,15 +48,53 @@ class TestClass_NonASCIITitles:
                     curr = next((x for x in self.affiliations if affiliation == x.name), None)
                     curr.nbr_scholars += 1
 
-    def test_danny_weyns(self):
+    def test_mauro_caporuscio(self):
         self.add_sss_scholars(self.test_nonascii_scholar, "N/A")
         self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
         self.miner.process_group() # This involves dealing with non-ASCII characters
         self.scholars = self.miner.get_scholars()
-        danny = None
+        mauro = None
         for scholar in self.scholars:
-            if scholar.name == "Danny Weyns":
-                danny = scholar
+            if scholar.name == "Mauro Caporuscio":
+                mauro = scholar
 
-        # TC1: Test that Danny is removed as he is a non-SCI first-author
-        assert danny is None
+                # TC1: Test that DBLP returns a result
+                assert self.scholars != None
+                assert len(self.scholars) == 1
+
+                # TC2: Test that Thomas Olsson has at least 40 DBLP entries
+                assert mauro.dblp_entries >= 40
+
+                # TC3: Test that the name is correctly processed
+                assert mauro.name == "Mauro Caporuscio"
+
+                # TC4: Test that Thomas Olsson has at least 30 publications after cleaning the list
+                assert mauro.nbr_publications >= 30
+
+                # TC5: Test that Thomas Olsson has non-zero ratios
+                assert mauro.first_ratio >= 0.01
+                assert mauro.sci_ratio >= 0.01
+                assert mauro.nbr_sci_publications >= 1
+
+                # TC6: Test write results
+                self.miner.write_results()
+                filename_txt = self.filename_prefix + "1_miner.txt"
+                filename_csv = self.filename_prefix + "1_miner.csv"
+                assert os.path.exists(filename_txt)
+                assert os.path.exists(filename_csv)
+
+                # TC7: Test file sizes
+                file_stats_txt = os.stat(filename_txt)
+                file_stats_csv = os.stat(filename_csv)
+                assert file_stats_txt.st_size > 0
+                assert file_stats_csv.st_size > 0
+
+                # TC8: Test analyzer
+                analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
+                analyzer.analyze_individual_research_interests()
+                assert mauro.sss_contrib >= 1.50
+                assert mauro.sss_rating >= 1.00
+
+                # TC10: Test tabulator
+                tabulator = ScholarTabulator(self.filename_prefix, self.test_nonascii_scholar, self.affiliations)
+                tabulator.write_tables()
