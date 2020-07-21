@@ -42,6 +42,7 @@ def add_sss_scholars(process_list, affiliation):
                 curr = next((x for x in sss_affiliations if affiliation == x.name), None)
                 curr.nbr_scholars += 1
 
+# Swe-SE-SCI entry point
 if (len(sys.argv) == 1):
     # fast_list = ["Stefan Cedergren", "Joakim Fröberg", "Thomas Olsson"]
     # add_sss_scholars(fast_list, "RISE")
@@ -54,7 +55,7 @@ if (len(sys.argv) == 1):
 
     rise_list = ["Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
                   "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson 0001", "Stefan Cedergren", "Stig Larsson 0002", "Jakob Axelsson", "Markus Bohlin", "Håkan Burden", "Peter Wallin"]
-    add_sss_scholars(rise_list, "RISE Research Institutes of Sweden AB")
+    add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
     lu_list = ["Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström", "Christin Lindholm", "Christoph Reichenbach", "Görel Hedin", "Martina Maggio"]
     add_sss_scholars(lu_list, "Lund University")
     bth_list = ["Claes Wohlin", "Tony Gorschek", "Krzysztof Wnuk", "Michael Unterkalmsteiner", "Michael Mattsson",
@@ -89,13 +90,14 @@ if (len(sys.argv) == 1):
     halmstad_university = ["Walid Taha"]
     add_sss_scholars(halmstad_university, "Halmstad University")
 
+# Process scholar provided in the argument
 else:
     custom_list = []
     custom_list.append(sys.argv[1])
     add_sss_scholars(custom_list, "N/A")
 
 # Prepare the process
-subdirectory = "db"
+subdirectory = "output"
 try:
     os.mkdir(subdirectory)
 except Exception:

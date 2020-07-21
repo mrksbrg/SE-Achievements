@@ -65,8 +65,9 @@ class ScholarMiner:
                                title_to_check.find("introduction to section") >= 0 or title_to_check.find("editor's introduction") >= 0 or \
                                title_to_check.find("in this issue") >= 0 or title_to_check.find("foreword to the") >= 0 or \
                                title_to_check.find("erratum") >= 0 or title_to_check.find("corrigendum") >= 0 or \
+                               title_to_check.find("correction to") >= 0 or \
                                title_to_check.find("open science initiative of the empirical software engineering journal") >= 0:
-                                print("Skipping editorial work: " + p.title)
+                                print("Skipping editorial work and corrections: " + p.title)
                                 continue
 
                             if p.journal == "CoRR":  # skip ArXiv preprints
@@ -216,6 +217,8 @@ class ScholarMiner:
             if scholar.affiliation not in affiliations:
                 affiliations[scholar.affiliation] = ""
         return affiliations
+
+''' The DBLP query engine '''
 
 DBLP_BASE_URL = 'http://dblp.uni-trier.de/'
 DBLP_AUTHOR_SEARCH_URL = DBLP_BASE_URL + 'search/author'
