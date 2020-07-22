@@ -2,9 +2,14 @@ class SSSPublication:
     
     sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM Trans. Softw. Eng. Methodol.", "Autom. Softw. Eng.", "Inf. Softw. Technol.", "Requir. Eng.", "Software and Systems Modeling", "Softw. Qual. J.", "J. Syst. Softw.", "J. Softw. Evol. Process.", "Journal of Software Maintenance", "J. Softw. Maintenance Res. Pract.", "Softw. Test. Verification Reliab.", "Softw. Pract. Exp.", "IET Software", "International Journal of Software Engineering and Knowledge Engineering"]
     conf_list = ["ICSE", "FSE"]
-    ' SWEBOK Knowledge Areas '
+
+    # SWEBOK Knowledge Areas, represented by integer in the self.ka variable
+    # -1 = Unclear
+    # 0 = Requirements engineering
     re_conf_list = ["RE", "REFSQ"]
     re_journal_list = ["Requir. Eng."]
+    # 1 = Design
+    design_conf_list = ["ICSA", "ECSA", "WICSA"]
 
     def __init__(self, title, journal, booktitle, year, authors):
         self.title = title
@@ -20,14 +25,18 @@ class SSSPublication:
         if self.journal in self.sci_list:
             self.sci_listed = True
 
-        self.ka_re = False
+        self.knowl_area = -1
         self.assign_knowledge_areas()
 
     def assign_knowledge_areas(self):
+        # 0 = Requirements Engineering
         if self.booktitle in self.re_conf_list:
-            self.ka_re = True
+            self.knowl_area = 0
         elif self.journal in self.re_journal_list:
-            self.ka_re = True
+            self.knowl_area = 0
+        # 1 = Design
+        elif self.booktitle in self.design_conf_list:
+            self.knowl_area = 1
 
     def __str__(self):
         if not self.journal is None:

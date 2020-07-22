@@ -22,6 +22,9 @@ class SSSScholar:
         self.sci_ratio = -1
         self.nbr_sci_publications = -1
         self.nbr_first_sci = -1
+
+        # SWEBOK Knowledge Areas
+        self.knowl_areas = [False] * 14
                 
     def __str__(self):
         if self.running_number == -1:
@@ -52,7 +55,7 @@ class SSSScholar:
 
     def add_publication(self, publ):
         if not isinstance(publ, SSSPublication):
-            raise TypeError("Error: do not add anything but instances of publication.SEPublication to the collection")
+            raise TypeError("Error: do not add anything but instances of publication.SSSPublication to the collection")
         if self.nbr_first_sci == -1:
             self.nbr_first_sci = 0
         if self.nbr_publications == -1:
@@ -61,6 +64,10 @@ class SSSScholar:
         self.nbr_publications += 1
         if publ.sci_listed:
             self.nbr_first_sci += 1
+        # Add corresponding SWEBOK Knowledge Area
+        if publ.knowl_area >= 0:
+            self.knowl_areas[publ.knowl_area] = True
+        # print(self.knowl_areas)
     
     def get_nbr_main_confs(self):
         nbr = 0
