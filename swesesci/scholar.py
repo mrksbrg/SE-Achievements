@@ -24,8 +24,8 @@ class SSSScholar:
         self.nbr_first_sci = -1
 
         # SWEBOK Knowledge Areas
-        self.knowl_areas = [False] * 14
-        self.knowl_area_counters = [0] * 14
+        self.knowl_areas = [False] * 15
+        self.knowl_area_counters = [0] * 15
         self.knowl_areas_string = ""
                 
     def __str__(self):
@@ -181,8 +181,41 @@ class SSSScholar:
             self.knowl_areas[2] = True
             self.knowl_areas_string += "Constr, "
         if self.knowl_area_counters[3] >= 2:
-            self.knowl_areas[1] = True
+            self.knowl_areas[3] = True
             self.knowl_areas_string += "Test, "
+        if self.knowl_area_counters[4] >= 2:
+            self.knowl_areas[4] = True
+            self.knowl_areas_string += "Maint, "
+        if self.knowl_area_counters[5] >= 2:
+            self.knowl_areas[5] = True
+            self.knowl_areas_string += "CM, "
+        if self.knowl_area_counters[6] >= 2:
+            self.knowl_areas[6] = True
+            self.knowl_areas_string += "Mgmt, "
+        if self.knowl_area_counters[7] >= 2:
+            self.knowl_areas[7] = True
+            self.knowl_areas_string += "Process, "
+        if self.knowl_area_counters[8] >= 2:
+            self.knowl_areas[8] = True
+            self.knowl_areas_string += "Models, "
+        if self.knowl_area_counters[9] >= 2:
+            self.knowl_areas[9] = True
+            self.knowl_areas_string += "Quality, "
+        if self.knowl_area_counters[10] >= 2:
+            self.knowl_areas[10] = True
+            self.knowl_areas_string += "Practice, "
+        if self.knowl_area_counters[11] >= 2:
+            self.knowl_areas[11] = True
+            self.knowl_areas_string += "Economics, "
+        if self.knowl_area_counters[12] >= 2:
+            self.knowl_areas[12] = True
+            self.knowl_areas_string += "Computing, "
+        if self.knowl_area_counters[13] >= 2:
+            self.knowl_areas[13] = True
+            self.knowl_areas_string += "Maths, "
+        if self.knowl_area_counters[14] >= 2:
+            self.knowl_areas[14] = True
+            self.knowl_areas_string += "Eng, "
 
     def to_string(self):
         return self.name + " (" + str(len(self.publications)) + " publications. SCI-ratio: " + str(round(self.sci_ratio, 2)) + " 1st-ratio: " + str(round(self.first_ratio, 2))  + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"

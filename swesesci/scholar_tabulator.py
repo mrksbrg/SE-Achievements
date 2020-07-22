@@ -15,8 +15,10 @@ class ScholarTabulator:
 
         self.sss_experts = []
         for s in self.sss_scholars:
-            for i in s.knowl_areas:
+            for i in range(len(s.knowl_areas)):
+                print("Checking KA " + str(i))
                 if s.knowl_areas[i] is True:
+                    print("KA: " + str(i) + " " + str(s.knowl_areas[i]))
                     self.sss_experts.append(s)
 
     def write_tables(self):

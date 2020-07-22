@@ -67,9 +67,42 @@ class SSSPublication:
         # 2 = Construction
         elif self.booktitle in self.constr_conf_list:
             self.knowl_area = 2
-        # 1 = Design
+        # 3 = Test
         elif self.booktitle in self.test_conf_list:
             self.knowl_area = 3
+        # 4 = Maintenance
+        elif self.booktitle in self.maint_conf_list:
+            self.knowl_area = 4
+        # 5 = Configuration Management
+        elif self.booktitle in self.cm_conf_list:
+            self.knowl_area = 5
+        # 6 = Management
+        elif self.booktitle in self.mgmt_conf_list:
+            self.knowl_area = 6
+        # 7 = Process
+        elif self.booktitle in self.process_conf_list:
+            self.knowl_area = 7
+        # 8 = Models and Methods
+        elif self.booktitle in self.models_conf_list:
+            self.knowl_area = 8
+        # 9 = Quality
+        elif self.booktitle in self.quality_conf_list:
+            self.knowl_area = 9
+        # 10 = Professional Practice
+        elif self.booktitle in self.practice_conf_list:
+            self.knowl_area = 10
+        # 11 = Economics
+        elif self.booktitle in self.economics_conf_list:
+            self.knowl_area = 11
+        # 12 = Computing Foundations
+        elif self.booktitle in self.comp_conf_list:
+            self.knowl_area = 12
+        # 13 = Mathematical Foundations
+        elif self.booktitle in self.maths_conf_list:
+            self.knowl_area = 13
+        # 14 = Engineering Foundations
+        elif self.booktitle in self.eng_conf_list:
+            self.knowl_area = 14
 
     def __str__(self):
         if not self.journal is None:
