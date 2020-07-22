@@ -170,12 +170,19 @@ class SSSScholar:
         self.signature_works = self.sci_publications_to_string()
 
     def calc_knowl_areas(self):
+        # Inspiration "Once is chance, twice is coincidence, three times is a pattern"
         if self.knowl_area_counters[0] >= 2:
             self.knowl_areas[0] = True
             self.knowl_areas_string += "RE, "
-        if self.knowl_area_counters[1] >= 1:
+        if self.knowl_area_counters[1] >= 2:
             self.knowl_areas[1] = True
             self.knowl_areas_string += "Design, "
+        if self.knowl_area_counters[2] >= 2:
+            self.knowl_areas[2] = True
+            self.knowl_areas_string += "Constr, "
+        if self.knowl_area_counters[3] >= 2:
+            self.knowl_areas[1] = True
+            self.knowl_areas_string += "Test, "
 
     def to_string(self):
         return self.name + " (" + str(len(self.publications)) + " publications. SCI-ratio: " + str(round(self.sci_ratio, 2)) + " 1st-ratio: " + str(round(self.first_ratio, 2))  + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"

@@ -13,10 +13,11 @@ class ScholarTabulator:
         self.sss_scholars = sss_scholars
         self.sss_affiliations = sss_affiliations
 
-        self.sss_re_scholars = []
+        self.sss_experts = []
         for s in self.sss_scholars:
-            if s.knowl_areas[0] is True:
-                self.sss_re_scholars.append(s)
+            for i in s.knowl_areas:
+                if s.knowl_areas[i] is True:
+                    self.sss_experts.append(s)
 
     def write_tables(self):
         env = Environment(
@@ -61,7 +62,7 @@ class ScholarTabulator:
 
         # SWEBOK Knowledge Areas
         template = env.get_template('yellow_pages.html')
-        output = template.render(sss_scholars=self.sss_re_scholars)
+        output = template.render(sss_scholars=self.sss_experts)
         tmp = open(self.filename_prefix + "3_tabulator_re.html", "w+")
         tmp.write(output)
         tmp.close()

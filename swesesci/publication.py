@@ -64,6 +64,12 @@ class SSSPublication:
         # 1 = Design
         elif self.booktitle in self.design_conf_list:
             self.knowl_area = 1
+        # 2 = Construction
+        elif self.booktitle in self.constr_conf_list:
+            self.knowl_area = 2
+        # 1 = Design
+        elif self.booktitle in self.test_conf_list:
+            self.knowl_area = 3
 
     def __str__(self):
         if not self.journal is None:
