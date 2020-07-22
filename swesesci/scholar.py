@@ -25,6 +25,8 @@ class SSSScholar:
 
         # SWEBOK Knowledge Areas
         self.knowl_areas = [False] * 14
+        self.knowl_area_counters = [0] * 14
+        self.knowl_areas_string = ""
                 
     def __str__(self):
         if self.running_number == -1:
@@ -52,6 +54,9 @@ class SSSScholar:
         self.sci_ratio = -1
         self.nbr_sci_publications = -1
         self.nbr_first_sci = -1
+        self.knowl_areas = [False] * 14
+        self.knowl_area_counters = [0] * 14
+        self.knowl_areas = ""
 
     def add_publication(self, publ):
         if not isinstance(publ, SSSPublication):
@@ -66,8 +71,8 @@ class SSSScholar:
             self.nbr_first_sci += 1
         # Add corresponding SWEBOK Knowledge Area
         if publ.knowl_area >= 0:
-            self.knowl_areas[publ.knowl_area] = True
-        # print(self.knowl_areas)
+            self.knowl_area_counters[publ.knowl_area] += 1
+        print(self.knowl_area_counters)
     
     def get_nbr_main_confs(self):
         nbr = 0
@@ -163,6 +168,14 @@ class SSSScholar:
     def calc_titles(self):
         self.research_interests_string = self.research_interests_to_string()
         self.signature_works = self.sci_publications_to_string()
+
+    def calc_knowl_areas(self):
+        if self.knowl_area_counters[0] >= 2:
+            self.knowl_areas[0] = True
+            self.knowl_areas_string += "RE, "
+        if self.knowl_area_counters[1] >= 1:
+            self.knowl_areas[1] = True
+            self.knowl_areas_string += "Design, "
 
     def to_string(self):
         return self.name + " (" + str(len(self.publications)) + " publications. SCI-ratio: " + str(round(self.sci_ratio, 2)) + " 1st-ratio: " + str(round(self.first_ratio, 2))  + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"

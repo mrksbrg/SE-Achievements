@@ -5,11 +5,38 @@ class SSSPublication:
 
     # SWEBOK Knowledge Areas, represented by integer in the self.ka variable
     # -1 = Unclear
-    # 0 = Requirements engineering
+    # 0 = Software Requirements
     re_conf_list = ["RE", "REFSQ"]
     re_journal_list = ["Requir. Eng."]
-    # 1 = Design
+    # 1 = Software Design
     design_conf_list = ["ICSA", "ECSA", "WICSA"]
+    # 2 = Software Construction
+    constr_conf_list = ["TBD"]
+    # 3 = Software Testing
+    test_conf_list = ["ICST", "ISSTA"]
+    # 4 = Software Maintenance
+    maint_conf_list = ["ICSME"]
+    # 5 = Software Configuration Management
+    cm_conf_list = ["TBD"]
+    # 6 = Software Engineering Management
+    mgmt_conf_list = ["ESEM", "EASE"]
+    # 7 = Software Engineering Process
+    process_conf_list = ["ICSSP"]
+    # 8 = Software Engineering Models and Methods
+    models_conf_list = ["MODELS"]
+    # 9 = Software Quality
+    quality_conf_list = ["TBD"]
+    # 10 = Software Engineering Professional Practice
+    practice_conf_list = ["TBD"]
+    # 11 = Software Engineering Economics
+    economics_conf_list = ["ICSOB"]
+    # 12 = Computing Foundations
+    comp_conf_list = ["TBD"]
+    # 13 = Mathematical Foundations
+    maths_conf_list = ["TBD"]
+    # 14 = Engineering Foundations
+    eng_conf_list = ["TBD"]
+
 
     def __init__(self, title, journal, booktitle, year, authors):
         self.title = title

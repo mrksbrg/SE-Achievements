@@ -65,7 +65,7 @@ class ScholarAnalyzer:
                                                           "experiments", "toward", "s", "1st", 
                                                           "ieee", "conference", "articles", 
                                                           "international", "cited", "towards",
-                                                          "problems", "via", "ein"])
+                                                          "problems", "via", "ein", "von"])
 
         # Preprocessing of authors' titles
         for scholar, corpus in self.scholars_dict.items():
@@ -118,6 +118,8 @@ class ScholarAnalyzer:
             research_interests = research_interests[:-2] # remove two final chars
             print(scholar + ": " + research_interests)
             curr.calc_titles()
+            # Assign SWEBOK Knowledge Areas
+            curr.calc_knowl_areas()
 
         print("\n####### Apparent research interests of the affiliations #######")
 
