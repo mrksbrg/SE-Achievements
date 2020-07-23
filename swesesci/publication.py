@@ -27,7 +27,7 @@ class SSSPublication:
     # 5 = Software Configuration Management
     cm_conf_list = ["SCM, SPLC"]
     # 6 = Software Engineering Management
-    mgmt_conf_list = ["ESEM", "EASE"]
+    mgmt_conf_list = ["ESEM", "EASE", "METRICS", "IWSM/Mensura", "IWSM-Mensura"]
     # 7 = Software Engineering Process
     process_conf_list = ["ICSSP, XP"]
     # 8 = Software Engineering Models and Methods
@@ -49,7 +49,6 @@ class SSSPublication:
     maths_journal_list = ["ACM Trans. Algorithms, Algorithmica"]
     # 14 = Engineering Foundations
     eng_conf_list = ["TBD"]
-
 
     def __init__(self, title, journal, booktitle, year, authors):
         self.title = title
