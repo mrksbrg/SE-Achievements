@@ -27,6 +27,7 @@ class SSSScholar:
         self.knowl_areas = [False] * 15
         self.knowl_area_counters = [0] * 15
         self.knowl_areas_string = ""
+        self.knowl_area_works = [""] * 15
                 
     def __str__(self):
         if self.running_number == -1:
@@ -54,9 +55,10 @@ class SSSScholar:
         self.sci_ratio = -1
         self.nbr_sci_publications = -1
         self.nbr_first_sci = -1
-        self.knowl_areas = [False] * 14
-        self.knowl_area_counters = [0] * 14
+        self.knowl_areas = [False] * 15
+        self.knowl_area_counters = [0] * 15
         self.knowl_areas = ""
+        self.knowl_area_works = [""] * 15
 
     def add_publication(self, publ):
         if not isinstance(publ, SSSPublication):
@@ -70,8 +72,21 @@ class SSSScholar:
         if publ.sci_listed:
             self.nbr_first_sci += 1
         # Add corresponding SWEBOK Knowledge Area
-        if publ.knowl_area >= 0:
+        first_author = False
+        if self.running_number == -1:
+            if publ.authors[0] == self.name:
+                first_author = True
+        else:
+            if publ.authors[0] == str(self.name + " " + self.running_number):
+                first_author = True
+        if first_author and publ.knowl_area >= 0:
             self.knowl_area_counters[publ.knowl_area] += 1
+            if publ.booktitle is not None:
+                self.knowl_area_works[publ.knowl_area] += str(publ.year) + ": " + publ.title + " (" + publ.booktitle + ") "
+                print(self.knowl_area_works[publ.knowl_area])
+            else:
+                self.knowl_area_works[publ.knowl_area] += str(publ.year) + ": " + publ.title + " (" + publ.journal + ") "
+                print(self.knowl_area_works[publ.knowl_area])
         print(self.knowl_area_counters)
     
     def get_nbr_main_confs(self):
