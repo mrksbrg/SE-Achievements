@@ -96,5 +96,5 @@ class TestClass_RunningNumber:
         assert thomas.sss_rating >= 1.00
 
         # TC10: Test tabulator
-        tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
+        tabulator = ScholarTabulator(self.filename_prefix, self.scholars, self.affiliations)
         tabulator.write_tables()

@@ -96,5 +96,5 @@ class TestClass_NonASCIITitles:
                 assert mauro.sss_rating >= 1.00
 
                 # TC10: Test tabulator
-                tabulator = ScholarTabulator(self.filename_prefix, self.test_nonascii_scholar, self.affiliations)
+                tabulator = ScholarTabulator(self.filename_prefix, self.scholars, self.affiliations)
                 tabulator.write_tables()

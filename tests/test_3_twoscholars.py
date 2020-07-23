@@ -95,7 +95,7 @@ class TestClass_TwoScholars:
         assert simon.sss_rating == 8.75
 
         # TC10: Test tabulator
-        tabulator = ScholarTabulator(self.filename_prefix, self.test_scholars, self.affiliations)
+        tabulator = ScholarTabulator(self.filename_prefix, self.scholars, self.affiliations)
         tabulator.write_tables()
 
     def test_richard_holst(self):
@@ -148,5 +148,5 @@ class TestClass_TwoScholars:
         # assert richard.sss_rating == 12.79
         #
         # # TC10: Test tabulator
-        # tabulator = ScholarTabulator(self.filename_prefix, self.test_scholars, self.affiliations)
+        # tabulator = ScholarTabulator(self.filename_prefix, self.scholars, self.affiliations)
         # tabulator.write_tables()

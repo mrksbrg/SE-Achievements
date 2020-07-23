@@ -96,5 +96,5 @@ class TestClass_OneScholar:
         assert david.sss_rating == 22.14
 
         # TC10: Test tabulator
-        tabulator = ScholarTabulator(self.filename_prefix, self.test_scholar, self.affiliations)
+        tabulator = ScholarTabulator(self.filename_prefix, self.scholars, self.affiliations)
         tabulator.write_tables()
