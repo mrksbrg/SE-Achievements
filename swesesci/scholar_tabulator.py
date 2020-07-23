@@ -19,7 +19,8 @@ class ScholarTabulator:
                 print("Checking KA " + str(i))
                 if s.knowl_areas[i] is True:
                     print("KA: " + str(i) + " " + str(s.knowl_areas[i]))
-                    self.sss_experts.append(s)
+                    if s not in self.sss_experts:
+                        self.sss_experts.append(s)
 
     def write_tables(self):
         env = Environment(
@@ -65,6 +66,6 @@ class ScholarTabulator:
         # SWEBOK Knowledge Areas
         template = env.get_template('yellow_pages.html')
         output = template.render(sss_scholars=self.sss_experts)
-        tmp = open(self.filename_prefix + "3_tabulator_re.html", "w+")
+        tmp = open(self.filename_prefix + "3_tabulator_swebok.html", "w+")
         tmp.write(output)
         tmp.close()
