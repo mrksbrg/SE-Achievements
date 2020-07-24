@@ -24,8 +24,9 @@ class SSSScholar:
         self.nbr_first_sci = -1
 
         # SWEBOK Knowledge Areas
-        self.knowl_areas = [False] * 15
+        #self.knowl_areas = [False] * 15
         self.knowl_area_counters = [0] * 15
+        self.knowl_area_badges = [0] * 15
         self.knowl_areas_string = ""
         self.knowl_area_works = [""] * 15
                 
@@ -55,8 +56,9 @@ class SSSScholar:
         self.sci_ratio = -1
         self.nbr_sci_publications = -1
         self.nbr_first_sci = -1
-        self.knowl_areas = [False] * 15
+        #self.knowl_areas = [False] * 15
         self.knowl_area_counters = [0] * 15
+        self.knowl_area_badges = [0] * 15
         self.knowl_areas_string = ""
         self.knowl_area_works = [""] * 15
 
@@ -184,53 +186,64 @@ class SSSScholar:
         self.research_interests_string = self.research_interests_to_string()
         self.signature_works = self.sci_publications_to_string()
 
-    def calc_knowl_areas(self):
+    def badge_grader(self, number):
+        # 1 = Bronze, 3 = Silver, 5 = Gold
+        level = 0
+        if number >= 1:
+            level = 1
+            if number >= 3:
+                level = 2
+                if number >= 5:
+                    level = 3
+        return level
+
+    def unlock_achievements(self):
         # Inspiration "Once is chance, twice is coincidence, three times is a pattern"
-        if self.knowl_area_counters[0] >= 2:
-            self.knowl_areas[0] = True
-            self.knowl_areas_string += "RE, "
-        if self.knowl_area_counters[1] >= 2:
-            self.knowl_areas[1] = True
-            self.knowl_areas_string += "Design, "
-        if self.knowl_area_counters[2] >= 2:
-            self.knowl_areas[2] = True
-            self.knowl_areas_string += "Constr, "
-        if self.knowl_area_counters[3] >= 2:
-            self.knowl_areas[3] = True
-            self.knowl_areas_string += "Test, "
-        if self.knowl_area_counters[4] >= 2:
-            self.knowl_areas[4] = True
-            self.knowl_areas_string += "Maint, "
-        if self.knowl_area_counters[5] >= 2:
-            self.knowl_areas[5] = True
-            self.knowl_areas_string += "CM, "
-        if self.knowl_area_counters[6] >= 2:
-            self.knowl_areas[6] = True
-            self.knowl_areas_string += "Mgmt, "
-        if self.knowl_area_counters[7] >= 2:
-            self.knowl_areas[7] = True
-            self.knowl_areas_string += "Process, "
-        if self.knowl_area_counters[8] >= 2:
-            self.knowl_areas[8] = True
-            self.knowl_areas_string += "Models, "
-        if self.knowl_area_counters[9] >= 2:
-            self.knowl_areas[9] = True
-            self.knowl_areas_string += "Quality, "
-        if self.knowl_area_counters[10] >= 2:
-            self.knowl_areas[10] = True
-            self.knowl_areas_string += "Practice, "
-        if self.knowl_area_counters[11] >= 2:
-            self.knowl_areas[11] = True
-            self.knowl_areas_string += "Economics, "
-        if self.knowl_area_counters[12] >= 2:
-            self.knowl_areas[12] = True
-            self.knowl_areas_string += "Computing, "
-        if self.knowl_area_counters[13] >= 2:
-            self.knowl_areas[13] = True
-            self.knowl_areas_string += "Maths, "
-        if self.knowl_area_counters[14] >= 2:
-            self.knowl_areas[14] = True
-            self.knowl_areas_string += "Eng, "
+        if self.knowl_area_counters[0] >= 1:
+            self.knowl_area_badges[0] = self.badge_grader(self.knowl_area_counters[0])
+            self.knowl_areas_string += str(self.knowl_area_badges[0]) + "-RE, "
+        if self.knowl_area_counters[1] >= 1:
+            self.knowl_area_badges[1] = self.badge_grader(self.knowl_area_counters[1])
+            self.knowl_areas_string += str(self.knowl_area_badges[1]) + "-Design, "
+        if self.knowl_area_counters[2] >= 1:
+            self.knowl_area_badges[2] = self.badge_grader(self.knowl_area_counters[2])
+            self.knowl_areas_string += str(self.knowl_area_badges[2]) + "-Constr, "
+        if self.knowl_area_counters[3] >= 1:
+            self.knowl_area_badges[3] = self.badge_grader(self.knowl_area_counters[3])
+            self.knowl_areas_string += str(self.knowl_area_badges[3]) + "-Test, "
+        if self.knowl_area_counters[4] >= 1:
+            self.knowl_area_badges[4] = self.badge_grader(self.knowl_area_counters[4])
+            self.knowl_areas_string += str(self.knowl_area_badges[4]) + "-Maint, "
+        if self.knowl_area_counters[5] >= 1:
+            self.knowl_area_badges[5] = self.badge_grader(self.knowl_area_counters[5])
+            self.knowl_areas_string += str(self.knowl_area_badges[5]) + "-CM, "
+        if self.knowl_area_counters[6] >= 1:
+            self.knowl_area_badges[6] = self.badge_grader(self.knowl_area_counters[6])
+            self.knowl_areas_string += str(self.knowl_area_badges[6]) + "-Mgmt, "
+        if self.knowl_area_counters[7] >= 1:
+            self.knowl_area_badges[7] = self.badge_grader(self.knowl_area_counters[7])
+            self.knowl_areas_string += str(self.knowl_area_badges[7]) + "-Process, "
+        if self.knowl_area_counters[8] >= 1:
+            self.knowl_areaknowl_area_badgess[8] = self.badge_grader(self.knowl_area_counters[8])
+            self.knowl_areas_string += str(self.knowl_area_badges[8]) + "-Models, "
+        if self.knowl_area_counters[9] >= 1:
+            self.knowl_area_badges[9] = self.badge_grader(self.knowl_area_counters[9])
+            self.knowl_areas_string += str(self.knowl_area_badges[9]) + "-Quality, "
+        if self.knowl_area_counters[10] >= 1:
+            self.knowl_area_badges[10] = self.badge_grader(self.knowl_area_counters[10])
+            self.knowl_areas_string += str(self.knowl_area_badges[10]) + "-Practice, "
+        if self.knowl_area_counters[11] >= 1:
+            self.knowl_area_badges[11] = self.badge_grader(self.knowl_area_counters[11])
+            self.knowl_areas_string += str(self.knowl_area_badges[11]) + "-Economics, "
+        if self.knowl_area_counters[12] >= 1:
+            self.knowl_area_badges[12] = self.badge_grader(self.knowl_area_counters[12])
+            self.knowl_areas_string += str(self.knowl_area_badges[12]) + "-Computing, "
+        if self.knowl_area_counters[13] >= 1:
+            self.knowl_area_badges[13] = self.badge_grader(self.knowl_area_counters[13])
+            self.knowl_areas_string += str(self.knowl_area_badges[13]) + "-Maths, "
+        if self.knowl_area_counters[14] >= 1:
+            self.knowl_area_badges[14] = self.badge_grader(self.knowl_area_counters[14])
+            self.knowl_areas_string += str(self.knowl_area_badges[14]) + "-Eng, "
 
     def to_string(self):
         return self.name + " (" + str(len(self.publications)) + " publications. SCI-ratio: " + str(round(self.sci_ratio, 2)) + " 1st-ratio: " + str(round(self.first_ratio, 2))  + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"

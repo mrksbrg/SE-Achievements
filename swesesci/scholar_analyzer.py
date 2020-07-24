@@ -119,7 +119,7 @@ class ScholarAnalyzer:
             print(scholar + ": " + research_interests)
             curr.calc_titles()
             # Assign SWEBOK Knowledge Areas
-            curr.calc_knowl_areas()
+            curr.unlock_achievements()
 
         print("\n####### Apparent research interests of the affiliations #######")
 
