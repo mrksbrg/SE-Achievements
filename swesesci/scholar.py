@@ -57,7 +57,7 @@ class SSSScholar:
         self.nbr_first_sci = -1
         self.knowl_areas = [False] * 15
         self.knowl_area_counters = [0] * 15
-        self.knowl_areas = ""
+        self.knowl_areas_string = ""
         self.knowl_area_works = [""] * 15
 
     def add_publication(self, publ):
