@@ -44,7 +44,7 @@ def add_sss_scholars(process_list, affiliation):
 
 # Swe-SE-SCI entry point
 if (len(sys.argv) == 1):
-    # fast_list = ["Stefan Cedergren", "Joakim Fröberg", "Thomas Olsson"]
+    # fast_list = ["Stefan Cedergren", "Joakim Fröberg", "Thomas Olsson 0001"]
     # add_sss_scholars(fast_list, "RISE")
     # fast_list2 = ["Annabella Loconsole"]
     # add_sss_scholars(fast_list2, "MAU")
@@ -66,7 +66,7 @@ if (len(sys.argv) == 1):
                      "Richard Berntsson-Svensson", "Francisco Gomes de Oliveira Neto", "Gregory Gay", "Michel Chaudron", "Jan Bosch", "Jennifer Horkoff",
                      "Eric Knauss", "Thorsten Berger", "Gul Calikli", "Regina Hebig", "Philipp Leitner 0001", "Agneta Nilsson", "Imed Hammouda", "Birgit Penzenstadler", "Lars Pareto"]
     add_sss_scholars(gbg_list, "Chalmers / Gothenburg University")
-    kth_list = ["Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt", "Martin Törngren", "Hannes Holm", "Cyrille Artho"]
+    kth_list = ["Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt", "Martin Törngren", "Hannes Holm", "Cyrille Artho", "Mira Kajko-Mattsson"]
     add_sss_scholars(kth_list, "KTH Royal Institute of Technology")
     su_list = ["Janis Stirna", "Jelena Zdravkovic"]
     add_sss_scholars(su_list, "Stockholm University")
