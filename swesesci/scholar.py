@@ -24,11 +24,11 @@ class SSSScholar:
         self.nbr_first_sci = -1
 
         # SWEBOK Knowledge Areas
-        #self.knowl_areas = [False] * 15
-        self.knowl_area_counters = [0] * 15
-        self.knowl_area_badges = [0] * 15
-        self.knowl_areas_string = ""
-        self.knowl_area_works = [""] * 15
+        self.swebok_counters = [0] * 22
+        self.swebok_badges = [0] * 22
+        self.swebok_string = ""
+        self.swebok_works = [""] * 22
+        self.swebok_re_string = ""
                 
     def __str__(self):
         if self.running_number == -1:
@@ -56,11 +56,11 @@ class SSSScholar:
         self.sci_ratio = -1
         self.nbr_sci_publications = -1
         self.nbr_first_sci = -1
-        #self.knowl_areas = [False] * 15
-        self.knowl_area_counters = [0] * 15
-        self.knowl_area_badges = [0] * 15
-        self.knowl_areas_string = ""
-        self.knowl_area_works = [""] * 15
+        self.swebok_counters = [0] * 22
+        self.swebok_badges = [0] * 22
+        self.swebok_string = ""
+        self.swebok_works = [""] * 22
+        self.swebok_re_string = ""
 
     def add_publication(self, publ):
         if not isinstance(publ, SSSPublication):
@@ -73,6 +73,7 @@ class SSSScholar:
         self.nbr_publications += 1
         if publ.sci_listed:
             self.nbr_first_sci += 1
+
         # Add corresponding SWEBOK Knowledge Area
         first_author = False
         if self.running_number == -1:
@@ -82,15 +83,26 @@ class SSSScholar:
             if publ.authors[0] == str(self.name + " " + self.running_number):
                 first_author = True
         if first_author and publ.knowl_area >= 0:
-            self.knowl_area_counters[publ.knowl_area] += 1
+            self.swebok_counters[publ.knowl_area] += 1
             if publ.booktitle is not None:
-                self.knowl_area_works[publ.knowl_area] += str(publ.year) + ": " + publ.title + " (" + publ.booktitle + ") "
-                print(self.knowl_area_works[publ.knowl_area])
+                # conference publication
+                tmp_work = str(publ.year) + ": " + publ.title + " (" + publ.booktitle + ") "
+                self.swebok_works[publ.knowl_area] += tmp_work
+                print(self.swebok_works[publ.knowl_area])
+                self.add_to_swebok_string(tmp_work, publ.knowl_area)
             else:
-                self.knowl_area_works[publ.knowl_area] += str(publ.year) + ": " + publ.title + " (" + publ.journal + ") "
-                print(self.knowl_area_works[publ.knowl_area])
-        print(self.knowl_area_counters)
-    
+                # journal publication
+                tmp_work = str(publ.year) + ": " + publ.title + " (" + publ.journal + ") "
+                self.swebok_works[publ.knowl_area] += tmp_work
+                print(self.swebok_works[publ.knowl_area])
+                self.add_to_swebok_string(tmp_work, publ.knowl_area)
+        print(self.swebok_counters)
+
+    # add to the string that Jinja uses
+    def add_to_swebok_string(self, str, knowl_area_id):
+        if knowl_area_id == 0:
+            self.swebok_re_string += str
+
     def get_nbr_main_confs(self):
         nbr = 0
         for publ in self.publications:
@@ -199,51 +211,72 @@ class SSSScholar:
 
     def unlock_achievements(self):
         # Inspiration "Once is chance, twice is coincidence, three times is a pattern"
-        if self.knowl_area_counters[0] >= 1:
-            self.knowl_area_badges[0] = self.badge_grader(self.knowl_area_counters[0])
-            self.knowl_areas_string += str(self.knowl_area_badges[0]) + "-RE, "
-        if self.knowl_area_counters[1] >= 1:
-            self.knowl_area_badges[1] = self.badge_grader(self.knowl_area_counters[1])
-            self.knowl_areas_string += str(self.knowl_area_badges[1]) + "-Design, "
-        if self.knowl_area_counters[2] >= 1:
-            self.knowl_area_badges[2] = self.badge_grader(self.knowl_area_counters[2])
-            self.knowl_areas_string += str(self.knowl_area_badges[2]) + "-Constr, "
-        if self.knowl_area_counters[3] >= 1:
-            self.knowl_area_badges[3] = self.badge_grader(self.knowl_area_counters[3])
-            self.knowl_areas_string += str(self.knowl_area_badges[3]) + "-Test, "
-        if self.knowl_area_counters[4] >= 1:
-            self.knowl_area_badges[4] = self.badge_grader(self.knowl_area_counters[4])
-            self.knowl_areas_string += str(self.knowl_area_badges[4]) + "-Maint, "
-        if self.knowl_area_counters[5] >= 1:
-            self.knowl_area_badges[5] = self.badge_grader(self.knowl_area_counters[5])
-            self.knowl_areas_string += str(self.knowl_area_badges[5]) + "-CM, "
-        if self.knowl_area_counters[6] >= 1:
-            self.knowl_area_badges[6] = self.badge_grader(self.knowl_area_counters[6])
-            self.knowl_areas_string += str(self.knowl_area_badges[6]) + "-Mgmt, "
-        if self.knowl_area_counters[7] >= 1:
-            self.knowl_area_badges[7] = self.badge_grader(self.knowl_area_counters[7])
-            self.knowl_areas_string += str(self.knowl_area_badges[7]) + "-Process, "
-        if self.knowl_area_counters[8] >= 1:
-            self.knowl_areaknowl_area_badgess[8] = self.badge_grader(self.knowl_area_counters[8])
-            self.knowl_areas_string += str(self.knowl_area_badges[8]) + "-Models, "
-        if self.knowl_area_counters[9] >= 1:
-            self.knowl_area_badges[9] = self.badge_grader(self.knowl_area_counters[9])
-            self.knowl_areas_string += str(self.knowl_area_badges[9]) + "-Quality, "
-        if self.knowl_area_counters[10] >= 1:
-            self.knowl_area_badges[10] = self.badge_grader(self.knowl_area_counters[10])
-            self.knowl_areas_string += str(self.knowl_area_badges[10]) + "-Practice, "
-        if self.knowl_area_counters[11] >= 1:
-            self.knowl_area_badges[11] = self.badge_grader(self.knowl_area_counters[11])
-            self.knowl_areas_string += str(self.knowl_area_badges[11]) + "-Economics, "
-        if self.knowl_area_counters[12] >= 1:
-            self.knowl_area_badges[12] = self.badge_grader(self.knowl_area_counters[12])
-            self.knowl_areas_string += str(self.knowl_area_badges[12]) + "-Computing, "
-        if self.knowl_area_counters[13] >= 1:
-            self.knowl_area_badges[13] = self.badge_grader(self.knowl_area_counters[13])
-            self.knowl_areas_string += str(self.knowl_area_badges[13]) + "-Maths, "
-        if self.knowl_area_counters[14] >= 1:
-            self.knowl_area_badges[14] = self.badge_grader(self.knowl_area_counters[14])
-            self.knowl_areas_string += str(self.knowl_area_badges[14]) + "-Eng, "
+        if self.swebok_counters[0] >= 1:
+            self.swebok_badges[0] = self.badge_grader(self.swebok_counters[0])
+            self.swebok_string += str(self.swebok_badges[0]) + "-RE, "
+        if self.swebok_counters[1] >= 1:
+            self.swebok_badges[1] = self.badge_grader(self.swebok_counters[1])
+            self.swebok_string += str(self.swebok_badges[1]) + "-Design, "
+        if self.swebok_counters[2] >= 1:
+            self.swebok_badges[2] = self.badge_grader(self.swebok_counters[2])
+            self.swebok_string += str(self.swebok_badges[2]) + "-Constr, "
+        if self.swebok_counters[3] >= 1:
+            self.swebok_badges[3] = self.badge_grader(self.swebok_counters[3])
+            self.swebok_string += str(self.swebok_badges[3]) + "-Test, "
+        if self.swebok_counters[4] >= 1:
+            self.swebok_badges[4] = self.badge_grader(self.swebok_counters[4])
+            self.swebok_string += str(self.swebok_badges[4]) + "-Maint, "
+        if self.swebok_counters[5] >= 1:
+            self.swebok_badges[5] = self.badge_grader(self.swebok_counters[5])
+            self.swebok_string += str(self.swebok_badges[5]) + "-CM, "
+        if self.swebok_counters[6] >= 1:
+            self.swebok_badges[6] = self.badge_grader(self.swebok_counters[6])
+            self.swebok_string += str(self.swebok_badges[6]) + "-Mgmt, "
+        if self.swebok_counters[7] >= 1:
+            self.swebok_badges[7] = self.badge_grader(self.swebok_counters[7])
+            self.swebok_string += str(self.swebok_badges[7]) + "-Process, "
+        if self.swebok_counters[8] >= 1:
+            self.swebok_badges[8] = self.badge_grader(self.swebok_counters[8])
+            self.swebok_string += str(self.swebok_badges[8]) + "-Models, "
+        if self.swebok_counters[9] >= 1:
+            self.swebok_badges[9] = self.badge_grader(self.swebok_counters[9])
+            self.swebok_string += str(self.swebok_badges[9]) + "-Quality, "
+        if self.swebok_counters[10] >= 1:
+            self.swebok_badges[10] = self.badge_grader(self.swebok_counters[10])
+            self.swebok_string += str(self.swebok_badges[10]) + "-Practice, "
+        if self.swebok_counters[11] >= 1:
+            self.swebok_badges[11] = self.badge_grader(self.swebok_counters[11])
+            self.swebok_string += str(self.swebok_badges[11]) + "-Economics, "
+        if self.swebok_counters[12] >= 1:
+            self.swebok_badges[12] = self.badge_grader(self.swebok_counters[12])
+            self.swebok_string += str(self.swebok_badges[12]) + "-Computing, "
+        if self.swebok_counters[13] >= 1:
+            self.swebok_badges[13] = self.badge_grader(self.swebok_counters[13])
+            self.swebok_string += str(self.swebok_badges[13]) + "-Maths, "
+        if self.swebok_counters[14] >= 1:
+            self.swebok_badges[14] = self.badge_grader(self.swebok_counters[14])
+            self.swebok_string += str(self.swebok_badges[14]) + "-Eng, "
+        if self.swebok_counters[15] >= 1:
+            self.swebok_badges[15] = self.badge_grader(self.swebok_counters[15])
+            self.swebok_string += str(self.swebok_badges[15]) + "-ICSE, "
+        if self.swebok_counters[16] >= 1:
+            self.swebok_badges[16] = self.badge_grader(self.swebok_counters[16])
+            self.swebok_string += str(self.swebok_badges[16]) + "-Prestige, "
+        if self.swebok_counters[17] >= 1:
+            self.swebok_badges[17] = self.badge_grader(self.swebok_counters[17])
+            self.swebok_string += str(self.swebok_badges[17]) + "-Emp, "
+        if self.swebok_counters[18] >= 1:
+            self.swebok_badges[18] = self.badge_grader(self.swebok_counters[18])
+            self.swebok_string += str(self.swebok_badges[18]) + "-IS, "
+        if self.swebok_counters[19] >= 1:
+            self.swebok_badges[19] = self.badge_grader(self.swebok_counters[19])
+            self.swebok_string += str(self.swebok_badges[19]) + "-HCI, "
+        if self.swebok_counters[20] >= 1:
+            self.swebok_badges[20] = self.badge_grader(self.swebok_counters[20])
+            self.swebok_string += str(self.swebok_badges[20]) + "-Assure, "
+        if self.swebok_counters[21] >= 1:
+            self.swebok_badges[21] = self.badge_grader(self.swebok_counters[21])
+            self.swebok_string += str(self.swebok_badges[21]) + "-Web, "
 
     def to_string(self):
         return self.name + " (" + str(len(self.publications)) + " publications. SCI-ratio: " + str(round(self.sci_ratio, 2)) + " 1st-ratio: " + str(round(self.first_ratio, 2))  + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"

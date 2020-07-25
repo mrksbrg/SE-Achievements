@@ -5,15 +5,14 @@ class SSSPublication:
                 "Softw. Qual. J.", "J. Syst. Softw.", "J. Softw. Evol. Process.", "Journal of Software Maintenance",
                 "J. Softw. Maintenance Res. Pract.", "Softw. Test. Verification Reliab.", "Softw. Pract. Exp.",
                 "IET Software", "International Journal of Software Engineering and Knowledge Engineering"]
-    conf_list = ["ICSE", "FSE"]
 
-    # SWEBOK Knowledge Areas, represented by integer in the self.ka variable
+    # SWEBOK Knowledge Areas
     # -1 = Unclear
     # 0 = Software Requirements
     re_conf_list = ["RE", "REFSQ"]
     re_journal_list = ["Requir. Eng."]
     # 1 = Software Design
-    design_conf_list = ["ICSA", "ECSA", "WICSA"]
+    design_conf_list = ["ICSA", "ECSA", "WICSA", "UIST", "IUI"]
     design_journal_list = ["J. Syst. Archit."]
     # 2 = Software Construction
     constr_conf_list = ["OOPSLA, ECOOP, SCAM"]
@@ -27,7 +26,8 @@ class SSSPublication:
     # 5 = Software Configuration Management
     cm_conf_list = ["SCM, SPLC"]
     # 6 = Software Engineering Management
-    mgmt_conf_list = ["ESEM", "EASE", "METRICS", "IWSM/Mensura", "IWSM-Mensura"]
+    mgmt_conf_list = ["METRICS", "IWSM/Mensura", "IWSM-Mensura"]
+    mgmt_journal_list = ["MIS Quarterly"]
     # 7 = Software Engineering Process
     process_conf_list = ["ICSSP, XP"]
     # 8 = Software Engineering Models and Methods
@@ -37,25 +37,44 @@ class SSSPublication:
     quality_conf_list = ["QRS"]
     quality_journal_list = ["Softw. Qual. J."]
     # 10 = Software Engineering Professional Practice
-    practice_conf_list = ["ICGSE, CHASE"]
+    practice_conf_list = ["ICGSE"]
     practice_journal_list = ["Softw. Pract. Exp."]
     # 11 = Software Engineering Economics
     economics_conf_list = ["ICSOB"]
     # 12 = Computing Foundations
     comp_conf_list = ["FASE, PLDI, POPL, IPDPS, PODC, SLE"]
-    comp_journal_list = ["Formal Asp. Comput."]
+    comp_journal_list = ["Formal Asp. Comput.", "Formal Methods Syst. Des"]
     # 13 = Mathematical Foundations
     maths_conf_list = ["SODA, ITCS, ESA, STACS, ISAAC, FSTTCS", ]
     maths_journal_list = ["ACM Trans. Algorithms, Algorithmica"]
     # 14 = Engineering Foundations
     eng_conf_list = ["TBD"]
 
+    # BONUS Categories
+    # 15 = ICSE
+    flagship_list = ["ICSE"]
+    # 16 = Prestigious general conferences
+    prestigious_list = ["FSE", "ASE"]
+    # 17 = Empiricism
+    emp_conf_list = ["ESEM", "EASE"]
+    emp_journal_list = ["Empirical Software Engineering"]
+    # 18 = Information Systems
+    is_conf_list = ["CaiSE", "ICEIS", "HICCS"]
+    # 19 = Human Computer Interaction
+    hci_conf_list = ["CHI", "INTERACT"]
+    # 20 = High Assurance
+    assure_conf_list = ["SAFECOMP", "ISSRE", "ARES", "HASE"]
+    assure_journal_list = ["IEEE Trans. Reliab.", "IEEE Trans. Dependable Secur. Comput."]
+    # 21 = Web Tech
+    web_conf_list = ["IEEE ICWS", "SCC", "ICSOC", "ICWE", "WISE", "SOCA"]
+    web_journal_list = ["Int. J. Web Serv. Res.", "J. Web Eng.", "IEEE Trans. Network and Service Management"]
+
     def __init__(self, title, journal, booktitle, year, authors):
         self.title = title
         self.journal = journal
         self.major_conf = False
         self.booktitle = booktitle
-        if self.booktitle in self.conf_list:
+        if self.booktitle in self.flagship_list:
             self.major_conf = True
         
         self.year = year
@@ -99,6 +118,8 @@ class SSSPublication:
         # 6 = Management
         elif self.booktitle in self.mgmt_conf_list:
             self.knowl_area = 6
+        elif self.journal in self.mgmt_journal_list:
+            self.knowl_area = 6
         # 7 = Process
         elif self.booktitle in self.process_conf_list:
             self.knowl_area = 7
@@ -133,6 +154,19 @@ class SSSPublication:
         # 14 = Engineering Foundations
         elif self.booktitle in self.eng_conf_list:
             self.knowl_area = 14
+
+        # 15 = ICSE
+        elif self.booktitle in self.flagship_list:
+            self.knowl_area = 15
+        # 16 = Prestigious General Conferences
+        elif self.booktitle in self.prestigious_list:
+            self.knowl_area = 16
+
+        # 17 = Empiricism
+        elif self.booktitle in self.emp_conf_list:
+            self.knowl_area = 17
+        elif self.journal in self.emp_journal_list:
+            self.knowl_area = 17
 
     def __str__(self):
         if not self.journal is None:

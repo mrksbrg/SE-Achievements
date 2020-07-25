@@ -17,24 +17,27 @@ class ScholarTabulator:
         self.assign_expertise()
 
     def assign_expertise(self):
-        for s in self.sss_scholars:
-            for i in range(len(s.knowl_area_badges)):
-                print("Checking KA " + str(i))
-                if s.knowl_area_badges[i] == 1:
-                    print("BRONZE KA: " + str(i) + " " + str(s.knowl_area_badges[i]))
-                    if s not in self.sss_experts:
-                        self.sss_experts.append(s)
-                elif s.knowl_area_badges[i] == 2:
-                    print("SILVER KA: " + str(i) + " " + str(s.knowl_area_badges[i]))
-                    if s not in self.sss_experts:
-                        self.sss_experts.append(s)
-                elif s.knowl_area_badges[i] == 3:
-                    print("GOLD KA: " + str(i) + " " + str(s.knowl_area_badges[i]))
-                    if s not in self.sss_experts:
-                        self.sss_experts.append(s)
+        for scholar in self.sss_scholars:
+            for knowl_area_id in range(len(scholar.swebok_badges)):
+                print("Checking KA " + str(knowl_area_id))
+                if scholar.swebok_badges[knowl_area_id] == 1:
+                    print("BRONZE KA: " + str(knowl_area_id) + " " + str(scholar.swebok_badges[knowl_area_id]))
+                    if scholar not in self.sss_experts:
+                        self.sss_experts.append(scholar)
+                        self.add_to_expert_lists(scholar, knowl_area_id, scholar.swebok_badges[knowl_area_id])
+                elif scholar.swebok_badges[knowl_area_id] == 2:
+                    print("SILVER KA: " + str(knowl_area_id) + " " + str(scholar.swebok_badges[knowl_area_id]))
+                    if scholar not in self.sss_experts:
+                        self.sss_experts.append(scholar)
+                        self.add_to_expert_lists(scholar, knowl_area_id, scholar.swebok_badges[knowl_area_id])
+                elif scholar.swebok_badges[knowl_area_id] == 3:
+                    print("GOLD KA: " + str(knowl_area_id) + " " + str(scholar.swebok_badges[knowl_area_id]))
+                    if scholar not in self.sss_experts:
+                        self.sss_experts.append(scholar)
+                        self.add_to_expert_lists(scholar, knowl_area_id, scholar.swebok_badges[knowl_area_id])
 
-    def add_to_expert_list(self, scholar, knowl_area, level):
-        if knowl_area == 1:
+    def add_to_expert_lists(self, scholar, knowl_area_id, level):
+        if knowl_area_id == 0:
             self.sss_experts_re.append(scholar)
 
     def write_tables(self):
@@ -85,8 +88,8 @@ class ScholarTabulator:
         tmp.write(output)
         tmp.close()
 
-        template = env.get_template('yellow_pages.html')
-        output = template.render(sss_scholars=self.sss_experts)
+        template = env.get_template('yellow_pages_re.html')
+        output = template.render(sss_scholars=self.sss_experts_re)
         tmp = open(self.filename_prefix + "3_tabulator_swebok-re.html", "w+")
         tmp.write(output)
         tmp.close()
