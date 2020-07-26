@@ -161,12 +161,27 @@ class SSSPublication:
         # 16 = Prestigious General Conferences
         elif self.booktitle in self.prestigious_list:
             self.knowl_area = 16
-
         # 17 = Empiricism
         elif self.booktitle in self.emp_conf_list:
             self.knowl_area = 17
         elif self.journal in self.emp_journal_list:
             self.knowl_area = 17
+        # 18 = Information systems
+        elif self.booktitle in self.is_conf_list:
+            self.knowl_area = 18
+        # 19 = Human-Computer Interaction
+        elif self.booktitle in self.hci_conf_list:
+            self.knowl_area = 19
+        # 20 = High Assurance
+        elif self.booktitle in self.assure_conf_list:
+            self.knowl_area = 20
+        elif self.journal in self.assure_journal_list:
+            self.knowl_area = 20
+        # 21 = Web
+        elif self.booktitle in self.web_conf_list:
+            self.knowl_area = 21
+        elif self.journal in self.web_journal_list:
+            self.knowl_area = 21
 
     def __str__(self):
         if not self.journal is None:
