@@ -29,6 +29,18 @@ class SSSScholar:
         self.swebok_string = ""
         self.swebok_works = [""] * 22
         self.swebok_re_string = ""
+        self.swebok_design_string = ""
+        self.swebok_constr_string = ""
+        self.swebok_test_string = ""
+        self.swebok_maint_string = ""
+        self.swebok_cm_string = ""
+        self.swebok_mgmt_string = ""
+        self.swebok_process_string = ""
+        self.swebok_models_string = ""
+        self.swebok_quality_string = ""
+        self.swebok_practice_string = ""
+        self.swebok_economics_string = ""
+        self.swebok_comp_string = ""
                 
     def __str__(self):
         if self.running_number == -1:
@@ -61,6 +73,18 @@ class SSSScholar:
         self.swebok_string = ""
         self.swebok_works = [""] * 22
         self.swebok_re_string = ""
+        self.swebok_design_string = ""
+        self.swebok_constr_string = ""
+        self.swebok_test_string = ""
+        self.swebok_maint_string = ""
+        self.swebok_cm_string = ""
+        self.swebok_mgmt_string = ""
+        self.swebok_process_string = ""
+        self.swebok_models_string = ""
+        self.swebok_quality_string = ""
+        self.swebok_practice_string = ""
+        self.swebok_economics_string = ""
+        self.swebok_comp_string = ""
 
     def add_publication(self, publ):
         if not isinstance(publ, SSSPublication):
@@ -102,6 +126,30 @@ class SSSScholar:
     def add_to_swebok_string(self, str, knowl_area_id):
         if knowl_area_id == 0:
             self.swebok_re_string += str
+        elif knowl_area_id == 1:
+            self.swebok_design_string += str
+        elif knowl_area_id == 2:
+            self.swebok_constr_string += str
+        elif knowl_area_id == 3:
+            self.swebok_test_string += str
+        elif knowl_area_id == 4:
+            self.swebok_maint_string += str
+        elif knowl_area_id == 5:
+            self.swebok_cm_string += str
+        elif knowl_area_id == 6:
+            self.swebok_mgmt_string += str
+        elif knowl_area_id == 7:
+            self.swebok_process_string += str
+        elif knowl_area_id == 8:
+            self.swebok_models_string += str
+        elif knowl_area_id == 9:
+            self.swebok_quality_string += str
+        elif knowl_area_id == 10:
+            self.swebok_practice_string += str
+        elif knowl_area_id == 11:
+            self.swebok_economics_string += str
+        elif knowl_area_id == 12:
+            self.swebok_comp_string += str
 
     def get_nbr_main_confs(self):
         nbr = 0
