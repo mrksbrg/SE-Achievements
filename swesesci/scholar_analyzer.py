@@ -65,7 +65,8 @@ class ScholarAnalyzer:
                                                           "experiments", "toward", "s", "1st", 
                                                           "ieee", "conference", "articles", 
                                                           "international", "cited", "towards",
-                                                          "problems", "via", "ein", "von"])
+                                                          "problems", "via", "ein", "von",
+                                                          "within", "much"])
 
         # Preprocessing of authors' titles
         for scholar, corpus in self.scholars_dict.items():
