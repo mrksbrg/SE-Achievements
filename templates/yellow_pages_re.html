@@ -35,16 +35,14 @@ tr:hover {
     <th></th>
     <th onclick="sortTable(1)">Scholar</th>
     <th onclick="sortTable(2)">Affiliation</th>
-    <th onclick="sortTable(3)">SSS rating</th>
-    <th onclick="sortTable(4)">RE titles</th>
-    <th onclick="sortTable(5)">Apparent research interests</th>
+    <th onclick="sortTable(3)">RE titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
   {% for value in sss_scholars  %}
   <tr>
     <td></td>
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
-    <td>{{ value.sss_rating }}</td>
     <td>{{ value.swebok_re_string }}</td>
     <td>{{ value.research_interests_string }}</td>
   </tr>
