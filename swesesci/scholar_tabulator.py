@@ -31,24 +31,12 @@ class ScholarTabulator:
     def assign_expertise(self):
         for scholar in self.sss_scholars:
             for knowl_area_id in range(len(scholar.swebok_badges)):
-                print("Checking KA " + str(knowl_area_id))
-                if scholar.swebok_badges[knowl_area_id] == 1:
-                    print("BRONZE KA: " + str(knowl_area_id) + " " + str(scholar.swebok_badges[knowl_area_id]))
-                    if scholar not in self.sss_experts:
-                        self.sss_experts.append(scholar)
-                        self.add_to_expert_lists(scholar, knowl_area_id)
-                elif scholar.swebok_badges[knowl_area_id] == 2:
-                    print("SILVER KA: " + str(knowl_area_id) + " " + str(scholar.swebok_badges[knowl_area_id]))
-                    if scholar not in self.sss_experts:
-                        self.sss_experts.append(scholar)
-                        self.add_to_expert_lists(scholar, knowl_area_id)
-                elif scholar.swebok_badges[knowl_area_id] == 3:
-                    print("GOLD KA: " + str(knowl_area_id) + " " + str(scholar.swebok_badges[knowl_area_id]))
-                    if scholar not in self.sss_experts:
-                        self.sss_experts.append(scholar)
-                        self.add_to_expert_lists(scholar, knowl_area_id)
+                if scholar.swebok_badges[knowl_area_id] >= 1:
+                    self.add_to_expert_lists(scholar, knowl_area_id)
 
     def add_to_expert_lists(self, scholar, knowl_area_id):
+        if scholar not in self.sss_experts:
+            self.sss_experts.append(scholar)
         if knowl_area_id == 0:
             self.sss_experts_re.append(scholar)
         if knowl_area_id == 1:
@@ -193,5 +181,11 @@ class ScholarTabulator:
         template = env.get_template('yellow_pages_economics.html')
         output = template.render(sss_scholars=self.sss_experts_economics)
         tmp = open(self.filename_prefix + "3_tabulator_swebok-economics.html", "w+")
+        tmp.write(output)
+        tmp.close()
+
+        template = env.get_template('yellow_pages_comp.html')
+        output = template.render(sss_scholars=self.sss_experts_comp)
+        tmp = open(self.filename_prefix + "3_tabulator_swebok-comp.html", "w+")
         tmp.write(output)
         tmp.close()
