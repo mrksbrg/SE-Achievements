@@ -24,7 +24,7 @@ class ScholarTabulator:
         self.sss_experts_models = []
         self.sss_experts_quality = []
         self.sss_experts_practice = []
-        self.sss_experts_exonomics = []
+        self.sss_experts_economics = []
         self.sss_experts_comp = []
         self.assign_expertise()
 
@@ -190,7 +190,7 @@ class ScholarTabulator:
         tmp.write(output)
         tmp.close()
 
-        template = env.get_template('yellow_pages_econmics.html')
+        template = env.get_template('yellow_pages_economics.html')
         output = template.render(sss_scholars=self.sss_experts_economics)
         tmp = open(self.filename_prefix + "3_tabulator_swebok-economics.html", "w+")
         tmp.write(output)
