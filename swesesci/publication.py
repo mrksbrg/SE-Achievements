@@ -15,38 +15,39 @@ class SSSPublication:
     design_conf_list = ["ICSA", "ECSA", "WICSA", "UIST", "IUI"]
     design_journal_list = ["J. Syst. Archit."]
     # 2 = Software Construction
-    constr_conf_list = ["OOPSLA, ECOOP, SCAM"]
-    constr_journal_list = ["Sci. Comput. Program."]
+    constr_conf_list = ["OOPSLA", "ECOOP", "SCAM", "Programming"]
+    constr_journal_list = ["Sci. Comput. Program.", "Programming and Computer Software"]
     # 3 = Software Testing
     test_conf_list = ["ICST", "ISSTA"]
     test_journal_list = ["Softw. Test. Verification Reliab."]
     # 4 = Software Maintenance
     maint_conf_list = ["ICSME", "CSMR", "CSMR-WCRE", "WCRE"]
-    maint_journal_list = ["J. Softw. Evol. Process."]
+    maint_journal_list = ["J. Softw. Maintenance Res. Pract."]
     # 5 = Software Configuration Management
-    cm_conf_list = ["SCM, SPLC"]
+    cm_conf_list = ["SCM", "SPLC"]
     # 6 = Software Engineering Management
     mgmt_conf_list = ["METRICS", "IWSM/Mensura", "IWSM-Mensura"]
     mgmt_journal_list = ["MIS Quarterly"]
     # 7 = Software Engineering Process
-    process_conf_list = ["ICSSP, XP"]
+    process_conf_list = ["ICSSP", "XP", "PROFES"]
+    process_journal_list = ["J. Softw. Evol. Process."]
     # 8 = Software Engineering Models and Methods
-    models_conf_list = ["MoDELS, ER"]
+    models_conf_list = ["MoDELS", "ER", "FormaliSE"]
     models_journal_list = ["Software and Systems Modeling"]
     # 9 = Software Quality
-    quality_conf_list = ["QRS"]
-    quality_journal_list = ["Softw. Qual. J."]
+    quality_conf_list = ["QRS", "SAFECOMP", "ISSRE", "ARES", "HASE"]
+    quality_journal_list = ["Softw. Qual. J.", "IEEE Trans. Reliab."]
     # 10 = Software Engineering Professional Practice
     practice_conf_list = ["ICGSE"]
-    practice_journal_list = ["Softw. Pract. Exp."]
+    practice_journal_list = ["IEEE Software", "Softw. Pract. Exp."]
     # 11 = Software Engineering Economics
     economics_conf_list = ["ICSOB"]
     # 12 = Computing Foundations
-    comp_conf_list = ["FASE, PLDI, POPL, IPDPS, PODC, SLE"]
+    comp_conf_list = ["FASE", "PLDI", "POPL", "IPDPS", "PODC", "SLE"]
     comp_journal_list = ["Formal Asp. Comput.", "Formal Methods Syst. Des"]
     # 13 = Mathematical Foundations
-    maths_conf_list = ["SODA, ITCS, ESA, STACS, ISAAC, FSTTCS", ]
-    maths_journal_list = ["ACM Trans. Algorithms, Algorithmica"]
+    maths_conf_list = ["SODA", "ITCS", "ESA", "STACS", "ISAAC", "FSTTCS", ]
+    maths_journal_list = ["ACM Trans. Algorithms", "Algorithmica"]
     # 14 = Engineering Foundations
     eng_conf_list = ["TBD"]
 
@@ -122,6 +123,8 @@ class SSSPublication:
             self.knowl_area = 6
         # 7 = Process
         elif self.booktitle in self.process_conf_list:
+            self.knowl_area = 7
+        elif self.journal in self.process_journal_list:
             self.knowl_area = 7
         # 8 = Models and Methods
         elif self.booktitle in self.models_conf_list:
