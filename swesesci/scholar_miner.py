@@ -55,7 +55,8 @@ class ScholarMiner:
                             continue
                         elif p.type == "article":
                             # remove any non-ASCII characters, e.g., set theory
-                            p.title = self.ensure_ascii(p.title)
+                            encoded_string = p.title.encode('ascii', 'ignore')
+                            p.title = encoded_string.decode()
 
                             # Remove titles containing any of the substrings indicating editorial work
                             title_to_check = str(p.title).lower()
@@ -74,8 +75,9 @@ class ScholarMiner:
                                 continue
                             if p.journal == "ACM SIGSOFT Software Engineering Notes":  # skip SE Notes
                                 continue
-                                # elif p.type == "inproceedings": # This is what conference proceedings look like
-                            # print(p.booktitle)
+                        #elif p.type == "inproceedings": # This is what conference proceedings look like
+                        #    encoded_string = p.title.encode('ascii', 'ignore')
+                        #    p.title = encoded_string.decode()
                         current_publication = SSSPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
                         scholar.add_publication(current_publication)
                         self.coauthors = self.coauthors + Counter(p.authors)
@@ -117,24 +119,6 @@ class ScholarMiner:
     def clear_all_scholars(self):
         for scholar in self.sss_scholars:
             scholar.clear()
-
-    def ensure_ascii(self, string_to_check):
-        """
-        Replace any non-ASCII character with a whitespace (' ')
-        """
-        cleaned_string = str(string_to_check)
-        try:
-            string_to_check.encode('ascii')
-            cleaned_string = str(string_to_check)
-        except Exception:
-            print("Non-ASCII characters in the string: " + string_to_check)
-            for i in string_to_check:
-                try:
-                    i.encode('ascii')
-                except Exception:
-                    print("Non-ASCII character: " + i)
-                    cleaned_string = cleaned_string.replace(i, ' ')
-        return cleaned_string
 
     def write_results(self):
         tmp = open(self.filename_prefix + "1_miner.txt","w+")
