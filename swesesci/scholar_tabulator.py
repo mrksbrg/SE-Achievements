@@ -26,6 +26,7 @@ class ScholarTabulator:
         self.sss_experts_practice = []
         self.sss_experts_economics = []
         self.sss_experts_comp = []
+        self.sss_test = []
         self.assign_expertise()
 
     def assign_expertise(self):
@@ -33,6 +34,9 @@ class ScholarTabulator:
             for knowl_area_id in range(len(scholar.swebok_badges)):
                 if scholar.swebok_badges[knowl_area_id] >= 1:
                     self.add_to_expert_lists(scholar, knowl_area_id)
+        # add all domain experts to common list
+        self.sss_test.append(self.sss_experts_re)
+        self.sss_test.append(self.sss_experts_design)
 
     def add_to_expert_lists(self, scholar, knowl_area_id):
         if scholar not in self.sss_experts:
@@ -187,5 +191,11 @@ class ScholarTabulator:
         template = env.get_template('yellow_pages_comp.html')
         output = template.render(sss_scholars=self.sss_experts_comp)
         tmp = open(self.filename_prefix + "3_tabulator_swebok-comp.html", "w+")
+        tmp.write(output)
+        tmp.close()
+
+        template = env.get_template('yellow_pages_raw.html')
+        output = template.render(sss_test=self.sss_test)
+        tmp = open(self.filename_prefix + "3_tabulator_swebok-raw.html", "w+")
         tmp.write(output)
         tmp.close()
