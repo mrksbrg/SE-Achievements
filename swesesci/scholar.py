@@ -24,10 +24,11 @@ class SSSScholar:
         self.nbr_first_sci = -1
 
         # SWEBOK Knowledge Areas
-        self.swebok_counters = [0] * 22
-        self.swebok_badges = [0] * 22
+        self.NBR_AREAS = 22
+        self.swebok_counters = [0] * self.NBR_AREAS
+        self.swebok_badges = [0] * self.NBR_AREAS
         self.swebok_string = ""
-        self.swebok_works = [""] * 22
+        self.swebok_works = [""] * self.NBR_AREAS
         self.swebok_re_string = ""
         self.swebok_design_string = ""
         self.swebok_constr_string = ""
@@ -68,10 +69,10 @@ class SSSScholar:
         self.sci_ratio = -1
         self.nbr_sci_publications = -1
         self.nbr_first_sci = -1
-        self.swebok_counters = [0] * 22
-        self.swebok_badges = [0] * 22
+        self.swebok_counters = [0] * self.NBR_AREAS
+        self.swebok_badges = [0] * self.NBR_AREAS
         self.swebok_string = ""
-        self.swebok_works = [""] * 22
+        self.swebok_works = [""] * self.NBR_AREAS
         self.swebok_re_string = ""
         self.swebok_design_string = ""
         self.swebok_constr_string = ""
@@ -247,7 +248,7 @@ class SSSScholar:
         self.signature_works = self.sci_publications_to_string()
 
     def badge_grader(self, number):
-        # 1 = Bronze, 3 = Silver, 5 = Gold
+        # 1 = Bronze, 3 = Silver, 5 = Gold, 10 = Platinum
         level = 0
         if number >= 1:
             level = 1
@@ -255,6 +256,8 @@ class SSSScholar:
                 level = 2
                 if number >= 5:
                     level = 3
+                    if number >= 10:
+                        level = 4
         return level
 
     def unlock_achievements(self):
