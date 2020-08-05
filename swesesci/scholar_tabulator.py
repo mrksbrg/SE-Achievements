@@ -12,7 +12,9 @@ class ScholarTabulator:
         self.filename_prefix = filename_prefix
         self.sss_scholars = sss_scholars
         self.sss_affiliations = sss_affiliations
-        self.sss_experts = []
+        self.sss_all_experts = []
+        self.sss_expert_per_swebok_ka = []
+
         self.sss_experts_re = []
         self.sss_experts_design = []
         self.sss_experts_constr = []
@@ -26,7 +28,6 @@ class ScholarTabulator:
         self.sss_experts_practice = []
         self.sss_experts_economics = []
         self.sss_experts_comp = []
-        self.sss_test = []
         self.assign_expertise()
 
     def assign_expertise(self):
@@ -35,12 +36,22 @@ class ScholarTabulator:
                 if scholar.swebok_badges[knowl_area_id] >= 1:
                     self.add_to_expert_lists(scholar, knowl_area_id)
         # add all domain experts to common list
-        self.sss_test.append(self.sss_experts_re)
-        self.sss_test.append(self.sss_experts_design)
+        self.sss_expert_per_swebok_ka.append(self.sss_experts_re)
+        self.sss_expert_per_swebok_ka.append(self.sss_experts_design)
+        self.sss_expert_per_swebok_ka.append(self.sss_experts_constr)
+        self.sss_expert_per_swebok_ka.append(self.sss_experts_maint)
+        self.sss_expert_per_swebok_ka.append(self.sss_experts_cm)
+        self.sss_expert_per_swebok_ka.append(self.sss_experts_mgmt)
+        self.sss_expert_per_swebok_ka.append(self.sss_experts_process)
+        self.sss_expert_per_swebok_ka.append(self.sss_experts_models)
+        self.sss_expert_per_swebok_ka.append(self.sss_experts_quality)
+        self.sss_expert_per_swebok_ka.append(self.sss_experts_practice)
+        self.sss_expert_per_swebok_ka.append(self.sss_experts_economics)
 
     def add_to_expert_lists(self, scholar, knowl_area_id):
-        if scholar not in self.sss_experts:
-            self.sss_experts.append(scholar)
+        print("Adding as expert: " + str(knowl_area_id))
+        if scholar not in self.sss_all_experts:
+            self.sss_all_experts.append(scholar)
         if knowl_area_id == 0:
             self.sss_experts_re.append(scholar)
         if knowl_area_id == 1:
@@ -110,9 +121,15 @@ class ScholarTabulator:
         tmp.close()
 
         # SWEBOK Knowledge Areas
-        template = env.get_template('SWEBOK_table.html')
-        output = template.render(sss_scholars=self.sss_experts)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok.html", "w+")
+        # template = env.get_template('SWEBOK_table.html')
+        # output = template.render(sss_scholars=self.sss_all_experts)
+        # tmp = open(self.filename_prefix + "3_tabulator_swebok.html", "w+")
+        # tmp.write(output)
+        # tmp.close()
+
+        template = env.get_template('yellow_pages_raw.html')
+        output = template.render(sss_scholars=self.sss_expert_per_swebok_ka)
+        tmp = open(self.filename_prefix + "3_tabulator_swebok-raw.html", "w+")
         tmp.write(output)
         tmp.close()
 
@@ -191,11 +208,5 @@ class ScholarTabulator:
         template = env.get_template('yellow_pages_comp.html')
         output = template.render(sss_scholars=self.sss_experts_comp)
         tmp = open(self.filename_prefix + "3_tabulator_swebok-comp.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_raw.html')
-        output = template.render(sss_test=self.sss_test)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-raw.html", "w+")
         tmp.write(output)
         tmp.close()
