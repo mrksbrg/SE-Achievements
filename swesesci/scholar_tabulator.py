@@ -110,7 +110,7 @@ class ScholarTabulator:
         tmp.close()
 
         # SWEBOK Knowledge Areas
-        template = env.get_template('yellow_pages.html')
+        template = env.get_template('SWEBOK_table.html')
         output = template.render(sss_scholars=self.sss_experts)
         tmp = open(self.filename_prefix + "3_tabulator_swebok.html", "w+")
         tmp.write(output)
