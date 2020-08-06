@@ -113,15 +113,15 @@ class SSSScholar:
                 # conference publication
                 tmp_work = str(publ.year) + ": " + publ.title + " (" + publ.booktitle + ") "
                 self.swebok_works[publ.knowl_area] += tmp_work
-                print(self.swebok_works[publ.knowl_area])
+                #print(self.swebok_works[publ.knowl_area])
                 self.add_to_swebok_string(tmp_work, publ.knowl_area)
             else:
                 # journal publication
                 tmp_work = str(publ.year) + ": " + publ.title + " (" + publ.journal + ") "
                 self.swebok_works[publ.knowl_area] += tmp_work
-                print(self.swebok_works[publ.knowl_area])
+                #print(self.swebok_works[publ.knowl_area])
                 self.add_to_swebok_string(tmp_work, publ.knowl_area)
-        print(self.swebok_counters)
+        #print(self.swebok_counters)
 
     # add to the string that Jinja uses
     def add_to_swebok_string(self, str, knowl_area_id):
