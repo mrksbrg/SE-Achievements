@@ -29,21 +29,23 @@ tr:hover {
 </style>
 
 <body>
-<table id="yellow_pages_comp" cellpadding="10">
-  <caption>SWEBOK Knowledge Area - Computing Fundamentals</caption>
+<table id="yellow_pages" cellpadding="10">
+  <caption>SWEBOK Knowledge Areas</caption>
   <tr>
     <th></th>
     <th onclick="sortTable(1)">Scholar</th>
     <th onclick="sortTable(2)">Affiliation</th>
-    <th onclick="sortTable(3)">Computing titles</th>
-    <th onclick="sortTable(4)">Apparent research interests</th>
+    <th onclick="sortTable(3)">SSS rating</th>
+    <th onclick="sortTable(4)">Knowledge Areas</th>
+    <th onclick="sortTable(5)">Apparent research interests</th>
   </tr>
   {% for value in sss_scholars  %}
   <tr>
     <td></td>
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
-    <td>{{ value.swebok_comp_string }}</td>
+    <td>{{ value.sss_rating }}</td>
+    <td>{{ value.swebok_string }}</td>
     <td>{{ value.research_interests_string }}</td>
   </tr>
   {% endfor %}
@@ -52,7 +54,7 @@ tr:hover {
 <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("yellow_pages_comp");
+  table = document.getElementById("yellow_pages");
   switching = true;
   // Set the sorting direction to ascending:
   dir = "asc";

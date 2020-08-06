@@ -12,9 +12,9 @@ class ScholarTabulator:
         self.filename_prefix = filename_prefix
         self.sss_scholars = sss_scholars
         self.sss_affiliations = sss_affiliations
-        self.sss_all_experts = []
-        self.sss_expert_per_swebok_ka = []
 
+        # SWEBOK Knowledge Areas
+        self.sss_all_experts = []
         self.sss_experts_re = []
         self.sss_experts_design = []
         self.sss_experts_constr = []
@@ -35,18 +35,6 @@ class ScholarTabulator:
             for knowl_area_id in range(len(scholar.swebok_badges)):
                 if scholar.swebok_badges[knowl_area_id] >= 1:
                     self.add_to_expert_lists(scholar, knowl_area_id)
-        # add all domain experts to common list
-        self.sss_expert_per_swebok_ka.append(self.sss_experts_re)
-        self.sss_expert_per_swebok_ka.append(self.sss_experts_design)
-        self.sss_expert_per_swebok_ka.append(self.sss_experts_constr)
-        self.sss_expert_per_swebok_ka.append(self.sss_experts_maint)
-        self.sss_expert_per_swebok_ka.append(self.sss_experts_cm)
-        self.sss_expert_per_swebok_ka.append(self.sss_experts_mgmt)
-        self.sss_expert_per_swebok_ka.append(self.sss_experts_process)
-        self.sss_expert_per_swebok_ka.append(self.sss_experts_models)
-        self.sss_expert_per_swebok_ka.append(self.sss_experts_quality)
-        self.sss_expert_per_swebok_ka.append(self.sss_experts_practice)
-        self.sss_expert_per_swebok_ka.append(self.sss_experts_economics)
 
     def add_to_expert_lists(self, scholar, knowl_area_id):
         print("Adding as expert: " + str(knowl_area_id))
@@ -121,92 +109,19 @@ class ScholarTabulator:
         tmp.close()
 
         # SWEBOK Knowledge Areas
-        # template = env.get_template('SWEBOK_table.html')
-        # output = template.render(sss_scholars=self.sss_all_experts)
-        # tmp = open(self.filename_prefix + "3_tabulator_swebok.html", "w+")
-        # tmp.write(output)
-        # tmp.close()
-
-        template = env.get_template('yellow_pages_raw.html')
-        output = template.render(sss_scholars=self.sss_expert_per_swebok_ka)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-raw.html", "w+")
+        template = env.get_template('SWEBOK_table.html')
+        output = template.render(sss_all_experts=self.sss_all_experts)
+        tmp = open(self.filename_prefix + "3_tabulator_swebok.html", "w+")
         tmp.write(output)
         tmp.close()
 
-        template = env.get_template('yellow_pages_re.html')
-        output = template.render(sss_scholars=self.sss_experts_re)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-re.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_design.html')
-        output = template.render(sss_scholars=self.sss_experts_design)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-design.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_constr.html')
-        output = template.render(sss_scholars=self.sss_experts_constr)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-constr.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_test.html')
-        output = template.render(sss_scholars=self.sss_experts_test)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-test.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_maint.html')
-        output = template.render(sss_scholars=self.sss_experts_maint)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-maint.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_cm.html')
-        output = template.render(sss_scholars=self.sss_experts_cm)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-cm.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_mgmt.html')
-        output = template.render(sss_scholars=self.sss_experts_mgmt)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-mgmt.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_process.html')
-        output = template.render(sss_scholars=self.sss_experts_process)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-process.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_models.html')
-        output = template.render(sss_scholars=self.sss_experts_models)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-models.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_quality.html')
-        output = template.render(sss_scholars=self.sss_experts_quality)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-quality.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_practice.html')
-        output = template.render(sss_scholars=self.sss_experts_practice)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-practice.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_economics.html')
-        output = template.render(sss_scholars=self.sss_experts_economics)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-economics.html", "w+")
-        tmp.write(output)
-        tmp.close()
-
-        template = env.get_template('yellow_pages_comp.html')
-        output = template.render(sss_scholars=self.sss_experts_comp)
-        tmp = open(self.filename_prefix + "3_tabulator_swebok-comp.html", "w+")
+        template = env.get_template('yellow_pages.html')
+        output = template.render(sss_re=self.sss_experts_re, sss_design=self.sss_experts_design,
+                                 sss_constr=self.sss_experts_constr, sss_test=self.sss_experts_test,
+                                 sss_maint=self.sss_experts_maint, sss_cm=self.sss_experts_cm,
+                                 sss_mgmt=self.sss_experts_mgmt, sss_process=self.sss_experts_process,
+                                 sss_models=self.sss_experts_models, sss_quality=self.sss_experts_quality,
+                                 sss_practice=self.sss_experts_practice, sss_economics=self.sss_experts_economics)
+        tmp = open(self.filename_prefix + "3_tabulator_yellow_pages.html", "w+")
         tmp.write(output)
         tmp.close()
