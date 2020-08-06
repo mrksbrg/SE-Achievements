@@ -4,7 +4,7 @@ class SSSPublication:
                 "Autom. Softw. Eng.", "Inf. Softw. Technol.", "Requir. Eng.", "Software and Systems Modeling",
                 "Softw. Qual. J.", "J. Syst. Softw.", "J. Softw. Evol. Process.", "Journal of Software Maintenance",
                 "J. Softw. Maintenance Res. Pract.", "Softw. Test. Verification Reliab.", "Softw. Pract. Exp.",
-                "IET Software", "International Journal of Software Engineering and Knowledge Engineering"]
+                "IET Software", "Int. J. Softw. Eng. Knowl. Eng."]
 
     # SWEBOK Knowledge Areas
     # -1 = Unclear
