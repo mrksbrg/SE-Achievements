@@ -27,9 +27,9 @@
     <th onclick="sortTable(3)">RE titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+  {% for value in sss_re %}
   <tr>
     <td></td>
-    {% for value in sss_re %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_re_string }}</td>
@@ -47,9 +47,9 @@
     <th onclick="sortTable(3)">Design titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+    {% for value in sss_design %}
   <tr>
     <td></td>
-    {% for value in sss_design %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_design_string }}</td>
@@ -67,9 +67,9 @@
     <th onclick="sortTable(3)">Construction titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+  {% for value in sss_constr %}
   <tr>
     <td></td>
-    {% for value in sss_constr %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_constr_string }}</td>
@@ -87,9 +87,9 @@
     <th onclick="sortTable(3)">Testing titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+  {% for value in sss_test %}
   <tr>
     <td></td>
-    {% for value in sss_test %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_test_string }}</td>
@@ -107,9 +107,9 @@
     <th onclick="sortTable(3)">Maintenance titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+  {% for value in sss_maint %}
   <tr>
     <td></td>
-    {% for value in sss_maint %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_maint_string }}</td>
@@ -127,9 +127,9 @@
     <th onclick="sortTable(3)">CM titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+  {% for value in sss_cm %}
   <tr>
     <td></td>
-    {% for value in sss_cm %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_cm_string }}</td>
@@ -147,9 +147,9 @@
     <th onclick="sortTable(3)">Management titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+  {% for value in sss_mgmt %}
   <tr>
     <td></td>
-    {% for value in sss_mgmt %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_mgmt_string }}</td>
@@ -167,9 +167,9 @@
     <th onclick="sortTable(3)">Process titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+  {% for value in sss_process %}
   <tr>
     <td></td>
-    {% for value in sss_process %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_process_string }}</td>
@@ -187,9 +187,9 @@
     <th onclick="sortTable(3)">Models and Methods titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+  {% for value in sss_models %}
   <tr>
     <td></td>
-    {% for value in sss_models %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_models_string }}</td>
@@ -207,9 +207,9 @@
     <th onclick="sortTable(3)">Quality titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+  {% for value in sss_quality %}
   <tr>
     <td></td>
-    {% for value in sss_quality %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_quality_string }}</td>
@@ -227,9 +227,9 @@
     <th onclick="sortTable(3)">Practice titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+  {% for value in sss_practice %}
   <tr>
     <td></td>
-    {% for value in sss_practice %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_practice_string }}</td>
@@ -247,9 +247,9 @@
     <th onclick="sortTable(3)">Economics titles</th>
     <th onclick="sortTable(4)">Apparent research interests</th>
   </tr>
+  {% for value in sss_economics %}
   <tr>
     <td></td>
-    {% for value in sss_economics %}
     <td>{{ value.name }}</td>
     <td>{{ value.affiliation }}</td>
     <td>{{ value.swebok_economics_string }}</td>
