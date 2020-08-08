@@ -2,9 +2,9 @@ class SSSPublication:
     
     sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM Trans. Softw. Eng. Methodol.",
                 "Autom. Softw. Eng.", "Inf. Softw. Technol.", "Requir. Eng.", "Software and Systems Modeling",
-                "Softw. Qual. J.", "J. Syst. Softw.", "J. Softw. Evol. Process.", "Journal of Software Maintenance",
-                "J. Softw. Maintenance Res. Pract.", "Softw. Test. Verification Reliab.", "Softw. Pract. Exp.",
-                "IET Software", "Int. J. Softw. Eng. Knowl. Eng."]
+                "Softw. Qual. J.", "J. Syst. Softw.", "J. Softw. Evol. Process.", "Softw. Process. Improv. Pract.",
+                "Journal of Software Maintenance", "J. Softw. Maintenance Res. Pract.", "Softw. Test. Verification Reliab.",
+                "Softw. Pract. Exp.", "IET Software", "Int. J. Softw. Eng. Knowl. Eng."]
 
     # SWEBOK Knowledge Areas
     # -1 = Unclear
@@ -30,7 +30,7 @@ class SSSPublication:
     mgmt_journal_list = ["MIS Quarterly"]
     # 7 = Software Engineering Process
     process_conf_list = ["ICSSP", "XP", "PROFES", "SPICE"]
-    process_journal_list = ["J. Softw. Evol. Process."]
+    process_journal_list = ["J. Softw. Evol. Process.", "Softw. Process. Improv. Pract."]
     # 8 = Software Engineering Models and Methods
     models_conf_list = ["MoDELS", "ER", "FormaliSE", "ISoLA"]
     models_journal_list = ["Software and Systems Modeling"]
