@@ -152,7 +152,7 @@ class SSSScholar:
         elif knowl_area_id == 12:
             self.swebok_comp_string += str
 
-    def get_nbr_main_confs(self):
+    def get_nbr_ICSE(self):
         nbr = 0
         for publ in self.publications:
             if publ.major_conf:
@@ -330,10 +330,10 @@ class SSSScholar:
             self.swebok_string += str(self.swebok_badges[21]) + "-Web, "
 
     def to_string(self):
-        return self.name + " (" + str(len(self.publications)) + " publications. SCI-ratio: " + str(round(self.sci_ratio, 2)) + " 1st-ratio: " + str(round(self.first_ratio, 2))  + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr main confs: " + str(self.get_nbr_main_confs()) + ")"
+        return self.name + " (" + str(len(self.publications)) + " publications. SCI-ratio: " + str(round(self.sci_ratio, 2)) + " 1st-ratio: " + str(round(self.first_ratio, 2)) + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr first ICSE: " + str(self.get_nbr_ICSE()) + ")"
     
     def to_csv_line(self):
-        return self.name + ";" + str(self.dblp_entries) + ";" + str(len(self.publications)) + ";" + str(self.sci_ratio) + ";" + str(self.first_ratio) + ";" + str(self.nbr_first_sci) + ";" + str(self.get_nbr_main_confs())
+        return self.name + ";" + str(self.dblp_entries) + ";" + str(len(self.publications)) + ";" + str(self.sci_ratio) + ";" + str(self.first_ratio) + ";" + str(self.nbr_first_sci) + ";" + str(self.get_nbr_ICSE())
     
     def research_interests_to_string(self):
         ''' Return a comma separated string by concatenating research interests. '''
