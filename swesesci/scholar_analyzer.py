@@ -66,7 +66,7 @@ class ScholarAnalyzer:
                                                           "ieee", "conference", "articles", 
                                                           "international", "cited", "towards",
                                                           "problems", "via", "ein", "von",
-                                                          "within", "much"])
+                                                          "within", "much", "two", "2002"])
 
         # Preprocessing of authors' titles
         for scholar, corpus in self.scholars_dict.items():
