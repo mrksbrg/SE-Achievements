@@ -72,7 +72,13 @@ class ScholarTabulator:
         )
 
         template = env.get_template('Swe-SE-SCI.html')
-        output = template.render(sss_scholars=self.sss_scholars, sss_affiliations=self.sss_affiliations)
+        output = template.render(sss_scholars=self.sss_scholars, sss_affiliations=self.sss_affiliations,
+                                 sss_re=self.sss_experts_re, sss_design=self.sss_experts_design,
+                                 sss_constr=self.sss_experts_constr, sss_test=self.sss_experts_test,
+                                 sss_maint=self.sss_experts_maint, sss_cm=self.sss_experts_cm,
+                                 sss_mgmt=self.sss_experts_mgmt, sss_process=self.sss_experts_process,
+                                 sss_models=self.sss_experts_models, sss_quality=self.sss_experts_quality,
+                                 sss_practice=self.sss_experts_practice, sss_economics=self.sss_experts_economics)
         tmp = open(self.filename_prefix + "3_tabulator_Swe-SE-SCI.html", "w+")
         tmp.write(output)
         tmp.close()

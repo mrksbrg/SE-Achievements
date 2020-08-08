@@ -79,6 +79,246 @@ tr:hover {
     {% endfor %}
 </table>
 
+<table id="yellow_pages_re" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Requirements</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">RE titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_re %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_re_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table id="yellow_pages_design" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Design</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">Design titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_design %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_design_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table id="yellow_pages_constr" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Construction</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">Construction titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_constr %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_constr_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table id="yellow_pages_test" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Testing</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">Testing titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_test %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_test_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table id="yellow_pages_maint" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Maintenance</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">Maintenance titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_maint %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_maint_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table id="yellow_pages_cm" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Configuration Management</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">CM titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_cm %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_cm_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table id="yellow_pages_mgmt" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Engineering Management</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">Management titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_mgmt %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_mgmt_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table id="yellow_pages_process" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Engineering Process</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">Process titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_process %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_process_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table id="yellow_pages_models" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Engineering Models and Methods</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">Models and Methods titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_models %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_models_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table id="yellow_pages_quality" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Quality</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">Quality titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_quality %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_quality_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table id="yellow_pages_practice" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Engineering Professional Practice</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">Practice titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_practice %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_practice_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table id="yellow_pages_economics" cellpadding="10">
+  <caption>SWEBOK Knowledge Area - Software Engineering Economics</caption>
+  <tr>
+    <th></th>
+    <th onclick="sortTable(1)">Scholar</th>
+    <th onclick="sortTable(2)">Affiliation</th>
+    <th onclick="sortTable(3)">Economics titles</th>
+    <th onclick="sortTable(4)">Apparent research interests</th>
+  </tr>
+  <tr>
+    {% for value in sss_economics %}
+    <td></td>
+    <td>{{ value.name }}</td>
+    <td>{{ value.affiliation }}</td>
+    <td>{{ value.swebok_economics_string }}</td>
+    <td>{{ value.research_interests_string }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
 <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
