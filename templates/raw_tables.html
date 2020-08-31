@@ -240,15 +240,13 @@
         <th></th>
         <th onclick="sortTableInterests(1)">Scholar</th>
         <th onclick="sortTableInterests(2)">Affiliation</th>
-        <th onclick="sortTableInterests(3)">SSS rating</th>
-        <th onclick="sortTableInterests(4)">Apparent research interests</th>
+        <th onclick="sortTableInterests(3)">Apparent research interests</th>
     </tr>
     {% for value in sss_scholars %}
     <tr>
         <td></td>
         <td>{{ value.name }}</td>
         <td>{{ value.affiliation }}</td>
-        <td>{{ value.sss_rating }}</td>
         <td>{{ value.research_interests_string }}</td>
     </tr>
     {% endfor %}
@@ -260,15 +258,13 @@
         <th></th>
         <th onclick="sortTableWorks(1)">Scholar</th>
         <th onclick="sortTableWorks(2)">Affiliation</th>
-        <th onclick="sortTableWorks(3)">SSS rating</th>
-        <th onclick="sortTableWorks(4)">Signature SSS works</th>
+        <th onclick="sortTableWorks(3)">Signature SSS works</th>
     </tr>
     {% for value in sss_scholars %}
     <tr>
         <td></td>
         <td>{{ value.name }}</td>
         <td>{{ value.affiliation }}</td>
-        <td>{{ value.sss_rating }}</td>
         <td>{{ value.signature_works }}</td>
     </tr>
     {% endfor %}
