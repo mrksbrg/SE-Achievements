@@ -32,14 +32,20 @@ class ScholarMiner:
                     if scholar.running_number == -1:
                         authors = search(scholar.name, -1)
                         search_res = authors[0]
+                        #print("if")
                     else:
                         authors = search(scholar.name, scholar.running_number)
+                        #print("Looking for: " + str(authors))
                         search_res = authors[0]
+                        print(search_res)
                 except:
                     print("ERROR: Invalid search result from DBLP. Waiting...")
                     self.clear_all_scholars()
                     time.sleep(5)
                     break
+
+                #print("Here")
+                #print(search_res)
 
                 dblp_entries = len(search_res.publications)
                 print("DBLP entries: ", dblp_entries)
