@@ -1,6 +1,6 @@
 class SSSPublication:
     
-    sci_list = ["IEEE Trans. Software Eng.", "Empirical Software Engineering", "ACM Trans. Softw. Eng. Methodol.",
+    sci_list = ["IEEE Trans. Software Eng.", "Empir. Softw. Eng.", "ACM Trans. Softw. Eng. Methodol.",
                 "Autom. Softw. Eng.", "Inf. Softw. Technol.", "Requir. Eng.", "Software and Systems Modeling",
                 "Softw. Qual. J.", "J. Syst. Softw.", "J. Softw. Evol. Process.", "Softw. Process. Improv. Pract.",
                 "Journal of Software Maintenance", "J. Softw. Maintenance Res. Pract.", "Softw. Test. Verification Reliab.",
