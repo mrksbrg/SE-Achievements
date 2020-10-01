@@ -54,8 +54,8 @@ if (len(sys.argv) == 1):
     # add_sss_scholars(big_names, "Misc.")
 
     rise_list = ["Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
-                  "Ana Magazinius", "Joakim Fröberg", "Thomas Olsson 0001", "Stefan Cedergren", "Stig Larsson 0002", "Jakob Axelsson",
-                 "Markus Bohlin", "Håkan Burden", "Peter Wallin", "Piotr Tomaszewski"]
+                  "Ana Magazinius", "Joakim Fröberg", "Stefan Cedergren", "Jakob Axelsson",
+                 "Markus Bohlin", "Håkan Burden", "Peter Wallin", "Piotr Tomaszewski", "Thomas Olsson 0001"] #"Stig Larsson 0002",
     add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
     lu_list = ["Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström", "Christin Lindholm", "Christoph Reichenbach", "Görel Hedin", "Martina Maggio"]
     add_sss_scholars(lu_list, "Lund University")
@@ -63,9 +63,10 @@ if (len(sys.argv) == 1):
                 "Mikael Svahnberg", "Darja Smite", "Michael Felderer", "Jürgen Börstler", "Emil Alégroth", "Ali Nauman", "Fabian Fagerholm", "Javier Gonzalez-Huerta", "Muhammad Usman",
                 "Davide Fucci", "Daniel Méndez Fernández", "Nauman Bin Ali", "Deepika Badampudi", "Emilia Mendes", "Ludwik Kuzniarz", "Lars Lundberg"]
     add_sss_scholars(bth_list, "Blekinge Institute of Technology")
-    gbg_list = ["Rogardt Heldal", "Kenneth Lind", "Patrizio Pelliccione", "Riccardo Scandariato", "Miroslaw Staron", "Jan-Philipp Steghöfer", "Christian Berger 0001", "Robert Feldt", "Richard Torkar", "Ivica Crnkovic",
+    gbg_list = ["Rogardt Heldal", "Kenneth Lind", "Patrizio Pelliccione", "Miroslaw Staron", "Jan-Philipp Steghöfer", "Robert Feldt", "Richard Torkar", "Ivica Crnkovic",
                      "Richard Berntsson-Svensson", "Francisco Gomes de Oliveira Neto", "Gregory Gay", "Michel Chaudron", "Jan Bosch", "Jennifer Horkoff",
-                     "Eric Knauss", "Thorsten Berger", "Gul Calikli", "Regina Hebig", "Philipp Leitner 0001", "Agneta Nilsson", "Imed Hammouda", "Birgit Penzenstadler", "Lars Pareto"]
+                     "Eric Knauss", "Thorsten Berger", "Gul Calikli", "Regina Hebig", "Agneta Nilsson", "Imed Hammouda", "Birgit Penzenstadler", "Lars Pareto",
+                     "Christian Berger", "Philipp Leitner"] #"Christian Berger 0001", "Philipp Leitner 0001" #defaulting to 0001 works
     add_sss_scholars(gbg_list, "Chalmers / Gothenburg University")
     kth_list = ["Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt", "Martin Törngren", "Hannes Holm", "Cyrille Artho", "Mira Kajko-Mattsson"]
     add_sss_scholars(kth_list, "KTH Royal Institute of Technology")
@@ -80,7 +81,8 @@ if (len(sys.argv) == 1):
     add_sss_scholars(mdh_list, "Mälardalen University")
     linne_list = ["Jesper Andersson", "Morgan Ericsson", "Narges Khakpour", "Danny Weyns", "Welf Löwe", "Francesco Flammini", "Francis Palma", "Andreas Kerren", "Rafael Messias Martins", "Anna Wingkvist", "Jonas Lundberg", "Mauro Caporuscio"]
     add_sss_scholars(linne_list, "Linneaus Univerity")
-    skovde_list = ["Björn Lundell", "Sten Andler", "Birgitta Lindström", "Henrik Gustavsson", "Jonas Gamalielsson", "Simon Butler"]
+    skovde_list = ["Björn Lundell", "Sten Andler", "Birgitta Lindström", "Henrik Gustavsson", "Jonas Gamalielsson",
+                   "Simon Butler", "Joeri van Laere", "Anne Persson", "Beatrice Alenljung", "Jeremy Rose"]
     add_sss_scholars(skovde_list, "Skövde University")
     karlstad_list = ["Sebastian Herold", "Bestoun S. Ahmed", "Martin Blom", "Muhammad Ovais Ahmad"]
     add_sss_scholars(karlstad_list, "Karlstad University")
