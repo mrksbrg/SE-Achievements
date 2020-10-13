@@ -68,7 +68,7 @@ if (len(sys.argv) == 1):
                      "Eric Knauss", "Thorsten Berger", "Gul Calikli", "Regina Hebig", "Agneta Nilsson", "Imed Hammouda", "Birgit Penzenstadler", "Lars Pareto",
                      "Christian Berger", "Philipp Leitner"] #"Christian Berger 0001", "Philipp Leitner 0001" #defaulting to 0001 works
     add_sss_scholars(gbg_list, "Chalmers / Gothenburg University")
-    kth_list = ["Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt", "Martin Törngren", "Hannes Holm", "Cyrille Artho", "Mira Kajko-Mattsson"]
+    kth_list = ["Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt", "Martin Törngren", "Hannes Holm", "Cyrille Artho", "Mira Kajko-Mattsson", "Philipp Haller", "David Broman", "Paris Carbone", "Elena Troubitsyna", "Richard Glassey", "Musard Balliu"]
     add_sss_scholars(kth_list, "KTH Royal Institute of Technology")
     su_list = ["Janis Stirna", "Jelena Zdravkovic"]
     add_sss_scholars(su_list, "Stockholm University")
