@@ -46,7 +46,7 @@ def add_sss_scholars(process_list, affiliation):
 if (len(sys.argv) == 1):
     # fast_list = ["Stefan Cedergren", "Joakim Fröberg", "Thomas Olsson 0001"]
     # add_sss_scholars(fast_list, "RISE")
-    # fast_list2 = ["Annabella Loconsole"]
+    # fast_list2 = ["Philipp Haller", "David Broman", "Paris Carbone", "Elena Troubitsyna", "Richard Glassey", "Musard Balliu"]
     # add_sss_scholars(fast_list2, "MAU")
     # bfast_list_3 = ["Danny Weyns"]
     # add_sss_scholars(fast_list_3, "Linköping University")
@@ -65,7 +65,7 @@ if (len(sys.argv) == 1):
     add_sss_scholars(bth_list, "Blekinge Institute of Technology")
     gbg_list = ["Rogardt Heldal", "Kenneth Lind", "Patrizio Pelliccione", "Miroslaw Staron", "Jan-Philipp Steghöfer", "Robert Feldt", "Richard Torkar", "Ivica Crnkovic",
                      "Richard Berntsson-Svensson", "Francisco Gomes de Oliveira Neto", "Gregory Gay", "Jan Bosch", "Jennifer Horkoff",
-                     "Eric Knauss", "Thorsten Berger", "Gul Calikli", "Regina Hebig", "Agneta Nilsson", "Imed Hammouda", "Birgit Penzenstadler", "Lars Pareto",
+                     "Eric Knauss", "Thorsten Berger", "Regina Hebig", "Agneta Nilsson", "Imed Hammouda", "Birgit Penzenstadler", "Lars Pareto",
                      "Christian Berger", "Philipp Leitner"] #"Christian Berger 0001", "Philipp Leitner 0001" #defaulting to 0001 works
     add_sss_scholars(gbg_list, "Chalmers / Gothenburg University")
     kth_list = ["Martin Monperrus", "Frederic Loiret", "Karl Meinke", "Benoit Baudry", "Pontus Johnson", "Robert Lagerström", "Mathias Ekstedt", "Martin Törngren", "Hannes Holm", "Cyrille Artho", "Mira Kajko-Mattsson", "Philipp Haller", "David Broman", "Paris Carbone", "Elena Troubitsyna", "Richard Glassey", "Musard Balliu"]
