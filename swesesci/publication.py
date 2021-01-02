@@ -33,7 +33,7 @@ class SSSPublication:
     process_journal_list = ["J. Softw. Evol. Process.", "Softw. Process. Improv. Pract."]
     # 8 = Software Engineering Models and Methods
     models_conf_list = ["MoDELS", "ER", "FormaliSE", "ISoLA"]
-    models_journal_list = ["Software and Systems Modeling"]
+    models_journal_list = ["Softw. Syst. Model."]
     # 9 = Software Quality
     quality_conf_list = ["QRS", "SAFECOMP", "ISSRE", "ARES", "HASE", "ICPE"]
     quality_journal_list = ["Softw. Qual. J.", "IEEE Trans. Reliab."]

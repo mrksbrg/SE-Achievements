@@ -70,7 +70,7 @@ class ScholarAnalyzer:
                                                           "first", "anforderungen", "ways",
                                                           "one", "two", "three", "four",
                                                           "five", "six", "seven", "eight",
-                                                          "nine", "ten"])
+                                                          "nine", "ten", "icse"])
 
         # Preprocessing of authors' titles
         for scholar, corpus in self.scholars_dict.items():

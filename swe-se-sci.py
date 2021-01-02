@@ -54,8 +54,8 @@ if (len(sys.argv) == 1):
     # add_sss_scholars(big_names, "Misc.")
 
     rise_list = ["Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
-                  "Ana Magazinius", "Joakim Fröberg", "Stefan Cedergren", "Jakob Axelsson",
-                 "Markus Bohlin", "Håkan Burden", "Peter Wallin", "Piotr Tomaszewski", "Thomas Olsson 0001"] #"Stig Larsson 0002",
+                  "Ana Magazinius", "Joakim Fröberg", "Stefan Cedergren", "Jakob Axelsson", "Ronald Jabangwe",
+                 "Håkan Burden", "Peter Wallin", "Piotr Tomaszewski", "Thomas Olsson 0001"] #"Stig Larsson 0002",
     add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
     lu_list = ["Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström", "Christin Lindholm", "Christoph Reichenbach", "Görel Hedin", "Martina Maggio"]
     add_sss_scholars(lu_list, "Lund University")
@@ -64,7 +64,7 @@ if (len(sys.argv) == 1):
                 "Davide Fucci", "Daniel Méndez Fernández", "Nauman Bin Ali", "Deepika Badampudi", "Emilia Mendes", "Ludwik Kuzniarz", "Lars Lundberg"]
     add_sss_scholars(bth_list, "Blekinge Institute of Technology")
     gbg_list = ["Rogardt Heldal", "Kenneth Lind", "Patrizio Pelliccione", "Miroslaw Staron", "Jan-Philipp Steghöfer", "Robert Feldt", "Richard Torkar", "Ivica Crnkovic",
-                     "Richard Berntsson-Svensson", "Francisco Gomes de Oliveira Neto", "Gregory Gay", "Jan Bosch", "Jennifer Horkoff",
+                     "Richard Berntsson-Svensson", "Francisco Gomes de Oliveira Neto", "Gregory Gay", "Jan Bosch", "Jennifer Horkoff", "John Hughes",
                      "Eric Knauss", "Thorsten Berger", "Regina Hebig", "Agneta Nilsson", "Imed Hammouda", "Birgit Penzenstadler", "Lars Pareto",
                      "Christian Berger", "Philipp Leitner"] #"Christian Berger 0001", "Philipp Leitner 0001" #defaulting to 0001 works
     add_sss_scholars(gbg_list, "Chalmers / Gothenburg University")
