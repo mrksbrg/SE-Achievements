@@ -1,5 +1,5 @@
 requests==2.22.0
-lxml==3.4.4
+lxml==4.6.2
 pytest==4.6.3
 pandas==0.24.2
 nltk>=3.4.5
