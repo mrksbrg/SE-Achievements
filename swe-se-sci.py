@@ -54,7 +54,7 @@ if (len(sys.argv) == 1):
     # add_sss_scholars(big_names, "Misc.")
 
     rise_list = ["Niklas Mellegård", "Efi Papatheocharous", "Mehrdad Saadatmand", "Pasqualina Potena", "Markus Borg", "Ulrik Franke",
-                  "Ana Magazinius", "Joakim Fröberg", "Stefan Cedergren", "Jakob Axelsson", "Ronald Jabangwe",
+                  "Ana Magazinius", "Jakob Axelsson", "Ronald Jabangwe",
                  "Håkan Burden", "Peter Wallin", "Piotr Tomaszewski", "Thomas Olsson 0001"] #"Stig Larsson 0002",
     add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
     lu_list = ["Per Runeson", "Björn Regnell", "Martin Höst", "Elizabeth Bjarnason", "Emelie Engström", "Christin Lindholm", "Christoph Reichenbach", "Görel Hedin", "Martina Maggio"]
