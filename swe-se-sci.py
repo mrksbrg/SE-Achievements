@@ -71,7 +71,7 @@ if (len(sys.argv) == 1):
     add_sss_scholars(kth_list, "KTH Royal Institute of Technology")
     su_list = ["Janis Stirna", "Jelena Zdravkovic"]
     add_sss_scholars(su_list, "Stockholm University")
-    malmo_list = ["Helena Holmström Olsson", "Annabella Loconsole", "Patrik Berander", "Carl Magnus Olsson", "Jeanette Eriksson", "Bahtijar Vogel"]
+    malmo_list = ["Helena Holmström Olsson", "Annabella Loconsole", "Patrik Berander", "Carl Magnus Olsson", "Jeanette Eriksson", "Bahtijar Vogel", "Hussan Munir"]
     add_sss_scholars(malmo_list, "Malmö University")
     linkoping_list = ["Kristian Sandahl", "Peter Fritzson", "Mariam Kamkar"]
     add_sss_scholars(linkoping_list, "Linköping University")
