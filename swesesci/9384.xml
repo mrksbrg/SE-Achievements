@@ -1,0 +1,1812 @@
+<?xml version="1.0"?>
+<dblpperson name="Markus Borg" pid="47/9384" n="112">
+<person key="homepages/47/9384" mdate="2021-04-28">
+<author pid="47/9384">Markus Borg</author>
+<url>http://mrksbrg.com/</url>
+<url>https://www.sics.se/people/markus-borg</url>
+<url>https://scholar.google.com/citations?user=VVBfGMYAAAAJ</url>
+<url>https://github.com/mrksbrg</url>
+<url>https://orcid.org/0000-0001-7879-4371</url>
+<url>https://www.wikidata.org/entity/Q57773704</url>
+<url>https://www.researcherid.com/rid/F-3609-2010</url>
+<url>https://publons.com/researcher/193377</url>
+<url>https://dl.acm.org/profile/81490647774</url>
+<note type="affiliation">RISE Research Institutes of Sweden AB, Lund, Sweden</note>
+</person>
+<r><article key="journals/infsof/HenrikssonBBTSE21" mdate="2021-01-07">
+<author pid="226/0101">Jens Henriksson</author>
+<author pid="98/4996-1">Christian Berger 0001</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="192/4731">Lars Tornberg</author>
+<author pid="237/9490">Sankar Raman Sathyamoorthy</author>
+<author pid="94/708">Cristofer Englund</author>
+<title>Performance analysis of out-of-distribution detection on trained neural networks.</title>
+<pages>106409</pages>
+<year>2021</year>
+<volume>130</volume>
+<journal>Inf. Softw. Technol.</journal>
+<ee>https://doi.org/10.1016/j.infsof.2020.106409</ee>
+<url>db/journals/infsof/infsof130.html#HenrikssonBBTSE21</url>
+</article>
+</r>
+<r><inproceedings key="conf/icst/BorgJAEHL21" mdate="2021-06-02">
+<author pid="47/9384">Markus Borg</author>
+<author pid="67/10438">Ronald Jabangwe</author>
+<author pid="274/2084">Simon &#197;berg</author>
+<author pid="286/8537">Arvid Ekblom</author>
+<author pid="274/1958">Ludwig Hedlund</author>
+<author pid="274/1995">August Lidfeldt</author>
+<title>Test Automation with Grad-CAM Heatmaps - A Future Pipe Segment in MLOps for Vision AI?</title>
+<pages>175-181</pages>
+<year>2021</year>
+<booktitle>ICST Workshops</booktitle>
+<ee>https://doi.org/10.1109/ICSTW52544.2021.00039</ee>
+<crossref>conf/icst/2021w</crossref>
+<url>db/conf/icst/icst2021w.html#BorgJAEHL21</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icst/VercammenDBC21" mdate="2021-06-02">
+<author pid="224/0227">Sten Vercammen</author>
+<author pid="d/SDemeyer">Serge Demeyer</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="293/9600">Robbe Claessens</author>
+<title>Flaky Mutants; Another Concern for Mutation Testing.</title>
+<pages>284-285</pages>
+<year>2021</year>
+<booktitle>ICST Workshops</booktitle>
+<ee>https://doi.org/10.1109/ICSTW52544.2021.00054</ee>
+<crossref>conf/icst/2021w</crossref>
+<url>db/conf/icst/icst2021w.html#VercammenDBC21</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icst/BorgANJS21" mdate="2021-06-07">
+<author pid="47/9384">Markus Borg</author>
+<author pid="184/8061">Raja Ben Abdessalem</author>
+<author pid="57/3937">Shiva Nejati</author>
+<author pid="281/7084">Fran&#231;ois-Xavier Jegeden</author>
+<author pid="118/8296">Donghwan Shin 0001</author>
+<title>Digital Twins Are Not Monozygotic - Cross-Replicating ADAS Testing in Two Industry-Grade Automotive Simulators.</title>
+<pages>383-393</pages>
+<year>2021</year>
+<booktitle>ICST</booktitle>
+<ee>https://doi.org/10.1109/ICST49551.2021.00050</ee>
+<crossref>conf/icst/2021</crossref>
+<url>db/conf/icst/icst2021.html#BorgANJS21</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/swqd/Borg21" mdate="2021-01-26">
+<author pid="47/9384">Markus Borg</author>
+<title>The AIQ Meta-Testbed: Pragmatically Bridging Academic AI Testing and Industrial Q Needs.</title>
+<pages>66-77</pages>
+<year>2021</year>
+<booktitle>SWQD</booktitle>
+<ee>https://doi.org/10.1007/978-3-030-65854-0_6</ee>
+<crossref>conf/swqd/2021</crossref>
+<url>db/conf/swqd/swqd2021.html#Borg21</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/xpu/TengstrandTBJ21" mdate="2021-06-16">
+<author pid="291/4379">Sara Nilsson Tengstrand</author>
+<author pid="75/5273">Piotr Tomaszewski</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="67/10438">Ronald Jabangwe</author>
+<title>Challenges of Adopting SAFe in the Banking Industry - A Study Two Years After Its Introduction.</title>
+<pages>157-171</pages>
+<year>2021</year>
+<booktitle>XP</booktitle>
+<ee>https://doi.org/10.1007/978-3-030-78098-2_10</ee>
+<crossref>conf/xpu/2021</crossref>
+<url>db/conf/xpu/xp2021.html#TengstrandTBJ21</url>
+</inproceedings>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-2103-01837" mdate="2021-03-04">
+<author pid="47/9384">Markus Borg</author>
+<author pid="67/10438">Ronald Jabangwe</author>
+<author pid="274/2084">Simon &#197;berg</author>
+<author pid="286/8537">Arvid Ekblom</author>
+<author pid="274/1958">Ludwig Hedlund</author>
+<author pid="274/1995">August Lidfeldt</author>
+<title>Test Automation with Grad-CAM Heatmaps - A Future Pipe Segment in MLOps for Vision AI?</title>
+<year>2021</year>
+<volume>abs/2103.01837</volume>
+<journal>CoRR</journal>
+<ee type="oa">https://arxiv.org/abs/2103.01837</ee>
+<url>db/journals/corr/corr2103.html#abs-2103-01837</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-2103-09051" mdate="2021-03-23">
+<author pid="47/9384">Markus Borg</author>
+<author pid="288/0469">Joshua Bronson</author>
+<author pid="288/0375">Linus Christensson</author>
+<author pid="50/6540">Fredrik Olsson</author>
+<author pid="287/9280">Olof Lennartsson</author>
+<author pid="287/9594">Elias Sonnsj&#246;</author>
+<author pid="288/0046">Hamid Ebabi</author>
+<author pid="287/9193">Martin Karsberg</author>
+<title>Exploring the Assessment List for Trustworthy AI in the Context of Advanced Driver-Assistance Systems.</title>
+<year>2021</year>
+<volume>abs/2103.09051</volume>
+<journal>CoRR</journal>
+<ee type="oa">https://arxiv.org/abs/2103.09051</ee>
+<url>db/journals/corr/corr2103.html#abs-2103-09051</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-2103-15580" mdate="2021-04-07">
+<author pid="226/0101">Jens Henriksson</author>
+<author pid="98/4996-1">Christian Berger 0001</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="192/4731">Lars Tornberg</author>
+<author pid="237/9490">Sankar Raman Sathyamoorthy</author>
+<author pid="94/708">Cristofer Englund</author>
+<title>Performance Analysis of Out-of-Distribution Detection on Various Trained Neural Networks.</title>
+<year>2021</year>
+<volume>abs/2103.15580</volume>
+<journal>CoRR</journal>
+<ee type="oa">https://arxiv.org/abs/2103.15580</ee>
+<url>db/journals/corr/corr2103.html#abs-2103-15580</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-2104-12893" mdate="2021-05-03">
+<author pid="195/2000">Mahshid Helali Moghadam</author>
+<author pid="271/0941">Golrokh Hamidi</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="14/9944">Mehrdad Saadatmand</author>
+<author pid="87/6323">Markus Bohlin</author>
+<author pid="11/65">Bj&#246;rn Lisper</author>
+<author pid="49/2251">Pasqualina Potena</author>
+<title>Performance Testing Using a Smart Reinforcement Learning-Driven Test Agent.</title>
+<year>2021</year>
+<volume>abs/2104.12893</volume>
+<journal>CoRR</journal>
+<ee type="oa">https://arxiv.org/abs/2104.12893</ee>
+<url>db/journals/corr/corr2104.html#abs-2104-12893</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-2104-13992" mdate="2021-05-04">
+<author pid="291/4379">Sara Nilsson Tengstrand</author>
+<author pid="75/5273">Piotr Tomaszewski</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="67/10438">Ronald Jabangwe</author>
+<title>Challenges of Adopting SAFe in the Banking Industry - A Study Two Years after its Introduction.</title>
+<year>2021</year>
+<volume>abs/2104.13992</volume>
+<journal>CoRR</journal>
+<ee type="oa">https://arxiv.org/abs/2104.13992</ee>
+<url>db/journals/corr/corr2104.html#abs-2104-13992</url>
+</article>
+</r>
+<r><article key="journals/ese/GarousiBO20" mdate="2021-05-14">
+<author orcid="0000-0001-6590-7576" pid="88/1884">Vahid Garousi</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="49/2801">Markku Oivo</author>
+<title>Practical relevance of software engineering research: synthesizing the community's voice.</title>
+<pages>1687-1754</pages>
+<year>2020</year>
+<volume>25</volume>
+<journal>Empir. Softw. Eng.</journal>
+<number>3</number>
+<ee type="oa">https://doi.org/10.1007/s10664-020-09803-0</ee>
+<url>db/journals/ese/ese25.html#GarousiBO20</url>
+</article>
+</r>
+<r><article key="journals/sqj/ChatzipetrouPWB20" mdate="2021-05-14">
+<author orcid="0000-0002-0311-1502" pid="09/10404">Panagiota Chatzipetrou</author>
+<author pid="76/302">Efi Papatheocharous</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="133/4686">Emil Al&#233;groth</author>
+<author pid="82/3504">Tony Gorschek</author>
+<title>Component attributes and their importance in decisions and component selection.</title>
+<pages>567-593</pages>
+<year>2020</year>
+<volume>28</volume>
+<journal>Softw. Qual. J.</journal>
+<number>2</number>
+<ee type="oa">https://doi.org/10.1007/s11219-019-09465-2</ee>
+<url>db/journals/sqj/sqj28.html#ChatzipetrouPWB20</url>
+</article>
+</r>
+<r><article key="journals/tciaig/BorgGMOS20" mdate="2020-10-26">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="88/1884">Vahid Garousi</author>
+<author pid="22/8904">Anas Mahmoud</author>
+<author pid="31/5587-1">Thomas Olsson 0001</author>
+<author pid="239/4301">Oskar St&#229;lberg</author>
+<title>Video Game Development in a Rush: A Survey of the Global Game Jam Participants.</title>
+<pages>246-259</pages>
+<year>2020</year>
+<volume>12</volume>
+<journal>IEEE Trans. Games</journal>
+<number>3</number>
+<ee>https://doi.org/10.1109/TG.2019.2910248</ee>
+<url>db/journals/tciaig/tciaig12.html#BorgGMOS20</url>
+</article>
+</r>
+<r><inproceedings key="conf/csee/Borg20" mdate="2020-11-25">
+<author pid="47/9384">Markus Borg</author>
+<title>Making Lab Sessions Mandatory - on Student Work Distribution in a Gamified Project Course on Market-Driven Software Engineering.</title>
+<pages>1-10</pages>
+<year>2020</year>
+<booktitle>CSEE&#38;T</booktitle>
+<ee>https://doi.org/10.1109/CSEET49119.2020.9206218</ee>
+<crossref>conf/csee/2020</crossref>
+<url>db/conf/csee/csee2020.html#Borg20</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icse/Borg20" mdate="2020-12-07">
+<author pid="47/9384">Markus Borg</author>
+<title>Do preparatory programming lab sessions contribute to even work distribution in student teams?</title>
+<pages>254-255</pages>
+<year>2020</year>
+<booktitle>ICSE (Companion Volume)</booktitle>
+<ee>https://doi.org/10.1145/3377812.3390893</ee>
+<ee>https://ieeexplore.ieee.org/document/9270330</ee>
+<crossref>conf/icse/2020c</crossref>
+<url>db/conf/icse/icse2020c.html#Borg20</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icse/BorgW0FA20" mdate="2020-10-16">
+<author pid="47/9384">Markus Borg</author>
+<author pid="266/1545">Joakim Wernberg</author>
+<author pid="31/5587-1">Thomas Olsson 0001</author>
+<author pid="71/3754">Ulrik Franke</author>
+<author pid="38/439">Martin Andersson</author>
+<title>Illuminating a Blind Spot in Digitalization - Software Development in Sweden's Private and Public Sector.</title>
+<pages>299-302</pages>
+<year>2020</year>
+<booktitle>ICSE (Workshops)</booktitle>
+<ee>https://doi.org/10.1145/3387940.3392213</ee>
+<crossref>conf/icse/2020w</crossref>
+<url>db/conf/icse/icse2020w.html#BorgW0FA20</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icst/MoghadamSBBL20" mdate="2020-08-12">
+<author pid="195/2000">Mahshid Helali Moghadam</author>
+<author pid="14/9944">Mehrdad Saadatmand</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="87/6323">Markus Bohlin</author>
+<author pid="11/65">Bj&#246;rn Lisper</author>
+<title>Poster: Performance Testing Driven by Reinforcement Learning.</title>
+<pages>402-405</pages>
+<year>2020</year>
+<booktitle>ICST</booktitle>
+<ee>https://doi.org/10.1109/ICST46399.2020.00048</ee>
+<crossref>conf/icst/2020</crossref>
+<url>db/conf/icst/icst2020.html#MoghadamSBBL20</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/iot/LidfeldtIHABL20" mdate="2020-10-23">
+<author pid="274/1995">August Lidfeldt</author>
+<author pid="274/1889">Daniel Isaksson</author>
+<author pid="274/1958">Ludwig Hedlund</author>
+<author pid="274/2084">Simon &#197;berg</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="60/5665">Erik Larsson</author>
+<title>Enabling Image Recognition on Constrained Devices Using Neural Network Pruning and a CycleGAN.</title>
+<pages>10:1-10:14</pages>
+<year>2020</year>
+<booktitle>IOT Companion</booktitle>
+<ee>https://doi.org/10.1145/3423423.3423437</ee>
+<crossref>conf/iot/2020c</crossref>
+<url>db/conf/iot/iot2020c.html#LidfeldtIHABL20</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/refsq/BorgG20" mdate="2020-03-31">
+<author pid="47/9384">Markus Borg</author>
+<author pid="160/0919">Eduard C. Groen</author>
+<title>Preface: REFSQ 2020 Posters and Tools Track.</title>
+<year>2020</year>
+<booktitle>REFSQ Workshops</booktitle>
+<ee type="oa">http://ceur-ws.org/Vol-2584/PT-preface.pdf</ee>
+<crossref>conf/refsq/2020w</crossref>
+<url>db/conf/refsq/refsq2020w.html#BorgG20</url>
+</inproceedings>
+</r>
+<r><proceedings key="conf/refsq/2020w" mdate="2020-03-31">
+<editor pid="25/6367">Mehrdad Sabetzadeh</editor>
+<editor pid="19/8725">Andreas Vogelsang</editor>
+<editor pid="146/0408">Sallam Abualhaija</editor>
+<editor pid="47/9384">Markus Borg</editor>
+<editor pid="00/203">Fabiano Dalpiaz</editor>
+<editor pid="17/3761">Maya Daneva</editor>
+<editor pid="48/6304">Nelly Condori-Fern&#225;ndez</editor>
+<editor pid="f/XavierFranch">Xavier Franch</editor>
+<editor pid="70/9016">Davide Fucci</editor>
+<editor pid="g/VincenzoGervasi">Vincenzo Gervasi</editor>
+<editor pid="160/0919">Eduard C. Groen</editor>
+<editor pid="75/5043">Renata S. S. Guizzardi</editor>
+<editor pid="24/3228">Andrea Herrmann</editor>
+<editor pid="92/5983">Jennifer Horkoff</editor>
+<editor pid="89/5557">Luisa Mich</editor>
+<editor pid="16/4754">Anna Perini</editor>
+<editor pid="53/5222">Angelo Susi</editor>
+<title>Joint Proceedings of REFSQ-2020 Workshops, Doctoral Symposium, Live Studies Track, and Poster Track co-located with the 26th International Conference on Requirements Engineering: Foundation for Software Quality (REFSQ 2020), Pisa, Italy, March 24, 2020.</title>
+<booktitle>REFSQ Workshops</booktitle>
+<publisher>CEUR-WS.org</publisher>
+<series href="db/series/ceurws/index.html">CEUR Workshop Proceedings</series>
+<volume>2584</volume>
+<year>2020</year>
+<ee type="oa">http://ceur-ws.org/Vol-2584</ee>
+<ee>https://nbn-resolving.org/urn:nbn:de:0074-2584-1</ee>
+<url>db/conf/refsq/refsq2020w.html</url>
+</proceedings>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-2005-12607" mdate="2020-05-28">
+<author pid="47/9384">Markus Borg</author>
+<author pid="266/1545">Joakim Wernberg</author>
+<author pid="31/5587-1">Thomas Olsson 0001</author>
+<author pid="71/3754">Ulrik Franke</author>
+<author pid="38/439">Martin Andersson</author>
+<title>Illuminating a Blind Spot in Digitalization - Software Development in Sweden's Private and Public Sector.</title>
+<year>2020</year>
+<volume>abs/2005.12607</volume>
+<journal>CoRR</journal>
+<ee type="oa">https://arxiv.org/abs/2005.12607</ee>
+<url>db/journals/corr/corr2005.html#abs-2005-12607</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-2005-13496" mdate="2020-05-28">
+<author pid="47/9384">Markus Borg</author>
+<title>Making Lab Sessions Mandatory - On Student Work Distribution in a Gamified Project Course on Market-Driven Software Engineering.</title>
+<year>2020</year>
+<volume>abs/2005.13496</volume>
+<journal>CoRR</journal>
+<ee type="oa">https://arxiv.org/abs/2005.13496</ee>
+<url>db/journals/corr/corr2005.html#abs-2005-13496</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-2009-05260" mdate="2020-09-17">
+<author pid="47/9384">Markus Borg</author>
+<title>The AIQ Meta-Testbed: Pragmatically Bridging Academic AI Testing and Industrial Q Needs.</title>
+<year>2020</year>
+<volume>abs/2009.05260</volume>
+<journal>CoRR</journal>
+<ee type="oa">https://arxiv.org/abs/2009.05260</ee>
+<url>db/journals/corr/corr2009.html#abs-2009-05260</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-2009-05300" mdate="2020-10-23">
+<author pid="274/1995">August Lidfeldt</author>
+<author pid="274/1889">Daniel Isaksson</author>
+<author pid="274/1958">Ludwig Hedlund</author>
+<author pid="274/2084">Simon &#197;berg</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="60/5665">Erik Larsson</author>
+<title>Enabling Image Recognition on Constrained Devices Using Neural Network Pruning and a CycleGAN.</title>
+<year>2020</year>
+<volume>abs/2009.05300</volume>
+<journal>CoRR</journal>
+<ee type="oa">https://arxiv.org/abs/2009.05300</ee>
+<url>db/journals/corr/corr2009.html#abs-2009-05300</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-2012-06822" mdate="2021-06-02">
+<author pid="47/9384">Markus Borg</author>
+<author pid="184/8061">Raja Ben Abdessalem</author>
+<author pid="57/3937">Shiva Nejati</author>
+<author pid="281/7084">Fran&#231;ois-Xavier Jegeden</author>
+<author pid="118/8296">Donghwan Shin 0001</author>
+<title>Digital Twins Are Not Monozygotic - Cross-Replicating ADAS Testing in Two Industry-Grade Automotive Simulators.</title>
+<year>2020</year>
+<volume>abs/2012.06822</volume>
+<journal>CoRR</journal>
+<ee type="oa">https://arxiv.org/abs/2012.06822</ee>
+<url>db/journals/corr/corr2012.html#abs-2012-06822</url>
+</article>
+</r>
+<r><article key="journals/infsof/BorgCWAGPSA19" mdate="2020-02-20">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0002-0311-1502" pid="09/10404">Panagiota Chatzipetrou</author>
+<author orcid="0000-0003-3567-9300" pid="86/2856">Krzysztof Wnuk</author>
+<author pid="133/4686">Emil Al&#233;groth</author>
+<author pid="82/3504">Tony Gorschek</author>
+<author pid="76/302">Efi Papatheocharous</author>
+<author pid="93/5025">Syed Muhammad Ali Shah</author>
+<author pid="50/6797">Jakob Axelsson</author>
+<title>Selecting component sourcing options: A survey of software engineering's broader make-or-buy decisions.</title>
+<pages>18-34</pages>
+<year>2019</year>
+<volume>112</volume>
+<journal>Inf. Softw. Technol.</journal>
+<ee>https://doi.org/10.1016/j.infsof.2019.03.015</ee>
+<url>db/journals/infsof/infsof112.html#BorgCWAGPSA19</url>
+</article>
+</r>
+<r><article key="journals/sigsoft/Unterkalmsteiner19" mdate="2020-09-17">
+<author pid="08/8212">Michael Unterkalmsteiner</author>
+<author pid="51/8403">Tingting Yu</author>
+<author pid="39/7539">Gregory Gay</author>
+<author pid="19/1459">Elizabeth Bjarnason</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="49/2990">Michael Felderer</author>
+<title>Summary of the 5th International Workshop on Requirements Engineering and Testing (RET 2018).</title>
+<pages>31-34</pages>
+<year>2019</year>
+<volume>44</volume>
+<journal>ACM SIGSOFT Softw. Eng. Notes</journal>
+<number>1</number>
+<ee>https://doi.org/10.1145/3310013.3310037</ee>
+<url>db/journals/sigsoft/sigsoft44.html#Unterkalmsteiner19</url>
+</article>
+</r>
+<r><article key="journals/software/TrubianiJCSJB19" mdate="2020-06-15">
+<author orcid="0000-0002-7675-6942" pid="05/410">Catia Trubiani</author>
+<author orcid="0000-0002-9342-0703" pid="57/2301">Pooyan Jamshidi</author>
+<author pid="150/6416">J&#252;rgen Cito</author>
+<author pid="96/7305">Weiyi Shang</author>
+<author pid="50/23">Zhen Ming Jiang</author>
+<author pid="47/9384">Markus Borg</author>
+<title>Performance Issues? Hey DevOps, Mind the Uncertainty.</title>
+<pages>110-117</pages>
+<year>2019</year>
+<volume>36</volume>
+<journal>IEEE Softw.</journal>
+<number>2</number>
+<ee>https://doi.org/10.1109/MS.2018.2875989</ee>
+<url>db/journals/software/software36.html#TrubianiJCSJB19</url>
+</article>
+</r>
+<r><inproceedings key="conf/aitest/Henriksson0BTES19" mdate="2019-05-22">
+<author pid="226/0101">Jens Henriksson</author>
+<author pid="98/4996-1">Christian Berger 0001</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="192/4731">Lars Tornberg</author>
+<author pid="94/708">Cristofer Englund</author>
+<author pid="237/9490">Sankar Raman Sathyamoorthy</author>
+<author pid="33/2715">Stig Ursing</author>
+<title>Towards Structured Evaluation of Deep Neural Network Supervisors.</title>
+<pages>27-34</pages>
+<year>2019</year>
+<booktitle>AITest</booktitle>
+<ee>https://doi.org/10.1109/AITest.2019.00-12</ee>
+<crossref>conf/aitest/2019</crossref>
+<url>db/conf/aitest/aitest2019.html#Henriksson0BTES19</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/enase/WnukBG19" mdate="2019-06-06">
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="82/3504">Tony Gorschek</author>
+<title>Towards New Ways of Evaluating Methods of Supporting Requirements Management and Traceability using Signal-to-Noise Ratio.</title>
+<pages>330-339</pages>
+<year>2019</year>
+<booktitle>ENASE</booktitle>
+<ee>https://doi.org/10.5220/0007717203300339</ee>
+<crossref>conf/enase/2019</crossref>
+<url>db/conf/enase/enase2019.html#WnukBG19</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/euromicro/Henriksson0BTSE19" mdate="2019-11-25">
+<author pid="226/0101">Jens Henriksson</author>
+<author pid="98/4996-1">Christian Berger 0001</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="192/4731">Lars Tornberg</author>
+<author pid="237/9490">Sankar Raman Sathyamoorthy</author>
+<author pid="94/708">Cristofer Englund</author>
+<title>Performance Analysis of Out-of-Distribution Detection on Various Trained Neural Networks.</title>
+<pages>113-120</pages>
+<year>2019</year>
+<booktitle>SEAA</booktitle>
+<ee>https://doi.org/10.1109/SEAA.2019.00026</ee>
+<crossref>conf/euromicro/2019</crossref>
+<url>db/conf/euromicro/euromicro2019.html#Henriksson0BTSE19</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/euromicro/0001HHFB19" mdate="2019-11-25">
+<author pid="31/5587-1">Thomas Olsson 0001</author>
+<author pid="10/6874">Martin Hell</author>
+<author pid="07/6594">Martin H&#246;st</author>
+<author pid="71/3754">Ulrik Franke</author>
+<author pid="47/9384">Markus Borg</author>
+<title>Sharing of Vulnerability Information Among Companies - A Survey of Swedish Companies.</title>
+<pages>284-291</pages>
+<year>2019</year>
+<booktitle>SEAA</booktitle>
+<ee>https://doi.org/10.1109/SEAA.2019.00051</ee>
+<crossref>conf/euromicro/2019</crossref>
+<url>db/conf/euromicro/euromicro2019.html#0001HHFB19</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icst/MoghadamSBBL19" mdate="2019-06-11">
+<author pid="195/2000">Mahshid Helali Moghadam</author>
+<author pid="14/9944">Mehrdad Saadatmand</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="87/6323">Markus Bohlin</author>
+<author pid="11/65">Bj&#246;rn Lisper</author>
+<title>Machine Learning to Guide Performance Testing: An Autonomous Test Framework.</title>
+<pages>164-167</pages>
+<year>2019</year>
+<booktitle>ICST Workshops</booktitle>
+<ee>https://doi.org/10.1109/ICSTW.2019.00046</ee>
+<crossref>conf/icst/2019w</crossref>
+<url>db/conf/icst/icstw2019.html#MoghadamSBBL19</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/re/VogelsangB19" mdate="2020-01-07">
+<author pid="19/8725">Andreas Vogelsang</author>
+<author pid="47/9384">Markus Borg</author>
+<title>Requirements Engineering for Machine Learning: Perspectives from Data Scientists.</title>
+<pages>245-251</pages>
+<year>2019</year>
+<booktitle>RE Workshops</booktitle>
+<ee>https://doi.org/10.1109/REW.2019.00050</ee>
+<crossref>conf/re/2019w</crossref>
+<url>db/conf/re/re2019w.html#VogelsangB19</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/sigsoft/BorgSBH19" mdate="2019-08-27">
+<author pid="47/9384">Markus Borg</author>
+<author pid="237/9584">Oscar Svensson</author>
+<author pid="237/9656">Kristian Berg</author>
+<author pid="152/9960">Daniel Hansson</author>
+<title>SZZ unleashed: an open implementation of the SZZ algorithm - featuring example usage in a study of just-in-time bug prediction for the Jenkins project.</title>
+<pages>7-12</pages>
+<year>2019</year>
+<booktitle>MaLTeSQuE@ESEC/SIGSOFT FSE</booktitle>
+<ee>https://doi.org/10.1145/3340482.3342742</ee>
+<crossref>conf/sigsoft/2019maltesque</crossref>
+<url>db/conf/sigsoft/maltesque2019.html#BorgSBH19</url>
+</inproceedings>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-1903-01263" mdate="2019-04-01">
+<author pid="226/0101">Jens Henriksson</author>
+<author pid="98/4996-1">Christian Berger 0001</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="192/4731">Lars Tornberg</author>
+<author pid="94/708">Cristofer Englund</author>
+<author pid="237/9490">Sankar Raman Sathyamoorthy</author>
+<author pid="33/2715">Stig Ursing</author>
+<title>Towards Structured Evaluation of Deep Neural Network Supervisors.</title>
+<year>2019</year>
+<volume>abs/1903.01263</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1903.01263</ee>
+<url>db/journals/corr/corr1903.html#abs-1903-01263</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-1903-01742" mdate="2019-03-30">
+<author pid="47/9384">Markus Borg</author>
+<author pid="237/9584">Oscar Svensson</author>
+<author pid="237/9656">Kristian Berg</author>
+<author pid="152/9960">Daniel Hansson</author>
+<title>SZZ Unleashed: An Open Implementation of the SZZ Algorithm - Featuring Example Usage in a Study of Just-in-Time Bug Prediction for the Jenkins Project.</title>
+<year>2019</year>
+<volume>abs/1903.01742</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1903.01742</ee>
+<url>db/journals/corr/corr1903.html#abs-1903-01742</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-1904-00462" mdate="2019-04-24">
+<author pid="47/9384">Markus Borg</author>
+<author pid="88/1884">Vahid Garousi</author>
+<author pid="22/8904">Anas Mahmoud</author>
+<author pid="31/5587-1">Thomas Olsson 0001</author>
+<author pid="239/4301">Oskar St&#229;lberg</author>
+<title>Video Game Development in a Rush: A Survey of the Global Game Jam Participants.</title>
+<year>2019</year>
+<volume>abs/1904.00462</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1904.00462</ee>
+<url>db/journals/corr/corr1904.html#abs-1904-00462</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-1906-04424" mdate="2019-06-14">
+<author pid="31/5587-1">Thomas Olsson 0001</author>
+<author pid="10/6874">Martin Hell</author>
+<author pid="07/6594">Martin H&#246;st</author>
+<author pid="71/3754">Ulrik Franke</author>
+<author pid="47/9384">Markus Borg</author>
+<title>Sharing of vulnerability information among companies - a survey of Swedish companies.</title>
+<year>2019</year>
+<volume>abs/1906.04424</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1906.04424</ee>
+<url>db/journals/corr/corr1906.html#abs-1906-04424</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-1908-04674" mdate="2019-08-19">
+<author pid="19/8725">Andreas Vogelsang</author>
+<author pid="47/9384">Markus Borg</author>
+<title>Requirements Engineering for Machine Learning: Perspectives from Data Scientists.</title>
+<year>2019</year>
+<volume>abs/1908.04674</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1908.04674</ee>
+<url>db/journals/corr/corr1908.html#abs-1908-04674</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-1908-06900" mdate="2019-08-26">
+<author pid="195/2000">Mahshid Helali Moghadam</author>
+<author pid="14/9944">Mehrdad Saadatmand</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="87/6323">Markus Bohlin</author>
+<author pid="11/65">Bj&#246;rn Lisper</author>
+<title>An Autonomous Performance Testing Framework using Self-Adaptive Fuzzy Reinforcement Learning.</title>
+<year>2019</year>
+<volume>abs/1908.06900</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1908.06900</ee>
+<url>db/journals/corr/corr1908.html#abs-1908-06900</url>
+</article>
+</r>
+<r><article key="journals/sigsoft/BorgCDE18" mdate="2020-09-17">
+<author pid="47/9384">Markus Borg</author>
+<author pid="65/1332">Adnan Causevic</author>
+<author pid="d/SDemeyer">Serge Demeyer</author>
+<author pid="71/5135">Sigrid Eldh</author>
+<title>Summary of the 1st IEEE Workshop on the Next Level of Test Automation (NEXTA 2018).</title>
+<pages>36-38</pages>
+<year>2018</year>
+<volume>43</volume>
+<journal>ACM SIGSOFT Softw. Eng. Notes</journal>
+<number>4</number>
+<ee>https://doi.org/10.1145/3282517.3302399</ee>
+<url>db/journals/sigsoft/sigsoft43.html#BorgCDE18</url>
+</article>
+</r>
+<r><article key="journals/sigsoft/BorgCDE18a" mdate="2020-09-17">
+<author pid="47/9384">Markus Borg</author>
+<author pid="65/1332">Adnan Causevic</author>
+<author pid="d/SDemeyer">Serge Demeyer</author>
+<author pid="71/5135">Sigrid Eldh</author>
+<title>Summary of the 1st IEEE Workshop on the Next Level of Test Automation (NEXTA 2018).</title>
+<pages>53</pages>
+<year>2018</year>
+<volume>43</volume>
+<journal>ACM SIGSOFT Softw. Eng. Notes</journal>
+<number>4</number>
+<ee>https://doi.org/10.1145/3282517.3282540</ee>
+<url>db/journals/sigsoft/sigsoft43.html#BorgCDE18a</url>
+</article>
+</r>
+<r><inproceedings key="conf/esem/VercammenDBE18" mdate="2019-09-25">
+<author pid="224/0227">Sten Vercammen</author>
+<author orcid="0000-0002-4463-2945" pid="d/SDemeyer">Serge Demeyer</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="71/5135">Sigrid Eldh</author>
+<title>Speeding up mutation testing via the cloud: lessons learned for further optimisations.</title>
+<pages>26:1-26:9</pages>
+<year>2018</year>
+<booktitle>ESEM</booktitle>
+<ee>https://doi.org/10.1145/3239235.3240506</ee>
+<crossref>conf/esem/2018</crossref>
+<url>db/conf/esem/esem2018.html#VercammenDBE18</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/euromicro/ChatzipetrouAPB18" mdate="2019-09-16">
+<author orcid="0000-0002-0311-1502" pid="09/10404">Panagiota Chatzipetrou</author>
+<author pid="133/4686">Emil Al&#233;groth</author>
+<author pid="76/302">Efi Papatheocharous</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="82/3504">Tony Gorschek</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<title>Component Selection in Software Engineering - Which Attributes are the Most Important in the Decision Process?</title>
+<pages>198-205</pages>
+<year>2018</year>
+<booktitle>SEAA</booktitle>
+<ee>https://doi.org/10.1109/SEAA.2018.00039</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/SEAA.2018.00039</ee>
+<crossref>conf/euromicro/2018</crossref>
+<url>db/conf/euromicro/euromicro2018.html#ChatzipetrouAPB18</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icse/MoghadamSBBL18a" mdate="2019-09-16">
+<author pid="195/2000">Mahshid Helali Moghadam</author>
+<author orcid="0000-0002-1512-0844" pid="14/9944">Mehrdad Saadatmand</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="87/6323">Markus Bohlin</author>
+<author pid="11/65">Bj&#246;rn Lisper</author>
+<title>Learning-based response time analysis in real-time embedded systems: a simulation-based approach.</title>
+<pages>21-24</pages>
+<year>2018</year>
+<booktitle>SQUADE@ICSE</booktitle>
+<ee>https://doi.org/10.1145/3194095.3194097</ee>
+<ee>http://ieeexplore.ieee.org/document/8445037</ee>
+<crossref>conf/icse/2018squade</crossref>
+<url>db/conf/icse/squade2018.html#MoghadamSBBL18a</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icse/BorgOFA18" mdate="2019-12-27">
+<author pid="47/9384">Markus Borg</author>
+<author orcid="0000-0002-2933-1925" pid="31/5587-1">Thomas Olsson 0001</author>
+<author pid="71/3754">Ulrik Franke</author>
+<author pid="a/SaidAssar">Sa&#239;d Assar</author>
+<title>Digitalization of swedish government agencies: a perspective through the lens of a software development census.</title>
+<pages>37-46</pages>
+<year>2018</year>
+<booktitle>ICSE-SEIS</booktitle>
+<ee>https://doi.org/10.1145/3183428.3183434</ee>
+<ee>http://ieeexplore.ieee.org/document/8445157</ee>
+<crossref>conf/icse/2018seis</crossref>
+<url>db/conf/icse/icse2018seis.html#BorgOFA18</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icse/HenrikssonBE18" mdate="2018-09-06">
+<author pid="226/0101">Jens Henriksson</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="94/708">Cristofer Englund</author>
+<title>Automotive Safety and Machine Learning: Initial Results from a Study on How to Adapt the ISO 26262 Safety Standard.</title>
+<pages>47-49</pages>
+<year>2018</year>
+<booktitle>SEFAIAS@ICSE</booktitle>
+<ee>http://ieeexplore.ieee.org/document/8452730</ee>
+<crossref>conf/icse/2018sefaias</crossref>
+<url>db/conf/icse/sefaias2018.html#HenrikssonBE18</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icse/MoghadamSBBL18" mdate="2019-09-16">
+<author pid="195/2000">Mahshid Helali Moghadam</author>
+<author orcid="0000-0002-1512-0844" pid="14/9944">Mehrdad Saadatmand</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="87/6323">Markus Bohlin</author>
+<author pid="11/65">Bj&#246;rn Lisper</author>
+<title>Adaptive runtime response time control in PLC-based real-time systems using reinforcement learning.</title>
+<pages>217-223</pages>
+<year>2018</year>
+<booktitle>SEAMS@ICSE</booktitle>
+<ee>https://doi.org/10.1145/3194133.3194153</ee>
+<ee>http://ieeexplore.ieee.org/document/8595402</ee>
+<crossref>conf/icse/2018seams</crossref>
+<url>db/conf/icse/seams2018.html#MoghadamSBBL18</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icst/MoghadamSBBL18" mdate="2019-09-16">
+<author pid="195/2000">Mahshid Helali Moghadam</author>
+<author orcid="0000-0002-1512-0844" pid="14/9944">Mehrdad Saadatmand</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="87/6323">Markus Bohlin</author>
+<author pid="11/65">Bj&#246;rn Lisper</author>
+<title>Learning-Based Self-Adaptive Assurance of Timing Properties in a Real-Time Embedded System.</title>
+<pages>77-80</pages>
+<year>2018</year>
+<booktitle>ICST Workshops</booktitle>
+<ee>http://doi.ieeecomputersociety.org/10.1109/ICSTW.2018.00031</ee>
+<crossref>conf/icst/2018w</crossref>
+<url>db/conf/icst/icstw2018.html#MoghadamSBBL18</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/laser/CitoWLB018" mdate="2019-01-21">
+<author pid="150/6416">J&#252;rgen Cito</author>
+<author pid="134/1173">Johannes Wettinger</author>
+<author pid="162/6032">Lucy Ellen Lwakatare</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="87/3534-2">Fei Li 0002</author>
+<title>Feedback from Operations to Software Development - A DevOps Perspective on Runtime Metrics and Logs.</title>
+<pages>184-195</pages>
+<year>2018</year>
+<booktitle>DEVOPS</booktitle>
+<ee>https://doi.org/10.1007/978-3-030-06019-0_14</ee>
+<crossref>conf/laser/2018d</crossref>
+<url>db/conf/laser/devops2018.html#CitoWLB018</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/sigsoft/VercammenGDB18" mdate="2019-09-25">
+<author pid="224/0227">Sten Vercammen</author>
+<author pid="119/3648">Mohammad Ghafari</author>
+<author orcid="0000-0002-4463-2945" pid="d/SDemeyer">Serge Demeyer</author>
+<author pid="47/9384">Markus Borg</author>
+<title>Goal-oriented mutation testing with focal methods.</title>
+<pages>23-30</pages>
+<year>2018</year>
+<booktitle>A-TEST@ESEC/SIGSOFT FSE</booktitle>
+<ee>https://doi.org/10.1145/3278186.3278190</ee>
+<crossref>conf/sigsoft/2018atest</crossref>
+<url>db/conf/sigsoft/atest2018.html#VercammenGDB18</url>
+</inproceedings>
+</r>
+<r><proceedings key="conf/icse/2018serip" mdate="2019-10-16">
+<editor pid="00/6395">Rakesh Shukla</editor>
+<editor pid="51/11067">Dusica Marijan</editor>
+<editor pid="47/9384">Markus Borg</editor>
+<editor pid="55/4341">Ye Yang</editor>
+<title>5th IEEE/ACM International Workshop on Software Engineering Research and Industrial Practice, SER&#38;IP@ICSE 2018, Gothenburg, Sweden, May 29, 2018</title>
+<booktitle>SER&#38;IP@ICSE</booktitle>
+<publisher>ACM</publisher>
+<year>2018</year>
+<isbn>978-1-4503-5744-9</isbn>
+<ee>https://ieeexplore.ieee.org/xpl/conhome/8452123/proceeding</ee>
+<url>db/conf/icse/serip2018.html</url>
+</proceedings>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-1802-00312" mdate="2018-08-13">
+<author pid="47/9384">Markus Borg</author>
+<author pid="31/5587-1">Thomas Olsson 0001</author>
+<author pid="71/3754">Ulrik Franke</author>
+<author pid="a/SaidAssar">Sa&#239;d Assar</author>
+<title>Digitalization of Swedish Government Agencies - A Perspective Through the Lens of a Software Development Census.</title>
+<year>2018</year>
+<volume>abs/1802.00312</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1802.00312</ee>
+<url>db/journals/corr/corr1802.html#abs-1802-00312</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-1807-10953" mdate="2018-08-13">
+<author pid="224/0227">Sten Vercammen</author>
+<author pid="119/3648">Mohammad Ghafari</author>
+<author pid="d/SDemeyer">Serge Demeyer</author>
+<author pid="47/9384">Markus Borg</author>
+<title>Goal-oriented Mutation Testing with Focal Methods.</title>
+<year>2018</year>
+<volume>abs/1807.10953</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1807.10953</ee>
+<url>db/journals/corr/corr1807.html#abs-1807-10953</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-1808-09767" mdate="2018-09-03">
+<author pid="47/9384">Markus Borg</author>
+<author pid="225/7785">Daniel Brytting</author>
+<author pid="152/9960">Daniel Hansson</author>
+<title>Enabling Visual Design Verification Analytics - From Prototype Visualizations to an Analytics Tool using the Unity Game Engine.</title>
+<year>2018</year>
+<volume>abs/1808.09767</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1808.09767</ee>
+<url>db/journals/corr/corr1808.html#abs-1808-09767</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-1812-01395" mdate="2019-01-01">
+<author pid="88/1884">Vahid Garousi</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="49/2801">Markku Oivo</author>
+<title>Cut to the chase: Revisiting the relevance of software engineering research.</title>
+<year>2018</year>
+<volume>abs/1812.01395</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1812.01395</ee>
+<url>db/journals/corr/corr1812.html#abs-1812-01395</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-1812-05389" mdate="2019-07-17">
+<author pid="47/9384">Markus Borg</author>
+<author pid="94/708">Cristofer Englund</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author pid="70/5293">Boris Dur&#225;n</author>
+<author pid="123/5080">Christoffer Levandowski</author>
+<author pid="232/2321">Shenjian Gao</author>
+<author pid="232/2367">Yanwen Tan</author>
+<author pid="175/3829">Henrik Kaijser</author>
+<author pid="63/5205">Henrik L&#246;nn</author>
+<author pid="232/2044">Jonas T&#246;rnqvist</author>
+<title>Safely Entering the Deep: A Review of Verification and Validation for Machine Learning and a Challenge Elicitation in the Automotive Industry.</title>
+<year>2018</year>
+<volume>abs/1812.05389</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1812.05389</ee>
+<url>db/journals/corr/corr1812.html#abs-1812-05389</url>
+</article>
+</r>
+<r><article key="journals/sigsoft/BorgBUYGF17" mdate="2020-09-17">
+<author pid="47/9384">Markus Borg</author>
+<author pid="19/1459">Elizabeth Bjarnason</author>
+<author pid="08/8212">Michael Unterkalmsteiner</author>
+<author pid="51/8403">Tingting Yu</author>
+<author pid="39/7539">Gregory Gay</author>
+<author pid="49/2990">Michael Felderer</author>
+<title>Summary of the 4th International Workshop on Requirements Engineering and Testing (RET 2017).</title>
+<pages>28-31</pages>
+<year>2017</year>
+<volume>42</volume>
+<journal>ACM SIGSOFT Softw. Eng. Notes</journal>
+<number>4</number>
+<ee>https://doi.org/10.1145/3149485.3149522</ee>
+<url>db/journals/sigsoft/sigsoft42.html#BorgBUYGF17</url>
+</article>
+</r>
+<r><article key="journals/software/BjarnasonB17" mdate="2020-06-08">
+<author orcid="0000-0001-9070-0008" pid="19/1459">Elizabeth Bjarnason</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<title>Aligning Requirements and Testing: Working Together toward the Same Goal.</title>
+<pages>20-23</pages>
+<year>2017</year>
+<volume>34</volume>
+<journal>IEEE Softw.</journal>
+<number>1</number>
+<ee>https://doi.org/10.1109/MS.2017.14</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/MS.2017.14</ee>
+<ee>https://www.wikidata.org/entity/Q58811725</ee>
+<url>db/journals/software/software34.html#BjarnasonB17</url>
+</article>
+</r>
+<r><article key="journals/tse/BorgWRR17" mdate="2018-11-24">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author pid="09/1284">Bj&#246;rn Regnell</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<title>Supporting Change Impact Analysis Using a Recommendation System: An Industrial Case Study in a Safety-Critical Context.</title>
+<pages>675-700</pages>
+<year>2017</year>
+<volume>43</volume>
+<journal>IEEE Trans. Software Eng.</journal>
+<number>7</number>
+<ee>https://doi.org/10.1109/TSE.2016.2620458</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/TSE.2016.2620458</ee>
+<ee>https://www.wikidata.org/entity/Q58811741</ee>
+<url>db/journals/tse/tse43.html#BorgWRR17</url>
+</article>
+</r>
+<r><inproceedings key="conf/ease/BorgLRB17" mdate="2019-09-25">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="200/8171">Iben Lennerstad</author>
+<author pid="200/8231">Rasmus Ros</author>
+<author orcid="0000-0001-9070-0008" pid="19/1459">Elizabeth Bjarnason</author>
+<title>On Using Active Learning and Self-training when Mining Performance Discussions on Stack Overflow.</title>
+<pages>308-313</pages>
+<year>2017</year>
+<booktitle>EASE</booktitle>
+<ee>https://doi.org/10.1145/3084226.3084273</ee>
+<ee>https://www.wikidata.org/entity/Q58811727</ee>
+<crossref>conf/ease/2017</crossref>
+<url>db/conf/ease/ease2017.html#BorgLRB17</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/iwpc/BorgAR17" mdate="2018-11-24">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="133/4686">Emil Al&#233;groth</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<title>Software engineers' information seeking behavior in change impact analysis: an interview study.</title>
+<pages>12-22</pages>
+<year>2017</year>
+<booktitle>ICPC</booktitle>
+<ee>https://doi.org/10.1109/ICPC.2017.20</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/ICPC.2017.20</ee>
+<ee>http://dl.acm.org/citation.cfm?id=3101417</ee>
+<ee>https://www.wikidata.org/entity/Q58811730</ee>
+<crossref>conf/iwpc/2017</crossref>
+<url>db/conf/iwpc/icpc2017.html#BorgAR17</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/re/BorgOS17" mdate="2019-12-27">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0002-2933-1925" pid="31/5587-1">Thomas Olsson 0001</author>
+<author pid="126/3880">John Svensson</author>
+<title>Piggybacking on an Autonomous Hauler: Business Models Enabling a System-of-Systems Approach to Mapping an Underground Mine.</title>
+<pages>372-381</pages>
+<year>2017</year>
+<booktitle>RE</booktitle>
+<ee>https://doi.org/10.1109/RE.2017.55</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/RE.2017.55</ee>
+<ee>https://www.wikidata.org/entity/Q58811728</ee>
+<crossref>conf/re/2017</crossref>
+<url>db/conf/re/re2017.html#BorgOS17</url>
+</inproceedings>
+</r>
+<r><article publtype="informal" key="journals/corr/BorgOS17" mdate="2018-08-13">
+<author pid="47/9384">Markus Borg</author>
+<author pid="31/5587-1">Thomas Olsson 0001</author>
+<author pid="126/3880">John Svensson</author>
+<title>From LiDAR to Underground Maps via 5G - Business Models Enabling a System-of-Systems Approach to Mapping the Kankberg Mine.</title>
+<year>2017</year>
+<volume>abs/1702.03775</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1702.03775</ee>
+<url>db/journals/corr/corr1702.html#BorgOS17</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/BorgAR17" mdate="2018-08-13">
+<author pid="47/9384">Markus Borg</author>
+<author pid="133/4686">Emil Al&#233;groth</author>
+<author pid="24/24">Per Runeson</author>
+<title>Software Engineers' Information Seeking Behavior in Change Impact Analysis - An Interview Study.</title>
+<year>2017</year>
+<volume>abs/1703.01897</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1703.01897</ee>
+<url>db/journals/corr/corr1703.html#BorgAR17</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/BorgLRB17" mdate="2018-08-13">
+<author pid="47/9384">Markus Borg</author>
+<author pid="200/8171">Iben Lennerstad</author>
+<author pid="200/8231">Rasmus Ros</author>
+<author pid="19/1459">Elizabeth Bjarnason</author>
+<title>On Using Active Learning and Self-Training when Mining Performance Discussions on Stack Overflow.</title>
+<year>2017</year>
+<volume>abs/1705.02395</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1705.02395</ee>
+<url>db/journals/corr/corr1705.html#BorgLRB17</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/BorgOS17a" mdate="2018-08-13">
+<author pid="47/9384">Markus Borg</author>
+<author pid="31/5587-1">Thomas Olsson 0001</author>
+<author pid="126/3880">John Svensson</author>
+<title>Piggybacking on an Autonomous Hauler: Business Models Enabling a System-of-Systems Approach to Mapping an Underground Mine.</title>
+<year>2017</year>
+<volume>abs/1705.05087</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1705.05087</ee>
+<url>db/journals/corr/corr1705.html#BorgOS17a</url>
+</article>
+</r>
+<r><article key="journals/ese/AssarBP16" mdate="2020-08-25">
+<author orcid="0000-0001-8040-5865" pid="a/SaidAssar">Sa&#239;d Assar</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0003-2400-501X" pid="p/DietmarPfahl">Dietmar Pfahl</author>
+<title>Using text clustering to predict defect resolution time: a conceptual replication and an evaluation of prediction accuracy.</title>
+<pages>1437-1475</pages>
+<year>2016</year>
+<volume>21</volume>
+<journal>Empir. Softw. Eng.</journal>
+<number>4</number>
+<ee>https://doi.org/10.1007/s10664-015-9391-7</ee>
+<ee>https://www.wikidata.org/entity/Q58811748</ee>
+<url>db/journals/ese/ese21.html#AssarBP16</url>
+</article>
+</r>
+<r><article key="journals/ese/JonssonBBSER16" mdate="2020-08-25">
+<author orcid="0000-0002-8989-0251" pid="28/11466">Leif Jonsson</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="13/3318">David Broman</author>
+<author pid="59/4490">Kristian Sandahl</author>
+<author pid="71/5135">Sigrid Eldh</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<title>Automated bug assignment: Ensemble-based machine learning in large scale industrial contexts.</title>
+<pages>1533-1578</pages>
+<year>2016</year>
+<volume>21</volume>
+<journal>Empir. Softw. Eng.</journal>
+<number>4</number>
+<ee>https://doi.org/10.1007/s10664-015-9401-9</ee>
+<ee>https://www.wikidata.org/entity/Q58811737</ee>
+<url>db/journals/ese/ese21.html#JonssonBBSER16</url>
+</article>
+</r>
+<r><article key="journals/infsof/BjarnasonUBE16" mdate="2020-02-20">
+<author orcid="0000-0001-9070-0008" pid="19/1459">Elizabeth Bjarnason</author>
+<author pid="08/8212">Michael Unterkalmsteiner</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0001-6736-9425" pid="31/2107">Emelie Engstr&#246;m</author>
+<title>A multi-case study of agile requirements engineering and the use of test cases as requirements.</title>
+<pages>61-79</pages>
+<year>2016</year>
+<volume>77</volume>
+<journal>Inf. Softw. Technol.</journal>
+<ee>https://doi.org/10.1016/j.infsof.2016.03.008</ee>
+<ee>https://www.wikidata.org/entity/Q58811758</ee>
+<url>db/journals/infsof/infsof77.html#BjarnasonUBE16</url>
+</article>
+</r>
+<r><article key="journals/sigsoft/Unterkalmsteiner16" mdate="2020-09-17">
+<author pid="08/8212">Michael Unterkalmsteiner</author>
+<author orcid="0000-0001-6794-9585" pid="39/7539">Gregory Gay</author>
+<author pid="49/2990">Michael Felderer</author>
+<author pid="19/1459">Elizabeth Bjarnason</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="20/5419">Mirko Morandini</author>
+<title>Summary of the 3rd International Workshop on Requirements Engineering and Testing (RET 2016): [Co-located with REFSQ 2016].</title>
+<pages>31-33</pages>
+<year>2016</year>
+<volume>41</volume>
+<journal>ACM SIGSOFT Softw. Eng. Notes</journal>
+<number>3</number>
+<ee>https://doi.org/10.1145/2934240.2934249</ee>
+<url>db/journals/sigsoft/sigsoft41.html#Unterkalmsteiner16</url>
+</article>
+</r>
+<r><article key="journals/smr/Borg16" mdate="2020-03-06">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<title>TuneR: a framework for tuning software engineering tools with hands-on instructions in R.</title>
+<pages>427-459</pages>
+<year>2016</year>
+<volume>28</volume>
+<journal>J. Softw. Evol. Process.</journal>
+<number>6</number>
+<ee>https://doi.org/10.1002/smr.1784</ee>
+<ee>https://www.wikidata.org/entity/Q58811745</ee>
+<url>db/journals/smr/smr28.html#Borg16</url>
+</article>
+</r>
+<r><article key="journals/tse/VaraBWM16" mdate="2019-09-25">
+<author orcid="0000-0003-1813-398X" pid="08/1361">Jose Luis de la Vara</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author orcid="0000-0002-1761-6771" pid="m/LeonMoonen">Leon Moonen</author>
+<title>An Industrial Survey of Safety Evidence Change Impact Analysis Practice.</title>
+<pages>1095-1117</pages>
+<year>2016</year>
+<volume>42</volume>
+<journal>IEEE Trans. Software Eng.</journal>
+<number>12</number>
+<ee>https://doi.org/10.1109/TSE.2016.2553032</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/TSE.2016.2553032</ee>
+<ee>https://www.wikidata.org/entity/Q58811733</ee>
+<url>db/journals/tse/tse42.html#VaraBWM16</url>
+</article>
+</r>
+<r><inproceedings key="conf/profes/WnukBS16" mdate="2018-11-24">
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="128/4622">Sardar Muhammad Sulaman</author>
+<title>An Industrial Case Study on Measuring the Quality of the Requirements Scoping Process.</title>
+<pages>487-494</pages>
+<year>2016</year>
+<booktitle>PROFES</booktitle>
+<ee>https://doi.org/10.1007/978-3-319-49094-6_34</ee>
+<ee>https://www.wikidata.org/entity/Q58811735</ee>
+<crossref>conf/profes/2016</crossref>
+<url>db/conf/profes/profes2016.html#WnukBS16</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/refsq/LarssonBO16" mdate="2019-05-28">
+<author pid="156/7374">Jacob Larsson</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="31/5587-1">Thomas Olsson 0001</author>
+<title>Testing Quality Requirements of a System-of-Systems in the Public Sector - Challenges and Potential Remedies.</title>
+<year>2016</year>
+<booktitle>REFSQ Workshops</booktitle>
+<ee type="oa">http://ceur-ws.org/Vol-1564/paper17.pdf</ee>
+<crossref>conf/refsq/2016w</crossref>
+<url>db/conf/refsq/refsq2016w.html#LarssonBO16</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/safecomp/BorgVW16" mdate="2019-12-27">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0003-1813-398X" pid="08/1361">Jose Luis de la Vara</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<title>Practitioners' Perspectives on Change Impact Analysis for Safety-Critical Software - A Preliminary Analysis.</title>
+<pages>346-358</pages>
+<year>2016</year>
+<booktitle>SAFECOMP Workshops</booktitle>
+<ee>https://doi.org/10.1007/978-3-319-45480-1_28</ee>
+<ee>https://www.wikidata.org/entity/Q58811739</ee>
+<crossref>conf/safecomp/2016w</crossref>
+<url>db/conf/safecomp/safecomp2016w.html#BorgVW16</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/wicsa/CicchettiBSWCP16" mdate="2019-02-20">
+<author pid="28/2455">Antonio Cicchetti</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="38/7036">S&#233;verine Sentilles</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author pid="21/588">Jan Carlson</author>
+<author pid="76/302">Efi Papatheocharous</author>
+<title>Towards Software Assets Origin Selection Supported by a Knowledge Repository.</title>
+<pages>22-29</pages>
+<year>2016</year>
+<booktitle>MARCH@WICSA</booktitle>
+<ee>https://doi.org/10.1109/MARCH.2016.11</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/MARCH.2016.11</ee>
+<ee>https://www.wikidata.org/entity/Q58811744</ee>
+<crossref>conf/wicsa/2016march</crossref>
+<url>db/conf/wicsa/march2016.html#CicchettiBSWCP16</url>
+</inproceedings>
+</r>
+<r><proceedings key="conf/refsq/2016w" mdate="2020-07-17">
+<editor pid="19/1459">Elizabeth Bjarnason</editor>
+<editor pid="47/9384">Markus Borg</editor>
+<editor pid="03/8213">Marian Daun</editor>
+<editor pid="24/1437">Oscar Dieste</editor>
+<editor pid="16/2055">Sergio Espa&#241;a</editor>
+<editor pid="49/2990">Michael Felderer</editor>
+<editor pid="f/PeterForbrig">Peter Forbrig</editor>
+<editor pid="f/XavierFranch">Xavier Franch</editor>
+<editor pid="39/7539">Gregory Gay</editor>
+<editor pid="24/3228">Andrea Herrmann</editor>
+<editor pid="92/5983">Jennifer Horkoff</editor>
+<editor pid="53/2482">Marite Kirikova</editor>
+<editor pid="20/5419">Mirko Morandini</editor>
+<editor pid="12/256">Andreas L. Opdahl</editor>
+<editor pid="p/BarbaraPaech">Barbara Paech</editor>
+<editor pid="91/8213">Cristina Palomares</editor>
+<editor pid="63/2360">Kai Petersen</editor>
+<editor pid="45/4911">Ahmed Seffah</editor>
+<editor pid="43/5436">Bastian Tenbergen</editor>
+<editor pid="08/8212">Michael Unterkalmsteiner</editor>
+<title>Joint Proceedings of REFSQ-2016 Workshops, Doctoral Symposium, Research Method Track, and Poster Track co-located with the 22nd International Conference on Requirements Engineering: Foundation for Software Quality (REFSQ 2016), Gothenburg, Sweden, March 14, 2016.</title>
+<booktitle>REFSQ Workshops</booktitle>
+<publisher>CEUR-WS.org</publisher>
+<series href="db/series/ceurws/index.html">CEUR Workshop Proceedings</series>
+<volume>1564</volume>
+<year>2016</year>
+<ee type="oa">http://ceur-ws.org/Vol-1564</ee>
+<ee>https://nbn-resolving.org/urn:nbn:de:0074-1564-1</ee>
+<url>db/conf/refsq/refsq2016w.html</url>
+</proceedings>
+</r>
+<r><article publtype="informal" key="journals/corr/LarssonBO16" mdate="2018-08-13">
+<author pid="156/7374">Jacob Larsson</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="31/5587-1">Thomas Olsson 0001</author>
+<title>Testing Quality Requirements of a System-of-Systems in the Public Sector - Challenges and Potential Remedies.</title>
+<year>2016</year>
+<volume>abs/1602.05618</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1602.05618</ee>
+<url>db/journals/corr/corr1602.html#LarssonBO16</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/Borg16" mdate="2018-08-13">
+<author pid="47/9384">Markus Borg</author>
+<title>Advancing Trace Recovery Evaluation - Applied Information Retrieval in a Software Engineering Context.</title>
+<year>2016</year>
+<volume>abs/1602.07633</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1602.07633</ee>
+<url>db/journals/corr/corr1602.html#Borg16</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/BorgVW16" mdate="2018-08-13">
+<author pid="47/9384">Markus Borg</author>
+<author pid="08/1361">Jos&#233; Luis de la Vara</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<title>Practitioners' Perspectives on Change Impact Analysis for Safety-Critical Software - A Preliminary Analysis.</title>
+<year>2016</year>
+<volume>abs/1605.07105</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1605.07105</ee>
+<url>db/journals/corr/corr1605.html#BorgVW16</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/corr/WnukBS16" mdate="2018-08-13">
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="128/4622">Sardar Muhammad Sulaman</author>
+<title>An Industrial Case Study on Measuring the Quality of the Requirements Scoping Process.</title>
+<year>2016</year>
+<volume>abs/1611.04099</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1611.04099</ee>
+<url>db/journals/corr/corr1611.html#WnukBS16</url>
+</article>
+</r>
+<r><article publtype="informal" key="journals/tinytocs/BorgGO16" mdate="2020-07-03">
+<author pid="47/9384">Markus Borg</author>
+<author pid="178/3202">Petter Gulin</author>
+<author pid="178/3194">Linus Olofsson</author>
+<title>Do Take it Personal: It's Not What You Say, It's Who (and Where) You Are!</title>
+<year>2016</year>
+<volume>4</volume>
+<journal>Tiny Trans. Comput. Sci.</journal>
+<ee>http://tinytocs.org/papers/tinytocs4_paper_borg.pdf</ee>
+<url>db/journals/tinytocs/tinytocs4.html#BorgGO16</url>
+</article>
+</r>
+<r><phdthesis key="phd/basesearch/Borg15" mdate="2020-03-12">
+<author pid="47/9384">Markus Borg</author>
+<title>From Bugs to Decision Support - Leveraging Historical Issue Reports in Software Evolution.</title>
+<year>2015</year>
+<school>Lund University, Sweden</school>
+<ee>http://lup.lub.lu.se/record/5268091</ee>
+<ee type="oa">http://portal.research.lu.se/ws/files/5393516/5268413.pdf</ee>
+<ee>https://www.base-search.net/Record/d4dfdfe740808ac5b2e417791503f7e84cdefc475636b9e2ef7c1adfa1e4b594</ee>
+<note type="source">base-search.net (ftulundlup:oai:lup.lub.lu.se:2187b818-0f8f-42d5-b22c-c4f7ad2b10f4)</note>
+</phdthesis>
+</r>
+<r><article key="journals/sigsoft/BjarnasonBMUFS15" mdate="2020-09-17">
+<author pid="19/1459">Elizabeth Bjarnason</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="20/5419">Mirko Morandini</author>
+<author pid="08/8212">Michael Unterkalmsteiner</author>
+<author pid="49/2990">Michael Felderer</author>
+<author pid="88/6925">Matthew Staats</author>
+<title>Summary of 2nd International Workshop on Requirements Engineering and Testing (RET 2015): Co-located with ICSE 2015.</title>
+<pages>39-42</pages>
+<year>2015</year>
+<volume>40</volume>
+<journal>ACM SIGSOFT Softw. Eng. Notes</journal>
+<number>5</number>
+<ee>https://doi.org/10.1145/2815021.2815036</ee>
+<url>db/journals/sigsoft/sigsoft40.html#BjarnasonBMUFS15</url>
+</article>
+</r>
+<r><inproceedings key="conf/icse/BjarnasonMBUFS15" mdate="2019-09-25">
+<author orcid="0000-0001-9070-0008" pid="19/1459">Elizabeth Bjarnason</author>
+<author pid="20/5419">Mirko Morandini</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="08/8212">Michael Unterkalmsteiner</author>
+<author pid="49/2990">Michael Felderer</author>
+<author pid="88/6925">Matthew Staats</author>
+<title>2nd International Workshop on Requirements Engineering and Testing (RET 2015).</title>
+<pages>997-998</pages>
+<year>2015</year>
+<booktitle>ICSE (2)</booktitle>
+<ee>https://doi.org/10.1109/ICSE.2015.351</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/ICSE.2015.351</ee>
+<ee>http://dl.acm.org/citation.cfm?id=2819248</ee>
+<ee>https://www.wikidata.org/entity/Q58811750</ee>
+<crossref>conf/icse/2015-2</crossref>
+<url>db/conf/icse/icse2015-2.html#BjarnasonMBUFS15</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icst/ErmanTBRA15" mdate="2018-11-24">
+<author pid="162/3696">Nicklas Erman</author>
+<author pid="162/3708">Vanja Tufvesson</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<author pid="a/AndersArdo">Anders Ard&#246;</author>
+<title>Navigating Information Overload Caused by Automated Testing - a Clustering Approach in Multi-Branch Development.</title>
+<pages>1-9</pages>
+<year>2015</year>
+<booktitle>ICST</booktitle>
+<ee>https://doi.org/10.1109/ICST.2015.7102596</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/ICST.2015.7102596</ee>
+<ee>https://www.wikidata.org/entity/Q58811760</ee>
+<crossref>conf/icst/2015</crossref>
+<url>db/conf/icst/icst2015.html#ErmanTBRA15</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/xpu/BjarnasonUEB15" mdate="2019-10-19">
+<author orcid="0000-0001-9070-0008" pid="19/1459">Elizabeth Bjarnason</author>
+<author pid="08/8212">Michael Unterkalmsteiner</author>
+<author orcid="0000-0001-6736-9425" pid="31/2107">Emelie Engstr&#246;m</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<title>An Industrial Case Study on Test Cases as Requirements.</title>
+<pages>27-39</pages>
+<year>2015</year>
+<booktitle>XP</booktitle>
+<ee>https://doi.org/10.1007/978-3-319-18612-2_3</ee>
+<ee>https://www.wikidata.org/entity/Q58811753</ee>
+<crossref>conf/xpu/2015</crossref>
+<url>db/conf/xpu/xp2015.html#BjarnasonUEB15</url>
+</inproceedings>
+</r>
+<r><proceedings key="conf/icse/2015ret" mdate="2019-10-16">
+<editor pid="19/1459">Elizabeth Bjarnason</editor>
+<editor pid="47/9384">Markus Borg</editor>
+<editor pid="20/5419">Mirko Morandini</editor>
+<title>2nd IEEE/ACM International Workshop on Requirements Engineering and Testing, RET 2015, Florence, Italy, May 18, 2015</title>
+<booktitle>RET@ICSE</booktitle>
+<publisher>IEEE Computer Society</publisher>
+<year>2015</year>
+<isbn>978-1-4673-7073-8</isbn>
+<ee>https://ieeexplore.ieee.org/xpl/conhome/7173533/proceeding</ee>
+<ee>https://www.computer.org/csdl/proceedings/ret/2015/7073/00/index.html</ee>
+<ee>http://dl.acm.org/citation.cfm?id=2820704</ee>
+<url>db/conf/icse/ret2015.html</url>
+</proceedings>
+</r>
+<r><article publtype="informal" key="journals/tinytocs/BorgJ15" mdate="2020-07-03">
+<author pid="47/9384">Markus Borg</author>
+<author pid="28/11466">Leif Jonsson</author>
+<title>The More the Merrier: Leveraging on the Bug Inflow to Guide Software Maintenance.</title>
+<year>2015</year>
+<volume>3</volume>
+<journal>Tiny Trans. Comput. Sci.</journal>
+<ee>http://tinytocs.org/vol3/papers/TinyToCS_3_borg.pdf</ee>
+<url>db/journals/tinytocs/tinytocs3.html#BorgJ15</url>
+</article>
+</r>
+<r><article key="journals/ese/BorgRA14" mdate="2020-08-25">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<author pid="a/AndersArdo">Anders Ard&#246;</author>
+<title>Recovering from a decade: a systematic mapping of information retrieval approaches to software traceability.</title>
+<pages>1565-1616</pages>
+<year>2014</year>
+<volume>19</volume>
+<journal>Empir. Softw. Eng.</journal>
+<number>6</number>
+<ee>https://doi.org/10.1007/s10664-013-9255-y</ee>
+<ee>https://www.wikidata.org/entity/Q58811774</ee>
+<url>db/journals/ese/ese19.html#BorgRA14</url>
+</article>
+</r>
+<r><article key="journals/ese/BjarnasonRBUERSLGF14" mdate="2020-10-26">
+<author orcid="0000-0001-9070-0008" pid="19/1459">Elizabeth Bjarnason</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="08/8212">Michael Unterkalmsteiner</author>
+<author orcid="0000-0001-6736-9425" pid="31/2107">Emelie Engstr&#246;m</author>
+<author orcid="0000-0002-9380-6120" pid="09/1284">Bj&#246;rn Regnell</author>
+<author orcid="0000-0003-1183-7001" pid="93/4352">Giedre Sabaliauskaite</author>
+<author pid="69/4553">Annabella Loconsole</author>
+<author pid="82/3504">Tony Gorschek</author>
+<author pid="97/831">Robert Feldt</author>
+<title>Challenges and practices in aligning requirements with verification and validation: a case study of six companies.</title>
+<pages>1809-1855</pages>
+<year>2014</year>
+<volume>19</volume>
+<journal>Empir. Softw. Eng.</journal>
+<number>6</number>
+<ee>https://doi.org/10.1007/s10664-013-9263-y</ee>
+<ee>https://www.wikidata.org/entity/Q58811764</ee>
+<url>db/journals/ese/ese19.html#BjarnasonRBUERSLGF14</url>
+</article>
+</r>
+<r><inproceedings key="conf/esem/BorgRJM14" mdate="2018-11-24">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<author pid="150/9029">Jens Johansson</author>
+<author orcid="0000-0002-2841-5879" pid="m/MikaMantyla">Mika M&#228;ntyl&#228;</author>
+<title>A replicated study on duplicate detection: using apache lucene to search among Android defects.</title>
+<pages>8:1-8:4</pages>
+<year>2014</year>
+<booktitle>ESEM</booktitle>
+<ee>https://doi.org/10.1145/2652524.2652556</ee>
+<ee>https://www.wikidata.org/entity/Q58811762</ee>
+<crossref>conf/esem/2014</crossref>
+<url>db/conf/esem/esem2014.html#BorgRJM14</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/euromicro/SulamanOBWHV14" mdate="2018-11-24">
+<author pid="128/4622">Sardar Muhammad Sulaman</author>
+<author pid="07/9506">Alma Orucevic-Alagic</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author orcid="0000-0002-9360-8693" pid="07/6594">Martin H&#246;st</author>
+<author orcid="0000-0003-1813-398X" pid="08/1361">Jose Luis de la Vara</author>
+<title>Development of Safety-Critical Software Systems Using Open Source Software - A Systematic Map.</title>
+<pages>17-24</pages>
+<year>2014</year>
+<booktitle>EUROMICRO-SEAA</booktitle>
+<ee>https://doi.org/10.1109/SEAA.2014.25</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/SEAA.2014.25</ee>
+<ee>https://www.wikidata.org/entity/Q58811768</ee>
+<crossref>conf/euromicro/2014</crossref>
+<url>db/conf/euromicro/euromicro2014.html#SulamanOBWHV14</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icst/EngstromMRB14" mdate="2019-10-19">
+<author orcid="0000-0001-6736-9425" pid="31/2107">Emelie Engstr&#246;m</author>
+<author orcid="0000-0002-2841-5879" pid="m/MikaMantyla">Mika M&#228;ntyl&#228;</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<title>Supporting Regression Test Scoping with Visual Analytics.</title>
+<pages>283-292</pages>
+<year>2014</year>
+<booktitle>ICST</booktitle>
+<ee>https://doi.org/10.1109/ICST.2014.41</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/ICST.2014.41</ee>
+<ee>https://www.wikidata.org/entity/Q58811778</ee>
+<crossref>conf/icst/2014</crossref>
+<url>db/conf/icst/icst2014.html#EngstromMRB14</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/kbse/Borg14" mdate="2018-11-24">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<title>Embrace your issues: compassing the software engineering landscape using bug reports.</title>
+<pages>891-894</pages>
+<year>2014</year>
+<booktitle>ASE</booktitle>
+<ee>https://doi.org/10.1145/2642937.2653469</ee>
+<ee>https://www.wikidata.org/entity/Q58811770</ee>
+<crossref>conf/kbse/2014</crossref>
+<url>db/conf/kbse/ase2014.html#Borg14</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/re/LarssonB14" mdate="2018-11-24">
+<author pid="156/7374">Jacob Larsson</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<title>Revisiting the challenges in aligning RE and V&#38;V: Experiences from the public sector.</title>
+<pages>4-11</pages>
+<year>2014</year>
+<booktitle>RET</booktitle>
+<ee>https://doi.org/10.1109/RET.2014.6908671</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/RET.2014.6908671</ee>
+<ee>https://www.wikidata.org/entity/Q58811776</ee>
+<crossref>conf/re/2014ret</crossref>
+<url>db/conf/re/ret2014.html#LarssonB14</url>
+</inproceedings>
+</r>
+<r><incollection key="books/sp/rsse14/BorgR14" mdate="2018-11-24">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<title>Changes, Evolution, and Bugs - Recommendation Systems for Issue Management.</title>
+<pages>477-509</pages>
+<year>2014</year>
+<booktitle>Recommendation Systems in Software Engineering</booktitle>
+<ee>https://doi.org/10.1007/978-3-642-45135-5_18</ee>
+<ee>https://www.wikidata.org/entity/Q58811766</ee>
+<crossref>books/sp/rsse2014</crossref>
+<url>db/books/collections/rsse2014.html#BorgR14</url>
+</incollection>
+</r>
+<r><proceedings key="conf/re/2014ret" mdate="2019-10-16">
+<editor pid="49/2990">Michael Felderer</editor>
+<editor pid="19/1459">Elizabeth Bjarnason</editor>
+<editor pid="88/6925">Matt Staats</editor>
+<editor pid="20/5419">Mirko Morandini</editor>
+<editor pid="47/9384">Markus Borg</editor>
+<editor pid="08/8212">Michael Unterkalmsteiner</editor>
+<title>1st IEEE International Workshop on Requirements Engineering and Testing, RET 2014, Karlskrona, Sweden, August 26, 2014</title>
+<booktitle>RET</booktitle>
+<publisher>IEEE</publisher>
+<year>2014</year>
+<isbn>978-1-4799-6334-8</isbn>
+<ee>https://ieeexplore.ieee.org/xpl/conhome/6887462/proceeding</ee>
+<url>db/conf/re/ret2014.html</url>
+</proceedings>
+</r>
+<r><article publtype="informal" key="journals/corr/FeldererBBUMS14" mdate="2018-08-13">
+<author pid="49/2990">Michael Felderer</author>
+<author pid="19/1459">Elizabeth Bjarnason</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="08/8212">Michael Unterkalmsteiner</author>
+<author pid="20/5419">Mirko Morandini</author>
+<author pid="88/6925">Matt Staats</author>
+<title>Workshop Summary of the 1st International Workshop on Requirements and Testing (RET'14).</title>
+<year>2014</year>
+<volume>abs/1410.3401</volume>
+<journal>CoRR</journal>
+<ee type="oa">http://arxiv.org/abs/1410.3401</ee>
+<url>db/journals/corr/corr1410.html#FeldererBBUMS14</url>
+</article>
+</r>
+<r><inproceedings key="conf/csmr/BorgPR13" mdate="2018-11-24">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0003-2400-501X" pid="p/DietmarPfahl">Dietmar Pfahl</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<title>Analyzing Networks of Issue Reports.</title>
+<pages>79-88</pages>
+<year>2013</year>
+<booktitle>CSMR</booktitle>
+<ee>https://doi.org/10.1109/CSMR.2013.18</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/CSMR.2013.18</ee>
+<ee>https://www.wikidata.org/entity/Q58811781</ee>
+<crossref>conf/csmr/2013</crossref>
+<url>db/conf/csmr/csmr2013.html#BorgPR13</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/esem/BorgR13" mdate="2018-11-24">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<title>IR in Software Traceability: From a Bird's Eye View.</title>
+<pages>243-246</pages>
+<year>2013</year>
+<booktitle>ESEM</booktitle>
+<ee>https://doi.org/10.1109/ESEM.2013.39</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/ESEM.2013.39</ee>
+<ee>https://www.wikidata.org/entity/Q58811787</ee>
+<crossref>conf/esem/2013</crossref>
+<url>db/conf/esem/esem2013.html#BorgR13</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icse/CalleleWB13" mdate="2018-11-24">
+<author pid="33/1367">David Callele</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<title>Confounding factors when conducting industrial replications in requirements engineering.</title>
+<pages>55-58</pages>
+<year>2013</year>
+<booktitle>CESI@ICSE</booktitle>
+<ee>https://doi.org/10.1109/CESI.2013.6618472</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/CESI.2013.6618472</ee>
+<ee>http://dl.acm.org/citation.cfm?id=2662545</ee>
+<ee>https://www.wikidata.org/entity/Q58811783</ee>
+<crossref>conf/icse/2013cesi</crossref>
+<url>db/conf/icse/cesi2013.html#CalleleWB13</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icse/BorgGW13" mdate="2018-11-24">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="g/OrlenaGotel">Orlena Gotel</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<title>Enabling traceability reuse for impact analyses: A feasibility study in a safety context.</title>
+<pages>72-78</pages>
+<year>2013</year>
+<booktitle>TEFSE@ICSE</booktitle>
+<ee>https://doi.org/10.1109/TEFSE.2013.6620158</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/TEFSE.2013.6620158</ee>
+<ee>https://www.wikidata.org/entity/Q58811785</ee>
+<crossref>conf/icse/2013tefse</crossref>
+<url>db/conf/icse/tefse2013.html#BorgGW13</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/csmr/BorgWP12" mdate="2018-11-24">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author orcid="0000-0003-2400-501X" pid="p/DietmarPfahl">Dietmar Pfahl</author>
+<title>Industrial Comparability of Student Artifacts in Traceability Recovery Research - An Exploratory Survey.</title>
+<pages>181-190</pages>
+<year>2012</year>
+<booktitle>CSMR</booktitle>
+<ee>https://doi.org/10.1109/CSMR.2012.27</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/CSMR.2012.27</ee>
+<ee>https://www.wikidata.org/entity/Q58811792</ee>
+<crossref>conf/csmr/2012</crossref>
+<url>db/conf/csmr/csmr2012.html#BorgWP12</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/ease/BorgRB12" mdate="2018-11-24">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0003-2795-4851" pid="24/24">Per Runeson</author>
+<author pid="122/4848">Lina Broden</author>
+<title>Evaluation of traceability recovery in context: A taxonomy for information retrieval tools.</title>
+<pages>111-120</pages>
+<year>2012</year>
+<booktitle>EASE</booktitle>
+<ee>https://doi.org/10.1049/ic.2012.0014</ee>
+<ee>https://www.wikidata.org/entity/Q58811789</ee>
+<crossref>conf/ease/2012</crossref>
+<url>db/conf/ease/ease2012.html#BorgRB12</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/enase/Borg12" mdate="2012-10-26">
+<author pid="47/9384">Markus Borg</author>
+<title>Findability through Traceability - A Realistic Application of Candidate Trace Links?.</title>
+<pages>173-181</pages>
+<year>2012</year>
+<booktitle>ENASE</booktitle>
+<crossref>conf/enase/2012</crossref>
+<url>db/conf/enase/enase2012.html#Borg12</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/er/WnukBA12" mdate="2018-11-24">
+<author pid="86/2856">Krzysztof Wnuk</author>
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0001-8040-5865" pid="a/SaidAssar">Sa&#239;d Assar</author>
+<title>Towards Scalable Information Modeling of Requirements Architectures.</title>
+<pages>141-150</pages>
+<year>2012</year>
+<booktitle>ER Workshops</booktitle>
+<ee>https://doi.org/10.1007/978-3-642-33999-8_17</ee>
+<ee>https://www.wikidata.org/entity/Q58811794</ee>
+<crossref>conf/er/2012w</crossref>
+<url>db/conf/er/erw2012.html#WnukBA12</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/csmr/Borg11" mdate="2018-11-24">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<title>In Vivo Evaluation of Large-Scale IR-Based Traceability Recovery.</title>
+<pages>365-368</pages>
+<year>2011</year>
+<booktitle>CSMR</booktitle>
+<ee>https://doi.org/10.1109/CSMR.2011.54</ee>
+<ee>http://doi.ieeecomputersociety.org/10.1109/CSMR.2011.54</ee>
+<ee>https://www.wikidata.org/entity/Q58811798</ee>
+<crossref>conf/csmr/2011</crossref>
+<url>db/conf/csmr/csmr2011.html#Borg11</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/nodalida/Borg07" mdate="2019-09-17">
+<author pid="47/9384">Markus Borg</author>
+<title>Time Extraction from Real-time Generated Football Reports.</title>
+<pages>37-43</pages>
+<year>2007</year>
+<booktitle>NODALIDA</booktitle>
+<ee type="oa">https://www.aclweb.org/anthology/W07-2407/</ee>
+<crossref>conf/nodalida/2007</crossref>
+<url>db/conf/nodalida/nodalida2007.html#Borg07</url>
+</inproceedings>
+</r>
+<coauthors n="143" nc="4">
+<co c="0"><na f="a/Abdessalem:Raja_Ben" pid="184/8061">Raja Ben Abdessalem</na></co>
+<co c="0"><na f="=/=Aring=berg:Simon" pid="274/2084">Simon &#197;berg</na></co>
+<co c="0"><na f="a/Abualhaija:Sallam" pid="146/0408">Sallam Abualhaija</na></co>
+<co c="0"><na f="a/Al=eacute=groth:Emil" pid="133/4686">Emil Al&#233;groth</na></co>
+<co c="0"><na f="a/Andersson:Martin" pid="38/439">Martin Andersson</na></co>
+<co c="0"><na f="a/Ard=ouml=:Anders" pid="a/AndersArdo">Anders Ard&#246;</na></co>
+<co c="0"><na f="a/Assar:Sa=iuml=d" pid="a/SaidAssar">Sa&#239;d Assar</na></co>
+<co c="0"><na f="a/Axelsson:Jakob" pid="50/6797">Jakob Axelsson</na></co>
+<co c="2"><na f="b/Berg:Kristian" pid="237/9656">Kristian Berg</na></co>
+<co c="0"><na f="b/Berger_0001:Christian" pid="98/4996-1">Christian Berger 0001</na></co>
+<co c="0"><na f="b/Bjarnason:Elizabeth" pid="19/1459">Elizabeth Bjarnason</na></co>
+<co c="0"><na f="b/Bohlin:Markus" pid="87/6323">Markus Bohlin</na></co>
+<co c="0"><na f="b/Broden:Lina" pid="122/4848">Lina Broden</na></co>
+<co c="0"><na f="b/Broman:David" pid="13/3318">David Broman</na></co>
+<co c="1"><na f="b/Bronson:Joshua" pid="288/0469">Joshua Bronson</na></co>
+<co c="2"><na f="b/Brytting:Daniel" pid="225/7785">Daniel Brytting</na></co>
+<co c="0"><na f="c/Callele:David" pid="33/1367">David Callele</na></co>
+<co c="0"><na f="c/Carlson:Jan" pid="21/588">Jan Carlson</na></co>
+<co c="0"><na f="c/Causevic:Adnan" pid="65/1332">Adnan Causevic</na></co>
+<co c="0"><na f="c/Chatzipetrou:Panagiota" pid="09/10404">Panagiota Chatzipetrou</na></co>
+<co c="1"><na f="c/Christensson:Linus" pid="288/0375">Linus Christensson</na></co>
+<co c="0"><na f="c/Cicchetti:Antonio" pid="28/2455">Antonio Cicchetti</na></co>
+<co c="0"><na f="c/Cito:J=uuml=rgen" pid="150/6416">J&#252;rgen Cito</na></co>
+<co c="0"><na f="c/Claessens:Robbe" pid="293/9600">Robbe Claessens</na></co>
+<co c="0"><na f="c/Condori=Fern=aacute=ndez:Nelly" pid="48/6304">Nelly Condori-Fern&#225;ndez</na></co>
+<co c="0"><na f="d/Dalpiaz:Fabiano" pid="00/203">Fabiano Dalpiaz</na></co>
+<co c="0"><na f="d/Daneva:Maya" pid="17/3761">Maya Daneva</na></co>
+<co c="0"><na f="d/Daun:Marian" pid="03/8213">Marian Daun</na></co>
+<co c="0"><na f="d/Demeyer:Serge" pid="d/SDemeyer">Serge Demeyer</na></co>
+<co c="0"><na f="d/Dur=aacute=n:Boris" pid="70/5293">Boris Dur&#225;n</na></co>
+<co c="1"><na f="e/Ebabi:Hamid" pid="288/0046">Hamid Ebabi</na></co>
+<co c="0"><na f="e/Ekblom:Arvid" pid="286/8537">Arvid Ekblom</na></co>
+<co c="0"><na f="e/Eldh:Sigrid" pid="71/5135">Sigrid Eldh</na></co>
+<co c="0"><na f="e/Englund:Cristofer" pid="94/708">Cristofer Englund</na></co>
+<co c="0"><na f="e/Engstr=ouml=m:Emelie" pid="31/2107">Emelie Engstr&#246;m</na></co>
+<co c="0"><na f="e/Erman:Nicklas" pid="162/3696">Nicklas Erman</na></co>
+<co c="0"><na f="e/Espa=ntilde=a:Sergio" pid="16/2055">Sergio Espa&#241;a</na></co>
+<co c="0"><na f="f/Felderer:Michael" pid="49/2990">Michael Felderer</na></co>
+<co c="0"><na f="f/Feldt:Robert" pid="97/831">Robert Feldt</na></co>
+<co c="0"><na f="f/Forbrig:Peter" pid="f/PeterForbrig">Peter Forbrig</na></co>
+<co c="0"><na f="f/Franch:Xavier" pid="f/XavierFranch">Xavier Franch</na></co>
+<co c="0"><na f="f/Franke:Ulrik" pid="71/3754">Ulrik Franke</na></co>
+<co c="0"><na f="f/Fucci:Davide" pid="70/9016">Davide Fucci</na></co>
+<co c="0"><na f="g/Gao:Shenjian" pid="232/2321">Shenjian Gao</na></co>
+<co c="0"><na f="g/Garousi:Vahid" pid="88/1884">Vahid Garousi</na></co>
+<co c="0"><na f="g/Gay:Gregory" pid="39/7539">Gregory Gay</na></co>
+<co c="0"><na f="g/Gervasi:Vincenzo" pid="g/VincenzoGervasi">Vincenzo Gervasi</na></co>
+<co c="0"><na f="g/Ghafari:Mohammad" pid="119/3648">Mohammad Ghafari</na></co>
+<co c="0"><na f="g/Gorschek:Tony" pid="82/3504">Tony Gorschek</na></co>
+<co c="0" n="2"><na f="g/Gotel:Olly" pid="g/OrlenaGotel">Olly Gotel</na><na>Orlena Gotel</na></co>
+<co c="0"><na f="g/Groen:Eduard_C=" pid="160/0919">Eduard C. Groen</na></co>
+<co c="0"><na f="g/Guizzardi:Renata_S=_S=" pid="75/5043">Renata S. S. Guizzardi</na></co>
+<co c="3"><na f="g/Gulin:Petter" pid="178/3202">Petter Gulin</na></co>
+<co c="0"><na f="h/Hamidi:Golrokh" pid="271/0941">Golrokh Hamidi</na></co>
+<co c="2"><na f="h/Hansson:Daniel" pid="152/9960">Daniel Hansson</na></co>
+<co c="0"><na f="h/Hedlund:Ludwig" pid="274/1958">Ludwig Hedlund</na></co>
+<co c="0"><na f="h/Hell:Martin" pid="10/6874">Martin Hell</na></co>
+<co c="0"><na f="h/Henriksson:Jens" pid="226/0101">Jens Henriksson</na></co>
+<co c="0"><na f="h/Herrmann:Andrea" pid="24/3228">Andrea Herrmann</na></co>
+<co c="0"><na f="h/Horkoff:Jennifer" pid="92/5983">Jennifer Horkoff</na></co>
+<co c="0"><na f="h/H=ouml=st:Martin" pid="07/6594">Martin H&#246;st</na></co>
+<co c="0"><na f="i/Isaksson:Daniel" pid="274/1889">Daniel Isaksson</na></co>
+<co c="0"><na f="j/Jabangwe:Ronald" pid="67/10438">Ronald Jabangwe</na></co>
+<co c="0"><na f="j/Jamshidi:Pooyan" pid="57/2301">Pooyan Jamshidi</na></co>
+<co c="0"><na f="j/Jegeden:Fran=ccedil=ois=Xavier" pid="281/7084">Fran&#231;ois-Xavier Jegeden</na></co>
+<co c="0" n="2"><na f="j/Jiang:Zhen_Ming_=Jack=" pid="50/23">Zhen Ming (Jack) Jiang</na><na>Zhen Ming Jiang</na></co>
+<co c="0"><na f="j/Johansson:Jens" pid="150/9029">Jens Johansson</na></co>
+<co c="0"><na f="j/Jonsson:Leif" pid="28/11466">Leif Jonsson</na></co>
+<co c="0"><na f="k/Kaijser:Henrik" pid="175/3829">Henrik Kaijser</na></co>
+<co c="1"><na f="k/Karsberg:Martin" pid="287/9193">Martin Karsberg</na></co>
+<co c="0"><na f="k/Kirikova:Marite" pid="53/2482">Marite Kirikova</na></co>
+<co c="0"><na f="l/Larsson:Erik" pid="60/5665">Erik Larsson</na></co>
+<co c="0"><na f="l/Larsson:Jacob" pid="156/7374">Jacob Larsson</na></co>
+<co c="1"><na f="l/Lennartsson:Olof" pid="287/9280">Olof Lennartsson</na></co>
+<co c="0"><na f="l/Lennerstad:Iben" pid="200/8171">Iben Lennerstad</na></co>
+<co c="0"><na f="l/Levandowski:Christoffer" pid="123/5080">Christoffer Levandowski</na></co>
+<co c="0"><na f="l/Li_0002:Fei" pid="87/3534-2">Fei Li 0002</na></co>
+<co c="0"><na f="l/Lidfeldt:August" pid="274/1995">August Lidfeldt</na></co>
+<co c="0"><na f="l/Lisper:Bj=ouml=rn" pid="11/65">Bj&#246;rn Lisper</na></co>
+<co c="0"><na f="l/Loconsole:Annabella" pid="69/4553">Annabella Loconsole</na></co>
+<co c="0"><na f="l/L=ouml=nn:Henrik" pid="63/5205">Henrik L&#246;nn</na></co>
+<co c="0"><na f="l/Lwakatare:Lucy_Ellen" pid="162/6032">Lucy Ellen Lwakatare</na></co>
+<co c="0"><na f="m/Mahmoud:Anas" pid="22/8904">Anas Mahmoud</na></co>
+<co c="0"><na f="m/M=auml=ntyl=auml=:Mika" pid="m/MikaMantyla">Mika M&#228;ntyl&#228;</na></co>
+<co c="0"><na f="m/Marijan:Dusica" pid="51/11067">Dusica Marijan</na></co>
+<co c="0"><na f="m/Mich:Luisa" pid="89/5557">Luisa Mich</na></co>
+<co c="0"><na f="m/Moghadam:Mahshid_Helali" pid="195/2000">Mahshid Helali Moghadam</na></co>
+<co c="0"><na f="m/Moonen:Leon" pid="m/LeonMoonen">Leon Moonen</na></co>
+<co c="0"><na f="m/Morandini:Mirko" pid="20/5419">Mirko Morandini</na></co>
+<co c="0"><na f="n/Nejati:Shiva" pid="57/3937">Shiva Nejati</na></co>
+<co c="0"><na f="o/Oivo:Markku" pid="49/2801">Markku Oivo</na></co>
+<co c="3"><na f="o/Olofsson:Linus" pid="178/3194">Linus Olofsson</na></co>
+<co c="1"><na f="o/Olsson:Fredrik" pid="50/6540">Fredrik Olsson</na></co>
+<co c="0"><na f="o/Olsson_0001:Thomas" pid="31/5587-1">Thomas Olsson 0001</na></co>
+<co c="0"><na f="o/Opdahl:Andreas_L=" pid="12/256">Andreas L. Opdahl</na></co>
+<co c="0"><na f="o/Orucevic=Alagic:Alma" pid="07/9506">Alma Orucevic-Alagic</na></co>
+<co c="0"><na f="p/Paech:Barbara" pid="p/BarbaraPaech">Barbara Paech</na></co>
+<co c="0"><na f="p/Palomares:Cristina" pid="91/8213">Cristina Palomares</na></co>
+<co c="0"><na f="p/Papatheocharous:Efi" pid="76/302">Efi Papatheocharous</na></co>
+<co c="0"><na f="p/Perini:Anna" pid="16/4754">Anna Perini</na></co>
+<co c="0"><na f="p/Petersen:Kai" pid="63/2360">Kai Petersen</na></co>
+<co c="0"><na f="p/Pfahl:Dietmar" pid="p/DietmarPfahl">Dietmar Pfahl</na></co>
+<co c="0"><na f="p/Potena:Pasqualina" pid="49/2251">Pasqualina Potena</na></co>
+<co c="0"><na f="r/Regnell:Bj=ouml=rn" pid="09/1284">Bj&#246;rn Regnell</na></co>
+<co c="0"><na f="r/Ros:Rasmus" pid="200/8231">Rasmus Ros</na></co>
+<co c="0"><na f="r/Runeson:Per" pid="24/24">Per Runeson</na></co>
+<co c="0"><na f="s/Saadatmand:Mehrdad" pid="14/9944">Mehrdad Saadatmand</na></co>
+<co c="0"><na f="s/Sabaliauskaite:Giedre" pid="93/4352">Giedre Sabaliauskaite</na></co>
+<co c="0"><na f="s/Sabetzadeh:Mehrdad" pid="25/6367">Mehrdad Sabetzadeh</na></co>
+<co c="0"><na f="s/Sandahl:Kristian" pid="59/4490">Kristian Sandahl</na></co>
+<co c="0"><na f="s/Sathyamoorthy:Sankar_Raman" pid="237/9490">Sankar Raman Sathyamoorthy</na></co>
+<co c="0"><na f="s/Seffah:Ahmed" pid="45/4911">Ahmed Seffah</na></co>
+<co c="0"><na f="s/Sentilles:S=eacute=verine" pid="38/7036">S&#233;verine Sentilles</na></co>
+<co c="0"><na f="s/Shah:Syed_Muhammad_Ali" pid="93/5025">Syed Muhammad Ali Shah</na></co>
+<co c="0"><na f="s/Shang:Weiyi" pid="96/7305">Weiyi Shang</na></co>
+<co c="0"><na f="s/Shin_0001:Donghwan" pid="118/8296">Donghwan Shin 0001</na></co>
+<co c="0"><na f="s/Shukla:Rakesh" pid="00/6395">Rakesh Shukla</na></co>
+<co c="1"><na f="s/Sonnsj=ouml=:Elias" pid="287/9594">Elias Sonnsj&#246;</na></co>
+<co c="0" n="2"><na f="s/Staats:Matthew" pid="88/6925">Matthew Staats</na><na>Matt Staats</na></co>
+<co c="0"><na f="s/St=aring=lberg:Oskar" pid="239/4301">Oskar St&#229;lberg</na></co>
+<co c="0"><na f="s/Sulaman:Sardar_Muhammad" pid="128/4622">Sardar Muhammad Sulaman</na></co>
+<co c="0"><na f="s/Susi:Angelo" pid="53/5222">Angelo Susi</na></co>
+<co c="0"><na f="s/Svensson:John" pid="126/3880">John Svensson</na></co>
+<co c="2"><na f="s/Svensson:Oscar" pid="237/9584">Oscar Svensson</na></co>
+<co c="0"><na f="t/Tan:Yanwen" pid="232/2367">Yanwen Tan</na></co>
+<co c="0"><na f="t/Tenbergen:Bastian" pid="43/5436">Bastian Tenbergen</na></co>
+<co c="0"><na f="t/Tengstrand:Sara_Nilsson" pid="291/4379">Sara Nilsson Tengstrand</na></co>
+<co c="0"><na f="t/Tomaszewski:Piotr" pid="75/5273">Piotr Tomaszewski</na></co>
+<co c="0"><na f="t/Tornberg:Lars" pid="192/4731">Lars Tornberg</na></co>
+<co c="0"><na f="t/T=ouml=rnqvist:Jonas" pid="232/2044">Jonas T&#246;rnqvist</na></co>
+<co c="0"><na f="t/Trubiani:Catia" pid="05/410">Catia Trubiani</na></co>
+<co c="0" n="2"><na f="t/Tub=iacute=o:=Oacute=scar_Dieste" pid="24/1437">&#211;scar Dieste Tub&#237;o</na><na>Oscar Dieste</na></co>
+<co c="0"><na f="t/Tufvesson:Vanja" pid="162/3708">Vanja Tufvesson</na></co>
+<co c="0"><na f="u/Unterkalmsteiner:Michael" pid="08/8212">Michael Unterkalmsteiner</na></co>
+<co c="0"><na f="u/Ursing:Stig" pid="33/2715">Stig Ursing</na></co>
+<co c="0" n="2"><na f="v/Vara:Jose_Luis_de_la" pid="08/1361">Jose Luis de la Vara</na><na>Jos&#233; Luis de la Vara</na></co>
+<co c="0"><na f="v/Vercammen:Sten" pid="224/0227">Sten Vercammen</na></co>
+<co c="0"><na f="v/Vogelsang:Andreas" pid="19/8725">Andreas Vogelsang</na></co>
+<co c="0"><na f="w/Wernberg:Joakim" pid="266/1545">Joakim Wernberg</na></co>
+<co c="0"><na f="w/Wettinger:Johannes" pid="134/1173">Johannes Wettinger</na></co>
+<co c="0"><na f="w/Wnuk:Krzysztof" pid="86/2856">Krzysztof Wnuk</na></co>
+<co c="0"><na f="y/Yang:Ye" pid="55/4341">Ye Yang</na></co>
+<co c="0"><na f="y/Yu:Tingting" pid="51/8403">Tingting Yu</na></co>
+</coauthors>
+</dblpperson>
+
