@@ -4,6 +4,15 @@ from sortedcontainers import SortedSet
 #import SSSScholar
 
 class ScholarHandler(xml.sax.ContentHandler):
+
+    state = -1
+    current_pub_title = -1
+    current_pub_journal = -1
+    current_pub_booktitle = -1
+    current_pub_year = -1
+    current_pub_authors = []
+    current_pub_informal = False
+
     def __init__(self):
         param1="Markus Borg"
         param2="0"
@@ -36,36 +45,81 @@ class ScholarHandler(xml.sax.ContentHandler):
         self.title = ""
         self.year = ""
 
+    def clear_current_pub(self):
+        self.current_pub_title = -1
+        self.current_pub_journal = -1
+        self.current_pub_booktitle = -1
+        self.current_pub_year = -1
+        self.current_pub_authors = []
+        self.current_pub_informal = False
 
     def startElement(self, tag, attributes):
+        self.state = 0
+        #print("Starting element in state: " + str(self.state))
         self.CurrentData = tag
-        if tag == "article":
-            key = attributes["key"]
-            #print("Article:", key)
+        # Opening person
+        if tag == "dblpperson":
+            self.state = 1
+            author_name = attributes["name"]
+            author_id = attributes["pid"]
+            print("Author Name (ID):", author_name + " (" + str(author_id) + ")")
+        # Opening journal paper
+        elif tag == "article":
+            self.state = 2
+            self.clear_current_pub()
+            # filter arXiv preprints
+            attribute_list = attributes.getNames()
+            if "publtype" in attribute_list and attributes["publtype"] == "informal":
+                self.current_pub_informal = True
+                print("Skipping an arXiv preprint")
+        # Opening conference/workshop paper
         elif tag == "inproceedings":
-            key = attributes["key"]
-            #print("inproceedings:", key)
+            self.clear_current_pub()
+            self.state = 3
+        # Opening co-author
+        elif tag == "author":
+            self.state = 4
+            author_ID = attributes["pid"]
+            self.current_pub_authors.append(author_ID)
 
     def endElement(self, tag):
-        if self.CurrentData == "article":
-            #print("Article:", self.article)
-            title = self.article
-        elif self.CurrentData == "year":
-            #print("Year:", self.year)
-            year = self.year
+        # Closing person
+        if tag == "dblpperson":
+            self.state = 0
+        # Closing journal paper
+        elif tag == "article" and not self.current_pub_informal:
+            #(self, title, journal, booktitle, year, authors)
+            print("Journal: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
+            print("\tCo-authors: " + str(self.current_pub_authors))
+            self.state = 0
+        # Closing conference/workshop paper
+        elif tag == "inproceedings":
+            # (self, title, journal, booktitle, year, authors)
+            print("Conf/ws paper: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
+            print("\tCo-authors: " + str(self.current_pub_authors))
+            self.state = 0
+        # Closing year
+        elif tag == "title":
+            self.current_pub_title = self.title
+        # Closing year
+        elif tag == "year":
+            self.current_pub_year = self.year
         self.CurrentData = ""
 
+    # Over write the characters method to get the content of an XML element
     def characters(self, content):
         if self.CurrentData == "name":
             self.name = content
         elif self.CurrentData == "article":
+            self.article = content
+        elif self.CurrentData == "title":
             self.title = content
         elif self.CurrentData == "year":
             self.year = content
 
 if (__name__ == "__main__"):
     parser = xml.sax.make_parser()
-    # turn off namepsaces
+    # turn off namespaces
     parser.setFeature(xml.sax.handler.feature_namespaces, 0)
 
     Handler = ScholarHandler()

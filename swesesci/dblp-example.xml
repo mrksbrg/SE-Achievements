@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<dblpperson name="Markus Borg" pid="47/9384" n="112">
+<person key="homepages/47/9384" mdate="2021-04-28">
+<author pid="47/9384">Markus Borg</author>
+<url>http://mrksbrg.com/</url>
+<url>https://www.sics.se/people/markus-borg</url>
+<url>https://scholar.google.com/citations?user=VVBfGMYAAAAJ</url>
+<url>https://github.com/mrksbrg</url>
+<url>https://orcid.org/0000-0001-7879-4371</url>
+<url>https://www.wikidata.org/entity/Q57773704</url>
+<url>https://www.researcherid.com/rid/F-3609-2010</url>
+<url>https://publons.com/researcher/193377</url>
+<url>https://dl.acm.org/profile/81490647774</url>
+<note type="affiliation">RISE Research Institutes of Sweden AB, Lund, Sweden</note>
+</person>
+<r><article key="journals/infsof/HenrikssonBBTSE21" mdate="2021-01-07">
+<author pid="226/0101">Jens Henriksson</author>
+<author pid="98/4996-1">Christian Berger 0001</author>
+<author pid="47/9384">Markus Borg</author>
+<author pid="192/4731">Lars Tornberg</author>
+<author pid="237/9490">Sankar Raman Sathyamoorthy</author>
+<author pid="94/708">Cristofer Englund</author>
+<title>Performance analysis of out-of-distribution detection on trained neural networks.</title>
+<pages>106409</pages>
+<year>2021</year>
+<volume>130</volume>
+<journal>Inf. Softw. Technol.</journal>
+<ee>https://doi.org/10.1016/j.infsof.2020.106409</ee>
+<url>db/journals/infsof/infsof130.html#HenrikssonBBTSE21</url>
+</article>
+</r>
+<r><inproceedings key="conf/icst/BorgJAEHL21" mdate="2021-06-02">
+<author pid="47/9384">Markus Borg</author>
+<author pid="67/10438">Ronald Jabangwe</author>
+<author pid="274/2084">Simon &#197;berg</author>
+<author pid="286/8537">Arvid Ekblom</author>
+<author pid="274/1958">Ludwig Hedlund</author>
+<author pid="274/1995">August Lidfeldt</author>
+<title>Test Automation with Grad-CAM Heatmaps - A Future Pipe Segment in MLOps for Vision AI?</title>
+<pages>175-181</pages>
+<year>2021</year>
+<booktitle>ICST Workshops</booktitle>
+<ee>https://doi.org/10.1109/ICSTW52544.2021.00039</ee>
+<crossref>conf/icst/2021w</crossref>
+<url>db/conf/icst/icst2021w.html#BorgJAEHL21</url>
+</inproceedings>
+</r>
+<r><inproceedings key="conf/icst/BorgANJS21" mdate="2021-06-07">
+<author pid="47/9384">Markus Borg</author>
+<author pid="184/8061">Raja Ben Abdessalem</author>
+<author pid="57/3937">Shiva Nejati</author>
+<author pid="281/7084">Fran&#231;ois-Xavier Jegeden</author>
+<author pid="118/8296">Donghwan Shin 0001</author>
+<title>Digital Twins Are Not Monozygotic - Cross-Replicating ADAS Testing in Two Industry-Grade Automotive Simulators.</title>
+<pages>383-393</pages>
+<year>2021</year>
+<booktitle>ICST</booktitle>
+<ee>https://doi.org/10.1109/ICST49551.2021.00050</ee>
+<crossref>conf/icst/2021</crossref>
+<url>db/conf/icst/icst2021.html#BorgANJS21</url>
+</inproceedings>
+</r>
+<r><article publtype="informal" key="journals/corr/abs-2103-01837" mdate="2021-03-04">
+<author pid="47/9384">Markus Borg</author>
+<author pid="67/10438">Ronald Jabangwe</author>
+<author pid="274/2084">Simon &#197;berg</author>
+<author pid="286/8537">Arvid Ekblom</author>
+<author pid="274/1958">Ludwig Hedlund</author>
+<author pid="274/1995">August Lidfeldt</author>
+<title>Test Automation with Grad-CAM Heatmaps - A Future Pipe Segment in MLOps for Vision AI?</title>
+<year>2021</year>
+<volume>abs/2103.01837</volume>
+<journal>CoRR</journal>
+<ee type="oa">https://arxiv.org/abs/2103.01837</ee>
+<url>db/journals/corr/corr2103.html#abs-2103-01837</url>
+</article>
+</r>
+<r><article key="journals/infsof/BorgCWAGPSA19" mdate="2020-02-20">
+<author orcid="0000-0001-7879-4371" pid="47/9384">Markus Borg</author>
+<author orcid="0000-0002-0311-1502" pid="09/10404">Panagiota Chatzipetrou</author>
+<author orcid="0000-0003-3567-9300" pid="86/2856">Krzysztof Wnuk</author>
+<author pid="133/4686">Emil Al&#233;groth</author>
+<author pid="82/3504">Tony Gorschek</author>
+<author pid="76/302">Efi Papatheocharous</author>
+<author pid="93/5025">Syed Muhammad Ali Shah</author>
+<author pid="50/6797">Jakob Axelsson</author>
+<title>Selecting component sourcing options: A survey of software engineering's broader make-or-buy decisions.</title>
+<pages>18-34</pages>
+<year>2019</year>
+<volume>112</volume>
+<journal>Inf. Softw. Technol.</journal>
+<ee>https://doi.org/10.1016/j.infsof.2019.03.015</ee>
+<url>db/journals/infsof/infsof112.html#BorgCWAGPSA19</url>
+</article>
+</r>
+<r><inproceedings key="conf/nodalida/Borg07" mdate="2019-09-17">
+<author pid="47/9384">Markus Borg</author>
+<title>Time Extraction from Real-time Generated Football Reports.</title>
+<pages>37-43</pages>
+<year>2007</year>
+<booktitle>NODALIDA</booktitle>
+<ee type="oa">https://www.aclweb.org/anthology/W07-2407/</ee>
+<crossref>conf/nodalida/2007</crossref>
+<url>db/conf/nodalida/nodalida2007.html#Borg07</url>
+</inproceedings>
+</r>
+<coauthors n="143" nc="4">
+<co c="0"><na f="a/Abdessalem:Raja_Ben" pid="184/8061">Raja Ben Abdessalem</na></co>
+<co c="0"><na f="=/=Aring=berg:Simon" pid="274/2084">Simon &#197;berg</na></co>
+<co c="0"><na f="a/Abualhaija:Sallam" pid="146/0408">Sallam Abualhaija</na></co>
+<co c="0"><na f="a/Al=eacute=groth:Emil" pid="133/4686">Emil Al&#233;groth</na></co>
+<co c="0"><na f="a/Andersson:Martin" pid="38/439">Martin Andersson</na></co>
+<co c="0"><na f="a/Ard=ouml=:Anders" pid="a/AndersArdo">Anders Ard&#246;</na></co>
+<co c="0"><na f="a/Assar:Sa=iuml=d" pid="a/SaidAssar">Sa&#239;d Assar</na></co>
+<co c="0"><na f="a/Axelsson:Jakob" pid="50/6797">Jakob Axelsson</na></co>
+<co c="2"><na f="b/Berg:Kristian" pid="237/9656">Kristian Berg</na></co>
+<co c="0"><na f="b/Berger_0001:Christian" pid="98/4996-1">Christian Berger 0001</na></co>
+<co c="0"><na f="b/Bjarnason:Elizabeth" pid="19/1459">Elizabeth Bjarnason</na></co>
+<co c="0"><na f="b/Bohlin:Markus" pid="87/6323">Markus Bohlin</na></co>
+<co c="0"><na f="b/Broden:Lina" pid="122/4848">Lina Broden</na></co>
+<co c="0"><na f="b/Broman:David" pid="13/3318">David Broman</na></co>
+<co c="1"><na f="b/Bronson:Joshua" pid="288/0469">Joshua Bronson</na></co>
+<co c="2"><na f="b/Brytting:Daniel" pid="225/7785">Daniel Brytting</na></co>
+<co c="0"><na f="c/Callele:David" pid="33/1367">David Callele</na></co>
+<co c="0"><na f="c/Carlson:Jan" pid="21/588">Jan Carlson</na></co>
+</coauthors>
+</dblpperson>
+
