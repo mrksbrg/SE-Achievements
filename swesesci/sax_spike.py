@@ -5,18 +5,17 @@ from sortedcontainers import SortedSet
 
 class ScholarHandler(xml.sax.ContentHandler):
 
-    state = -1
-    current_pub_title = -1
-    current_pub_journal = -1
-    current_pub_booktitle = -1
-    current_pub_year = -1
-    current_pub_authors = []
-    current_pub_informal = False
-
     def __init__(self):
-        param1="Markus Borg"
-        param2="0"
-        param3="RISE"
+        self.current_pub_title = -1
+        self.current_pub_journal = -1
+        self.current_pub_booktitle = -1
+        self.current_pub_year = -1
+        self.current_pub_authors = []
+        self.current_pub_informal = False
+
+        #param1="Markus Borg"
+        #param2="0"
+        #param3="RISE"
         #scholar = SSSScholar(param1, param2, param3)
 
         # all this should be added during parsing
@@ -39,11 +38,6 @@ class ScholarHandler(xml.sax.ContentHandler):
         # self.nbr_first_sci = -1
         #
         # self.publications = SortedSet()
-
-        # temp
-        self.name = ""
-        self.title = ""
-        self.year = ""
 
     def clear_current_pub(self):
         self.current_pub_title = -1
@@ -125,5 +119,5 @@ if (__name__ == "__main__"):
     Handler = ScholarHandler()
     parser.setContentHandler(Handler)
 
-    parser.parse("9384.xml")
+    parser.parse("dblp-example.xml")
     print("Done")

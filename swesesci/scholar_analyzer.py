@@ -9,10 +9,10 @@ import csv
 
 from sklearn.feature_extraction.text import CountVectorizer
 
+import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-import nltk
 
 from sklearn.decomposition import LatentDirichletAllocation as LDA
 
