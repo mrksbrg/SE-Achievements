@@ -1,4 +1,5 @@
 import xml.sax
+import datetime
 from sortedcontainers import SortedSet
 import publication
 #import scholar
@@ -55,7 +56,14 @@ class ScholarHandler(xml.sax.ContentHandler):
         self.current_pub_authors = []
         self.current_pub_informal = False
 
-    def 
+    # Get a list of the last decade's titles
+    def get_recent_titles(self):
+        recent_publications = []
+        now = datetime.datetime.now()
+        for p in self.publications:
+            if int(p.year) >= int(now.year) - 10:
+                recent_publications.append(p)
+        return recent_publications
 
     def startElement(self, tag, attributes):
         #print("Starting element in state: " + str(self.state))
@@ -135,4 +143,6 @@ if (__name__ == "__main__"):
     print("Author with " + str(handler.dblp_entries) + " DBLP entries and " + str(count) + " publications.")
     for p in handler.publications:
         print(type(p))
+
+    print("Recent work: " + str(handler.get_recent_titles()))
     print("Done")
