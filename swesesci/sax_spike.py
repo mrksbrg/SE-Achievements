@@ -2,7 +2,7 @@ import xml.sax
 import datetime
 from sortedcontainers import SortedSet
 import publication
-#import scholar
+import scholar
 
 class ScholarHandler(xml.sax.ContentHandler):
 
@@ -19,8 +19,6 @@ class ScholarHandler(xml.sax.ContentHandler):
         self.current_pub_year = -1
         self.current_pub_authors = []
         self.current_pub_informal = False
-
-
 
         #param1="Markus Borg"
         #param2="0"
