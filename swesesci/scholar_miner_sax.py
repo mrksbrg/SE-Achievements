@@ -21,6 +21,12 @@ class ScholarMiner:
         self.sss_affiliations = sss_affiliations
         self.coauthors = Counter()
 
+    def parse_scholars(self):
+        print(str(len(self.sss_scholars)) + " scholars to parse. Let's go!")
+        for scholar in self.sss_scholars:
+            # SAX parse the URL
+            print("Parsing scholar: " + scholar.name)
+
     def process_group(self):
         nbr_remaining = len(self.sss_scholars)
         attempts = 0

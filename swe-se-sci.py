@@ -60,7 +60,7 @@ if (len(sys.argv) == 1):
     add_sss_scholars(lu_list, "Lund University")
     bth_list = ["Claes Wohlin", "Tony Gorschek", "Krzysztof Wnuk", "Michael Unterkalmsteiner", "Michael Mattsson",
                 "Mikael Svahnberg", "Darja Smite", "Jürgen Börstler", "Emil Alégroth", "Ali Nauman", "Fabian Fagerholm", "Javier Gonzalez-Huerta", "Muhammad Usman",
-                "Davide Fucci", "Daniel Méndez Fernández", "Nauman Bin Ali", "Deepika Badampudi", "Emilia Mendes", "Ludwik Kuzniarz", "Lars Lundberg"]
+                "Davide Fucci", "Daniel Méndez Fernández", "Nauman Bin Ali", "Deepika Badampudi", "Emilia Mendes", "Ludwik Kuzniarz", "Lars Lundberg", "Niklas Lavesson"]
     add_sss_scholars(bth_list, "Blekinge Institute of Technology")
     gbg_list = ["Rogardt Heldal", "Kenneth Lind", "Patrizio Pelliccione", "Miroslaw Staron", "Jan-Philipp Steghöfer", "Robert Feldt", "Richard Torkar", "Ivica Crnkovic",
                      "Richard Berntsson-Svensson", "Francisco Gomes de Oliveira Neto", "Gregory Gay", "Jan Bosch", "Jennifer Horkoff", "John Hughes",
@@ -85,7 +85,7 @@ if (len(sys.argv) == 1):
     add_sss_scholars(skovde_list, "Skövde University")
     karlstad_list = ["Sebastian Herold", "Bestoun S. Ahmed", "Martin Blom", "Muhammad Ovais Ahmad"]
     add_sss_scholars(karlstad_list, "Karlstad University")
-    jonkoping_list = ["Anders Adlemo", "Niklas Lavesson"]
+    jonkoping_list = ["Anders Adlemo"]
     add_sss_scholars(jonkoping_list, "Jönköping University")
     orebro_list = ["Panagiota Chatzipetrou"]
     add_sss_scholars(orebro_list, "Örebro University")
