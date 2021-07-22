@@ -16,7 +16,6 @@ from collections import namedtuple
 from sortedcontainers import SortedSet
 
 from . import publication
-#from .publication import SSSPublication
 
 class ScholarMiner(xml.sax.ContentHandler):
 
@@ -45,17 +44,17 @@ class ScholarMiner(xml.sax.ContentHandler):
         for scholar in self.sss_scholars:
             # SAX parse the URL
             print("Parsing scholar: " + scholar.name)
-            parser.parse("dblp-example.xml")
-            #count = 0
-            #for i in self.publications:
-            #    count = count + 1
+            parser.parse(scholar.url)
+            count = 0
+            for i in self.publications:
+                count = count + 1
 
-            #print("Author with " + str(handler.dblp_entries) + " DBLP entries and " + str(count) + " publications.")
-            #for p in handler.publications:
-            #    print(type(p))
+            print("Author with " + str(self.dblp_entries) + " DBLP entries and " + str(count) + " publications.")
+            for p in self.publications:
+                print(type(p))
 
-            #print("Recent work: " + str(handler.get_recent_titles()))
-            #print("Done")
+            print("Recent work: " + str(self.get_recent_titles()))
+            print("Done")
 
     def clear_current_pub(self):
         self.current_pub_title = -1
