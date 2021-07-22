@@ -6,14 +6,19 @@ Created on Wed Jul 21 2021
 """
 
 import time
+import datetime
+import xml.sax
 import pandas as pd
 from collections import Counter
 import requests
 from lxml import etree
 from collections import namedtuple
-from .publication import SSSPublication
+from sortedcontainers import SortedSet
 
-class ScholarMiner:
+from . import publication
+#from .publication import SSSPublication
+
+class ScholarMiner(xml.sax.ContentHandler):
 
     def __init__(self, filename_prefix, sss_scholars, sss_affiliations):
         self.filename_prefix = filename_prefix
@@ -21,11 +26,121 @@ class ScholarMiner:
         self.sss_affiliations = sss_affiliations
         self.coauthors = Counter()
 
+        self.dblp_entries = 0
+        self.nbr_publications = 0
+        self.publications = SortedSet()
+
+        # Some information to keep track of while parsing publications
+        self.current_pub_title = -1
+        self.current_pub_journal = -1
+        self.current_pub_booktitle = -1
+        self.current_pub_year = -1
+        self.current_pub_authors = []
+        self.current_pub_informal = False
+
     def parse_scholars(self):
         print(str(len(self.sss_scholars)) + " scholars to parse. Let's go!")
+        parser = xml.sax.make_parser()
+        parser.setContentHandler(self)
         for scholar in self.sss_scholars:
             # SAX parse the URL
             print("Parsing scholar: " + scholar.name)
+            parser.parse("dblp-example.xml")
+            #count = 0
+            #for i in self.publications:
+            #    count = count + 1
+
+            #print("Author with " + str(handler.dblp_entries) + " DBLP entries and " + str(count) + " publications.")
+            #for p in handler.publications:
+            #    print(type(p))
+
+            #print("Recent work: " + str(handler.get_recent_titles()))
+            #print("Done")
+
+    def clear_current_pub(self):
+        self.current_pub_title = -1
+        self.current_pub_journal = -1
+        self.current_pub_booktitle = -1
+        self.current_pub_year = -1
+        self.current_pub_authors = []
+        self.current_pub_informal = False
+
+    # Get a list of the last decade's titles
+    def get_recent_titles(self):
+        recent_publications = []
+        now = datetime.datetime.now()
+        for p in self.publications:
+            if int(p.year) >= int(now.year) - 10:
+                recent_publications.append(p)
+        return recent_publications
+
+    def startElement(self, tag, attributes):
+        #print("Starting element in state: " + str(self.state))
+        self.CurrentData = tag
+        # Opening person
+        if tag == "dblpperson":
+            author_name = attributes["name"]
+            author_id = attributes["pid"]
+            print("Author Name (ID):", author_name + " (" + str(author_id) + ")")
+        # Opening journal paper
+        elif tag == "article":
+            self.dblp_entries = self.dblp_entries + 1
+            self.clear_current_pub()
+            # filter arXiv preprints
+            attribute_list = attributes.getNames()
+            if "publtype" in attribute_list and attributes["publtype"] == "informal":
+                self.current_pub_informal = True
+                print("Skipping an arXiv preprint")
+        # Opening conference/workshop paper
+        elif tag == "inproceedings":
+            self.dblp_entries = self.dblp_entries + 1
+            self.clear_current_pub()
+        # Opening co-author
+        elif tag == "author":
+            author_ID = attributes["pid"]
+            self.current_pub_authors.append(author_ID)
+
+    def endElement(self, tag):
+        # Closing journal paper
+        if tag == "article" and not self.current_pub_informal:
+            #(self, title, journal, booktitle, year, authors)
+            print("Journal: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
+            print("\tCo-authors: " + str(self.current_pub_authors))
+            self.publications.add(
+                publication.SSSPublication(self.title, self.current_pub_journal, None, self.current_pub_year,
+                                           self.current_pub_authors))
+        # Closing conference/workshop paper
+        elif tag == "inproceedings":
+            # (self, title, journal, booktitle, year, authors)
+            print("Conf/ws paper: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
+            print("\tCo-authors: " + str(self.current_pub_authors))
+            self.publications.add(
+                publication.SSSPublication(self.title, None, self.current_pub_booktitle, self.current_pub_year,
+                                           self.current_pub_authors))
+        # Closing year
+        elif tag == "title":
+            self.current_pub_title = self.title
+        # Closing year
+        elif tag == "year":
+            self.current_pub_year = self.year
+        self.CurrentData = ""
+
+    # Overwrite the characters method to get the content of an XML element
+    def characters(self, content):
+        if self.CurrentData == "name":
+            self.name = content
+        elif self.CurrentData == "article":
+            self.article = content
+        elif self.CurrentData == "title":
+            self.title = content
+        elif self.CurrentData == "year":
+            self.year = content
+
+
+
+
+
+    ### OLD
 
     def process_group(self):
         nbr_remaining = len(self.sss_scholars)

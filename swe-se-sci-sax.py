@@ -8,6 +8,7 @@ Created on Wed Jul 21 2021
 import sys
 import os.path
 from datetime import date
+import xml.sax
 from swesesci.scholar_sax import SSSScholar
 from swesesci.affiliation import SSSAffiliation
 from swesesci.scholar_miner_sax import ScholarMiner
@@ -57,33 +58,36 @@ filename_prefix = os.path.join(subdirectory, str(date.today()) + "_sss_")
 
 # 1. Mine the scholars, write the results
 print("####### Step 1 - Mining scholars #######")
+parser = xml.sax.make_parser()
+# turn off namespaces
+parser.setFeature(xml.sax.handler.feature_namespaces, 0)
 miner = ScholarMiner(filename_prefix, sss_scholars, sss_affiliations)
-miner.process_group()
-miner.write_results()
-sss_scholars = miner.get_scholars()
+miner.parse_scholars()
+#miner.write_results()
+#sss_scholars = miner.get_scholars()
 
 # 2. Analyze the scholars, remove affiliations with no first-authored SCI publications, write the results
-print("\n####### Step 2 - Analyzing scholars #######")
-for scholar in sss_scholars:
-    curr = next((x for x in sss_affiliations if scholar.affiliation == x.name), None)
-    curr.nbr_first_sci += scholar.nbr_first_sci
-tmp_affiliations = []
-for affiliation in sss_affiliations:
+#print("\n####### Step 2 - Analyzing scholars #######")
+#for scholar in sss_scholars:
+#    curr = next((x for x in sss_affiliations if scholar.affiliation == x.name), None)
+#    curr.nbr_first_sci += scholar.nbr_first_sci
+#tmp_affiliations = []
+#for affiliation in sss_affiliations:
     # keep only affiliations with SSS scholars
-    if affiliation.nbr_first_sci > 0:
-        tmp_affiliations.append(affiliation)
-sss_affiliations = tmp_affiliations
-analyzer = ScholarAnalyzer(filename_prefix, sss_scholars, sss_affiliations)
-analyzer.analyze_individual_research_interests()
-analyzer.analyze_affiliation_topics()
-analyzer.write_results()
+#    if affiliation.nbr_first_sci > 0:
+#        tmp_affiliations.append(affiliation)
+#sss_affiliations = tmp_affiliations
+#analyzer = ScholarAnalyzer(filename_prefix, sss_scholars, sss_affiliations)
+#analyzer.analyze_individual_research_interests()
+#analyzer.analyze_affiliation_topics()
+#analyzer.write_results()
 
 # 3. Tabulate the scholars, write the results
-print("\n####### Step 3 - Tabulating scholars #######")
-sss_scholars.sort(reverse=True)
-sss_affiliations.sort(reverse=True)
-tabulator = ScholarTabulator(filename_prefix, sss_scholars, sss_affiliations)
-tabulator.write_tables()
+#print("\n####### Step 3 - Tabulating scholars #######")
+#sss_scholars.sort(reverse=True)
+#sss_affiliations.sort(reverse=True)
+#tabulator = ScholarTabulator(filename_prefix, sss_scholars, sss_affiliations)
+#tabulator.write_tables()
 
 # 4. Visualize the results, save to files
 #visualizer = ScholarVisualizer(filename_prefix)
