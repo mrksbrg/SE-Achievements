@@ -38,18 +38,23 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.current_pub_informal = False
 
     def parse_scholars(self):
-        print(str(len(self.sss_scholars)) + " scholars to parse. Let's go!")
+        nbr_scholars = len(self.sss_scholars)
+        i = 0
+        print(str(nbr_scholars) + " scholars to parse. Let's go!")
+        self.print_progress_bar(i, nbr_scholars)
         parser = xml.sax.make_parser()
         parser.setContentHandler(self)
         for scholar in self.sss_scholars:
+            i = i + 1
             # SAX parse the URL
-            print("Parsing scholar: " + scholar.name)
+            #print("Parsing scholar: " + scholar.name + "\n")
             parser.parse(scholar.url)
             count = 0
-            for i in self.publications:
+            for j in self.publications:
                 count = count + 1
 
-            print("Author with " + str(self.dblp_entries) + " DBLP entries and " + str(count) + " publications.")
+            #print("Author with " + str(self.dblp_entries) + " DBLP entries and " + str(count) + " publications.\n")
+            self.print_progress_bar(i, nbr_scholars)
             #for p in self.publications:
             #    print(type(p))
 
