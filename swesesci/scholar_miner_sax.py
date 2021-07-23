@@ -16,6 +16,9 @@ from collections import namedtuple
 from sortedcontainers import SortedSet
 
 from . import publication
+from .publication import SSSPublication
+from .scholar_sax import SSSScholar
+
 
 class ScholarMiner(xml.sax.ContentHandler):
 
@@ -25,9 +28,15 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.sss_affiliations = sss_affiliations
         self.coauthors = Counter()
 
-        self.dblp_entries = 0
-        self.nbr_publications = 0
-        self.publications = SortedSet()
+        # Some information to keep track of while parsing scholars
+        self.current_scholar = None
+        self.current_scholar_name = ""
+        self.current_scholar_running_nbr = -1
+        self.current_scholar_affiliation = ""
+        self.current_scholar_url = ""
+        self.current_sss_dblp_entries = 0
+        self.current_sss_nbr_publications = 0
+        self.current_sss_publications = SortedSet()
 
         # Some information to keep track of while parsing publications
         self.current_pub_title = -1
@@ -46,12 +55,13 @@ class ScholarMiner(xml.sax.ContentHandler):
         parser.setContentHandler(self)
         for scholar in self.sss_scholars:
             i = i + 1
+            self.current_scholar_name = scholar.name
+            self.current_scholar_running_nbr = scholar.running_number
+            self.current_scholar_affiliation = scholar.affiliation
+            self.current_scholar_url = scholar.url
             # SAX parse the URL
             #print("Parsing scholar: " + scholar.name + "\n")
             parser.parse(scholar.url)
-            count = 0
-            for j in self.publications:
-                count = count + 1
 
             #print("Author with " + str(self.dblp_entries) + " DBLP entries and " + str(count) + " publications.\n")
             self.print_progress_bar(i, nbr_scholars)
@@ -60,6 +70,11 @@ class ScholarMiner(xml.sax.ContentHandler):
 
             #print("Recent work: " + str(self.get_recent_titles()))
             #print("Done")
+
+    def clear_current_scholar(self):
+        self.current_sss_dblp_entries = -1
+        self.current_sss_nbr_publications = -1
+        self.current_sss_publications = SortedSet()
 
     def clear_current_pub(self):
         self.current_pub_title = -1
@@ -85,10 +100,11 @@ class ScholarMiner(xml.sax.ContentHandler):
         if tag == "dblpperson":
             author_name = attributes["name"]
             author_id = attributes["pid"]
+            self.current_scholar = SSSScholar(self.current_scholar_name, self.current_scholar_running_nbr, author_id, self.current_scholar_affiliation, self.current_scholar_url)
             print("Author Name (ID):", author_name + " (" + str(author_id) + ")")
         # Opening journal paper
         elif tag == "article":
-            self.dblp_entries = self.dblp_entries + 1
+            self.current_sss_dblp_entries = self.current_sss_dblp_entries + 1
             self.clear_current_pub()
             # filter arXiv preprints
             attribute_list = attributes.getNames()
@@ -97,7 +113,7 @@ class ScholarMiner(xml.sax.ContentHandler):
                 #print("Skipping an arXiv preprint")
         # Opening conference/workshop paper
         elif tag == "inproceedings":
-            self.dblp_entries = self.dblp_entries + 1
+            self.current_sss_dblp_entries = self.current_sss_dblp_entries + 1
             self.clear_current_pub()
         # Opening co-author
         elif tag == "author":
@@ -110,16 +126,19 @@ class ScholarMiner(xml.sax.ContentHandler):
             #(self, title, journal, booktitle, year, authors)
             #print("Journal: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
             #print("\tCo-authors: " + str(self.current_pub_authors))
-            self.publications.add(
-                publication.SSSPublication(self.title, self.current_pub_journal, None, self.current_pub_year,
+            current_publication = SSSPublication(self.current_pub_title, self.current_pub_journal, self.current_pub_booktitle, self.current_pub_year, self.current_pub_authors)
+            self.current_scholar.add_publication(current_publication)
+            #self.coauthors = self.coauthors + Counter(p.authors)
+            self.current_sss_publications.add(
+                publication.SSSPublication(self.current_pub_title, self.current_pub_journal, None, self.current_pub_year,
                                            self.current_pub_authors))
         # Closing conference/workshop paper
         elif tag == "inproceedings":
             # (self, title, journal, booktitle, year, authors)
             #print("Conf/ws paper: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
             #print("\tCo-authors: " + str(self.current_pub_authors))
-            self.publications.add(
-                publication.SSSPublication(self.title, None, self.current_pub_booktitle, self.current_pub_year,
+            self.current_sss_publications.add(
+                publication.SSSPublication(self.current_pub_title, None, self.current_pub_booktitle, self.current_pub_year,
                                            self.current_pub_authors))
         # Closing year
         elif tag == "title":
@@ -250,6 +269,8 @@ class ScholarMiner(xml.sax.ContentHandler):
             scholar.clear()
 
     def write_results(self):
+        print("Writing results to file")
+
         tmp = open(self.filename_prefix + "1_miner.txt","w+")
         for scholar in self.sss_scholars:
             tmp.write(scholar.name + "\n")

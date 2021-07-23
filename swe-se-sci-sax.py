@@ -64,7 +64,7 @@ parser = xml.sax.make_parser()
 parser.setFeature(xml.sax.handler.feature_namespaces, 0)
 miner = ScholarMiner(filename_prefix, sss_scholars, sss_affiliations)
 miner.parse_scholars()
-#miner.write_results()
+miner.write_results()
 #sss_scholars = miner.get_scholars()
 
 # 2. Analyze the scholars, remove affiliations with no first-authored SCI publications, write the results
