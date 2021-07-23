@@ -50,11 +50,11 @@ class ScholarMiner(xml.sax.ContentHandler):
                 count = count + 1
 
             print("Author with " + str(self.dblp_entries) + " DBLP entries and " + str(count) + " publications.")
-            for p in self.publications:
-                print(type(p))
+            #for p in self.publications:
+            #    print(type(p))
 
-            print("Recent work: " + str(self.get_recent_titles()))
-            print("Done")
+            #print("Recent work: " + str(self.get_recent_titles()))
+            #print("Done")
 
     def clear_current_pub(self):
         self.current_pub_title = -1
@@ -89,7 +89,7 @@ class ScholarMiner(xml.sax.ContentHandler):
             attribute_list = attributes.getNames()
             if "publtype" in attribute_list and attributes["publtype"] == "informal":
                 self.current_pub_informal = True
-                print("Skipping an arXiv preprint")
+                #print("Skipping an arXiv preprint")
         # Opening conference/workshop paper
         elif tag == "inproceedings":
             self.dblp_entries = self.dblp_entries + 1
@@ -103,16 +103,16 @@ class ScholarMiner(xml.sax.ContentHandler):
         # Closing journal paper
         if tag == "article" and not self.current_pub_informal:
             #(self, title, journal, booktitle, year, authors)
-            print("Journal: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
-            print("\tCo-authors: " + str(self.current_pub_authors))
+            #print("Journal: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
+            #print("\tCo-authors: " + str(self.current_pub_authors))
             self.publications.add(
                 publication.SSSPublication(self.title, self.current_pub_journal, None, self.current_pub_year,
                                            self.current_pub_authors))
         # Closing conference/workshop paper
         elif tag == "inproceedings":
             # (self, title, journal, booktitle, year, authors)
-            print("Conf/ws paper: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
-            print("\tCo-authors: " + str(self.current_pub_authors))
+            #print("Conf/ws paper: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
+            #print("\tCo-authors: " + str(self.current_pub_authors))
             self.publications.add(
                 publication.SSSPublication(self.title, None, self.current_pub_booktitle, self.current_pub_year,
                                            self.current_pub_authors))

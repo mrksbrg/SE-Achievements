@@ -38,8 +38,9 @@ def add_sss_scholars(process_list, affiliation):
 
 # Swe-SE-SCI entry point
 if (len(sys.argv) == 1):
-    fast_list = [("Stefan Cedergren", "https://dblp.org/pid/116/6013.xml")
-                 ]
+    fast_list = [("Stefan Cedergren", "https://dblp.org/pid/116/6013.xml"),
+                 ("Markus Borg", "https://dblp.org/pid/47/9384.xml"),
+                 ("Krysztof Wnuk", "https://dblp.org/pid/86/2856.xml")]
     add_sss_scholars(fast_list, "Fast")
 
 # Process scholar provided in the argument
