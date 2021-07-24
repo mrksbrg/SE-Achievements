@@ -26,7 +26,9 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.filename_prefix = filename_prefix
         self.sss_scholars = sss_scholars
         self.sss_affiliations = sss_affiliations
-        self.coauthors = Counter()
+
+        self.global_SSS_coauthors = Counter()
+        self.global_SSS_coathors2 = Counter()
 
         # Some information to keep track of while parsing scholars
         self.current_scholar = None
@@ -37,6 +39,9 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.current_sss_dblp_entries = 0
         self.current_sss_nbr_publications = 0
         self.current_sss_publications = SortedSet()
+        self.current_scholar_coauthors = Counter()
+        self.current_scholar_coauthors2 = Counter()
+        self.current_scholar_coauthors3 = Counter()
 
         # Some information to keep track of while parsing publications
         self.current_pub_title = -1
@@ -48,7 +53,7 @@ class ScholarMiner(xml.sax.ContentHandler):
 
     def parse_scholars(self):
         nbr_scholars = len(self.sss_scholars)
-        i = 0
+        i = 0 # for the progress bar
         print(str(nbr_scholars) + " scholars to parse. Let's go!")
         self.print_progress_bar(i, nbr_scholars)
         parser = xml.sax.make_parser()
@@ -60,16 +65,8 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.current_scholar_affiliation = scholar.affiliation
             self.current_scholar_url = scholar.url
             # SAX parse the URL
-            #print("Parsing scholar: " + scholar.name + "\n")
             parser.parse(scholar.url)
-
-            #print("Author with " + str(self.dblp_entries) + " DBLP entries and " + str(count) + " publications.\n")
             self.print_progress_bar(i, nbr_scholars)
-            #for p in self.publications:
-            #    print(type(p))
-
-            #print("Recent work: " + str(self.get_recent_titles()))
-            #print("Done")
 
     def clear_current_scholar(self):
         self.current_sss_dblp_entries = -1
@@ -94,7 +91,6 @@ class ScholarMiner(xml.sax.ContentHandler):
         return recent_publications
 
     def startElement(self, tag, attributes):
-        #print("Starting element in state: " + str(self.state))
         self.CurrentData = tag
         # Opening person
         if tag == "dblpperson":
@@ -109,8 +105,7 @@ class ScholarMiner(xml.sax.ContentHandler):
             # filter arXiv preprints
             attribute_list = attributes.getNames()
             if "publtype" in attribute_list and attributes["publtype"] == "informal":
-                self.current_pub_informal = True
-                #print("Skipping an arXiv preprint")
+                self.current_pub_informal = True  # skipping arXiv preprints
         # Opening conference/workshop paper
         elif tag == "inproceedings":
             self.current_sss_dblp_entries = self.current_sss_dblp_entries + 1
@@ -118,17 +113,20 @@ class ScholarMiner(xml.sax.ContentHandler):
         # Opening co-author
         elif tag == "author":
             author_ID = attributes["pid"]
-            self.current_pub_authors.append(author_ID)
+            self.current_pub_authors.append((self.current_scholar_name, author_ID))
 
     def endElement(self, tag):
+        # Closing coauthors
+        if tag == "coauthors":
+            for i in self.current_scholar_coauthors3:
+                print(i)
         # Closing journal paper
-        if tag == "article" and not self.current_pub_informal:
-            #(self, title, journal, booktitle, year, authors)
-            #print("Journal: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
-            #print("\tCo-authors: " + str(self.current_pub_authors))
+        elif tag == "article" and not self.current_pub_informal:
             current_publication = SSSPublication(self.current_pub_title, self.current_pub_journal, self.current_pub_booktitle, self.current_pub_year, self.current_pub_authors)
             self.current_scholar.add_publication(current_publication)
-            #self.coauthors = self.coauthors + Counter(p.authors)
+            self.current_scholar_coauthors = self.current_scholar_coauthors + Counter(self.current_pub_authors)
+            self.current_scholar_coauthors2 = self.current_scholar_coauthors2 + Counter(self.current_pub_authors)
+            self.global_SSS_coauthors = self.global_SSS_coauthors + Counter(self.current_scholar_coauthors)
             self.current_sss_publications.add(
                 publication.SSSPublication(self.current_pub_title, self.current_pub_journal, None, self.current_pub_year,
                                            self.current_pub_authors))
@@ -146,6 +144,10 @@ class ScholarMiner(xml.sax.ContentHandler):
         # Closing year
         elif tag == "year":
             self.current_pub_year = self.year
+        # Closing coauthor
+        elif tag == "na":
+            print(self.na)
+            self.current_scholar_coauthors3 = self.current_scholar_coauthors3 + Counter(str(self.na))
         self.CurrentData = ""
 
     # Overwrite the characters method to get the content of an XML element
@@ -158,6 +160,8 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.title = content
         elif self.CurrentData == "year":
             self.year = content
+        elif self.CurrentData == "na":
+            self.na = content
 
 
 
@@ -286,14 +290,14 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.write_author_and_affiliation_titles()
 
         # Write co-authors to csv-file
-        (pd.DataFrame.from_dict(data=self.coauthors, orient='index').to_csv(self.filename_prefix + "1_coauthors.csv", sep=';', header=False))
+        (pd.DataFrame.from_dict(data=self.global_SSS_coauthors, orient='index').to_csv(self.filename_prefix + "1_coauthors.csv", sep=';', header=False))
 
         # Write co-authors that are not already among the mined Swedish SE scholars
         diff = {}
-        for coauthor in self.coauthors:
+        for coauthor in self.global_SSS_coauthors:
             for swese_scholar in self.sss_scholars:
                 if coauthor != swese_scholar.name:
-                    diff[coauthor] = self.coauthors[coauthor]
+                    diff[coauthor] = self.global_SSS_coauthors[coauthor]
 
         (pd.DataFrame.from_dict(data=diff, orient='index').to_csv(self.filename_prefix + "1_candidates.csv", sep=';', header=False))
 
