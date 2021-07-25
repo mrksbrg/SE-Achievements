@@ -148,16 +148,19 @@ class ScholarMiner(xml.sax.ContentHandler):
 
     # Overwrite the characters method to get the content of an XML element
     def characters(self, content):
+        # remove any non-ASCII characters, e.g., set theory
+        encoded_string = content.encode('ascii', 'ignore')
+        clean_content = encoded_string.decode()
         if self.CurrentData == "name":
-            self.name = content
+            self.name = clean_content
         elif self.CurrentData == "article":
-            self.article = content
+            self.article = clean_content
         elif self.CurrentData == "title":
-            self.title = content
+            self.title = clean_content
         elif self.CurrentData == "year":
-            self.year = content
+            self.year = clean_content
         elif self.CurrentData == "na":
-            self.na = content
+            self.na = clean_content
 
 
 
@@ -311,6 +314,7 @@ class ScholarMiner(xml.sax.ContentHandler):
             for p in scholar.get_first_author_titles():
                 affiliation_titles[scholar.affiliation] += p + " "
                 tmp += p + " "
+                print("here is a title: " + tmp)
                 titles_per_author.write(tmp + "\n")
 
         for affiliation, titles in affiliation_titles.items():
