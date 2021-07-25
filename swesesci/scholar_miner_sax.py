@@ -125,7 +125,6 @@ class ScholarMiner(xml.sax.ContentHandler):
             # Remove titles containing any of the substrings indicating editorial work
             real_article = True
             title_to_check = self.current_pub_title.lower()
-
             if title_to_check.find("special issue") >= 0 or title_to_check.find("special section") >= 0 or \
                     title_to_check.find("editorial") >= 0 or title_to_check.find("commentaries on") >= 0 or \
                     title_to_check.find("introduction to section") >= 0 or title_to_check.find(
@@ -135,6 +134,10 @@ class ScholarMiner(xml.sax.ContentHandler):
                     title_to_check.find("correction to") >= 0 or \
                     title_to_check.find("open science initiative of the empirical software engineering journal") >= 0:
                 print("Skipping editorial work and corrections: " + self.current_pub_title)
+                real_article = False
+
+            # Remove titles published in ACM SIGSOFT Softw. Eng. Notes
+            if self.current_pub_journal == "ACM SIGSOFT Softw. Eng. Notes":
                 real_article = False
 
             if real_article:
@@ -154,6 +157,9 @@ class ScholarMiner(xml.sax.ContentHandler):
         # Closing year
         elif tag == "title":
             self.current_pub_title = self.title
+        # Closing journal
+        elif tag == "journal":
+            self.current_pub_journal = self.journal
         # Closing year
         elif tag == "year":
             self.current_pub_year = self.year
@@ -173,6 +179,8 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.article = clean_content
         elif self.CurrentData == "title":
             self.title = clean_content
+        elif self.CurrentData == "journal":
+            self.journal = clean_content
         elif self.CurrentData == "year":
             self.year = clean_content
         elif self.CurrentData == "na":
