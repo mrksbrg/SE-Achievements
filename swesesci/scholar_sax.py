@@ -197,20 +197,20 @@ class SSSScholar:
         for publ in self.publications:
             try:
                 if self.running_number == -1:  # author has no running number
-                    if publ.sci_listed and publ.authors[0] == self.name:
+                    if publ.sci_listed and publ.authors[0][0] == self.name:
                         nbr_first_author += 1
                         self.nbr_sci_publications += 1
                         self.nbr_first_sci += 1
-                    elif publ.authors[0] == self.name:
+                    elif publ.authors[0][0] == self.name:
                         nbr_first_author += 1
                     elif publ.sci_listed:
                         self.nbr_sci_publications += 1
                 else:  # author has a running number
-                    if publ.sci_listed and publ.authors[0] == str(self.name + " " + self.running_number):
+                    if publ.sci_listed and publ.authors[0][0] == str(self.name + " " + self.running_number):
                         nbr_first_author += 1
                         self.nbr_sci_publications += 1
                         self.nbr_first_sci += 1
-                    elif publ.authors[0] == str(self.name + " " + self.running_number):
+                    elif publ.authors[0][0] == str(self.name + " " + self.running_number):
                         nbr_first_author += 1
                     elif publ.sci_listed:
                         self.nbr_sci_publications += 1

@@ -39,14 +39,11 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.current_scholar_running_nbr = -1
         self.current_scholar_affiliation = ""
         self.current_scholar_url = ""
-        self.current_sss_dblp_entries = 0
-        self.current_sss_nbr_publications = 0
-        self.current_sss_publications = SortedSet()
-        self.current_scholar_coauthors = Counter()
-        self.current_scholar_coauthors2 = Counter()
-        self.current_scholar_coauthors3 = Counter()
 
         # some information to keep track of while parsing publications
+        self.parsing_publication = False
+        #self.parsing_publication_authors = False
+        self.tmp_author_pid = ""
         self.current_pub_title = -1
         self.current_pub_journal = -1
         self.current_pub_booktitle = -1
@@ -92,9 +89,7 @@ class ScholarMiner(xml.sax.ContentHandler):
             print("Done! No scholars were removed.")
 
     def clear_current_scholar(self):
-        self.current_sss_dblp_entries = -1
-        self.current_sss_nbr_publications = -1
-        self.current_sss_publications = SortedSet()
+        self.current_scholar = None
 
     def clear_current_pub(self):
         self.current_pub_title = -1
@@ -123,7 +118,7 @@ class ScholarMiner(xml.sax.ContentHandler):
             print("Author Name (ID):", author_name + " (" + str(author_id) + ")")
         # Opening journal paper
         elif tag == "article":
-            self.current_sss_dblp_entries = self.current_sss_dblp_entries + 1
+            self.parsing_publication = True
             self.clear_current_pub()
             # filter arXiv preprints
             attribute_list = attributes.getNames()
@@ -131,21 +126,17 @@ class ScholarMiner(xml.sax.ContentHandler):
                 self.current_pub_informal = True  # skipping arXiv preprints
         # Opening conference/workshop paper
         elif tag == "inproceedings":
-            self.current_sss_dblp_entries = self.current_sss_dblp_entries + 1
+            self.parsing_publication = True
             self.clear_current_pub()
-        # Opening co-author
-        elif tag == "author":
-            author_ID = attributes["pid"]
-            self.current_pub_authors.append((self.current_scholar_name, author_ID))
+        # Opening co-author of a publication
+        elif tag == "author" and self.parsing_publication:
+            # store the author's PID until we end the element
+            self.tmp_author_pid = attributes["pid"]
 
     def endElement(self, tag):
         # Closing person
         if tag == "dblpperson":
             self.sss_scholars.append(self.current_scholar)
-        # Closing coauthors
-        elif tag == "coauthors":
-            for i in self.current_scholar_coauthors3:
-                print(i)
         # Closing journal paper
         elif tag == "article" and not self.current_pub_informal:
             # Remove titles containing any of the substrings indicating editorial work
@@ -169,18 +160,18 @@ class ScholarMiner(xml.sax.ContentHandler):
             if real_article:
                 current_publication = SSSPublication(self.current_pub_title, self.current_pub_journal, self.current_pub_booktitle, self.current_pub_year, self.current_pub_authors)
                 self.current_scholar.add_publication(current_publication)
-                self.current_sss_publications.add(
-                    publication.SSSPublication(self.current_pub_title, self.current_pub_journal, None, self.current_pub_year,
-                                               self.current_pub_authors))
+            self.parsing_publication = False
         # Closing conference/workshop paper
         elif tag == "inproceedings":
-            # (self, title, journal, booktitle, year, authors)
-            #print("Conf/ws paper: (" + str(self.current_pub_year + ") " + str(self.current_pub_title)))
-            #print("\tCo-authors: " + str(self.current_pub_authors))
-            self.current_sss_publications.add(
-                publication.SSSPublication(self.current_pub_title, None, self.current_pub_booktitle, self.current_pub_year,
-                                           self.current_pub_authors))
-        # Closing year
+            current_publication = SSSPublication(self.current_pub_title, self.current_pub_journal,
+                                                 self.current_pub_booktitle, self.current_pub_year,
+                                                 self.current_pub_authors)
+            self.current_scholar.add_publication(current_publication)
+            self.parsing_publication = False
+        # Closing author
+        elif tag == "author" and self.parsing_publication:
+            self.current_pub_authors.append((self.author, self.tmp_author_pid))
+        # Closing title
         elif tag == "title":
             self.current_pub_title = self.title
         # Closing journal
@@ -199,10 +190,8 @@ class ScholarMiner(xml.sax.ContentHandler):
         # remove any non-ASCII characters, e.g., set theory
         encoded_string = content.encode('ascii', 'ignore')
         clean_content = encoded_string.decode()
-        if self.CurrentData == "name":
-            self.name = clean_content
-        elif self.CurrentData == "article":
-            self.article = clean_content
+        if self.CurrentData == "author":
+            self.author = clean_content
         elif self.CurrentData == "title":
             self.title = clean_content
         elif self.CurrentData == "journal":

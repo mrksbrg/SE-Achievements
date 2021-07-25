@@ -40,7 +40,7 @@ def add_sss_scholars(process_list, affiliation):
 if (len(sys.argv) == 1):
     fast_list = [("Stefan Cedergren", "https://dblp.org/pid/116/6013.xml"),
                  ("Markus Borg", "https://dblp.org/pid/47/9384.xml"),
-                 ("Krysztof Wnuk", "https://dblp.org/pid/86/2856.xml"),
+                 ("Krzysztof Wnuk", "https://dblp.org/pid/86/2856.xml"),
                  ("Mehrdad Saadatmand", "https://dblp.org/pid/14/9944.xml")]
     add_sss_scholars(fast_list, "Fast")
 
