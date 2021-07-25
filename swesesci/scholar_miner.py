@@ -79,7 +79,7 @@ class ScholarMiner:
 
                             if p.journal == "CoRR":  # skip ArXiv preprints
                                 continue
-                            if p.journal == "ACM SIGSOFT Software Engineering Notes":  # skip SE Notes
+                            if p.journal == "ACM SIGSOFT Softw. Eng. Notes":  # skip SE Notes
                                 continue
                         #elif p.type == "inproceedings": # This is what conference proceedings look like
                         #    encoded_string = p.title.encode('ascii', 'ignore')
