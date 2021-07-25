@@ -27,8 +27,8 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.sss_scholars = sss_scholars
         self.sss_affiliations = sss_affiliations
 
+        # keep track of all coauthors as they might suggest missing SSS scholars
         self.global_SSS_coauthors = Counter()
-        self.global_SSS_coathors2 = Counter()
 
         # Some information to keep track of while parsing scholars
         self.current_scholar = None
@@ -124,9 +124,6 @@ class ScholarMiner(xml.sax.ContentHandler):
         elif tag == "article" and not self.current_pub_informal:
             current_publication = SSSPublication(self.current_pub_title, self.current_pub_journal, self.current_pub_booktitle, self.current_pub_year, self.current_pub_authors)
             self.current_scholar.add_publication(current_publication)
-            self.current_scholar_coauthors = self.current_scholar_coauthors + Counter(self.current_pub_authors)
-            self.current_scholar_coauthors2 = self.current_scholar_coauthors2 + Counter(self.current_pub_authors)
-            self.global_SSS_coauthors = self.global_SSS_coauthors + Counter(self.current_scholar_coauthors)
             self.current_sss_publications.add(
                 publication.SSSPublication(self.current_pub_title, self.current_pub_journal, None, self.current_pub_year,
                                            self.current_pub_authors))
@@ -146,8 +143,7 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.current_pub_year = self.year
         # Closing coauthor
         elif tag == "na":
-            print(self.na)
-            self.current_scholar_coauthors3 = self.current_scholar_coauthors3 + Counter(str(self.na))
+            self.global_SSS_coauthors[self.na] += 1 # add/increment this author to the Counter
         self.CurrentData = ""
 
     # Overwrite the characters method to get the content of an XML element
