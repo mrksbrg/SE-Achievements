@@ -22,15 +22,18 @@ from .scholar_sax import SSSScholar
 
 class ScholarMiner(xml.sax.ContentHandler):
 
-    def __init__(self, filename_prefix, sss_scholars, sss_affiliations):
+    def __init__(self, filename_prefix, input_sss_scholars, input_sss_affiliations):
         self.filename_prefix = filename_prefix
-        self.sss_scholars = sss_scholars
-        self.sss_affiliations = sss_affiliations
+        self.input_sss_scholars = input_sss_scholars
+        self.input_sss_affiliations = input_sss_affiliations
+
+        # data structures containing the results
+        self.sss_scholars = []
 
         # keep track of all coauthors as they might suggest missing SSS scholars
         self.global_SSS_coauthors = Counter()
 
-        # Some information to keep track of while parsing scholars
+        # some information to keep track of while parsing scholars
         self.current_scholar = None
         self.current_scholar_name = ""
         self.current_scholar_running_nbr = -1
@@ -43,7 +46,7 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.current_scholar_coauthors2 = Counter()
         self.current_scholar_coauthors3 = Counter()
 
-        # Some information to keep track of while parsing publications
+        # some information to keep track of while parsing publications
         self.current_pub_title = -1
         self.current_pub_journal = -1
         self.current_pub_booktitle = -1
@@ -52,13 +55,13 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.current_pub_informal = False
 
     def parse_scholars(self):
-        nbr_scholars = len(self.sss_scholars)
+        nbr_scholars = len(self.input_sss_scholars)
         i = 0 # for the progress bar
         print(str(nbr_scholars) + " scholars to parse. Let's go!")
         self.print_progress_bar(i, nbr_scholars)
         parser = xml.sax.make_parser()
         parser.setContentHandler(self)
-        for scholar in self.sss_scholars:
+        for scholar in self.input_sss_scholars:
             i = i + 1
             self.current_scholar_name = scholar.name
             self.current_scholar_running_nbr = scholar.running_number
@@ -67,6 +70,26 @@ class ScholarMiner(xml.sax.ContentHandler):
             # SAX parse the URL
             parser.parse(scholar.url)
             self.print_progress_bar(i, nbr_scholars)
+
+        # Calculating statistics and removing scholars with no first-authored SCI publications
+        print("\nRemoving scholars that have no first-authored SCI publication...")
+        tmp_scholars = []
+        counter = 0
+        for scholar in self.sss_scholars:
+            scholar.calc_stats()
+            if scholar.nbr_first_sci > 0:
+                print("Keeping: " + scholar.name)
+                tmp_scholars.append(scholar)
+            else:
+                #curr = next((x for x in self.sss_affiliations if scholar.affiliation == x.name), None)
+                #curr.nbr_scholars -= 1
+                counter = counter + 1
+                print("Removed scholar with no first-authored SCI publications: " + scholar.name)
+        self.sss_scholars = tmp_scholars
+        if counter > 0:
+            print("Done! " + str(counter) + " scholars removed.")
+        else:
+            print("Done! No scholars were removed.")
 
     def clear_current_scholar(self):
         self.current_sss_dblp_entries = -1
@@ -116,8 +139,11 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.current_pub_authors.append((self.current_scholar_name, author_ID))
 
     def endElement(self, tag):
+        # Closing person
+        if tag == "dblpperson":
+            self.sss_scholars.append(self.current_scholar)
         # Closing coauthors
-        if tag == "coauthors":
+        elif tag == "coauthors":
             for i in self.current_scholar_coauthors3:
                 print(i)
         # Closing journal paper
@@ -273,11 +299,12 @@ class ScholarMiner(xml.sax.ContentHandler):
         if attempts >= 10:
             print("Failed to process scholars")
 
-        # Remove scholars with no first-authored SCI publications
+        # Calculate all statistics and remove scholars with no first-authored SCI publications
         print("\nRemoving scholars that have no first-authored SCI publication...")
         tmp_scholars = []
         counter = 0
         for scholar in self.sss_scholars:
+            scholar.calc_stats()
             if scholar.nbr_first_sci > 0:
                 tmp_scholars.append(scholar)
             else:
