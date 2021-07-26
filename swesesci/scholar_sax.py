@@ -104,28 +104,25 @@ class SSSScholar:
         # Add corresponding SWEBOK Knowledge Area
         first_author = False
         if self.running_number == -1:
-            if publ.authors[0] == self.name or publ.authors[0] == str(self.name + " 0001"):
+            if publ.authors[0][0] == self.name or publ.authors[0][0] == str(self.name + " 0001"):
                 #print("First author name without running number matches: " + publ.title)
                 first_author = True
         else:
-            if publ.authors[0] == str(self.name + " " + self.running_number):
+            if publ.authors[0][0] == str(self.name + " " + self.running_number):
                 #print("First author name with running number (" + self.running_number + "): " + publ.title)
                 first_author = True
         if first_author and publ.knowl_area >= 0:
             self.swebok_counters[publ.knowl_area] += 1
-            if publ.booktitle is not None:
+            if publ.booktitle != -1:
                 # conference publication
                 tmp_work = str(publ.year) + ": " + publ.title + " (" + publ.booktitle + ") "
                 self.swebok_works[publ.knowl_area] += tmp_work
-                #print(self.swebok_works[publ.knowl_area])
                 self.add_to_swebok_string(tmp_work, publ.knowl_area)
             else:
                 # journal publication
                 tmp_work = str(publ.year) + ": " + publ.title + " (" + publ.journal + ") "
                 self.swebok_works[publ.knowl_area] += tmp_work
-                #print(self.swebok_works[publ.knowl_area])
                 self.add_to_swebok_string(tmp_work, publ.knowl_area)
-        print(self.swebok_counters)
 
     # add to the string that Jinja uses
     def add_to_swebok_string(self, str, knowl_area_id):

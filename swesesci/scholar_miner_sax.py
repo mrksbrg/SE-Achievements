@@ -208,6 +208,8 @@ class ScholarMiner(xml.sax.ContentHandler):
         # Closing journal
         elif tag == "journal":
             self.current_pub_journal = self.journal
+        elif tag == "booktitle":
+            self.current_pub_booktitle = self.booktitle
         # Closing year
         elif tag == "year":
             self.current_pub_year = self.year
@@ -227,6 +229,8 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.title = clean_content
         elif self.CurrentData == "journal":
             self.journal = clean_content
+        elif self.CurrentData == "booktitle":
+            self.booktitle = clean_content
         elif self.CurrentData == "year":
             self.year = clean_content
         elif self.CurrentData == "na":
