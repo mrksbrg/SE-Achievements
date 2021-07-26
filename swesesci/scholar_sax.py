@@ -3,13 +3,14 @@ from .publication import SSSPublication
 
 class SSSScholar:
 
-    def __init__(self, name, running_number, pid, url, affiliation):
+    def __init__(self, name, running_number, pid, url, affiliation, dblp_entries):
         # Some redundancy needed for use with Jinja2
         self.name = name
         self.running_number = running_number
         self.pid = pid
         self.url = url
         self.affiliation = affiliation
+        self.dblp_entries = dblp_entries
         self.research_interests = []
         self.research_interests_string = ""
 
@@ -17,7 +18,6 @@ class SSSScholar:
         self.sss_contrib = -1
         self.sss_rating = -1
 
-        self.dblp_entries = -1
         self.publications = SortedSet()
         self.nbr_publications = -1
         self.first_ratio = -1
@@ -100,7 +100,6 @@ class SSSScholar:
         self.nbr_publications += 1
         if publ.sci_listed:
             self.nbr_first_sci += 1
-        print(self.publications)
 
         # Add corresponding SWEBOK Knowledge Area
         first_author = False
@@ -179,10 +178,10 @@ class SSSScholar:
         result = ""
         for publ in self.publications:
             if self.running_number == -1:
-                if publ.sci_listed and publ.authors[0] == self.name:
+                if publ.sci_listed and publ.authors[0][0] == self.name:
                     result += str(publ.year) + ": " + publ.title + " (" + str(publ.journal) + ")" + "\n"
             else:
-                if publ.sci_listed and publ.authors[0] == str(self.name + " " + self.running_number):
+                if publ.sci_listed and publ.authors[0][0] == str(self.name + " " + self.running_number):
                     result += str(publ.year) + ": " + publ.title + " (" + str(publ.journal) + ")" + "\n"
         return result
 

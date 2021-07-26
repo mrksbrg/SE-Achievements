@@ -27,7 +27,7 @@ def add_sss_scholars(process_list, affiliation):
         split2 = split1[1].split(".xml")
         pid = split2[0]
 
-        sss_scholars.append(SSSScholar(name, -1, pid, url, affiliation))
+        sss_scholars.append(SSSScholar(name, -1, pid, url, affiliation, -1))
         tmp_aff = SSSAffiliation(affiliation)
         if tmp_aff not in sss_affiliations:
             tmp_aff.nbr_scholars += 1
