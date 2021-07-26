@@ -54,7 +54,7 @@ class ScholarMiner(xml.sax.ContentHandler):
     def parse_scholars(self):
         nbr_scholars = len(self.input_sss_scholars)
         i = 0 # for the progress bar
-        print(str(nbr_scholars) + " scholars to parse. Let's go!")
+        print(str(nbr_scholars) + " scholars to parse from DBLP...")
         self.print_progress_bar(i, nbr_scholars)
         parser = xml.sax.make_parser()
         parser.setContentHandler(self)
@@ -69,7 +69,7 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.print_progress_bar(i, nbr_scholars)
 
         # Calculating statistics and removing scholars with no first-authored SCI publications
-        print("\nRemoving scholars that have no first-authored SCI publication...")
+        print("Calculating statistics...")
         tmp_scholars = []
         counter = 0
         for scholar in self.sss_scholars:
@@ -146,7 +146,7 @@ class ScholarMiner(xml.sax.ContentHandler):
             author_id = attributes["pid"]
             dblp_entries = attributes["n"]
             self.current_scholar = SSSScholar(self.current_scholar_name, self.current_scholar_running_nbr, author_id, self.current_scholar_url, self.current_scholar_affiliation, dblp_entries)
-            print("Author Name (ID):", author_name + " (" + str(author_id) + "): " + str(dblp_entries) + " DBLP entries to parse.")
+            #print("Author Name (ID):", author_name + " (" + str(author_id) + "): " + str(dblp_entries) + " DBLP entries to parse.")
         # Opening journal paper
         elif tag == "article":
             self.parsing_publication = True
@@ -181,7 +181,7 @@ class ScholarMiner(xml.sax.ContentHandler):
                     title_to_check.find("erratum") >= 0 or title_to_check.find("corrigendum") >= 0 or \
                     title_to_check.find("correction to") >= 0 or \
                     title_to_check.find("open science initiative of the empirical software engineering journal") >= 0:
-                print("Skipping editorial work and corrections: " + self.current_pub_title)
+                #print("Skipping editorial work and corrections: " + self.current_pub_title)
                 real_article = False
 
             # Remove titles published in ACM SIGSOFT Softw. Eng. Notes
