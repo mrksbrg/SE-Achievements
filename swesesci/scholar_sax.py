@@ -1,6 +1,7 @@
 from sortedcontainers import SortedSet
 from .publication import SSSPublication
 
+
 class SSSScholar:
 
     def __init__(self, name, running_number, pid, url, affiliation, dblp_entries):
