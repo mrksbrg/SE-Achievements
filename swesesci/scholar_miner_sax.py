@@ -35,7 +35,6 @@ class ScholarMiner(xml.sax.ContentHandler):
 
         # some information to keep track of while parsing publications
         self.parsing_publication = False
-        #self.parsing_publication_authors = False
         self.tmp_author_pid = ""
         self.current_pub_title = -1
         self.current_pub_journal = -1

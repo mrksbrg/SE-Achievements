@@ -6,15 +6,13 @@ Created on Fri Jul  5 11:21:15 2019
 """
 
 import csv
-
 from sklearn.feature_extraction.text import CountVectorizer
-
 import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-
 from sklearn.decomposition import LatentDirichletAllocation as LDA
+
 
 class ScholarAnalyzer:
 
