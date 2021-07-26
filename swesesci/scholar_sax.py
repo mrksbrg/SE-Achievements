@@ -164,10 +164,10 @@ class SSSScholar:
         first_author_titles = []
         for publ in self.publications:
             if self.running_number == -1:
-                if publ.authors[0] == self.name:
+                if publ.authors[0][0] == self.name:
                     first_author_titles.append(publ.title)
             else:
-                if publ.authors[0] == str(self.name + " " + self.running_number):
+                if publ.authors[0][0] == str(self.name + " " + self.running_number):
                     first_author_titles.append(publ.title)
         return first_author_titles
         

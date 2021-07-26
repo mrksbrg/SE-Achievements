@@ -136,6 +136,27 @@ class ScholarMiner(xml.sax.ContentHandler):
 
         (pd.DataFrame.from_dict(data=diff, orient='index').to_csv(self.filename_prefix + "1_candidates.csv", sep=';', header=False))
 
+    def write_author_and_affiliation_titles(self):
+        """
+        Write all titles from all first authors to csv
+        """
+
+        titles_per_author = open(self.filename_prefix + "1_titles_per_author.csv", "w+")
+        titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv", "w+")
+        affiliation_titles = self.get_dict_of_affiliations()
+
+        for scholar in self.sss_scholars:
+            tmp = scholar.name + "; "
+            for p in scholar.get_first_author_titles():
+                affiliation_titles[scholar.affiliation] += p + " "
+                tmp += p + " "
+            titles_per_author.write(tmp + "\n")
+
+        for affiliation, titles in affiliation_titles.items():
+            titles_per_affiliation.write(affiliation + ";" + titles + "\n")
+        titles_per_author.close()
+        titles_per_affiliation.close()
+
     # SAX parsing
 
     def startElement(self, tag, attributes):
@@ -345,28 +366,6 @@ class ScholarMiner(xml.sax.ContentHandler):
     def clear_all_scholars(self):
         for scholar in self.sss_scholars:
             scholar.clear()
-
-    def write_author_and_affiliation_titles(self):
-        """ 
-        Write all titles from all first authors to csv
-        """
-
-        titles_per_author = open(self.filename_prefix + "1_titles_per_author.csv", "w+")
-        titles_per_affiliation = open(self.filename_prefix + "1_titles_per_affiliation.csv", "w+")
-        affiliation_titles = self.get_dict_of_affiliations()
-
-        for scholar in self.sss_scholars:
-            tmp = scholar.name + "; "
-            for p in scholar.get_first_author_titles():
-                affiliation_titles[scholar.affiliation] += p + " "
-                tmp += p + " "
-                print("here is a title: " + tmp)
-                titles_per_author.write(tmp + "\n")
-
-        for affiliation, titles in affiliation_titles.items():
-            titles_per_affiliation.write(affiliation + ";" + titles + "\n")
-        titles_per_author.close()
-        titles_per_affiliation.close()
 
     def get_scholars(self):
         return self.sss_scholars
