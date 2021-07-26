@@ -6,7 +6,6 @@ Created on Wed Jul 21 2021
 """
 
 import time
-import datetime
 import xml.sax
 import pandas as pd
 from collections import Counter
@@ -51,7 +50,7 @@ class ScholarMiner(xml.sax.ContentHandler):
         parser = xml.sax.make_parser()
         parser.setContentHandler(self)
         for scholar in self.input_sss_scholars:
-            i = i + 1
+            i += 1
             self.current_scholar_name = scholar.name
             self.current_scholar_running_nbr = scholar.running_number
             self.current_scholar_affiliation = scholar.affiliation
@@ -89,15 +88,6 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.current_pub_year = -1
         self.current_pub_authors = []
         self.current_pub_informal = False
-
-    # Get a list of the last decade's titles
-    def get_recent_titles(self):
-        recent_publications = []
-        now = datetime.datetime.now()
-        for p in self.publications:
-            if int(p.year) >= int(now.year) - 10:
-                recent_publications.append(p)
-        return recent_publications
 
     def write_results(self):
         print("Writing results to file")

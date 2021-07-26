@@ -1,3 +1,4 @@
+import datetime
 from sortedcontainers import SortedSet
 from .publication import SSSPublication
 
@@ -171,7 +172,18 @@ class SSSScholar:
                 if publ.authors[0][0] == str(self.name + " " + self.running_number):
                     first_author_titles.append(publ.title)
         return first_author_titles
-        
+
+    def get_recent_titles(self):
+        '''
+        :return: Return a list of the recent (5 years) titles
+        '''
+        recent_publications = ""
+        now = datetime.datetime.now()
+        for p in self.publications:
+            if int(p.year) >= int(now.year) - 5:
+                recent_publications += p.title + " "
+        return recent_publications
+
     def sci_publications_to_string(self):
         result = ""
         for publ in self.publications:
