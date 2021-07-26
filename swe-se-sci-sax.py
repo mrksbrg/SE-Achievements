@@ -14,6 +14,7 @@ from swesesci.affiliation import SSSAffiliation
 from swesesci.scholar_miner_sax import ScholarMiner
 from swesesci.scholar_analyzer import ScholarAnalyzer
 from swesesci.scholar_tabulator import ScholarTabulator
+#from swesesci.scholar_visualizer import ScholarVisualizer
 
 sss_scholars = []
 sss_affiliations = []
@@ -85,11 +86,11 @@ analyzer.analyze_affiliation_topics()
 analyzer.write_results()
 
 # 3. Tabulate the scholars, write the results
-#print("\n####### Step 3 - Tabulating scholars #######")
-#sss_scholars.sort(reverse=True)
-#sss_affiliations.sort(reverse=True)
-#tabulator = ScholarTabulator(filename_prefix, sss_scholars, sss_affiliations)
-#tabulator.write_tables()
+print("\n####### Step 3 - Tabulating scholars #######")
+sss_scholars.sort(reverse=True)
+sss_affiliations.sort(reverse=True)
+tabulator = ScholarTabulator(filename_prefix, sss_scholars, sss_affiliations)
+tabulator.write_tables()
 
 # 4. Visualize the results, save to files
 #visualizer = ScholarVisualizer(filename_prefix)
