@@ -39,10 +39,9 @@ def add_sss_scholars(process_list, affiliation):
 
 # Swe-SE-SCI entry point
 if (len(sys.argv) == 1):
-    fast_list = [("Stefan Cedergren", "https://dblp.org/pid/116/6013.xml"),
-                 ("Krzysztof Wnuk", "https://dblp.org/pid/86/2856.xml"),
-                 ("Per Runeson", "https://dblp.org/pid/24/24.xml")]
-    add_sss_scholars(fast_list, "Fast")
+    test_list = [#("Stefan Cedergren", "https://dblp.org/pid/116/6013.xml")]
+        ("Markus Borg", "https://dblp.org/pid/47/9384.xml")]
+    add_sss_scholars(test_list, "Test")
     rise_list = [("Niklas Mellegård", "https://dblp.org/pid/30/8216.xml" ),
                  ("Efi Papatheocharous", "https://dblp.org/pid/76/302.xml"),
                  ("Mehrdad Saadatmand", "https://dblp.org/pid/14/9944.xml"),
@@ -56,7 +55,13 @@ if (len(sys.argv) == 1):
                  ("Piotr Tomaszewski", "https://dblp.org/pid/75/5273.xml"),
                  ("Thomas Olsson", "https://dblp.org/pid/31/5587-1.xml"),
                  ("Stig Larsson", "https://dblp.org/pid/77/1925-2.xml")]
-    add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
+    #add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
+    lu_list = [("Per Runeson", "https://dblp.org/pid/24/24.xml"),
+               ("Björn Regnell", "https://dblp.uni-trier.de/pid/09/1284.xml")]
+    #add_sss_scholars(lu_list, "Lund University")
+    bth_list = [("Krzysztof Wnuk", "https://dblp.org/pid/86/2856.xml")]
+    #add_sss_scholars(bth_list, "Blekinge Institute of Technology")
+
 
 # Process scholar provided in the argument
 else:
