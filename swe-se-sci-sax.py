@@ -40,9 +40,10 @@ def add_sss_scholars(process_list, affiliation):
 # Swe-SE-SCI entry point
 if (len(sys.argv) == 1):
     test_list = [#("Stefan Cedergren", "https://dblp.org/pid/116/6013.xml")]
-        ("Markus Borg", "https://dblp.org/pid/47/9384.xml")]
+        #("Markus Borg", "https://dblp.org/pid/47/9384.xml"),
+        ("Niklas Mellegård", "https://dblp.org/pid/30/8216.xml")]
     add_sss_scholars(test_list, "Test")
-    rise_list = [("Niklas Mellegård", "https://dblp.org/pid/30/8216.xml" ),
+    rise_list = [("Niklas Mellegård", "https://dblp.org/pid/30/8216.xml"),
                  ("Efi Papatheocharous", "https://dblp.org/pid/76/302.xml"),
                  ("Mehrdad Saadatmand", "https://dblp.org/pid/14/9944.xml"),
                  ("Pasqualina Potena", "https://dblp.org/pid/49/2251.xml"),

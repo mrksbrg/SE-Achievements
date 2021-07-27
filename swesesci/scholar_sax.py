@@ -109,12 +109,12 @@ class SSSScholar:
         # Add corresponding SWEBOK Knowledge Area
         first_author = False
         if self.running_number == -1:
+            print("First author name without running number matches: " + publ.title + " by " + publ.authors[0][0])
             if publ.authors[0][0] == self.name or publ.authors[0][0] == str(self.name + " 0001"):
-                #print("First author name without running number matches: " + publ.title)
                 first_author = True
         else:
+            print("First author name with running number (" + self.running_number + "): " + publ.title)
             if publ.authors[0][0] == str(self.name + " " + self.running_number):
-                #print("First author name with running number (" + self.running_number + "): " + publ.title)
                 first_author = True
         if first_author and publ.knowl_area >= 0:
             self.swebok_counters[publ.knowl_area] += 1

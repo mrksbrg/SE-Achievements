@@ -42,6 +42,10 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.current_pub_authors = []
         self.current_pub_informal = False
 
+        # to tackle escaped characters
+        self.current_string_done = False
+        self.current_string = ""
+
     def parse_scholars(self):
         nbr_scholars = len(self.input_sss_scholars)
         i = 0 # for the progress bar
@@ -149,6 +153,8 @@ class ScholarMiner(xml.sax.ContentHandler):
 
     def startElement(self, tag, attributes):
         self.CurrentData = tag
+        self.current_string_done = False
+        self.current_string = ""
         # Opening person
         if tag == "dblpperson":
             author_name = attributes["name"]
@@ -174,6 +180,8 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.tmp_author_pid = attributes["pid"]
 
     def endElement(self, tag):
+        self.current_string_done = True
+        print("String ready: " + str(self.current_string))
         # Closing person
         if tag == "dblpperson":
             self.sss_scholars.append(self.current_scholar)
@@ -203,6 +211,7 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.parsing_publication = False
         # Closing conference/workshop paper
         elif tag == "inproceedings":
+            #print("Parsing inproceedings: " + self.current_pub_title)
             current_publication = SSSPublication(self.current_pub_title, self.current_pub_journal,
                                                  self.current_pub_booktitle, self.current_pub_year,
                                                  self.current_pub_authors)
@@ -230,8 +239,21 @@ class ScholarMiner(xml.sax.ContentHandler):
     # Overwrite the characters method to get the content of an XML element
     def characters(self, content):
         # remove any non-ASCII characters, e.g., set theory
-        encoded_string = content.encode('ascii', 'ignore')
-        clean_content = encoded_string.decode()
+        print("Raw input: " + content)
+        #test = xml.sax.saxutils.escape(content, {'å' : 'aaa'})
+        #print(test)
+        # test2 = xml.sax.saxutils.escape(test)
+        # print(test2)
+        if self.current_string == "":
+            self.current_string = content.encode('utf-8', 'ignore')
+        elif not self.current_string_done:
+            print("Before concat: " + str(self.current_string))
+            self.current_string = self.current_string + content.encode('utf-8', 'ignore')
+            print("Concatenated string... " + str(self.current_string))
+
+        self.current_string = content.encode('ascii', 'ignore')
+        clean_content = self.current_string.decode()
+
         if self.CurrentData == "author":
             self.author = clean_content
         elif self.CurrentData == "title":
