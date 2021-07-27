@@ -61,6 +61,8 @@ if (len(sys.argv) == 1):
     #add_sss_scholars(lu_list, "Lund University")
     bth_list = [("Krzysztof Wnuk", "https://dblp.org/pid/86/2856.xml")]
     #add_sss_scholars(bth_list, "Blekinge Institute of Technology")
+    mdh_list = [("Alessio Bucaioni", "https://dblp.org/pid/143/4024.xml")]
+    #add_sss_scholars(mdh_list, "Mälardalen University")
 
 
 # Process scholar provided in the argument

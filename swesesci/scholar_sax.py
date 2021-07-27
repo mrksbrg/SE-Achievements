@@ -94,6 +94,9 @@ class SSSScholar:
     def add_publication(self, publ):
         if not isinstance(publ, SSSPublication):
             raise TypeError("Error: do not add anything but instances of publication.SSSPublication to the collection")
+
+        print("Added: " + publ.year + " - " + publ.title + " (" + str(publ.booktitle) + ")")
+
         if self.nbr_first_sci == -1:
             self.nbr_first_sci = 0
         if self.nbr_publications == -1:
