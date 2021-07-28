@@ -61,6 +61,7 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.current_scholar_url = scholar.url
             # SAX parse the URL
             parser.parse(scholar.url)
+            #parser.parse("mellefull.xml")
             self.print_progress_bar(i, nbr_scholars)
 
         # Calculating statistics and removing scholars with no first-authored SCI publications
@@ -180,8 +181,9 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.tmp_author_pid = attributes["pid"]
 
     def endElement(self, tag):
+        #print("# Closing: " + tag)
         self.current_string_done = True
-        print("String ready: " + str(self.current_string))
+        #print("String ready: " + str(self.current_string))
         # Closing person
         if tag == "dblpperson":
             self.sss_scholars.append(self.current_scholar)
@@ -211,7 +213,6 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.parsing_publication = False
         # Closing conference/workshop paper
         elif tag == "inproceedings":
-            #print("Parsing inproceedings: " + self.current_pub_title)
             current_publication = SSSPublication(self.current_pub_title, self.current_pub_journal,
                                                  self.current_pub_booktitle, self.current_pub_year,
                                                  self.current_pub_authors)
@@ -238,140 +239,29 @@ class ScholarMiner(xml.sax.ContentHandler):
 
     # Overwrite the characters method to get the content of an XML element
     def characters(self, content):
-        # remove any non-ASCII characters, e.g., set theory
-        print("Raw input: " + content)
-        #test = xml.sax.saxutils.escape(content, {'å' : 'aaa'})
-        #print(test)
-        # test2 = xml.sax.saxutils.escape(test)
-        # print(test2)
-        if self.current_string == "":
-            self.current_string = content.encode('utf-8', 'ignore')
-        elif not self.current_string_done:
-            print("Before concat: " + str(self.current_string))
-            self.current_string = self.current_string + content.encode('utf-8', 'ignore')
-            print("Concatenated string... " + str(self.current_string))
+        # Single chars need to be turned into strings to support concatenation
+        if isinstance(self.current_string, bytes):
+            self.current_string = self.current_string.decode()
 
-        self.current_string = content.encode('ascii', 'ignore')
-        clean_content = self.current_string.decode()
+        # remove any unreasonable characters, e.g., set theory
+        tmp = content.encode('utf-8', 'ignore')
+        if self.current_string == "": # add to new string
+            self.current_string = tmp.decode()
+        else: # concatenate to remembered string
+            self.current_string = self.current_string + tmp.decode()
 
         if self.CurrentData == "author":
-            self.author = clean_content
+            self.author = self.current_string
         elif self.CurrentData == "title":
-            self.title = clean_content
+            self.title = self.current_string
         elif self.CurrentData == "journal":
-            self.journal = clean_content
+            self.journal = self.current_string
         elif self.CurrentData == "booktitle":
-            self.booktitle = clean_content
+            self.booktitle = self.current_string
         elif self.CurrentData == "year":
-            self.year = clean_content
+            self.year = self.current_string
         elif self.CurrentData == "na":
-            self.na = clean_content
-
-
-
-
-
-    ### OLD
-
-    def process_group(self):
-        nbr_remaining = len(self.sss_scholars)
-        attempts = 0
-        while nbr_remaining > 0 and attempts < 10:  # an extra loop to tackle DBLP flakiness
-            attempts += 1
-            for scholar in self.sss_scholars:
-                try:
-                    print("\n### Processing scholar: " + scholar.name + " ###")
-                    if scholar.running_number == -1:
-                        authors = search(scholar.name, -1)
-                        search_res = authors[0]
-                    else:
-                        print("running number author!")
-                        authors = search(scholar.name, scholar.running_number)
-                        search_res = authors[0]
-                except:
-                    print("ERROR: Invalid search result from DBLP. Waiting...")
-                    self.clear_all_scholars()
-                    time.sleep(5)
-                    break
-
-                #print("Here")
-                #print(search_res)
-
-                dblp_entries = len(search_res.publications)
-                print("DBLP entries: ", dblp_entries)
-                scholar.dblp_entries = dblp_entries
-
-                # traverse publications
-                i = 0
-                for p in search_res.publications:
-                    self.print_progress_bar(i + 1, dblp_entries)
-                    try:
-                        time.sleep(0.5)  # There appears to be some race condition in the dblp package
-                        if len(p.authors) == 0:  # skip papers with 0 authors
-                            continue
-                        elif p.type == "article":
-                            # remove any non-ASCII characters, e.g., set theory
-                            encoded_string = p.title.encode('ascii', 'ignore')
-                            p.title = encoded_string.decode()
-
-                            # Remove titles containing any of the substrings indicating editorial work
-                            title_to_check = str(p.title).lower()
-
-                            if title_to_check.find("special issue") >= 0 or title_to_check.find("special section") >= 0 or \
-                               title_to_check.find("editorial") >= 0 or title_to_check.find("commentaries on") >= 0 or \
-                               title_to_check.find("introduction to section") >= 0 or title_to_check.find("editor's introduction") >= 0 or \
-                               title_to_check.find("in this issue") >= 0 or title_to_check.find("foreword to the") >= 0 or \
-                               title_to_check.find("erratum") >= 0 or title_to_check.find("corrigendum") >= 0 or \
-                               title_to_check.find("correction to") >= 0 or \
-                               title_to_check.find("open science initiative of the empirical software engineering journal") >= 0:
-                                print("Skipping editorial work and corrections: " + p.title)
-                                continue
-
-                            if p.journal == "CoRR":  # skip ArXiv preprints
-                                continue
-                            if p.journal == "ACM SIGSOFT Software Engineering Notes":  # skip SE Notes
-                                continue
-                        #elif p.type == "inproceedings": # This is what conference proceedings look like
-                        #    encoded_string = p.title.encode('ascii', 'ignore')
-                        #    p.title = encoded_string.decode()
-                        current_publication = SSSPublication(p.title, p.journal, p.booktitle, p.year, p.authors)
-                        scholar.add_publication(current_publication)
-                        self.coauthors = self.coauthors + Counter(p.authors)
-
-                        # TODO: Cache the search_res locally
-                        i += 1
-                    except Exception as e:
-                        print(e)
-                        print("ERROR. Processing one of the papers failed. Waiting...")
-                        time.sleep(5)
-                        break
-
-                if dblp_entries > 0 and i < dblp_entries:
-                    self.print_progress_bar(dblp_entries, dblp_entries)
-                scholar.calc_stats()
-                nbr_remaining -= 1
-
-        if attempts >= 10:
-            print("Failed to process scholars")
-
-        # Calculate all statistics and remove scholars with no first-authored SCI publications
-        print("\nRemoving scholars that have no first-authored SCI publication...")
-        tmp_scholars = []
-        counter = 0
-        for scholar in self.sss_scholars:
-            scholar.calc_stats()
-            if scholar.nbr_first_sci > 0:
-                tmp_scholars.append(scholar)
-            else:
-                curr = next((x for x in self.sss_affiliations if scholar.affiliation == x.name), None)
-                curr.nbr_scholars -= 1
-                counter = counter + 1
-                print("Removed scholar with no first-authored SCI publications: " + scholar.name)
-        self.sss_scholars = tmp_scholars
-        if counter > 0:
-            print("Done! " + str(counter) + " scholars removed.")
-        else:
-            print("Done! No scholars were removed.")
+            self.na = self.current_string
 
     # Print progress bar for scholar processing
     def print_progress_bar(self, iteration, total):
