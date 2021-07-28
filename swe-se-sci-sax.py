@@ -22,13 +22,14 @@ sss_affiliations = []
 def add_sss_scholars(process_list, affiliation):
     for person in process_list:
         name = person[0]
-        url = person[1]
+        running_number = person[1]
+        url = person[2]
         # extract the pid from the url by substringing
         split1 = url.split("pid/")
         split2 = split1[1].split(".xml")
         pid = split2[0]
 
-        sss_scholars.append(SSSScholar(name, -1, pid, url, affiliation, -1))
+        sss_scholars.append(SSSScholar(name, running_number, pid, url, affiliation, -1))
         tmp_aff = SSSAffiliation(affiliation)
         if tmp_aff not in sss_affiliations:
             tmp_aff.nbr_scholars += 1
@@ -39,32 +40,31 @@ def add_sss_scholars(process_list, affiliation):
 
 # Swe-SE-SCI entry point
 if (len(sys.argv) == 1):
-    test_list = [#("Stefan Cedergren", "https://dblp.org/pid/116/6013.xml")]
-        #("Markus Borg", "https://dblp.org/pid/47/9384.xml"),
-        ("Niklas Mellegård", "https://dblp.org/pid/30/8216.xml")]
-    add_sss_scholars(test_list, "Test")
-    rise_list = [("Niklas Mellegård", "https://dblp.org/pid/30/8216.xml"),
-                 ("Efi Papatheocharous", "https://dblp.org/pid/76/302.xml"),
-                 ("Mehrdad Saadatmand", "https://dblp.org/pid/14/9944.xml"),
-                 ("Pasqualina Potena", "https://dblp.org/pid/49/2251.xml"),
-                 ("Markus Borg", "https://dblp.org/pid/47/9384.xml"),
-                 ("Ulrik Franke", "https://dblp.org/pid/71/3754.xml"),
-                 ("Ana Magazinius", "https://dblp.org/pid/46/8694.xml"),
-                 ("Jakob Axelsson", "https://dblp.org/pid/50/6797.xml"),
-                 ("Håkan Burden", "https://dblp.org/pid/02/10779.xml"),
-                 ("Peter Wallin", "https://dblp.org/pid/57/5749.xml"),
-                 ("Piotr Tomaszewski", "https://dblp.org/pid/75/5273.xml"),
-                 ("Thomas Olsson", "https://dblp.org/pid/31/5587-1.xml"),
-                 ("Stig Larsson", "https://dblp.org/pid/77/1925-2.xml")]
-    #add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
-    lu_list = [("Per Runeson", "https://dblp.org/pid/24/24.xml"),
-               ("Björn Regnell", "https://dblp.uni-trier.de/pid/09/1284.xml")]
-    #add_sss_scholars(lu_list, "Lund University")
-    bth_list = [("Krzysztof Wnuk", "https://dblp.org/pid/86/2856.xml")]
-    #add_sss_scholars(bth_list, "Blekinge Institute of Technology")
-    mdh_list = [("Alessio Bucaioni", "https://dblp.org/pid/143/4024.xml")]
-    #add_sss_scholars(mdh_list, "Mälardalen University")
-
+    test_list = [("Stefan Cedergren", "https://dblp.org/pid/116/6013.xml")]
+    #add_sss_scholars(test_list, "Fast test")
+    rise_list = [("Niklas Mellegård", "-1", "https://dblp.org/pid/30/8216.xml"),
+                 ("Efi Papatheocharous", "-1", "https://dblp.org/pid/76/302.xml"),
+                 ("Mehrdad Saadatmand", "-1", "https://dblp.org/pid/14/9944.xml"),
+                 ("Pasqualina Potena", "-1", "https://dblp.org/pid/49/2251.xml"),
+                 ("Markus Borg", "-1", "https://dblp.org/pid/47/9384.xml"),
+                 ("Ulrik Franke", "-1", "https://dblp.org/pid/71/3754.xml"),
+                 ("Ana Magazinius", "-1", "https://dblp.org/pid/46/8694.xml"),
+                 ("Jakob Axelsson", "-1", "https://dblp.org/pid/50/6797.xml"),
+                 ("Håkan Burden", "-1", "https://dblp.org/pid/02/10779.xml"),
+                 ("Peter Wallin", "-1", "https://dblp.org/pid/57/5749.xml"),
+                 ("Piotr Tomaszewski", "-1", "https://dblp.org/pid/75/5273.xml"),
+                 ("Thomas Olsson", "0001", "https://dblp.org/pid/31/5587-1.xml"),
+                 ("Stig Larsson", "0002", "https://dblp.org/pid/77/1925-2.xml")]
+    add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
+    lu_list = [("Per Runeson", "-1", "https://dblp.org/pid/24/24.xml"),
+               ("Björn Regnell", "-1", "https://dblp.uni-trier.de/pid/09/1284.xml")]
+    add_sss_scholars(lu_list, "Lund University")
+    bth_list = [("Krzysztof Wnuk", "-1", "https://dblp.org/pid/86/2856.xml")]
+    add_sss_scholars(bth_list, "Blekinge Institute of Technology")
+    chalmers_list = [("Philipp Leitner", "0001", "https://dblp.org/pid/03/5268.xml")]
+    add_sss_scholars(chalmers_list, "Chalmers / Gothenburg University")
+    mdh_list = [("Alessio Bucaioni", "-1", "https://dblp.org/pid/143/4024.xml")]
+    add_sss_scholars(mdh_list, "Mälardalen University")
 
 # Process scholar provided in the argument
 else:
