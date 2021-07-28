@@ -127,6 +127,8 @@ class ScholarAnalyzer:
                 research_interests += str(term[0]) + ", "
                 curr.append_research_interest(str(term[0]))
             research_interests = research_interests[:-2] # remove two final chars
+            if research_interests == "":
+                research_interests = "<NON-ACTIVE AUTHOR>"
             print(scholar + ": " + research_interests)
             curr.calc_titles()
             # Assign SWEBOK Knowledge Areas
