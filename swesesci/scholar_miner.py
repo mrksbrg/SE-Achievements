@@ -74,6 +74,7 @@ class ScholarMiner(xml.sax.ContentHandler):
                     tmp_scholars.append(scholar)
                 else:
                     counter = counter + 1
+                    
                     print("Removed scholar with no first-authored SCI publications: " + scholar.name)
             self.sss_scholars = tmp_scholars
             if counter > 0:
