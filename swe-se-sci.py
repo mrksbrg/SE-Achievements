@@ -25,9 +25,13 @@ def add_sss_scholars(process_list, affiliation):
         running_number = person[1]
         url = person[2]
         # extract the pid from the url by substringing
-        split1 = url.split("pid/")
-        split2 = split1[1].split(".xml")
-        pid = split2[0]
+        try:
+            split1 = url.split("pid/")
+            split2 = split1[1].split(".xml")
+            pid = split2[0]
+        except IndexError:
+            print("Invalid format of input XML URL.")
+            return
 
         sss_scholars.append(SSSScholar(name, running_number, pid, url, affiliation, -1))
         tmp_aff = SSSAffiliation(affiliation)

@@ -48,39 +48,38 @@ class ScholarMiner(xml.sax.ContentHandler):
 
     def parse_scholars(self):
         nbr_scholars = len(self.input_sss_scholars)
-        i = 0 # for the progress bar
-        print(str(nbr_scholars) + " scholars to parse from DBLP...")
-        self.print_progress_bar(i, nbr_scholars)
-        parser = xml.sax.make_parser()
-        parser.setContentHandler(self)
-        for scholar in self.input_sss_scholars:
-            i += 1
-            self.current_scholar_name = scholar.name
-            self.current_scholar_running_nbr = scholar.running_number
-            self.current_scholar_affiliation = scholar.affiliation
-            self.current_scholar_url = scholar.url
-            # SAX parse the URL
-            parser.parse(scholar.url)
+        if nbr_scholars > 0:
+            i = 0 # for the progress bar
+            print(str(nbr_scholars) + " scholars to parse from DBLP...")
             self.print_progress_bar(i, nbr_scholars)
+            parser = xml.sax.make_parser()
+            parser.setContentHandler(self)
+            for scholar in self.input_sss_scholars:
+                i += 1
+                self.current_scholar_name = scholar.name
+                self.current_scholar_running_nbr = scholar.running_number
+                self.current_scholar_affiliation = scholar.affiliation
+                self.current_scholar_url = scholar.url
+                # SAX parse the URL
+                parser.parse(scholar.url)
+                self.print_progress_bar(i, nbr_scholars)
 
-        # Calculating statistics and removing scholars with no first-authored SCI publications
-        print("Calculating statistics...")
-        tmp_scholars = []
-        counter = 0
-        for scholar in self.sss_scholars:
-            scholar.calc_stats()
-            if scholar.nbr_first_sci > 0:
-                tmp_scholars.append(scholar)
+            # Calculating statistics and removing scholars with no first-authored SCI publications
+            print("Calculating statistics...")
+            tmp_scholars = []
+            counter = 0
+            for scholar in self.sss_scholars:
+                scholar.calc_stats()
+                if scholar.nbr_first_sci > 0:
+                    tmp_scholars.append(scholar)
+                else:
+                    counter = counter + 1
+                    print("Removed scholar with no first-authored SCI publications: " + scholar.name)
+            self.sss_scholars = tmp_scholars
+            if counter > 0:
+                print("Done! " + str(counter) + " scholars removed.")
             else:
-                #curr = next((x for x in self.sss_affiliations if scholar.affiliation == x.name), None)
-                #curr.nbr_scholars -= 1
-                counter = counter + 1
-                print("Removed scholar with no first-authored SCI publications: " + scholar.name)
-        self.sss_scholars = tmp_scholars
-        if counter > 0:
-            print("Done! " + str(counter) + " scholars removed.")
-        else:
-            print("Done! No scholars were removed.")
+                print("Done! No scholars were removed.")
 
     def clear_current_scholar(self):
         self.current_scholar = None
