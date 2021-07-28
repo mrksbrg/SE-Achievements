@@ -40,7 +40,7 @@ def add_sss_scholars(process_list, affiliation):
 
 # Swe-SE-SCI entry point
 if (len(sys.argv) == 1):
-    test_list = [("Stefan Cedergren", "https://dblp.org/pid/116/6013.xml")]
+    test_list = [("Stefan Cedergren", "-1", "https://dblp.org/pid/116/6013.xml")]
     #add_sss_scholars(test_list, "Fast test")
     rise_list = [("Niklas Mellegård", "-1", "https://dblp.org/pid/30/8216.xml"),
                  ("Efi Papatheocharous", "-1", "https://dblp.org/pid/76/302.xml"),
@@ -95,8 +95,10 @@ if (len(sys.argv) == 1):
 
 # Process scholar provided in the argument
 else:
+    specific_scholar = (sys.argv[1], sys.argv[2], sys.argv[3])
     custom_list = []
-    custom_list.append(sys.argv[1])
+    custom_list.append(specific_scholar)
+
     add_sss_scholars(custom_list, "N/A")
 
 # Prepare the process
