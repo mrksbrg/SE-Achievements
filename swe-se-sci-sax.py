@@ -66,7 +66,27 @@ if (len(sys.argv) == 1):
                ("Görel Hedin", "-1", "https://dblp.uni-trier.de/pid/95/987.xml"),
                ("Martina Maggio", "-1", "https://dblp.uni-trier.de/pid/02/8575.xml")]
     add_sss_scholars(lu_list, "Lund University")
-    bth_list = [("Krzysztof Wnuk", "-1", "https://dblp.org/pid/86/2856.xml")]
+    bth_list = [("Claes Wohlin", "-1", "https://dblp.org/pid/w/ClaesWohlin.xml"),
+                ("Tony Gorschek", "-1", "https://dblp.org/pid/82/3504.xml"),
+                ("Krzysztof Wnuk", "-1", "https://dblp.org/pid/86/2856.xml"),
+                ("Michael Unterkalmsteiner", "-1", "https://dblp.org/pid/08/8212.xml"),
+                ("Michael Mattsson", "-1", "https://dblp.org/pid/04/6269.xml"),
+                ("Mikael Svahnberg", "-1", "https://dblp.org/pid/81/5477.xml"),
+                ("Darja Smite", "-1", "https://dblp.org/pid/30/4138.xml"),
+                ("Jürgen Börstler", "-1", "https://dblp.org/pid/b/JBorstler.xml"),
+                ("Emil Alégroth", "-1", "https://dblp.org/pid/133/4686.xml"),
+                ("Nauman Bin Ali", "-1", "https://dblp.org/pid/37/10608.xml"),
+                ("Fabian Fagerholm", "-1", "https://dblp.org/pid/78/9972.xml"),
+                ("Javier Gonzalez-Huerta", "-1", "https://dblp.org/pid/98/8522.xml"),
+                ("Muhammad Usman", "0006", "https://dblp.org/pid/20/241-6.xml"),
+                ("Davide Fucci", "-1", "https://dblp.org/pid/70/9016.xml"),
+                ("Daniel Méndez Fernández", "-1", "https://dblp.org/pid/69/8522.xml"),
+                ("Deepika Badampudi", "-1", "https://dblp.org/pid/130/6487.xml"),
+                ("Emilia Mendes", "-1", "https://dblp.org/pid/m/EMendes.xml"),
+                ("Ludwik Kuzniarz", "-1", "https://dblp.org/pid/26/532.xml"),
+                ("Lars Lundberg", "-1", "https://dblp.org/pid/58/356.xml"),
+                ("Niklas Lavesson", "-1", "https://dblp.org/pid/55/1994.xml"),
+                ("Ahmad Nauman Ghazi", "-1", "https://dblp.org/pid/156/2314.xml")]
     add_sss_scholars(bth_list, "Blekinge Institute of Technology")
     chalmers_list = [("Philipp Leitner", "0001", "https://dblp.org/pid/03/5268.xml")]
     add_sss_scholars(chalmers_list, "Chalmers / Gothenburg University")
