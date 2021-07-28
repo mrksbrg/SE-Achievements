@@ -57,7 +57,14 @@ if (len(sys.argv) == 1):
                  ("Stig Larsson", "0002", "https://dblp.org/pid/77/1925-2.xml")]
     add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
     lu_list = [("Per Runeson", "-1", "https://dblp.org/pid/24/24.xml"),
-               ("Björn Regnell", "-1", "https://dblp.uni-trier.de/pid/09/1284.xml")]
+               ("Björn Regnell", "-1", "https://dblp.uni-trier.de/pid/09/1284.xml"),
+               ("Martin Höst", "-1", "https://dblp.uni-trier.de/pid/07/6594.xml"),
+               ("Elizabeth Bjarnason", "-1", "https://dblp.uni-trier.de/pid/19/1459.xml"),
+               ("Emelie Engström", "-1", "https://dblp.uni-trier.de/pid/31/2107.xml"),
+               ("Christin Lindholm", "-1", "https://dblp.uni-trier.de/pid/20/851.xml"),
+               ("Christoph Reichenbach", "-1", "https://dblp.uni-trier.de/pid/98/4527.xml"),
+               ("Görel Hedin", "-1", "https://dblp.uni-trier.de/pid/95/987.xml"),
+               ("Martina Maggio", "-1", "https://dblp.uni-trier.de/pid/02/8575.xml")]
     add_sss_scholars(lu_list, "Lund University")
     bth_list = [("Krzysztof Wnuk", "-1", "https://dblp.org/pid/86/2856.xml")]
     add_sss_scholars(bth_list, "Blekinge Institute of Technology")
