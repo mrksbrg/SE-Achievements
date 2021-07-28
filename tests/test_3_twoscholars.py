@@ -20,38 +20,36 @@ class TestClass_TwoScholars:
         self.scholars = []
         self.affiliations = []
         self.filename_prefix = str(date.today()) + "_swese_"
-        self.test_scholars = ["Simon M. Poulding", "Richard C. Holt"]
+        self.test_scholars = [("Simon M. Poulding", "-1", "https://dblp.org/pid/93/6877.xml"),
+                              ("Richard C. Holt", "-1", "https://dblp.org/pid/h/RichardCHolt.xml")]
 
     def add_sss_scholars(self, process_list, affiliation):
-        for name in process_list:
-            words = name.split()
-            # check if author has a running number
-            if not words[len(words) - 1].isdigit():
-                self.scholars.append(SSSScholar(name, -1, affiliation))
-                tmp_aff = SSSAffiliation(affiliation)
-                if tmp_aff not in self.affiliations:
-                    tmp_aff.nbr_scholars += 1
-                    self.affiliations.append(tmp_aff)
-                else:
-                    curr = next((x for x in self.affiliations if affiliation == x.name), None)
-                    curr.nbr_scholars += 1
+        for person in process_list:
+            name = person[0]
+            running_number = person[1]
+            url = person[2]
+            # extract the pid from the url by substringing
+            try:
+                split1 = url.split("pid/")
+                split2 = split1[1].split(".xml")
+                pid = split2[0]
+            except IndexError:
+                print("Invalid format of input XML URL.")
+                return
+
+            self.scholars.append(SSSScholar(name, running_number, pid, url, affiliation, -1))
+            tmp_aff = SSSAffiliation(affiliation)
+            if tmp_aff not in self.affiliations:
+                tmp_aff.nbr_scholars += 1
+                self.affiliations.append(tmp_aff)
             else:
-                # author has a running number
-                tmp_scholar = SSSScholar(' '.join(map(str, words[0:len(words) - 1])), str(words[len(words) - 1]),
-                                         affiliation)
-                self.scholars.append(tmp_scholar)
-                tmp_aff = SSSAffiliation(affiliation)
-                if tmp_aff not in self.affiliations:
-                    tmp_aff.nbr_scholars += 1
-                    self.scholars.append(tmp_aff)
-                else:
-                    curr = next((x for x in self.affiliations if affiliation == x.name), None)
-                    curr.nbr_scholars += 1
+                curr = next((x for x in self.affiliations if affiliation == x.name), None)
+                curr.nbr_scholars += 1
 
     def test_simon_poulding(self):
         self.add_sss_scholars(self.test_scholars, "N/A")
         self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
-        self.miner.process_group()
+        self.miner.parse_scholars()
         self.scholars = self.miner.get_scholars()
         simon = None
         for scholar in self.scholars:
@@ -67,11 +65,11 @@ class TestClass_TwoScholars:
         # TC3: Test that the name is correctly processed
         assert simon.name == "Simon M. Poulding"
 
-        # TC4: Test that Simon Poulding has 42 publications after cleaning the list
-        assert simon.nbr_publications == 42
+        # TC4: Test that Simon Poulding has 41 publications after cleaning the list
+        assert simon.nbr_publications == 41
 
         # TC5: Test that Simon Poulding has the correct ratios
-        assert simon.first_ratio == pytest.approx(0.38, 0.01)
+        assert simon.first_ratio == pytest.approx(0.37, 0.01)
         assert simon.sci_ratio == pytest.approx(0.17, 0.01)
         assert simon.nbr_sci_publications == 7
 
@@ -91,8 +89,8 @@ class TestClass_TwoScholars:
         # TC8: Test analyzer
         analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
         analyzer.analyze_individual_research_interests()
-        assert simon.sss_contrib == 2.85
-        assert simon.sss_rating == 8.75
+        assert simon.sss_contrib == 2.84
+        assert simon.sss_rating == 8.5
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.scholars, self.affiliations)
@@ -101,7 +99,7 @@ class TestClass_TwoScholars:
     def test_richard_holst(self):
         self.add_sss_scholars(self.test_scholars, "N/A")
         self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
-        self.miner.process_group()
+        self.miner.parse_scholars()
         self.scholars = self.miner.get_scholars()
         richard = None
         for scholar in self.scholars:
@@ -110,43 +108,3 @@ class TestClass_TwoScholars:
 
         # TC1: Test that Richard is removed as a non-SCI first-author
         assert richard is None
-
-        # This part is only relevant if non-SCI first-authors are kept
-        # assert len(self.scholars) == 1
-        #
-        # # TC2: Test that Richard Holst has 138 entries
-        # assert richard.dblp_entries == 138
-        #
-        # # TC3: Test that the name is correctly processed
-        # assert richard.name == "Richard C. Holt"
-        #
-        # # TC4: Test that Richard Holst has 137 publications after removing duplicates
-        # assert richard.nbr_publications == 137
-        #
-        # # TC5: Test that Richard Holst has the correct ratios
-        # assert richard.first_ratio == pytest.approx(0.21, 0.01)
-        # assert richard.sci_ratio == pytest.approx(0.06, 0.01)
-        # assert richard.nbr_sci_publications == 8
-        #
-        # # TC6: Test write to files
-        # self.miner.write_results()
-        # filename_txt = self.filename_prefix + "1_miner.txt"
-        # filename_csv = self.filename_prefix + "1_miner.csv"
-        # assert os.path.exists(filename_txt)
-        # assert os.path.exists(filename_csv)
-        #
-        # # TC7: Test file size of txt-file
-        # file_stats_txt = os.stat(filename_txt)
-        # file_stats_csv = os.stat(filename_csv)
-        # assert file_stats_txt.st_size == pytest.approx(476, 1)
-        # assert file_stats_csv.st_size == pytest.approx(139, 1)
-        #
-        # # TC8: Test analyzer
-        # analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
-        # analyzer.analyze_individual_research_interests()
-        # assert richard.sss_contrib == 2.09
-        # assert richard.sss_rating == 12.79
-        #
-        # # TC10: Test tabulator
-        # tabulator = ScholarTabulator(self.filename_prefix, self.scholars, self.affiliations)
-        # tabulator.write_tables()
