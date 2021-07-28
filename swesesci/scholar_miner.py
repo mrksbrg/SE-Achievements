@@ -158,9 +158,8 @@ class ScholarMiner(xml.sax.ContentHandler):
         if tag == "dblpperson":
             author_name = attributes["name"]
             author_id = attributes["pid"]
-            dblp_entries = attributes["n"]
+            dblp_entries = int(attributes["n"])
             self.current_scholar = SSSScholar(self.current_scholar_name, self.current_scholar_running_nbr, author_id, self.current_scholar_url, self.current_scholar_affiliation, dblp_entries)
-            #print("Author Name (ID):", author_name + " (" + str(author_id) + "): " + str(dblp_entries) + " DBLP entries to parse.")
         # Opening journal paper
         elif tag == "article":
             self.parsing_publication = True

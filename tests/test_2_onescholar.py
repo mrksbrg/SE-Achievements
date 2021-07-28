@@ -20,38 +20,35 @@ class TestClass_OneScholar:
         self.scholars = []
         self.affiliations = []
         self.filename_prefix = str(date.today()) + "_swese_"
-        self.test_scholar = ["David Notkin"]
+        self.test_scholar = [("David Notkin", "-1", "https://dblp.org/pid/n/DavidNotkin.xml")]
 
     def add_sss_scholars(self, process_list, affiliation):
-        for name in process_list:
-            words = name.split()
-            # check if author has a running number
-            if not words[len(words) - 1].isdigit():
-                self.scholars.append(SSSScholar(name, -1, affiliation))
-                tmp_aff = SSSAffiliation(affiliation)
-                if tmp_aff not in self.affiliations:
-                    tmp_aff.nbr_scholars += 1
-                    self.affiliations.append(tmp_aff)
-                else:
-                    curr = next((x for x in self.affiliations if affiliation == x.name), None)
-                    curr.nbr_scholars += 1
+        for person in process_list:
+            name = person[0]
+            running_number = person[1]
+            url = person[2]
+            # extract the pid from the url by substringing
+            try:
+                split1 = url.split("pid/")
+                split2 = split1[1].split(".xml")
+                pid = split2[0]
+            except IndexError:
+                print("Invalid format of input XML URL.")
+                return
+
+            self.scholars.append(SSSScholar(name, running_number, pid, url, affiliation, -1))
+            tmp_aff = SSSAffiliation(affiliation)
+            if tmp_aff not in self.affiliations:
+                tmp_aff.nbr_scholars += 1
+                self.affiliations.append(tmp_aff)
             else:
-                # author has a running number
-                tmp_scholar = SSSScholar(' '.join(map(str, words[0:len(words) - 1])), str(words[len(words) - 1]),
-                                         affiliation)
-                self.scholars.append(tmp_scholar)
-                tmp_aff = SSSAffiliation(affiliation)
-                if tmp_aff not in self.affiliations:
-                    tmp_aff.nbr_scholars += 1
-                    self.scholars.append(tmp_aff)
-                else:
-                    curr = next((x for x in self.affiliations if affiliation == x.name), None)
-                    curr.nbr_scholars += 1
+                curr = next((x for x in self.affiliations if affiliation == x.name), None)
+                curr.nbr_scholars += 1
 
     def test_david_notkin(self):
         self.add_sss_scholars(self.test_scholar, "N/A")
         self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
-        self.miner.process_group()
+        self.miner.parse_scholars()
         self.scholars = self.miner.get_scholars()
         david = None
         for scholar in self.scholars:
@@ -68,12 +65,12 @@ class TestClass_OneScholar:
         # TC3: Test that the name is correctly processed
         assert david.name == "David Notkin"
 
-        # TC4: Test that David Notkin has 136 publications after cleaning the list
-        assert david.nbr_publications == 136
+        # TC4: Test that David Notkin has 125 publications after cleaning the list
+        assert david.nbr_publications == 125
 
         # TC5: Test that David Notkin has the correct ratios
-        assert david.first_ratio == pytest.approx(0.24, 0.01)
-        assert david.sci_ratio == pytest.approx(0.16, 0.01)
+        assert david.first_ratio == pytest.approx(0.18, 0.01)
+        assert david.sci_ratio == pytest.approx(0.18, 0.01)
         assert david.nbr_sci_publications == 22
 
         # TC6: Test write results
@@ -92,8 +89,8 @@ class TestClass_OneScholar:
         # TC8: Test analyzer
         analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
         analyzer.analyze_individual_research_interests()
-        assert david.sss_contrib == 6.04
-        assert david.sss_rating == 24.48
+        assert david.sss_contrib == 5.93
+        assert david.sss_rating == 22.5
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.scholars, self.affiliations)
