@@ -48,7 +48,7 @@ class SSSScholar:
         self.swebok_comp_string = ""
                 
     def __str__(self):
-        if self.running_number == -1:
+        if self.running_number == "-1":
             return self.name + " [" + self.pid + "]" + " (" + str(len(self.publications)) + " publications)"
         else:
             return self.name + " " + self.running_number + " (" + str(len(self.publications)) + " publications)"
@@ -95,8 +95,6 @@ class SSSScholar:
         if not isinstance(publ, SSSPublication):
             raise TypeError("Error: do not add anything but instances of publication.SSSPublication to the collection")
 
-        print("Added: " + publ.year + " - " + publ.title + " (" + str(publ.booktitle) + ")")
-
         if self.nbr_first_sci == -1:
             self.nbr_first_sci = 0
         if self.nbr_publications == -1:
@@ -108,12 +106,10 @@ class SSSScholar:
 
         # Add corresponding SWEBOK Knowledge Area
         first_author = False
-        if self.running_number == -1:
-            print("First author name without running number matches: " + publ.title + " by " + publ.authors[0][0])
+        if self.running_number == "-1":
             if publ.authors[0][0] == self.name or publ.authors[0][0] == str(self.name + " 0001"):
                 first_author = True
         else:
-            print("First author name with running number (" + self.running_number + "): " + publ.title)
             if publ.authors[0][0] == str(self.name + " " + self.running_number):
                 first_author = True
         if first_author and publ.knowl_area >= 0:
@@ -168,7 +164,7 @@ class SSSScholar:
     def get_first_author_titles(self):
         first_author_titles = []
         for publ in self.publications:
-            if self.running_number == -1:
+            if self.running_number == "-1":
                 if publ.authors[0][0] == self.name:
                     first_author_titles.append(publ.title)
             else:
@@ -190,7 +186,7 @@ class SSSScholar:
     def sci_publications_to_string(self):
         result = ""
         for publ in self.publications:
-            if self.running_number == -1:
+            if self.running_number == "-1":
                 if publ.sci_listed and publ.authors[0][0] == self.name:
                     result += str(publ.year) + ": " + publ.title + " (" + str(publ.journal) + ")" + "\n"
             else:
@@ -208,7 +204,7 @@ class SSSScholar:
         self.nbr_first_sci = 0
         for publ in self.publications:
             try:
-                if self.running_number == -1:  # author has no running number
+                if self.running_number == "-1":  # author has no running number
                     if publ.sci_listed and publ.authors[0][0] == self.name:
                         nbr_first_author += 1
                         self.nbr_sci_publications += 1

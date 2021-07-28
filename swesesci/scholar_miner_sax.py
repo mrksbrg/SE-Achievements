@@ -61,7 +61,6 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.current_scholar_url = scholar.url
             # SAX parse the URL
             parser.parse(scholar.url)
-            #parser.parse("mellefull.xml")
             self.print_progress_bar(i, nbr_scholars)
 
         # Calculating statistics and removing scholars with no first-authored SCI publications
