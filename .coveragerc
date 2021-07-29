@@ -1,7 +1,0 @@
-[report]
-omit =
-    */python?.?/*
-    */site-packages/nose/*
-    */templates/*
-    *__init__*
-    
