@@ -1,13 +1,18 @@
+import datetime
 from sortedcontainers import SortedSet
 from .publication import SSSPublication
 
+
 class SSSScholar:
 
-    def __init__(self, name, running_number, affiliation):
+    def __init__(self, name, running_number, pid, url, affiliation, dblp_entries):
         # Some redundancy needed for use with Jinja2
         self.name = name
         self.running_number = running_number
+        self.pid = pid
+        self.url = url
         self.affiliation = affiliation
+        self.dblp_entries = dblp_entries
         self.research_interests = []
         self.research_interests_string = ""
 
@@ -15,7 +20,6 @@ class SSSScholar:
         self.sss_contrib = -1
         self.sss_rating = -1
 
-        self.dblp_entries = -1
         self.publications = SortedSet()
         self.nbr_publications = -1
         self.first_ratio = -1
@@ -44,8 +48,8 @@ class SSSScholar:
         self.swebok_comp_string = ""
                 
     def __str__(self):
-        if self.running_number == -1:
-            return self.name + " (" + str(len(self.publications)) + " publications)"
+        if self.running_number == "-1":
+            return self.name + " [" + self.pid + "]" + " (" + str(len(self.publications)) + " publications)"
         else:
             return self.name + " " + self.running_number + " (" + str(len(self.publications)) + " publications)"
     
@@ -90,6 +94,7 @@ class SSSScholar:
     def add_publication(self, publ):
         if not isinstance(publ, SSSPublication):
             raise TypeError("Error: do not add anything but instances of publication.SSSPublication to the collection")
+
         if self.nbr_first_sci == -1:
             self.nbr_first_sci = 0
         if self.nbr_publications == -1:
@@ -101,27 +106,24 @@ class SSSScholar:
 
         # Add corresponding SWEBOK Knowledge Area
         first_author = False
-        if self.running_number == -1:
-            if publ.authors[0] == self.name:
+        if self.running_number == "-1":
+            if publ.authors[0][0] == self.name or publ.authors[0][0] == str(self.name + " 0001"):
                 first_author = True
         else:
-            if publ.authors[0] == str(self.name + " " + self.running_number):
+            if publ.authors[0][0] == str(self.name + " " + self.running_number):
                 first_author = True
         if first_author and publ.knowl_area >= 0:
             self.swebok_counters[publ.knowl_area] += 1
-            if publ.booktitle is not None:
+            if publ.booktitle != -1:
                 # conference publication
                 tmp_work = str(publ.year) + ": " + publ.title + " (" + publ.booktitle + ") "
                 self.swebok_works[publ.knowl_area] += tmp_work
-                #print(self.swebok_works[publ.knowl_area])
                 self.add_to_swebok_string(tmp_work, publ.knowl_area)
             else:
                 # journal publication
                 tmp_work = str(publ.year) + ": " + publ.title + " (" + publ.journal + ") "
                 self.swebok_works[publ.knowl_area] += tmp_work
-                #print(self.swebok_works[publ.knowl_area])
                 self.add_to_swebok_string(tmp_work, publ.knowl_area)
-        #print(self.swebok_counters)
 
     # add to the string that Jinja uses
     def add_to_swebok_string(self, str, knowl_area_id):
@@ -162,22 +164,33 @@ class SSSScholar:
     def get_first_author_titles(self):
         first_author_titles = []
         for publ in self.publications:
-            if self.running_number == -1:
-                if publ.authors[0] == self.name:
+            if self.running_number == "-1":
+                if publ.authors[0][0] == self.name:
                     first_author_titles.append(publ.title)
             else:
-                if publ.authors[0] == str(self.name + " " + self.running_number):
+                if publ.authors[0][0] == str(self.name + " " + self.running_number):
                     first_author_titles.append(publ.title)
         return first_author_titles
-        
+
+    def get_recent_titles(self):
+        '''
+        :return: Return a list of the recent (5 years) titles
+        '''
+        recent_publications = ""
+        now = datetime.datetime.now()
+        for p in self.publications:
+            if int(p.year) >= int(now.year) - 5:
+                recent_publications += p.title + " "
+        return recent_publications
+
     def sci_publications_to_string(self):
         result = ""
         for publ in self.publications:
-            if self.running_number == -1:
-                if publ.sci_listed and publ.authors[0] == self.name:
+            if self.running_number == "-1":
+                if publ.sci_listed and publ.authors[0][0] == self.name:
                     result += str(publ.year) + ": " + publ.title + " (" + str(publ.journal) + ")" + "\n"
             else:
-                if publ.sci_listed and publ.authors[0] == str(self.name + " " + self.running_number):
+                if publ.sci_listed and publ.authors[0][0] == str(self.name + " " + self.running_number):
                     result += str(publ.year) + ": " + publ.title + " (" + str(publ.journal) + ")" + "\n"
         return result
 
@@ -191,21 +204,21 @@ class SSSScholar:
         self.nbr_first_sci = 0
         for publ in self.publications:
             try:
-                if self.running_number == -1:  # author has no running number
-                    if publ.sci_listed and publ.authors[0] == self.name:
+                if self.running_number == "-1":  # author has no running number
+                    if publ.sci_listed and publ.authors[0][0] == self.name:
                         nbr_first_author += 1
                         self.nbr_sci_publications += 1
                         self.nbr_first_sci += 1
-                    elif publ.authors[0] == self.name:
+                    elif publ.authors[0][0] == self.name:
                         nbr_first_author += 1
                     elif publ.sci_listed:
                         self.nbr_sci_publications += 1
                 else:  # author has a running number
-                    if publ.sci_listed and publ.authors[0] == str(self.name + " " + self.running_number):
+                    if publ.sci_listed and publ.authors[0][0] == str(self.name + " " + self.running_number):
                         nbr_first_author += 1
                         self.nbr_sci_publications += 1
                         self.nbr_first_sci += 1
-                    elif publ.authors[0] == str(self.name + " " + self.running_number):
+                    elif publ.authors[0][0] == str(self.name + " " + self.running_number):
                         nbr_first_author += 1
                     elif publ.sci_listed:
                         self.nbr_sci_publications += 1
@@ -330,7 +343,7 @@ class SSSScholar:
             self.swebok_string += str(self.swebok_badges[21]) + "-Web, "
 
     def to_string(self):
-        return self.name + " (" + str(len(self.publications)) + " publications. SCI-ratio: " + str(round(self.sci_ratio, 2)) + " 1st-ratio: " + str(round(self.first_ratio, 2)) + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr first ICSE: " + str(self.get_nbr_ICSE()) + ")"
+        return self.name + " [" + self.pid + "] (" + str(len(self.publications)) + " publications. SCI-ratio: " + str(round(self.sci_ratio, 2)) + " 1st-ratio: " + str(round(self.first_ratio, 2)) + " Nbr firsts in SCI: " + str(self.nbr_first_sci) + " Nbr first ICSE: " + str(self.get_nbr_ICSE()) + ")"
     
     def to_csv_line(self):
         return self.name + ";" + str(self.dblp_entries) + ";" + str(len(self.publications)) + ";" + str(self.sci_ratio) + ";" + str(self.first_ratio) + ";" + str(self.nbr_first_sci) + ";" + str(self.get_nbr_ICSE())

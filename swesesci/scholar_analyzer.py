@@ -6,15 +6,13 @@ Created on Fri Jul  5 11:21:15 2019
 """
 
 import csv
-
 from sklearn.feature_extraction.text import CountVectorizer
-
+import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-import nltk
-
 from sklearn.decomposition import LatentDirichletAllocation as LDA
+
 
 class ScholarAnalyzer:
 
@@ -27,6 +25,7 @@ class ScholarAnalyzer:
         self.affiliations_dict = {}
         self.tailored_stop_words = []
         self.scholars_stopped_corpus = {}
+        self.scholars_stopped_recent_corpus = {}
         self.affiliations_stopped_corpus = {}
 
         self._nbr_sss_scholar = -1
@@ -40,7 +39,6 @@ class ScholarAnalyzer:
             for row in csv_reader:
                 self.scholars_dict[row[0]] = row[1]
         self._nbr_sss_scholar = len(self.scholars_dict)
-
 
         with open(self.filename_prefix + "1_titles_per_affiliation.csv") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=';')
@@ -71,32 +69,40 @@ class ScholarAnalyzer:
                                                           "one", "two", "three", "four",
                                                           "five", "six", "seven", "eight",
                                                           "nine", "ten", "icse", "2015",
-                                                          "die"])
+                                                          "die", "2016", "2017", "2018",
+                                                          "2019", "2020", "2021"])
 
         # Preprocessing of authors' titles
         for scholar, corpus in self.scholars_dict.items():
             self.scholars_stopped_corpus[scholar] = []
-            
             corpus = word_tokenize(str(self.scholars_dict[scholar]))
             corpus = [word.lower() for word in corpus]
-            
             tokenizer = RegexpTokenizer(r'\w+')
             corpus = tokenizer.tokenize(str(corpus))
-        
             for word in corpus:
                 if len(word) >= 3 and word not in self.tailored_stop_words:
                     self.scholars_stopped_corpus[scholar].append(word)
 
+        # Preprocessing of authors' contemporary titles
+        recent_titles = {}
+        for scholar in self.sss_scholars:
+            recent_titles[scholar.name] = scholar.get_recent_titles()
+            self.scholars_stopped_recent_corpus[scholar.name] = []
+            corpus = word_tokenize(recent_titles[scholar.name])
+            corpus = [word.lower() for word in corpus]
+            tokenizer = RegexpTokenizer(r'\w+')
+            corpus = tokenizer.tokenize(str(corpus))
+            for word in corpus:
+                if len(word) >= 3 and word not in self.tailored_stop_words:
+                    self.scholars_stopped_recent_corpus[scholar.name].append(word)
+
         # Preprocessing of affiliation' titles
         for affiliation, corpus in self.affiliations_dict.items():
             self.affiliations_stopped_corpus[affiliation] = []
-
             corpus = word_tokenize(str(self.affiliations_dict[affiliation]))
             corpus = [word.lower() for word in corpus]
-
             tokenizer = RegexpTokenizer(r'\w+')
             corpus = tokenizer.tokenize(str(corpus))
-
             for word in corpus:
                 if len(word) >= 3 and word not in self.tailored_stop_words:
                     self.affiliations_stopped_corpus[affiliation].append(word)
@@ -108,20 +114,21 @@ class ScholarAnalyzer:
         tmp.close()
     
     def analyze_individual_research_interests(self):
-        ''' Extract apparent research interests from all scholars based on first-authored publications '''
-        self.preprocess_titles()
-        print("\n####### Apparent individual research interests #######")
+        ''' Extract apparent contemporary research interests from all scholars '''
+        print("\n####### Apparent individual contemporary research interests #######")
 
         for scholar, corpus in self.scholars_dict.items():
             # Find the current scholar in the master list
             curr = next((x for x in self.sss_scholars if scholar == x.name), None)
-            word_dist = nltk.FreqDist(self.scholars_stopped_corpus[scholar])
+            word_dist = nltk.FreqDist(self.scholars_stopped_recent_corpus[scholar])
             top = word_dist.most_common(10)
             research_interests = ""
             for term in top:
                 research_interests += str(term[0]) + ", "
                 curr.append_research_interest(str(term[0]))
             research_interests = research_interests[:-2] # remove two final chars
+            if research_interests == "":
+                research_interests = "<NON-ACTIVE AUTHOR>"
             print(scholar + ": " + research_interests)
             curr.calc_titles()
             # Assign SWEBOK Knowledge Areas
