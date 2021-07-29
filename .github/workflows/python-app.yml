@@ -36,7 +36,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test coverage with pytest
       run: |
-        python -m pytest --cov=./myapp --cov-report xml
+        coverage run -m pytest
     - name: Coveralls Python
       uses: AndreMiras/coveralls-python-action@v20201129
   coveralls_finish:
