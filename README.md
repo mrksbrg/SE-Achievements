@@ -1,7 +1,6 @@
 # Swe-SE-SCI
 [![Python application](https://github.com/mrksbrg/SE-Achievements/actions/workflows/python-app.yml/badge.svg)](https://github.com/mrksbrg/SE-Achievements/actions/workflows/python-app.yml)
 [![Coverage Status](https://coveralls.io/repos/github/mrksbrg/SE-Achievements/badge.svg?branch=master)](https://coveralls.io/github/mrksbrg/SE-Achievements?branch=master)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/7d6b1dd683ba241ddabc/test_coverage)](https://codeclimate.com/github/mrksbrg/SE-Achievements/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7d6b1dd683ba241ddabc/maintainability)](https://codeclimate.com/github/mrksbrg/SE-Achievements/maintainability)
 [![CodeScene Code Health](https://codescene.io/projects/7137/status-badges/code-health)](https://codescene.io/projects/7137)
 
