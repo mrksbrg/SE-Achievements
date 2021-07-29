@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.9
@@ -41,5 +39,11 @@ jobs:
         python -m pytest --cov=./myapp --cov-report xml
     - name: Coveralls Python
       uses: AndreMiras/coveralls-python-action@v20201129
+  coveralls_finish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: AndreMiras/coveralls-python-action@develop
 
    
