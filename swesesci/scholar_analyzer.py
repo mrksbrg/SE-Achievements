@@ -70,7 +70,8 @@ class ScholarAnalyzer:
                                                           "five", "six", "seven", "eight",
                                                           "nine", "ten", "icse", "2015",
                                                           "die", "2016", "2017", "2018",
-                                                          "2019", "2020", "2021"])
+                                                          "2019", "2020", "2021",
+                                                          "thanks"])
 
         # Preprocessing of authors' titles
         for scholar, corpus in self.scholars_dict.items():
