@@ -114,11 +114,13 @@ class ScholarMiner(xml.sax.ContentHandler):
         # Write co-authors to csv-file
         (pd.DataFrame.from_dict(data=self.global_SSS_coauthors, orient='index').to_csv(self.filename_prefix + "1_coauthors.csv", sep=';', header=False))
 
-        # Write co-authors that are not already among the mined Swedish SE scholars
+        # Write co-authors who are not already among the included SSS scholars
         diff = Counter()
-        for coauthor in self.global_SSS_coauthors:
-            if not self.scholar_exists(coauthor):
-                diff[coauthor] += 1
+        for candidate in self.global_SSS_coauthors:
+            if self.scholar_exists(candidate):
+                del diff[candidate]
+            else:
+                diff[candidate] = self.global_SSS_coauthors[candidate]
 
         (pd.DataFrame.from_dict(data=diff, orient='index').to_csv(self.filename_prefix + "1_candidates.csv", sep=';', header=False))
 
