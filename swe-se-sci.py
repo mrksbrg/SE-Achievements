@@ -127,7 +127,8 @@ if (len(sys.argv) == 1):
                 ("Barbara Gallina", "-1", "https://dblp.org/pid/34/3823.xml"),
                 ("Mikael Sjödin", "-1", "https://dblp.org/pid/37/6301.xml"),
                 ("Daniel Flemström", "-1", "https://dblp.org/pid/13/6886.xml"),
-                ("Saad Mubeen", "-1", "https://dblp.org/pid/80/8239.xml")]
+                ("Saad Mubeen", "-1", "https://dblp.org/pid/80/8239.xml"),
+                ("Cristina Cerschi Seceleanu", "-1", "https://dblp.org/pid/85/2148.xml")]
     kth_list = [("Martin Monperrus", "-1", "https://dblp.org/pid/62/5292.xml"),
                 ("Frederic Loiret", "-1", "https://dblp.org/pid/17/1176.xml"),
                 ("Karl Meinke", "-1", "https://dblp.org/pid/70/1381.xml"),
