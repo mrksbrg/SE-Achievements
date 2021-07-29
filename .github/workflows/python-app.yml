@@ -40,10 +40,8 @@ jobs:
       run: |
         coverage run -m pytest
     - name: Publish coverage report
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
+        - uses: actions/checkout@master
+        - uses: actions/setup-node@master
         with:
           node-version: '12'
       - run: npm install -g yarn
