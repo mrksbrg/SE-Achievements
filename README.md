@@ -1,4 +1,5 @@
 # Swe-SE-SCI
+[![Python application](https://github.com/mrksbrg/SE-Achievements/actions/workflows/python-app.yml/badge.svg)](https://github.com/mrksbrg/SE-Achievements/actions/workflows/python-app.yml)
 [![Build Status](https://travis-ci.com/mrksbrg/SE-Achievements.svg?branch=master)](https://travis-ci.com/mrksbrg/SE-Achievements)
 [![Coverage Status](https://coveralls.io/repos/github/mrksbrg/SE-Achievements/badge.svg?branch=master)](https://coveralls.io/github/mrksbrg/SE-Achievements?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7d6b1dd683ba241ddabc/maintainability)](https://codeclimate.com/github/mrksbrg/SE-Achievements/maintainability)
