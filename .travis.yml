@@ -10,7 +10,7 @@ install:
   - pip install pytest
   - pip install coverage==4.5.4
   - pip install pytest-cov
-  - pip install python-coveralls
+  - pip install coveralls
 # Command to run tests.
 script:
   - travis_wait 45 pytest --cov
