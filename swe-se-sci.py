@@ -52,7 +52,7 @@ if (len(sys.argv) == 1):
                  ("Pasqualina Potena", "-1", "https://dblp.org/pid/49/2251.xml"),
                  ("Markus Borg", "-1", "https://dblp.org/pid/47/9384.xml"),
                  ("Ulrik Franke", "-1", "https://dblp.org/pid/71/3754.xml"),
-                 ("Ana Magazinius", "-1", "https://dblp.org/pid/46/8694.xml"),
+                 ("Maria Ulan", "-1", "https://dblp.org/pid/221/1630.xml"),
                  ("Jakob Axelsson", "-1", "https://dblp.org/pid/50/6797.xml"),
                  ("Håkan Burden", "-1", "https://dblp.org/pid/02/10779.xml"),
                  ("Peter Wallin", "-1", "https://dblp.org/pid/57/5749.xml"),
