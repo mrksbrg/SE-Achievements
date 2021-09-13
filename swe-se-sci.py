@@ -90,7 +90,8 @@ if (len(sys.argv) == 1):
                 ("Ludwik Kuzniarz", "-1", "https://dblp.org/pid/26/532.xml"),
                 ("Lars Lundberg", "-1", "https://dblp.org/pid/58/356.xml"),
                 ("Niklas Lavesson", "-1", "https://dblp.org/pid/55/1994.xml"),
-                ("Ahmad Nauman Ghazi", "-1", "https://dblp.org/pid/156/2314.xml")]
+                ("Ahmad Nauman Ghazi", "-1", "https://dblp.org/pid/156/2314.xml"),
+                ("Binish Tanveer", "-1", "https://dblp.org/pid/180/0071.xml")]
     chalmers_list = [("Philipp Leitner", "0001", "https://dblp.org/pid/03/5268.xml"),
                      ("Rogardt Heldal", "-1", "https://dblp.org/pid/70/2264.xml"),
                      ("Patrizio Pelliccione", "-1", "https://dblp.org/pid/p/PatrizioPelliccione.xml"),
@@ -146,7 +147,10 @@ if (len(sys.argv) == 1):
                 ("Richard Glassey", "-1", "https://dblp.org/pid/00/4905.xml"),
                 ("Musard Balliu", "-1", "https://dblp.org/pid/25/7796.xml")]
     su_list = [("Janis Stirna", "-1", "https://dblp.org/pid/86/5210.xml"),
-               ("Jelena Zdravkovic", "-1", "https://dblp.org/pid/32/855.xml")]
+               ("Jelena Zdravkovic", "-1", "https://dblp.org/pid/32/855.xml"),
+               ("Martin Henkel", "-1", "https://dblp.org/pid/88/250.xml"),
+               ("Ilia Bider", "-1", "https://dblp.org/pid/27/111.xml"),
+               ("Erik Perjons", "-1", "https://dblp.org/pid/97/6128.xml")]
     malmo_list = [("Helena Holmström Olsson", "-1", "https://dblp.org/pid/71/1008.xml"),
                   ("Annabella Loconsole", "-1", "https://dblp.org/pid/69/4553.xml"),
                   ("Patrik Berander", "-1", "https://dblp.org/pid/99/2602.xml"),
