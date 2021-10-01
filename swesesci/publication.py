@@ -18,7 +18,7 @@ class SSSPublication:
     constr_conf_list = ["OOPSLA", "ECOOP", "SCAM", "Programming", "Middleware"]
     constr_journal_list = ["Sci. Comput. Program.", "Programming and Computer Software"]
     # 3 = Software Testing
-    test_conf_list = ["ICST", "ISSTA"]
+    test_conf_list = ["ICST", "ISSTA", "AST@ICSE"]
     test_journal_list = ["Softw. Test. Verification Reliab."]
     # 4 = Software Maintenance
     maint_conf_list = ["ICSM", "ICSME", "CSMR", "CSMR-WCRE", "WCRE"]

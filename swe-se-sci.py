@@ -149,8 +149,8 @@ if (len(sys.argv) == 1):
     su_list = [("Janis Stirna", "-1", "https://dblp.org/pid/86/5210.xml"),
                ("Jelena Zdravkovic", "-1", "https://dblp.org/pid/32/855.xml"),
                ("Martin Henkel", "-1", "https://dblp.org/pid/88/250.xml"),
-               ("Ilia Bider", "-1", "https://dblp.org/pid/27/111.xml"),
                ("Erik Perjons", "-1", "https://dblp.org/pid/97/6128.xml")]
+    # Emeritus "Ilia Bider", "-1", "https://dblp.org/pid/27/111.xml"
     malmo_list = [("Helena Holmström Olsson", "-1", "https://dblp.org/pid/71/1008.xml"),
                   ("Annabella Loconsole", "-1", "https://dblp.org/pid/69/4553.xml"),
                   ("Patrik Berander", "-1", "https://dblp.org/pid/99/2602.xml"),
