@@ -171,7 +171,8 @@ if (len(sys.argv) == 1):
                   ("Rafael Messias Martins", "-1", "https://dblp.org/pid/117/2529.xml"),
                   ("Anna Wingkvist", "-1", "https://dblp.org/pid/55/7247.xml"),
                   ("Jonas Lundberg", "-1", "https://dblp.org/pid/86/5187.xml"),
-                  ("Mauro Caporuscio", "-1", "https://dblp.org/pid/c/MauroCaporuscio.xml")]
+                  ("Mauro Caporuscio", "-1", "https://dblp.org/pid/c/MauroCaporuscio.xml"),
+                  ("Diego Perez-Palacin", "-1", "https://dblp.org/pid/26/7841.xml")]
     skovde_list = [("Björn Lundell", "-1", "https://dblp.org/pid/37/6147.xml"),
                    ("Sten Andler", "-1", "https://dblp.org/pid/a/StenFAndler.xml"),
                    ("Birgitta Lindström", "-1", "https://dblp.org/pid/89/4385.xml"),
@@ -187,7 +188,8 @@ if (len(sys.argv) == 1):
                      ("Martin Blom", "-1", "https://dblp.org/pid/24/3713.xml"),
                      ("Muhammad Ovais Ahmad", "-1", "https://dblp.org/pid/143/1116.xml")]
     jonkoping_list = [("Anders Adlemo", "-1", "https://dblp.org/pid/65/4551.xml")]
-    orebro_list = [("Panagiota Chatzipetrou", "-1", "https://dblp.org/pid/09/10404.xml")]
+    orebro_list = [("Panagiota Chatzipetrou", "-1", "https://dblp.org/pid/09/10404.xml"),
+                   ("Fredrik Karlsson", "0001", "https://dblp.org/pid/54/4340.xml")]
     halmstad_university = [("Walid Taha", "-1", "https://dblp.org/pid/53/5525.xml")]
 
     add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
