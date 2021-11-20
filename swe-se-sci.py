@@ -113,7 +113,8 @@ if (len(sys.argv) == 1):
                      ("Imed Hammouda", "-1", "https://dblp.org/pid/14/5303.xml"),
                      ("Birgit Penzenstadler", "-1", "https://dblp.org/pid/92/3113.xml"),
                      ("Lars Pareto", "-1", "https://dblp.org/pid/p/LarsPareto.xml"),
-                     ("Christian Berger", "0001", "https://dblp.org/pid/98/4996-1.xml")]
+                     ("Christian Berger", "0001", "https://dblp.org/pid/98/4996-1.xml"),
+                     ("Daniel Strüber", "0001", "https://dblp.org/pid/46/11388-1.xml")]
     mdh_list = [("Alessio Bucaioni", "-1", "https://dblp.org/pid/143/4024.xml"),
                 ("Luciana Provenzano", "-1", "https://dblp.org/pid/35/160.xml"),
                 ("Hans A. Hansson", "-1", "https://dblp.org/pid/65/1154.xml"),
