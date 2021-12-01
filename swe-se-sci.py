@@ -146,7 +146,8 @@ if (len(sys.argv) == 1):
                 ("David Broman", "-1", "https://dblp.org/pid/13/3318.xml"),
                 ("Elena Troubitsyna", "-1", "https://dblp.org/pid/84/4265.xml"),
                 ("Richard Glassey", "-1", "https://dblp.org/pid/00/4905.xml"),
-                ("Musard Balliu", "-1", "https://dblp.org/pid/25/7796.xml")]
+                ("Musard Balliu", "-1", "https://dblp.org/pid/25/7796.xml"),
+                ("Fredrik Asplund", "-1", "https://dblp.org/pid/34/9961.xml")]
     su_list = [("Janis Stirna", "-1", "https://dblp.org/pid/86/5210.xml"),
                ("Jelena Zdravkovic", "-1", "https://dblp.org/pid/32/855.xml"),
                ("Martin Henkel", "-1", "https://dblp.org/pid/88/250.xml"),
