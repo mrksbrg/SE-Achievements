@@ -9,6 +9,7 @@ import sys
 import os.path
 from datetime import date
 import xml.sax
+import ssl
 from swesesci.scholar import SSSScholar
 from swesesci.affiliation import SSSAffiliation
 from swesesci.scholar_miner import ScholarMiner
@@ -163,7 +164,8 @@ if (len(sys.argv) == 1):
                   ("Hussan Munir", "-1", "https://dblp.org/pid/124/2690.xml")]
     linkoping_list = [("Kristian Sandahl", "-1", "https://dblp.org/pid/59/4490.xml"),
                       ("Peter Fritzson", "-1", "https://dblp.org/pid/f/PeterFritzson.xml"),
-                      ("Mariam Kamkar", "-1", "https://dblp.org/pid/k/MariamKamkar.xml")]
+                      ("Mariam Kamkar", "-1", "https://dblp.org/pid/k/MariamKamkar.xml"),
+                      ("Ola Leifler", "-1", "https://dblp.org/pid/11/3334.xml")]
     linne_list = [("Jesper Andersson", "-1", "https://dblp.org/pid/49/6212.xml"),
                   ("Morgan Ericsson", "-1", "https://dblp.org/pid/11/565.xml"),
                   ("Narges Khakpour", "-1", "https://dblp.org/pid/72/7537.xml"),
@@ -232,6 +234,7 @@ parser = xml.sax.make_parser()
 # turn off namespaces
 parser.setFeature(xml.sax.handler.feature_namespaces, 0)
 miner = ScholarMiner(filename_prefix, sss_scholars, sss_affiliations)
+ssl._create_default_https_context = ssl._create_unverified_context
 miner.parse_scholars()
 miner.write_results()
 sss_scholars = miner.get_scholars()
