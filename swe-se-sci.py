@@ -194,7 +194,7 @@ if (len(sys.argv) == 1):
                      ("Muhammad Ovais Ahmad", "-1", "https://dblp.org/pid/143/1116.xml")]
     jonkoping_list = [("Anders Adlemo", "-1", "https://dblp.org/pid/65/4551.xml")]
     orebro_list = [("Panagiota Chatzipetrou", "-1", "https://dblp.org/pid/09/10404.xml"),
-                   ("Fredrik Karlsson", "0001", "https://dblp.org/pid/54/4340.xml")]
+    			   ("Fredrik Karlsson", "0001", "https://dblp.org/pid/54/4340.xml")]
     halmstad_university = [("Walid Taha", "-1", "https://dblp.org/pid/53/5525.xml")]
 
     add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
