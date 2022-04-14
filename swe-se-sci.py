@@ -93,7 +93,8 @@ if (len(sys.argv) == 1):
                 ("Lars Lundberg", "-1", "https://dblp.org/pid/58/356.xml"),
                 ("Niklas Lavesson", "-1", "https://dblp.org/pid/55/1994.xml"),
                 ("Ahmad Nauman Ghazi", "-1", "https://dblp.org/pid/156/2314.xml"),
-                ("Binish Tanveer", "-1", "https://dblp.org/pid/180/0071.xml")]
+                ("Binish Tanveer", "-1", "https://dblp.org/pid/180/0071.xml"),
+                ("Eriks Klotins", "-1", "https://dblp.org/pid/163/6012.xml")]
     chalmers_list = [("Philipp Leitner", "0001", "https://dblp.org/pid/03/5268.xml"),
                      ("Rogardt Heldal", "-1", "https://dblp.org/pid/70/2264.xml"),
                      ("Patrizio Pelliccione", "-1", "https://dblp.org/pid/p/PatrizioPelliccione.xml"),
