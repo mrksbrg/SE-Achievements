@@ -59,7 +59,6 @@ if (len(sys.argv) == 1):
                  ("Peter Wallin", "-1", "https://dblp.org/pid/57/5749.xml"),
                  ("Piotr Tomaszewski", "-1", "https://dblp.org/pid/75/5273.xml"),
                  ("Thomas Olsson", "0001", "https://dblp.org/pid/31/5587-1.xml"),
-                 ("Stig Larsson", "0002", "https://dblp.org/pid/77/1925-2.xml"),
                  ("Kenneth Lind", "-1", "https://dblp.org/pid/46/7676.xml"),
                  ("Paris Carbone", "-1", "https://dblp.org/pid/90/7704.xml"),
                  ("Terese Besker", "-1", "https://dblp.org/pid/187/7364.xml")]
