@@ -154,7 +154,6 @@ if (len(sys.argv) == 1):
                ("Erik Perjons", "-1", "https://dblp.org/pid/97/6128.xml")]
     # Emeritus "Ilia Bider", "-1", "https://dblp.org/pid/27/111.xml"
     malmo_list = [("Helena Holmström Olsson", "-1", "https://dblp.org/pid/71/1008.xml"),
-                  ("Annabella Loconsole", "-1", "https://dblp.org/pid/69/4553.xml"),
                   ("Patrik Berander", "-1", "https://dblp.org/pid/99/2602.xml"),
                   ("Carl Magnus Olsson", "-1", "https://dblp.org/pid/27/4256.xml"),
                   ("Jeanette Eriksson", "-1", "https://dblp.org/pid/18/5227.xml"),
@@ -194,6 +193,7 @@ if (len(sys.argv) == 1):
     orebro_list = [("Panagiota Chatzipetrou", "-1", "https://dblp.org/pid/09/10404.xml"),
     			   ("Fredrik Karlsson", "0001", "https://dblp.org/pid/54/4340.xml")]
     halmstad_university = [("Walid Taha", "-1", "https://dblp.org/pid/53/5525.xml")]
+    university_west = [("Annabella Loconsole", "-1", "https://dblp.org/pid/69/4553.xml")]
 
     add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
     add_sss_scholars(lu_list, "Lund University")
@@ -210,6 +210,7 @@ if (len(sys.argv) == 1):
     add_sss_scholars(jonkoping_list, "Jönköping University")
     add_sss_scholars(orebro_list, "Örebro University")
     add_sss_scholars(halmstad_university, "Halmstad University")
+    add_sss_scholars(university_west, "University West")
 
 # Process scholar provided in the argument
 else:
