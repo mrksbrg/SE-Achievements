@@ -20,7 +20,8 @@ from swesesci.scholar_tabulator import ScholarTabulator
 sss_scholars = []
 sss_affiliations = []
 
-def add_sss_scholars(process_list, affiliation):
+def add_sss_scholars(process_list:'the list of scholars', affiliation:"the affiliation of the scholars"):
+    """Add all scholars from one affiliation for later processing"""
     for person in process_list:
         name = person[0]
         running_number = person[1]
