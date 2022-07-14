@@ -59,8 +59,8 @@ class TestClass_TwoScholars:
         # TC1: Test that DBLP returns a result
         assert len(self.scholars) == 1
 
-        # TC2: Test that Simon Poulding has 48 DBLP entries
-        assert simon.dblp_entries == 48
+        # TC2: Test that Simon Poulding has 49 DBLP entries
+        assert simon.dblp_entries == 49
 
         # TC3: Test that the name is correctly processed
         assert simon.name == "Simon M. Poulding"
