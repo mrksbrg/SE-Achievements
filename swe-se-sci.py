@@ -20,6 +20,25 @@ from swesesci.scholar_tabulator import ScholarTabulator
 sss_scholars = []
 sss_affiliations = []
 
+def url_splitter(scholar_string):
+    name = scholar_string[0]
+    running_number = scholar_string[1]
+    url = scholar_string[2]
+
+    try:
+        split1 = url.split("pid/")
+        split2 = split1[1].split(".xml")
+        pid = split2[0]
+    except IndexError:
+        print("Invalid format of input XML URL. (" + name + ")")
+        return
+
+    return (name, running_number, pid, url)
+
+def fp_add_sss_scholars(candidate_scholars, affiliation):
+    result = list(map(url_splitter, candidate_scholars))
+    print(result)
+
 def add_sss_scholars(process_list, affiliation):
     for person in process_list:
         name = person[0]
@@ -195,22 +214,23 @@ if (len(sys.argv) == 1):
     halmstad_university = [("Walid Taha", "-1", "https://dblp.org/pid/53/5525.xml")]
     university_west = [("Annabella Loconsole", "-1", "https://dblp.org/pid/69/4553.xml")]
 
-    add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
-    add_sss_scholars(lu_list, "Lund University")
-    add_sss_scholars(bth_list, "Blekinge Institute of Technology")
-    add_sss_scholars(chalmers_list, "Chalmers / Gothenburg University")
-    add_sss_scholars(mdh_list, "Mälardalen University")
-    add_sss_scholars(kth_list, "KTH Royal Institute of Technology")
-    add_sss_scholars(su_list, "Stockholm University")
-    add_sss_scholars(malmo_list, "Malmö University")
-    add_sss_scholars(linkoping_list, "Linköping University")
-    add_sss_scholars(linne_list, "Linneaus Univerity")
-    add_sss_scholars(skovde_list, "Skövde University")
-    add_sss_scholars(karlstad_list, "Karlstad University")
-    add_sss_scholars(jonkoping_list, "Jönköping University")
-    add_sss_scholars(orebro_list, "Örebro University")
-    add_sss_scholars(halmstad_university, "Halmstad University")
-    add_sss_scholars(university_west, "University West")
+    #add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
+    #add_sss_scholars(lu_list, "Lund University")
+    #add_sss_scholars(bth_list, "Blekinge Institute of Technology")
+    #add_sss_scholars(chalmers_list, "Chalmers / Gothenburg University")
+    #add_sss_scholars(mdh_list, "Mälardalen University")
+    #add_sss_scholars(kth_list, "KTH Royal Institute of Technology")
+    #add_sss_scholars(su_list, "Stockholm University")
+    #add_sss_scholars(malmo_list, "Malmö University")
+    fp_add_sss_scholars(malmo_list, "Malmö University")
+    #add_sss_scholars(linkoping_list, "Linköping University")
+    #add_sss_scholars(linne_list, "Linneaus Univerity")
+    #add_sss_scholars(skovde_list, "Skövde University")
+    #add_sss_scholars(karlstad_list, "Karlstad University")
+    #add_sss_scholars(jonkoping_list, "Jönköping University")
+    #add_sss_scholars(orebro_list, "Örebro University")
+    #add_sss_scholars(halmstad_university, "Halmstad University")
+    #add_sss_scholars(university_west, "University West")
 
 # Process scholar provided in the argument
 else:
