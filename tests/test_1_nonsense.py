@@ -15,7 +15,12 @@ class TestClass_NonSense:
     def setup_method(self):
         self.scholars = []
         self.affiliations = []
-        self.filename_prefix = str(date.today()) + "_swese_"
+        subdirectory = "output"
+        try:
+            os.mkdir(subdirectory)
+        except Exception:
+            pass
+        self.filename_prefix = os.path.join(subdirectory, str(date.today()) + "_sss_")
         self.test_nonsense = [("ABCDEFGH", "ijklmno", "A¿£$‰")]
 
     def add_sss_scholars(self, process_list, affiliation):
