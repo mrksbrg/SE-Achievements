@@ -5,6 +5,7 @@ Created on Sat Jun 15 16:50:30 2019
 @author: Markus Borg
 """
 
+import os.path
 from datetime import date
 from swesesci.scholar import SSSScholar
 from swesesci.affiliation import SSSAffiliation
