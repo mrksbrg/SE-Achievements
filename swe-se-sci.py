@@ -33,34 +33,22 @@ def url_splitter(scholar_string):
         print("Invalid format of input XML URL. (" + name + ")")
         return
 
-    return (name, running_number, pid, url)
+    return name, running_number, pid, url
 
-def create_sss_scholars(scholar_list):
-    if len(scholar_list) == 1:
-        sss_scholars.append(SSSScholar(scholar_list[0][0], scholar_list[0][1], scholar_list[0][2], scholar_list[0][3], "affiliation", -1))
-    else:
-        sss_scholars.append(SSSScholar(scholar_list[0][0], scholar_list[0][1], scholar_list[0][2], scholar_list[0][3], "affiliation", -1))
-        return create_sss_scholars(scholar_list[1:])
+def create_sss(scholar_tuple, affiliation):
+    sss_scholars.append(SSSScholar(scholar_tuple[0], scholar_tuple[1], scholar_tuple[2], scholar_tuple[3], affiliation, -1))
 
 def fp_add_sss_scholars(candidate_scholars, affiliation):
     scholar_list = list(map(url_splitter, candidate_scholars))
-    create_sss_scholars(scholar_list)
-    print("Result after recursion: " + str(sss_scholars))
+    list(map(create_sss, scholar_list, affiliation))
 
-    # To be FPd
-    '''tmp_aff = SSSAffiliation(affiliation)
-    print(str(tmp_aff))
-    
+    tmp_aff = SSSAffiliation(affiliation)
     if tmp_aff not in sss_affiliations:
         tmp_aff.nbr_scholars += 1
         sss_affiliations.append(tmp_aff)
     else:
         curr = next((x for x in sss_affiliations if affiliation == x.name), None)
         curr.nbr_scholars += 1
-        print("We now have #scholars: " + str(curr.nbr_scholars))
-    '''
-
-
 
 def add_sss_scholars(process_list, affiliation):
     for person in process_list:
@@ -275,7 +263,6 @@ print("####### Step 1 - Mining scholars #######")
 parser = xml.sax.make_parser()
 # turn off namespaces
 parser.setFeature(xml.sax.handler.feature_namespaces, 0)
-print("### " + str(sss_scholars))
 miner = ScholarMiner(filename_prefix, sss_scholars, sss_affiliations)
 ssl._create_default_https_context = ssl._create_unverified_context
 miner.parse_scholars()
