@@ -10,7 +10,6 @@ import os.path
 from datetime import date
 import xml.sax
 import ssl
-from functools import partial
 from swesesci.scholar import SSSScholar
 from swesesci.affiliation import SSSAffiliation
 from swesesci.scholar_miner import ScholarMiner
