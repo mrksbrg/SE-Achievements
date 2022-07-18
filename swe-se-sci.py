@@ -10,6 +10,7 @@ import os.path
 from datetime import date
 import xml.sax
 import ssl
+from functools import partial
 from swesesci.scholar import SSSScholar
 from swesesci.affiliation import SSSAffiliation
 from swesesci.scholar_miner import ScholarMiner
@@ -35,12 +36,9 @@ def url_splitter(scholar_string):
 
     return name, running_number, pid, url
 
-def create_sss(scholar_tuple, affiliation):
-    sss_scholars.append(SSSScholar(scholar_tuple[0], scholar_tuple[1], scholar_tuple[2], scholar_tuple[3], affiliation, -1))
-
-def fp_add_sss_scholars(candidate_scholars, affiliation):
+def add_sss_scholars(candidate_scholars, affiliation):
     scholar_list = list(map(url_splitter, candidate_scholars))
-    list(map(create_sss, scholar_list, affiliation))
+    sss_scholars = [SSSScholar(x[0], x[1], x[2], x[3], affiliation, -1) for x in scholar_list]
 
     tmp_aff = SSSAffiliation(affiliation)
     if tmp_aff not in sss_affiliations:
@@ -49,29 +47,6 @@ def fp_add_sss_scholars(candidate_scholars, affiliation):
     else:
         curr = next((x for x in sss_affiliations if affiliation == x.name), None)
         curr.nbr_scholars += 1
-
-def add_sss_scholars(process_list, affiliation):
-    for person in process_list:
-        name = person[0]
-        running_number = person[1]
-        url = person[2]
-        # extract the pid from the url by substringing
-        try:
-            split1 = url.split("pid/")
-            split2 = split1[1].split(".xml")
-            pid = split2[0]
-        except IndexError:
-            print("Invalid format of input XML URL. (" + name + ")")
-            return
-
-        sss_scholars.append(SSSScholar(name, running_number, pid, url, affiliation, -1))
-        tmp_aff = SSSAffiliation(affiliation)
-        if tmp_aff not in sss_affiliations:
-            tmp_aff.nbr_scholars += 1
-            sss_affiliations.append(tmp_aff)
-        else:
-            curr = next((x for x in sss_affiliations if affiliation == x.name), None)
-            curr.nbr_scholars += 1
 
 # Swe-SE-SCI entry point
 if (len(sys.argv) == 1):
@@ -225,23 +200,23 @@ if (len(sys.argv) == 1):
     halmstad_university = [("Walid Taha", "-1", "https://dblp.org/pid/53/5525.xml")]
     university_west = [("Annabella Loconsole", "-1", "https://dblp.org/pid/69/4553.xml")]
 
-    #add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
-    #add_sss_scholars(lu_list, "Lund University")
-    #add_sss_scholars(bth_list, "Blekinge Institute of Technology")
-    #add_sss_scholars(chalmers_list, "Chalmers / Gothenburg University")
-    #add_sss_scholars(mdh_list, "Mälardalen University")
-    #add_sss_scholars(kth_list, "KTH Royal Institute of Technology")
-    #add_sss_scholars(su_list, "Stockholm University")
-    #add_sss_scholars(malmo_list, "Malmö University")
-    fp_add_sss_scholars(malmo_list, "Malmö University")
-    #add_sss_scholars(linkoping_list, "Linköping University")
-    #add_sss_scholars(linne_list, "Linneaus Univerity")
-    #add_sss_scholars(skovde_list, "Skövde University")
-    #add_sss_scholars(karlstad_list, "Karlstad University")
-    #add_sss_scholars(jonkoping_list, "Jönköping University")
-    #add_sss_scholars(orebro_list, "Örebro University")
-    #add_sss_scholars(halmstad_university, "Halmstad University")
-    #add_sss_scholars(university_west, "University West")
+    add_sss_scholars(rise_list, "RISE Research Institutes of Sweden")
+    add_sss_scholars(lu_list, "Lund University")
+    add_sss_scholars(bth_list, "Blekinge Institute of Technology")
+    add_sss_scholars(chalmers_list, "Chalmers / Gothenburg University")
+    add_sss_scholars(mdh_list, "Mälardalen University")
+    add_sss_scholars(kth_list, "KTH Royal Institute of Technology")
+    add_sss_scholars(su_list, "Stockholm University")
+    add_sss_scholars(malmo_list, "Malmö University")
+    add_sss_scholars(malmo_list, "Malmö University")
+    add_sss_scholars(linkoping_list, "Linköping University")
+    add_sss_scholars(linne_list, "Linneaus Univerity")
+    add_sss_scholars(skovde_list, "Skövde University")
+    add_sss_scholars(karlstad_list, "Karlstad University")
+    add_sss_scholars(jonkoping_list, "Jönköping University")
+    add_sss_scholars(orebro_list, "Örebro University")
+    add_sss_scholars(halmstad_university, "Halmstad University")
+    add_sss_scholars(university_west, "University West")
 
 # Process scholar provided in the argument
 else:
