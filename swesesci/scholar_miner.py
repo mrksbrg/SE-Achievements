@@ -5,7 +5,6 @@ Created on Wed Jul 21 2021
 @author: Markus Borg
 """
 
-import time
 import xml.sax
 import pandas as pd
 from collections import Counter

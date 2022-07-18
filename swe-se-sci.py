@@ -20,28 +20,32 @@ from swesesci.scholar_tabulator import ScholarTabulator
 sss_scholars = []
 sss_affiliations = []
 
-def add_sss_scholars(process_list, affiliation):
-    for person in process_list:
-        name = person[0]
-        running_number = person[1]
-        url = person[2]
-        # extract the pid from the url by substringing
-        try:
-            split1 = url.split("pid/")
-            split2 = split1[1].split(".xml")
-            pid = split2[0]
-        except IndexError:
-            print("Invalid format of input XML URL. (" + name + ")")
-            return
+def url_splitter(scholar_string):
+    name = scholar_string[0]
+    running_number = scholar_string[1]
+    url = scholar_string[2]
 
-        sss_scholars.append(SSSScholar(name, running_number, pid, url, affiliation, -1))
-        tmp_aff = SSSAffiliation(affiliation)
-        if tmp_aff not in sss_affiliations:
-            tmp_aff.nbr_scholars += 1
-            sss_affiliations.append(tmp_aff)
-        else:
-            curr = next((x for x in sss_affiliations if affiliation == x.name), None)
-            curr.nbr_scholars += 1
+    try:
+        split1 = url.split("pid/")
+        split2 = split1[1].split(".xml")
+        pid = split2[0]
+    except IndexError:
+        print("Invalid format of input XML URL. (" + name + ")")
+        return
+
+    return name, running_number, pid, url
+
+def add_sss_scholars(candidate_scholars, affiliation):
+    scholar_list = list(map(url_splitter, candidate_scholars))
+    sss_scholars = [SSSScholar(x[0], x[1], x[2], x[3], affiliation, -1) for x in scholar_list]
+
+    tmp_aff = SSSAffiliation(affiliation)
+    if tmp_aff not in sss_affiliations:
+        tmp_aff.nbr_scholars += 1
+        sss_affiliations.append(tmp_aff)
+    else:
+        curr = next((x for x in sss_affiliations if affiliation == x.name), None)
+        curr.nbr_scholars += 1
 
 # Swe-SE-SCI entry point
 if (len(sys.argv) == 1):
@@ -202,6 +206,7 @@ if (len(sys.argv) == 1):
     add_sss_scholars(mdh_list, "Mälardalen University")
     add_sss_scholars(kth_list, "KTH Royal Institute of Technology")
     add_sss_scholars(su_list, "Stockholm University")
+    add_sss_scholars(malmo_list, "Malmö University")
     add_sss_scholars(malmo_list, "Malmö University")
     add_sss_scholars(linkoping_list, "Linköping University")
     add_sss_scholars(linne_list, "Linneaus Univerity")
