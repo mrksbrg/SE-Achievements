@@ -37,20 +37,10 @@ def url_splitter(scholar_string):
 
 def add_sss_scholars(candidate_scholars, affiliation):
     scholar_list = list(map(url_splitter, candidate_scholars))
-    tmp_sss_scholars = [SSSScholar(x[0], x[1], x[2], x[3], affiliation, -1) for x in scholar_list]
-    sss_scholars.append(tmp_sss_scholars)
-
+    [sss_scholars.append(SSSScholar(x[0], x[1], x[2], x[3], affiliation, -1)) for x in scholar_list]
     tmp_aff = SSSAffiliation(affiliation)
-    if tmp_aff not in sss_affiliations:
-        print("Never seen this before " + affiliation)
-        tmp_aff.nbr_scholars += 1
-        sss_affiliations.append(tmp_aff)
-    else:
-        print("Another SSS for " + affiliation)
-        curr = next((x for x in sss_affiliations if affiliation == x.name), None)
-        curr.nbr_scholars += 1
-
-    print(str(affiliation) + " added")
+    tmp_aff.nbr_scholars = len(candidate_scholars)
+    sss_affiliations.append(tmp_aff)
 
 # Swe-SE-SCI entry point
 if (len(sys.argv) == 1):
