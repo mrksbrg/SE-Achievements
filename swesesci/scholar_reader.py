@@ -48,7 +48,7 @@ class ScholarReader():
         self.csv_filename = csv_filename
 
     def read_candidate_scholars(self):
-        with open('test/test_input_scholars.csv', newline='', encoding='utf-8') as f:
+        with open(self.csv_filename, newline="", encoding="utf-8") as f:
             print("Reading file: " + self.csv_filename)
             reader = csv.reader(f)
             candidate_scholars = list(reader)

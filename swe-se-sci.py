@@ -32,7 +32,7 @@ filename_prefix = os.path.join(subdirectory, str(date.today()) + "_sss_")
 
 # 1. Read candidate scholars from CSV-file
 print("\n####### Step 1 - Reading candidate scholars #######")
-reader = ScholarReader("test_input_scholars.csv")
+reader = ScholarReader("input_scholars.csv")
 sss_scholars, sss_affiliations = reader.read_candidate_scholars()
 
 # 2. Mine the scholars, write the results
