@@ -52,23 +52,14 @@ def get_affiliation_list(scholars):
     return tmp_list
 
 # Swe-SE-SCI entry point
-if (len(sys.argv) == 1):
-    with open('input_scholars.csv', newline='', encoding='utf-8') as f:
-        reader = csv.reader(f)
-        candidate_scholars = list(reader)
+with open('test_input_scholars.csv', newline='', encoding='utf-8') as f:
+    reader = csv.reader(f)
+    candidate_scholars = list(reader)
 
-    scholar_list = list(map(string_splitter, candidate_scholars))
-    [sss_scholars.append(SSSScholar(x[1], x[2], x[3], x[4], x[0], -1)) for x in scholar_list]
-    sss_affiliations = get_affiliation_list(sss_scholars)
+scholar_list = list(map(string_splitter, candidate_scholars))
+[sss_scholars.append(SSSScholar(x[1], x[2], x[3], x[4], x[0], -1)) for x in scholar_list]
+sss_affiliations = get_affiliation_list(sss_scholars)
 
-# Process scholar provided in the argument
-else:
-    specific_scholar = (sys.argv[1], sys.argv[2], sys.argv[3])
-    custom_list = []
-    custom_list.append(specific_scholar)
-    add_sss_scholars(custom_list, "N/A")
-
-# 0. Prepare the process
 subdirectory = "output"
 try:
     os.mkdir(subdirectory)

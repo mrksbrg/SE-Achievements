@@ -14,6 +14,22 @@ from swesesci.scholar_miner import ScholarMiner
 from swesesci.scholar_analyzer import ScholarAnalyzer
 from swesesci.scholar_tabulator import ScholarTabulator
 
+def string_splitter(scholar_string):
+    affiliation = scholar_string[0]
+    name = scholar_string[1]
+    running_number = scholar_string[2]
+    url = scholar_string[3]
+
+    try:
+        split1 = url.split("pid/")
+        split2 = split1[1].split(".xml")
+        pid = split2[0]
+    except IndexError:
+        print("Invalid format of input XML URL. (" + name + ")")
+        raise IndexError
+
+    return affiliation, name, running_number, pid, url
+
 class TestClass_RunningNumber:
 
     def setup_method(self):
