@@ -41,7 +41,7 @@ class TestClass_NonSense:
             pass
         self.filename_prefix = os.path.join(subdirectory, str(date.today()) + "_sss_")
 
-    def get_affiliation_list(scholars):
+    def get_affiliation_list(self, scholars):
         tmp_list = []
         for scholar in scholars:
             tmp_aff = SSSAffiliation(scholar.affiliation)
