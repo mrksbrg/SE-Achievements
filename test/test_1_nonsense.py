@@ -45,7 +45,7 @@ class TestClass_NonSense:
         tmp_list = []
         for scholar in scholars:
             tmp_aff = SSSAffiliation(scholar.affiliation)
-            existing_aff = tmp_aff in sss_affiliations
+            existing_aff = tmp_aff in self.sss_affiliations
 
             if existing_aff is False:
                 tmp_aff.nbr_scholars += 1
