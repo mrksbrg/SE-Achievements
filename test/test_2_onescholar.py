@@ -28,15 +28,13 @@ class TestClass_OneScholar:
             pass
         self.filename_prefix = os.path.join(subdirectory, str(date.today()) + "_sss_")
 
-    def test_david_notkin(self):
         reader = ScholarReader("test/test_2_onescholar.csv")
-
         self.sss_scholars, self.sss_affiliations = reader.read_candidate_scholars()
-
         self.miner = ScholarMiner(self.filename_prefix, self.sss_scholars, self.sss_affiliations)
         self.miner.parse_scholars()
         self.sss_scholars = self.miner.get_scholars()
 
+    def test_david_notkin(self):
         david = None
         for scholar in self.sss_scholars:
             if scholar.name == "David Notkin":
