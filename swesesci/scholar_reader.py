@@ -25,7 +25,7 @@ def string_splitter(scholar_string):
         pid = split2[0]
     except IndexError:
         print("Invalid format of input XML URL. (" + name + ")")
-        return
+        raise IndexError
 
     return affiliation, name, running_number, pid, url
 
