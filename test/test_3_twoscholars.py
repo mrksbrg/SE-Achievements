@@ -10,75 +10,39 @@ import os.path
 from datetime import date
 from swesesci.scholar import SSSScholar
 from swesesci.affiliation import SSSAffiliation
+from swesesci.scholar_reader import ScholarReader
 from swesesci.scholar_miner import ScholarMiner
 from swesesci.scholar_analyzer import ScholarAnalyzer
 from swesesci.scholar_tabulator import ScholarTabulator
 
-def string_splitter(scholar_string):
-    affiliation = scholar_string[0]
-    name = scholar_string[1]
-    running_number = scholar_string[2]
-    url = scholar_string[3]
-
-    try:
-        split1 = url.split("pid/")
-        split2 = split1[1].split(".xml")
-        pid = split2[0]
-    except IndexError:
-        print("Invalid format of input XML URL. (" + name + ")")
-        raise IndexError
-
-    return affiliation, name, running_number, pid, url
-
 class TestClass_TwoScholars:
 
     def setup_method(self):
-        self.scholars = []
-        self.affiliations = []
+        self.sss_scholars = []
+        self.sss_affiliations = []
         subdirectory = "output"
         try:
             os.mkdir(subdirectory)
         except Exception:
             pass
         self.filename_prefix = os.path.join(subdirectory, str(date.today()) + "_sss_")
-        self.test_scholars = [("Simon M. Poulding", "-1", "https://dblp.org/pid/93/6877.xml"),
-                              ("Richard C. Holt", "-1", "https://dblp.org/pid/h/RichardCHolt.xml")]
 
-    def add_sss_scholars(self, process_list, affiliation):
-        for person in process_list:
-            name = person[0]
-            running_number = person[1]
-            url = person[2]
-            # extract the pid from the url by substringing
-            try:
-                split1 = url.split("pid/")
-                split2 = split1[1].split(".xml")
-                pid = split2[0]
-            except IndexError:
-                print("Invalid format of input XML URL.")
-                return
+        reader = ScholarReader("test/test_3_twoscholars.csv")
+        self.sss_scholars, self.sss_affiliations = reader.read_candidate_scholars()
+        self.miner = ScholarMiner(self.filename_prefix, self.sss_scholars, self.sss_affiliations)
+        self.miner.parse_scholars()
+        self.sss_scholars = self.miner.get_scholars()
+        print(self.sss_scholars)
 
-            self.scholars.append(SSSScholar(name, running_number, pid, url, affiliation, -1))
-            tmp_aff = SSSAffiliation(affiliation)
-            if tmp_aff not in self.affiliations:
-                tmp_aff.nbr_scholars += 1
-                self.affiliations.append(tmp_aff)
-            else:
-                curr = next((x for x in self.affiliations if affiliation == x.name), None)
-                curr.nbr_scholars += 1
+    def test_two_results(self):
+        # TC1: Test that DBLP returns a result
+        assert len(self.sss_scholars) == 1
 
     def test_simon_poulding(self):
-        self.add_sss_scholars(self.test_scholars, "N/A")
-        self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
-        self.miner.parse_scholars()
-        self.scholars = self.miner.get_scholars()
         simon = None
-        for scholar in self.scholars:
+        for scholar in self.sss_scholars:
             if scholar.name == "Simon M. Poulding":
                 simon = scholar
-
-        # TC1: Test that DBLP returns a result
-        assert len(self.scholars) == 1
 
         # TC2: Test that Simon Poulding has 49 DBLP entries
         assert simon.dblp_entries == 49
@@ -108,24 +72,20 @@ class TestClass_TwoScholars:
         assert file_stats_csv.st_size == pytest.approx(139, 1)
 
         # TC8: Test analyzer
-        analyzer = ScholarAnalyzer(self.filename_prefix, self.scholars, self.affiliations)
+        analyzer = ScholarAnalyzer(self.filename_prefix, self.sss_scholars, self.sss_affiliations)
         analyzer.analyze_individual_research_interests()
         assert simon.sss_contrib == 2.84
         assert simon.sss_rating == 8.5
 
         # TC10: Test tabulator
-        tabulator = ScholarTabulator(self.filename_prefix, self.scholars, self.affiliations)
+        tabulator = ScholarTabulator(self.filename_prefix, self.sss_scholars, self.sss_affiliations)
         tabulator.write_tables()
 
     def test_richard_holst(self):
-        self.add_sss_scholars(self.test_scholars, "N/A")
-        self.miner = ScholarMiner(self.filename_prefix, self.scholars, self.affiliations)
-        self.miner.parse_scholars()
-        self.scholars = self.miner.get_scholars()
         richard = None
-        for scholar in self.scholars:
+        for scholar in self.sss_scholars:
             if scholar.name == "Richard C. Holt":
                 richard = scholar
 
-        # TC1: Test that Richard is removed as a non-SCI first-author
+        # TC11: Test that Richard is removed as a non-SCI first-author
         assert richard is None
