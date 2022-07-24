@@ -7,29 +7,11 @@ Created on Sat Jun 15 16:50:30 2019
 
 import pytest
 import os.path
-import csv
 from datetime import date
-from swesesci.scholar import SSSScholar
-from swesesci.affiliation import SSSAffiliation
+from swesesci.scholar_reader import ScholarReader
 from swesesci.scholar_miner import ScholarMiner
 from swesesci.scholar_analyzer import ScholarAnalyzer
 from swesesci.scholar_tabulator import ScholarTabulator
-
-def string_splitter(scholar_string):
-    affiliation = scholar_string[0]
-    name = scholar_string[1]
-    running_number = scholar_string[2]
-    url = scholar_string[3]
-
-    try:
-        split1 = url.split("pid/")
-        split2 = split1[1].split(".xml")
-        pid = split2[0]
-    except IndexError:
-        print("Invalid format of input XML URL. (" + name + ")")
-        raise IndexError
-
-    return affiliation, name, running_number, pid, url
 
 class TestClass_OneScholar:
 
@@ -43,33 +25,13 @@ class TestClass_OneScholar:
             pass
         self.filename_prefix = os.path.join(subdirectory, str(date.today()) + "_sss_")
 
-    def get_affiliation_list(self, scholars):
-        tmp_list = []
-        for scholar in self.sss_scholars:
-            tmp_aff = SSSAffiliation(scholar.affiliation)
-            existing_aff = tmp_aff in self.sss_affiliations
-
-            if existing_aff is False:
-                tmp_aff.nbr_scholars += 1
-                tmp_list.append(tmp_aff)
-            else:
-                existing_aff.nbr_scholars += 1
-
-        return tmp_list
-
-    def test_david_notkin(self):
-        with open('test/test_2_onescholar.csv', newline='', encoding='utf-8') as f:
-            reader = csv.reader(f)
-            candidate_scholars = list(reader)
-
-        scholar_list = list(map(string_splitter, candidate_scholars))
-        [self.sss_scholars.append(SSSScholar(x[1], x[2], x[3], x[4], x[0], -1)) for x in scholar_list]
-        self.sss_affiliations = self.get_affiliation_list(self.sss_scholars)
-
+        reader = ScholarReader("test/test_2_onescholar.csv")
+        self.sss_scholars, self.sss_affiliations = reader.read_candidate_scholars()
         self.miner = ScholarMiner(self.filename_prefix, self.sss_scholars, self.sss_affiliations)
         self.miner.parse_scholars()
         self.sss_scholars = self.miner.get_scholars()
 
+    def test_david_notkin(self):
         david = None
         for scholar in self.sss_scholars:
             if scholar.name == "David Notkin":
