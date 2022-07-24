@@ -7,10 +7,7 @@ Created on Sat Jun 15 16:50:30 2019
 
 import pytest
 import os.path
-import csv
 from datetime import date
-from swesesci.scholar import SSSScholar
-from swesesci.affiliation import SSSAffiliation
 from swesesci.scholar_reader import ScholarReader
 from swesesci.scholar_miner import ScholarMiner
 from swesesci.scholar_analyzer import ScholarAnalyzer
