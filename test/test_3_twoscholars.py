@@ -8,8 +8,6 @@ Created on Sat Jun 15 16:50:30 2019
 import pytest
 import os.path
 from datetime import date
-from swesesci.scholar import SSSScholar
-from swesesci.affiliation import SSSAffiliation
 from swesesci.scholar_reader import ScholarReader
 from swesesci.scholar_miner import ScholarMiner
 from swesesci.scholar_analyzer import ScholarAnalyzer
@@ -32,7 +30,6 @@ class TestClass_TwoScholars:
         self.miner = ScholarMiner(self.filename_prefix, self.sss_scholars, self.sss_affiliations)
         self.miner.parse_scholars()
         self.sss_scholars = self.miner.get_scholars()
-        print(self.sss_scholars)
 
     def test_two_results(self):
         # TC1: Test that DBLP returns a result
