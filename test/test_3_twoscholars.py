@@ -33,7 +33,7 @@ class TestClass_TwoScholars:
 
     def test_two_results(self):
         # TC1: Test that DBLP returns a result
-        assert len(self.sss_scholars) == 1
+        assert len(self.sss_scholars) == 2
 
     def test_simon_poulding(self):
         simon = None
@@ -84,5 +84,39 @@ class TestClass_TwoScholars:
             if scholar.name == "Richard C. Holt":
                 richard = scholar
 
-        # TC11: Test that Richard is removed as a non-SCI first-author
-        assert richard is None
+                # TC11: Test that Richard C. Holt has 146 DBLP entries
+                assert richard.dblp_entries == 146
+
+                # TC12: Test that the name is correctly processed
+                assert richard.name == "Richard C. Holt"
+
+                # TC13: Test that Richard C. Holt has 41 publications after cleaning the list
+                assert richard.nbr_publications == 138
+
+                # TC14: Test that Richard C. Holt has the correct ratios
+                assert richard.first_ratio == pytest.approx(0.24, 0.01)
+                assert richard.sci_ratio == pytest.approx(0.07, 0.01)
+                assert richard.nbr_sci_publications == 9
+
+                # TC15: Test write to txt-file
+                self.miner.write_results()
+                filename_txt = self.filename_prefix + "1_miner.txt"
+                filename_csv = self.filename_prefix + "1_miner.csv"
+                assert os.path.exists(filename_txt)
+                assert os.path.exists(filename_csv)
+
+                # TC16: Test file sizes
+                file_stats_txt = os.stat(filename_txt)
+                file_stats_csv = os.stat(filename_csv)
+                assert file_stats_txt.st_size == pytest.approx(476, 1)
+                assert file_stats_csv.st_size == pytest.approx(139, 1)
+
+                # TC17: Test analyzer
+                analyzer = ScholarAnalyzer(self.filename_prefix, self.sss_scholars, self.sss_affiliations)
+                analyzer.analyze_individual_research_interests()
+                assert richard.sss_contrib == 3.09
+                assert richard.sss_rating == 12.65
+
+                # TC18: Test tabulator
+                tabulator = ScholarTabulator(self.filename_prefix, self.sss_scholars, self.sss_affiliations)
+                tabulator.write_tables()
