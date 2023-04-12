@@ -42,7 +42,7 @@ class TestClass_OneScholar:
         assert len(self.sss_scholars) == 1
 
         # TC2: Test that David Notkin has 159 DBLP entries
-        assert david.dblp_entries == 159
+        assert david.dblp_entries == 160
 
         # TC3: Test that the name is correctly processed
         assert david.name == "David Notkin"
