@@ -207,7 +207,7 @@ class ScholarMiner(xml.sax.ContentHandler):
                     title_to_check.find("correction to") >= 0 or \
                     title_to_check.find("open science initiative of the empirical software engineering journal") >= 0 or \
                     title_to_check.find("preface.") >= 0 or title_to_check.find("splc") >= 0 or \
-                    title_to_check.find("ftscs") >= 0:
+                    title_to_check.find("ftscs") >= 0 or title_to_check.find("keynote") >= 0:
                 #print("Skipping editorial work and corrections: " + self.current_pub_title)
                 real_article = False
 
