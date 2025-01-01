@@ -158,14 +158,12 @@ class ScholarAnalyzer:
                 nbr_terms = len(value)
                 print("Corpus size: " + str(len(value)))
                 tf = tf_vectorizer.fit_transform(value)
-                tf_feature_names = tf_vectorizer.get_feature_names()
-
+                tf_feature_names = tf_vectorizer.get_feature_names_out()
                 nbr_topics, nbr_words = self.calc_topics_tuple(nbr_terms)
 
                 # LDA
                 lda = LDA(n_components=nbr_topics)
                 lda.fit(tf)
-
                 topics = self.display_and_get_topics(lda, tf_feature_names, nbr_words)
                 self.write_topics(lda, tf_feature_names, nbr_words)
 
@@ -173,8 +171,9 @@ class ScholarAnalyzer:
                 curr = next((x for x in self.sss_affiliations if key == x.name), None)
                 curr.add_topics(topics)
                 curr.calc_topics()
-            except:
-                print("Too few publications - No topic model for this affiliation.")
+            except Exception as e:
+                print("Failed due to:", str(e))
+                print("Too few publications? Then there will be no topic model for this affiliation.")
        
     def display_and_get_topics(self, model, feature_names, no_top_words):
         topics = []
