@@ -21,12 +21,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest
-        pip install coverage
-        pip install pytest-cov
-        pip install coveralls
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        python -m nltk.downloader punkt-tab
+        pip install flake8 pytest coverage pytest-cov coveralls
+        python -m nltk.downloader punkt_tab
         python -m nltk.downloader stopwords
     - name: Check NLTK version
       run: python -c "import nltk; print(nltk.__version__)"
