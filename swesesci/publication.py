@@ -69,6 +69,8 @@ class SSSPublication:
     # 21 = Web Tech
     web_conf_list = ["IEEE ICWS", "SCC", "ICSOC", "ICWE", "WISE", "SOCA"]
     web_journal_list = ["Int. J. Web Serv. Res.", "J. Web Eng.", "IEEE Trans. Network and Service Management"]
+    # 22 = AI&SE
+    ai_conf_list = ["AIware"]
 
     def __init__(self, title, journal, booktitle, year, authors):
         self.title = title
