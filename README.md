@@ -1,6 +1,6 @@
 # Swe-SE-SCI
 [![Python application](https://github.com/mrksbrg/SE-Achievements/actions/workflows/python-app.yml/badge.svg)](https://github.com/mrksbrg/SE-Achievements/actions/workflows/python-app.yml)
-[![Coverage Status](https://coveralls.io/repos/github/mrksbrg/SE-Achievements/badge.svg?branch=main)](https://coveralls.io/github/mrksbrg/SE-Achievements?branch=main)[![Maintainability](https://api.codeclimate.com/v1/badges/7d6b1dd683ba241ddabc/maintainability)](https://codeclimate.com/github/mrksbrg/SE-Achievements/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/mrksbrg/SE-Achievements/badge.svg?branch=main)](https://coveralls.io/github/mrksbrg/SE-Achievements?branch=main)
 [![CodeScene Code Health](https://codescene.io/projects/7137/status-badges/code-health)](https://codescene.io/projects/7137)
 
 Navigating the academic Swedish software engineering landscape can be difficult. Swe-SE-SCI lists all Swedish Software Engineering (SE) scholars with permanent positions at Swedish non-profit research organizations. The ambition is to maintain an index of all Swedish SE scholars with first-authored publications in SCI-listed SE journals, i.e., "SSS scholars". Swe-SE-SCI mines DBLP publication lists to identify typical research topics of Swedish SE research organizations and apparent research interests of SSS scholars.
