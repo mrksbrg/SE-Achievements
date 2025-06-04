@@ -103,7 +103,7 @@ class SSSPublication:
         # 2 = Construction
         elif self.booktitle in self.constr_conf_list:
             self.knowl_area = 2
-        elif self.journal in self.design_journal_list:
+        elif self.journal in self.constr_journal_list:
             self.knowl_area = 2
         # 3 = Test
         elif self.booktitle in self.test_conf_list:
