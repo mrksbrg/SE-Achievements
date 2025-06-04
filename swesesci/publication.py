@@ -60,7 +60,7 @@ class SSSPublication:
     emp_conf_list = ["ESEM", "EASE"]
     emp_journal_list = ["Empirical Software Engineering"]
     # 18 = Information Systems
-    is_conf_list = ["CaiSE", "ICEIS", "HICCS"]
+    is_conf_list = ["CaiSE", "ICEIS", "HICSS"]
     # 19 = Human Computer Interaction
     hci_conf_list = ["CHI", "INTERACT"]
     # 20 = High Assurance
