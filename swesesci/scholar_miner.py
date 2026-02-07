@@ -10,6 +10,11 @@ import pandas as pd
 from collections import Counter
 from .publication import SSSPublication
 from .scholar import SSSScholar
+import io
+import time
+import random
+import urllib.request
+import urllib.error
 
 class ScholarMiner(xml.sax.ContentHandler):
 
@@ -45,6 +50,61 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.current_string_done = False
         self.current_string = ""
 
+    def _fetch_xml_bytes(self, url: str, max_tries: int = 8) -> bytes:
+        """
+        Fetch DBLP XML politely with retry/backoff and Retry-After support.
+        Returns raw XML bytes.
+        """
+        # Politeness: start conservative; tune later if you want.
+        min_interval_s = 1.2
+        time.sleep(min_interval_s)
+
+        backoff = 2.0
+        for attempt in range(1, max_tries + 1):
+            req = urllib.request.Request(
+                url,
+                headers={
+                    "User-Agent": "SWE-SE-SCI/1.0 (+your-contact-or-repo-url)",
+                    "Accept": "application/xml,text/xml;q=0.9,*/*;q=0.1",
+                },
+            )
+            try:
+                with urllib.request.urlopen(req, timeout=60) as resp:
+                    data = resp.read()
+                    if not data.strip():
+                        # Sometimes throttling yields empty responses; retry.
+                        raise urllib.error.URLError("Empty response body")
+                    return data
+
+            except urllib.error.HTTPError as e:
+                if e.code == 429:
+                    ra = e.headers.get("Retry-After")
+                    sleep_s = int(ra) if (ra and ra.isdigit()) else backoff
+                    sleep_s *= random.uniform(1.0, 1.4)
+                    time.sleep(min(sleep_s, 600))  # cap 10 minutes
+                    backoff = min(backoff * 2, 300)
+                    continue
+
+                if 500 <= e.code < 600:
+                    time.sleep(backoff * random.uniform(1.0, 1.4))
+                    backoff = min(backoff * 2, 300)
+                    continue
+
+                raise  # other HTTP errors are real
+
+            except (urllib.error.URLError, TimeoutError):
+                time.sleep(backoff * random.uniform(1.0, 1.4))
+                backoff = min(backoff * 2, 300)
+
+        raise RuntimeError(f"Failed to fetch DBLP XML after {max_tries} tries: {url}")
+
+    def _parse_dblp_url(self, parser, url: str) -> None:
+        """
+        Fetch URL and parse XML from bytes (avoids SAX doing urlopen itself).
+        """
+        xml_bytes = self._fetch_xml_bytes(url)
+        parser.parse(io.BytesIO(xml_bytes))
+
     def parse_scholars(self):
         nbr_scholars = len(self.input_sss_scholars)
         if nbr_scholars > 0:
@@ -60,7 +120,7 @@ class ScholarMiner(xml.sax.ContentHandler):
                 self.current_scholar_affiliation = scholar.affiliation
                 self.current_scholar_url = scholar.url
                 # SAX parse the URL
-                parser.parse(scholar.url)
+                self._parse_dblp_url(parser, scholar.url)
                 self.print_progress_bar(i, nbr_scholars)
 
             # Calculating statistics and removing scholars with no first-authored SCI publications
