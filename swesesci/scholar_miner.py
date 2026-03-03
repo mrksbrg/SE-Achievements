@@ -15,6 +15,57 @@ import time
 import random
 import urllib.request
 import urllib.error
+import socket
+import ssl
+import http.client
+
+def _fetch_xml_bytes(self, url: str, max_tries: int = 8) -> bytes:
+    """
+    Fetch DBLP XML politely with retry/backoff and Retry-After support.
+    Returns raw XML bytes.
+    """
+    # Politeness: start conservative; tune later if you want.
+    min_interval_s = 1.2
+    time.sleep(min_interval_s)
+
+    backoff = 2.0
+    for attempt in range(1, max_tries + 1):
+        req = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": "SWE-SE-SCI/1.0 (+your-contact-or-repo-url)",
+                "Accept": "application/xml,text/xml;q=0.9,*/*;q=0.1",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                data = resp.read()
+                if not data.strip():
+                    # Sometimes throttling yields empty responses; retry.
+                    raise urllib.error.URLError("Empty response body")
+                return data
+
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                ra = e.headers.get("Retry-After")
+                sleep_s = int(ra) if (ra and ra.isdigit()) else backoff
+                sleep_s *= random.uniform(1.0, 1.4)
+                time.sleep(min(sleep_s, 600))  # cap 10 minutes
+                backoff = min(backoff * 2, 300)
+                continue
+
+            if 500 <= e.code < 600:
+                time.sleep(backoff * random.uniform(1.0, 1.4))
+                backoff = min(backoff * 2, 300)
+                continue
+
+            raise  # other HTTP errors are real
+
+        except (urllib.error.URLError, TimeoutError):
+            time.sleep(backoff * random.uniform(1.0, 1.4))
+            backoff = min(backoff * 2, 300)
+
+    raise RuntimeError(f"Failed to fetch DBLP XML after {max_tries} tries: {url}")
 
 class ScholarMiner(xml.sax.ContentHandler):
 
@@ -50,51 +101,99 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.current_string_done = False
         self.current_string = ""
 
+        self._last_request_ts = 0.0
+
     def _fetch_xml_bytes(self, url: str, max_tries: int = 8) -> bytes:
         """
         Fetch DBLP XML politely with retry/backoff and Retry-After support.
         Returns raw XML bytes.
+
+        Handles:
+          - HTTP 429 (Retry-After)
+          - transient 5xx
+          - connection resets (WinError 10054), TLS hiccups, remote disconnects
         """
-        # Politeness: start conservative; tune later if you want.
-        min_interval_s = 1.2
-        time.sleep(min_interval_s)
+
+        # Be more conservative now that DBLP is touchy. Tune later.
+        min_interval_s = 3.0
+
+        # Mirror fallback can save runs when dblp.org is aggressive.
+        mirrors = [
+            url,
+            url.replace("https://dblp.org", "https://dblp.uni-trier.de"),
+            url.replace("https://dblp.org", "https://dblp.dagstuhl.de"),
+        ]
+
+        def polite_wait():
+            now = time.monotonic()
+            dt = now - getattr(self, "_last_request_ts", 0.0)
+            if dt < min_interval_s:
+                time.sleep(min_interval_s - dt)
+            self._last_request_ts = time.monotonic()
 
         backoff = 2.0
         for attempt in range(1, max_tries + 1):
-            req = urllib.request.Request(
-                url,
-                headers={
-                    "User-Agent": "SWE-SE-SCI/1.0 (+your-contact-or-repo-url)",
-                    "Accept": "application/xml,text/xml;q=0.9,*/*;q=0.1",
-                },
-            )
-            try:
-                with urllib.request.urlopen(req, timeout=60) as resp:
-                    data = resp.read()
-                    if not data.strip():
-                        # Sometimes throttling yields empty responses; retry.
-                        raise urllib.error.URLError("Empty response body")
-                    return data
+            for u in mirrors:
+                polite_wait()
 
-            except urllib.error.HTTPError as e:
-                if e.code == 429:
-                    ra = e.headers.get("Retry-After")
-                    sleep_s = int(ra) if (ra and ra.isdigit()) else backoff
-                    sleep_s *= random.uniform(1.0, 1.4)
-                    time.sleep(min(sleep_s, 600))  # cap 10 minutes
-                    backoff = min(backoff * 2, 300)
+                req = urllib.request.Request(
+                    u,
+                    headers={
+                        "User-Agent": "SWE-SE-SCI/1.0 (+your-contact-or-repo-url)",
+                        "Accept": "application/xml,text/xml;q=0.9,*/*;q=0.1",
+                        "Connection": "close",  # avoids some keep-alive edge cases
+                    },
+                )
+
+                try:
+                    with urllib.request.urlopen(req, timeout=60) as resp:
+                        data = resp.read()
+                        if not data.strip():
+                            raise urllib.error.URLError("Empty response body")
+                        return data
+
+                except urllib.error.HTTPError as e:
+                    if e.code == 429:
+                        ra = e.headers.get("Retry-After")
+                        sleep_s = int(ra) if (ra and ra.isdigit()) else backoff
+                        sleep_s = min(sleep_s, 1800) * random.uniform(1.0, 1.4)  # cap 30 min
+                        print(
+                            f"DBLP 429 (attempt {attempt}/{max_tries}). Retry-After={ra}. Sleeping {sleep_s:.0f}s. URL={u}")
+                        time.sleep(sleep_s)
+                        backoff = min(backoff * 2, 600)
+                        # On 429, no point trying mirrors immediately; cooldown first.
+                        break
+
+                    if 500 <= e.code < 600:
+                        sleep_s = min(backoff, 120) * random.uniform(1.0, 1.4)
+                        print(f"DBLP {e.code} (attempt {attempt}/{max_tries}). Sleeping {sleep_s:.0f}s. URL={u}")
+                        time.sleep(sleep_s)
+                        backoff = min(backoff * 2, 600)
+                        continue
+
+                    raise
+
+                except (
+                        urllib.error.URLError,
+                        TimeoutError,
+                        ConnectionResetError,  # WinError 10054
+                        socket.timeout,
+                        ssl.SSLError,
+                        http.client.RemoteDisconnected,
+                ) as e:
+                    sleep_s = min(backoff, 120) * random.uniform(1.0, 1.4)
+                    print(f"DBLP connection error {type(e).__name__} (attempt {attempt}/{max_tries}). "
+                          f"Sleeping {sleep_s:.0f}s. URL={u}")
+                    time.sleep(sleep_s)
+                    backoff = min(backoff * 2, 600)
                     continue
 
-                if 500 <= e.code < 600:
-                    time.sleep(backoff * random.uniform(1.0, 1.4))
-                    backoff = min(backoff * 2, 300)
-                    continue
+            else:
+                # mirrors loop exhausted without 'break' → keep outer attempt going
+                continue
 
-                raise  # other HTTP errors are real
-
-            except (urllib.error.URLError, TimeoutError):
-                time.sleep(backoff * random.uniform(1.0, 1.4))
-                backoff = min(backoff * 2, 300)
+            # we hit 'break' due to 429 → go to next attempt
+            continue
 
         raise RuntimeError(f"Failed to fetch DBLP XML after {max_tries} tries: {url}")
 
