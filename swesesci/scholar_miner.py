@@ -357,16 +357,23 @@ class ScholarMiner(xml.sax.ContentHandler):
             # Remove titles containing any of the substrings indicating editorial work
             real_article = True
             title_to_check = self.current_pub_title.lower()
-            if title_to_check.find("special issue") >= 0 or title_to_check.find("special section") >= 0 or \
-                    title_to_check.find("editorial") >= 0 or title_to_check.find("commentaries on") >= 0 or \
-                    title_to_check.find("introduction to section") >= 0 or title_to_check.find(
-                "editor's introduction") >= 0 or \
-                    title_to_check.find("in this issue") >= 0 or title_to_check.find("foreword to the") >= 0 or \
-                    title_to_check.find("erratum") >= 0 or title_to_check.find("corrigendum") >= 0 or \
+            if title_to_check.find("special issue") >= 0 or \
+                    title_to_check.find("special section") >= 0 or \
+                    title_to_check.find("editorial") >= 0 or \
+                    title_to_check.find("commentaries on") >= 0 or \
+                    title_to_check.find("introduction to section") >= 0 or \
+                    title_to_check.find("editor's introduction") >= 0 or \
+                    title_to_check.find("editors' notebook") >= 0 or \
+                    title_to_check.find("in this issue") >= 0 or \
+                    title_to_check.find("foreword to the") >= 0 or \
+                    title_to_check.find("erratum") >= 0 or \
+                    title_to_check.find("corrigendum") >= 0 or \
                     title_to_check.find("correction to") >= 0 or \
                     title_to_check.find("open science initiative of the empirical software engineering journal") >= 0 or \
-                    title_to_check.find("preface.") >= 0 or title_to_check.find("splc") >= 0 or \
-                    title_to_check.find("ftscs") >= 0 or title_to_check.find("keynote") >= 0:
+                    title_to_check.find("preface.") >= 0 or \
+                    title_to_check.find("splc") >= 0 or \
+                    title_to_check.find("ftscs") >= 0 or \
+                    title_to_check.find("keynote") >= 0:
                 #print("Skipping editorial work and corrections: " + self.current_pub_title)
                 real_article = False
 
