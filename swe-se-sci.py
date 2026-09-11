@@ -9,8 +9,6 @@ import sys
 import os.path
 from datetime import date
 import csv
-import xml.sax
-import ssl
 from swesesci.scholar import SSSScholar
 from swesesci.affiliation import SSSAffiliation
 from swesesci.scholar_reader import ScholarReader
@@ -35,13 +33,9 @@ print("\n####### Step 1 - Reading candidate scholars #######")
 reader = ScholarReader("input_scholars.csv")
 sss_scholars, sss_affiliations = reader.read_candidate_scholars()
 
-# 2. Mine the scholars, write the results
+# 2. Mine the scholars from the local DBLP dump (see download_dblp_dump.py), write the results
 print("\n####### Step 2 - Mining scholars #######")
-parser = xml.sax.make_parser()
-# turn off namespaces
-parser.setFeature(xml.sax.handler.feature_namespaces, 0)
 miner = ScholarMiner(filename_prefix, sss_scholars, sss_affiliations)
-ssl._create_default_https_context = ssl._create_unverified_context
 miner.parse_scholars()
 miner.write_results()
 sss_scholars = miner.get_scholars()
