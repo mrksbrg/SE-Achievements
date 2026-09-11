@@ -5,17 +5,24 @@ Created on Fri Sep 11 2026
 @author: Markus Borg
 
 Reads scholar data from a local DBLP XML dump instead of the DBLP web API, which is behind a bot check.
-Monthly snapshots (dblp-YYYY-MM-DD.xml.gz) and the DTD they reference are published on Dagstuhl DROPS:
-https://drops.dagstuhl.de/entities/collection/10.4230/dblp.xml -- run download_dblp_dump.py to fetch them.
+The newest monthly snapshot (dblp-YYYY-MM-01.xml.gz) and the DTD it references are downloaded from Dagstuhl DROPS:
+https://drops.dagstuhl.de/entities/collection/10.4230/dblp.xml
 """
 
 import glob
 import gzip
+import hashlib
 import os
 import pyexpat
+import re
+import urllib.error
+import urllib.request
+from datetime import date, timedelta
 from xml.sax.xmlreader import AttributesImpl
 
 DEFAULT_DUMP_DIR = "dblp_dump"
+DROPS_URL = "https://drops.dagstuhl.de/storage/artifacts/dblp/xml/"
+USER_AGENT = "SWE-SE-SCI/1.0 (+https://github.com/mrksbrg/SE-Achievements)"
 HOMEPAGE_PREFIX = "homepages/"
 PERSON_TAGS = ("author", "editor")
 CHUNK_SIZE = 1024 * 1024
@@ -24,15 +31,93 @@ CHUNK_SIZE = 1024 * 1024
 START, CHARS, END = 0, 1, 2
 
 
-def default_dump_path():
-    """ Return $DBLP_DUMP if set, otherwise the most recent dump in dblp_dump/. """
+def ensure_latest_dump(dump_dir=DEFAULT_DUMP_DIR, today=None):
+    """ Return the newest monthly DBLP dump, downloading it (and removing older ones) unless it is already there. """
+    if os.environ.get("DBLP_DUMP"):
+        return os.environ["DBLP_DUMP"]
+    first_of_month = (today or date.today()).replace(day=1)
+    previous_month = (first_of_month - timedelta(days=1)).replace(day=1)
+    for month in (first_of_month, previous_month):
+        name = "dblp-" + month.isoformat() + ".xml.gz"
+        path = os.path.join(dump_dir, name)
+        try:
+            if not os.path.isfile(path):
+                os.makedirs(dump_dir, exist_ok=True)
+                download_verified(DROPS_URL + str(month.year) + "/" + name, path)
+                remove_other_dumps(dump_dir, name)
+            ensure_dtd(path)
+            return path
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                continue  # snapshots are published a few days into the month
+            print("Could not download " + name + ": " + str(e))
+            break
+        except urllib.error.URLError as e:
+            print("Could not download " + name + ": " + str(e))
+            break
+    print("Falling back to the most recent local DBLP dump")
+    return default_dump_path(dump_dir)
+
+
+def default_dump_path(dump_dir=DEFAULT_DUMP_DIR):
+    """ Return $DBLP_DUMP if set, otherwise the most recent dump in dump_dir. """
     env_path = os.environ.get("DBLP_DUMP")
     if env_path:
         return env_path
-    dumps = sorted(glob.glob(os.path.join(DEFAULT_DUMP_DIR, "dblp-*.xml.gz")))
+    dumps = sorted(glob.glob(os.path.join(dump_dir, "dblp-*.xml.gz")))
     if not dumps:
-        raise FileNotFoundError("No DBLP dump found in " + DEFAULT_DUMP_DIR + "/. Run: python download_dblp_dump.py")
+        raise FileNotFoundError("No DBLP dump found in " + dump_dir + "/")
     return dumps[-1]
+
+
+def download_verified(url, path):
+    """ Download url to path, verified against the published .md5 file. """
+    with _fetch(url + ".md5") as response:
+        expected_md5 = response.read().decode().split()[0]
+    tmp_path = path + ".part"
+    with _fetch(url) as response, open(tmp_path, "wb") as f:
+        total = int(response.headers.get("Content-Length", 0))
+        done = 0
+        for block in iter(lambda: response.read(CHUNK_SIZE), b""):
+            f.write(block)
+            done += len(block)
+            if total:
+                print("\rDownloading " + url + ": " + str(100 * done // total) + "%", end="")
+    print()
+    if _md5_of(tmp_path) != expected_md5:
+        os.remove(tmp_path)
+        raise RuntimeError("MD5 mismatch for " + url)
+    os.replace(tmp_path, path)
+
+
+def ensure_dtd(dump_path):
+    """ Download the DTD named in the dump's DOCTYPE (e.g., dblp-2023-06-28.dtd) unless it is next to the dump. """
+    with gzip.open(dump_path, "rt", encoding="iso-8859-1") as f:
+        doctype = re.search(r'SYSTEM "(dblp-(\d{4})-\d{2}-\d{2}\.dtd)"', f.read(1000))
+    if doctype:
+        dtd_path = os.path.join(os.path.dirname(dump_path), doctype.group(1))
+        if not os.path.isfile(dtd_path):
+            download_verified(DROPS_URL + doctype.group(2) + "/" + doctype.group(1), dtd_path)
+
+
+def remove_other_dumps(dump_dir, keep_name):
+    for path in glob.glob(os.path.join(dump_dir, "dblp-*.xml.gz*")):
+        if os.path.basename(path) != keep_name:
+            os.remove(path)
+            print("Removed old DBLP dump file: " + path)
+
+
+def _fetch(url):
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    return urllib.request.urlopen(request, timeout=60)
+
+
+def _md5_of(path):
+    digest = hashlib.md5()
+    with open(path, "rb") as f:
+        for block in iter(lambda: f.read(CHUNK_SIZE), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def replay_person(handler, pid, names, records):
@@ -149,7 +234,7 @@ class DblpDump:
 
     def __init__(self, path):
         if not os.path.isfile(path):
-            raise FileNotFoundError("DBLP dump not found: " + path + ". Run: python download_dblp_dump.py")
+            raise FileNotFoundError("DBLP dump not found: " + path)
         self.path = path
 
     def find_person_names(self, pids, progress=None):
@@ -202,8 +287,7 @@ class DblpDump:
     def parse_dtd(self, parser, context, system_id):
         dtd_path = os.path.join(os.path.dirname(os.path.abspath(self.path)), system_id)
         if not os.path.isfile(dtd_path):
-            raise FileNotFoundError("The DBLP dump needs its DTD next to it: " + dtd_path +
-                                    ". Run: python download_dblp_dump.py")
+            raise FileNotFoundError("The DBLP dump needs its DTD next to it: " + dtd_path)
         with open(dtd_path, "rb") as f:
             parser.ExternalEntityParserCreate(context).ParseFile(f)
         return 1

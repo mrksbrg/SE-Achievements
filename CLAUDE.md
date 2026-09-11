@@ -19,13 +19,12 @@ The system:
   - `scholar.py`: Core data class for researchers
   - `publication.py`: Publication data class with journal/conference classification
   - `scholar_reader.py`: Reads input scholar data
-  - `dblp_dump.py`: Streams the DBLP XML dump and replays each scholar's records as per-person XML
+  - `dblp_dump.py`: Downloads the monthly DBLP XML dump, streams it, and replays each scholar's records as per-person XML
   - `scholar_miner.py`: Mines publication data from the DBLP dump
   - `scholar_analyzer.py`: Analyzes research interests
   - `scholar_tabulator.py`: Generates HTML tables
   - `scholar_visualizer.py`: Creates visualizations (commented out in main script)
 - `swe-se-sci.py`: Main entry point script
-- `download_dblp_dump.py`: Downloads a monthly DBLP XML dump snapshot into `dblp_dump/` (gitignored)
 - `templates/`: HTML templates for output
 - `test/`: Test cases for validation
 - `history/`: Historical HTML outputs organized by year/month
@@ -34,17 +33,14 @@ The system:
 
 ### Running the Application
 
-The DBLP web API (dblp.org/pid/*.xml) is behind a bot check, so scholars are mined from a local copy of the monthly DBLP XML dump hosted on Dagstuhl DROPS. First download the snapshot (about 1 GB, published early each month) and the DTD it references:
-```bash
-python download_dblp_dump.py 2026-09
-```
-
-Then run the full application:
+To run the full application:
 ```bash
 python swe-se-sci.py
 ```
 
-The app expects an `input_scholars.csv` file with candidate scholars. It uses the most recent `dblp_dump/dblp-*.xml.gz`, or the path in the `DBLP_DUMP` environment variable. Mining makes two passes over the dump and takes several minutes.
+The app expects an `input_scholars.csv` file with candidate scholars.
+
+The DBLP web API (dblp.org/pid/*.xml) is behind a bot check, so scholars are mined from the monthly DBLP XML dump hosted on Dagstuhl DROPS. Unless it is already in `dblp_dump/` (gitignored), `swe-se-sci.py` downloads the newest snapshot (about 1.1 GB) and the DTD it references, and removes older snapshots. Snapshots are published a few days into each month; until then the previous month is used, and without network access the most recent local dump. Set `DBLP_DUMP` to use a specific dump file. Mining makes two passes over the dump and takes several minutes.
 
 ### Running Tests
 

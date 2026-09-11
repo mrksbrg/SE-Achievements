@@ -11,6 +11,7 @@ from datetime import date
 import csv
 from swesesci.scholar import SSSScholar
 from swesesci.affiliation import SSSAffiliation
+from swesesci.dblp_dump import ensure_latest_dump
 from swesesci.scholar_reader import ScholarReader
 from swesesci.scholar_miner import ScholarMiner
 from swesesci.scholar_analyzer import ScholarAnalyzer
@@ -33,9 +34,9 @@ print("\n####### Step 1 - Reading candidate scholars #######")
 reader = ScholarReader("input_scholars.csv")
 sss_scholars, sss_affiliations = reader.read_candidate_scholars()
 
-# 2. Mine the scholars from the local DBLP dump (see download_dblp_dump.py), write the results
+# 2. Mine the scholars from the newest DBLP dump (downloaded if needed), write the results
 print("\n####### Step 2 - Mining scholars #######")
-miner = ScholarMiner(filename_prefix, sss_scholars, sss_affiliations)
+miner = ScholarMiner(filename_prefix, sss_scholars, sss_affiliations, ensure_latest_dump())
 miner.parse_scholars()
 miner.write_results()
 sss_scholars = miner.get_scholars()

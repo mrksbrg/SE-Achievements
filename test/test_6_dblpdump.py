@@ -6,13 +6,17 @@ Created on Fri Sep 11 2026
 """
 
 import gzip
+import urllib.error
+from datetime import date
 import pytest
 from xml.sax.handler import ContentHandler
-from swesesci.dblp_dump import DblpDump, replay_person
+from swesesci import dblp_dump
+from swesesci.dblp_dump import DblpDump, DROPS_URL, ensure_latest_dump, replay_person
 
+DTD_NAME = "dblp-2023-06-28.dtd"
 DTD = '<!ENTITY ouml "&#246;">\n'
 DUMP = '''<?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE dblp SYSTEM "test.dtd">
+<!DOCTYPE dblp SYSTEM "dblp-2023-06-28.dtd">
 <dblp>
 <article key="a1"><author>Bjorn Test</author><author>Ada Other</author><title>Old.</title><year>2001</year></article>
 <www key="homepages/3/4"><crossref>homepages/1/2</crossref></www>
@@ -23,6 +27,11 @@ DUMP = '''<?xml version="1.0" encoding="ISO-8859-1"?>
 </dblp>
 '''
 NAMES = ["Björn Test", "Bjorn Test"]
+
+
+def write_dump(path):
+    with gzip.open(path, "wb") as f:
+        f.write(DUMP.encode("iso-8859-1"))
 
 
 class Recorder(ContentHandler):
@@ -44,9 +53,8 @@ class Recorder(ContentHandler):
 
 @pytest.fixture
 def dump(tmp_path):
-    (tmp_path / "test.dtd").write_text(DTD)
-    with gzip.open(tmp_path / "dblp.xml.gz", "wb") as f:
-        f.write(DUMP.encode("iso-8859-1"))
+    (tmp_path / DTD_NAME).write_text(DTD)
+    write_dump(tmp_path / "dblp.xml.gz")
     return DblpDump(str(tmp_path / "dblp.xml.gz"))
 
 
@@ -78,7 +86,7 @@ class TestClass_DblpDump:
 
     def test_missing_dtd(self, dump, tmp_path):
         # TC5: A clear error when the DTD is not next to the dump
-        (tmp_path / "test.dtd").unlink()
+        (tmp_path / DTD_NAME).unlink()
         with pytest.raises(FileNotFoundError):
             dump.find_person_names(["1/2"])
 
@@ -86,3 +94,49 @@ class TestClass_DblpDump:
         # TC6: A clear error when the dump does not exist
         with pytest.raises(FileNotFoundError):
             DblpDump(str(tmp_path / "missing.xml.gz"))
+
+
+class TestClass_DumpDownload:
+
+    @pytest.fixture(autouse=True)
+    def no_env_override(self, monkeypatch):
+        monkeypatch.delenv("DBLP_DUMP", raising=False)
+
+    def test_existing_dump_needs_no_download(self, tmp_path, monkeypatch):
+        # TC7: This month's dump and its DTD are already there, so nothing is downloaded
+        def unexpected_download(url, path):
+            raise AssertionError("Unexpected download: " + url)
+        monkeypatch.setattr(dblp_dump, "download_verified", unexpected_download)
+        write_dump(tmp_path / "dblp-2026-09-01.xml.gz")
+        (tmp_path / DTD_NAME).write_text(DTD)
+        assert ensure_latest_dump(str(tmp_path), date(2026, 9, 11)) == str(tmp_path / "dblp-2026-09-01.xml.gz")
+
+    def test_previous_month_before_release(self, tmp_path, monkeypatch):
+        # TC8: This month's snapshot is not published yet, so last month's is downloaded and older dumps removed
+        urls = []
+
+        def fake_download(url, path):
+            urls.append(url)
+            if "2026-09-01" in url:
+                raise urllib.error.HTTPError(url, 404, "Not Found", None, None)
+            if url.endswith(".dtd"):
+                (tmp_path / DTD_NAME).write_text(DTD)
+            else:
+                write_dump(path)
+        monkeypatch.setattr(dblp_dump, "download_verified", fake_download)
+        write_dump(tmp_path / "dblp-2026-07-01.xml.gz")
+
+        path = ensure_latest_dump(str(tmp_path), date(2026, 9, 1))
+        assert path == str(tmp_path / "dblp-2026-08-01.xml.gz")
+        assert urls == [DROPS_URL + "2026/dblp-2026-09-01.xml.gz", DROPS_URL + "2026/dblp-2026-08-01.xml.gz",
+                        DROPS_URL + "2023/" + DTD_NAME]
+        assert not (tmp_path / "dblp-2026-07-01.xml.gz").exists()
+        assert DblpDump(path).find_person_names(["1/2"]) == {"1/2": NAMES}
+
+    def test_offline_uses_local_dump(self, tmp_path, monkeypatch):
+        # TC9: Without network access, the most recent local dump is used
+        def offline(url, path):
+            raise urllib.error.URLError("offline")
+        monkeypatch.setattr(dblp_dump, "download_verified", offline)
+        write_dump(tmp_path / "dblp-2026-07-01.xml.gz")
+        assert ensure_latest_dump(str(tmp_path), date(2026, 9, 11)) == str(tmp_path / "dblp-2026-07-01.xml.gz")
