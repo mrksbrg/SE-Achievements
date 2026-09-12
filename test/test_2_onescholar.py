@@ -20,7 +20,7 @@ class TestClass_OneScholar:
     def setup_method(self):
         self.sss_scholars = []
         self.sss_affiliations = []
-        subdirectory = "output"
+        subdirectory = os.path.join("test", "output")
         try:
             os.mkdir(subdirectory)
         except Exception:

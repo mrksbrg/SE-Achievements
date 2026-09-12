@@ -54,7 +54,7 @@ To run a specific test file:
 pytest test/test_2_onescholar.py
 ```
 
-Tests 2-5 read `test/dblp_test_dump.xml.gz`, a small subset of the dump with the test scholars. To regenerate it from a newer dump (expected values in the tests may then need updating):
+Tests 2-5 read `test/dblp_test_dump.xml.gz`, a small subset of the dump with the test scholars, and write their results to `test/output/` so they do not overwrite the application output in `output/`. To regenerate it from a newer dump (expected values in the tests may then need updating):
 ```bash
 python test/make_test_dump.py dblp_dump/dblp-2026-09-01.xml.gz
 ```
