@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
 ## Repository Overview
 
@@ -114,3 +114,5 @@ The repository implements a "badge" system for researchers based on their public
 - Silver: 3+ publications 
 - Gold: 5+ publications
 - Platinum: 10+ publications
+
+## Imported Claude Cowork project instructions

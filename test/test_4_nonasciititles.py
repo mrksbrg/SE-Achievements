@@ -12,12 +12,14 @@ from swesesci.scholar_miner import ScholarMiner
 from swesesci.scholar_analyzer import ScholarAnalyzer
 from swesesci.scholar_tabulator import ScholarTabulator
 
+TEST_DUMP = "test/dblp_test_dump.xml.gz"  # created by test/make_test_dump.py
+
 class TestClass_NonASCIITitles:
 
     def setup_method(self):
         self.sss_scholars = []
         self.sss_affiliations = []
-        subdirectory = "output"
+        subdirectory = os.path.join("test", "output")
         try:
             os.mkdir(subdirectory)
         except Exception:
@@ -26,7 +28,7 @@ class TestClass_NonASCIITitles:
 
         reader = ScholarReader("test/test_4_nonasciititles.csv")
         self.sss_scholars, self.sss_affiliations = reader.read_candidate_scholars()
-        self.miner = ScholarMiner(self.filename_prefix, self.sss_scholars, self.sss_affiliations)
+        self.miner = ScholarMiner(self.filename_prefix, self.sss_scholars, self.sss_affiliations, TEST_DUMP)
         self.miner.parse_scholars()
         self.sss_scholars = self.miner.get_scholars()
 

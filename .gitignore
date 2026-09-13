@@ -111,3 +111,6 @@ venv.bak/
 output/
 
 .vscode/extensions.json
+
+# Local DBLP XML dump (downloaded from drops.dagstuhl.de)
+dblp_dump/

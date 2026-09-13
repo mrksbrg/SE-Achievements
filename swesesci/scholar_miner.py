@@ -10,69 +10,15 @@ import pandas as pd
 from collections import Counter
 from .publication import SSSPublication
 from .scholar import SSSScholar
-import io
-import time
-import random
-import urllib.request
-import urllib.error
-import socket
-import ssl
-import http.client
-
-def _fetch_xml_bytes(self, url: str, max_tries: int = 8) -> bytes:
-    """
-    Fetch DBLP XML politely with retry/backoff and Retry-After support.
-    Returns raw XML bytes.
-    """
-    # Politeness: start conservative; tune later if you want.
-    min_interval_s = 1.2
-    time.sleep(min_interval_s)
-
-    backoff = 2.0
-    for attempt in range(1, max_tries + 1):
-        req = urllib.request.Request(
-            url,
-            headers={
-                "User-Agent": "SWE-SE-SCI/1.0 (+your-contact-or-repo-url)",
-                "Accept": "application/xml,text/xml;q=0.9,*/*;q=0.1",
-            },
-        )
-        try:
-            with urllib.request.urlopen(req, timeout=60) as resp:
-                data = resp.read()
-                if not data.strip():
-                    # Sometimes throttling yields empty responses; retry.
-                    raise urllib.error.URLError("Empty response body")
-                return data
-
-        except urllib.error.HTTPError as e:
-            if e.code == 429:
-                ra = e.headers.get("Retry-After")
-                sleep_s = int(ra) if (ra and ra.isdigit()) else backoff
-                sleep_s *= random.uniform(1.0, 1.4)
-                time.sleep(min(sleep_s, 600))  # cap 10 minutes
-                backoff = min(backoff * 2, 300)
-                continue
-
-            if 500 <= e.code < 600:
-                time.sleep(backoff * random.uniform(1.0, 1.4))
-                backoff = min(backoff * 2, 300)
-                continue
-
-            raise  # other HTTP errors are real
-
-        except (urllib.error.URLError, TimeoutError):
-            time.sleep(backoff * random.uniform(1.0, 1.4))
-            backoff = min(backoff * 2, 300)
-
-    raise RuntimeError(f"Failed to fetch DBLP XML after {max_tries} tries: {url}")
+from .dblp_dump import DblpDump, default_dump_path, replay_person
 
 class ScholarMiner(xml.sax.ContentHandler):
 
-    def __init__(self, filename_prefix, input_sss_scholars, input_sss_affiliations):
+    def __init__(self, filename_prefix, input_sss_scholars, input_sss_affiliations, dblp_dump_path=None):
         self.filename_prefix = filename_prefix
         self.input_sss_scholars = input_sss_scholars
         self.input_sss_affiliations = input_sss_affiliations
+        self.dblp_dump = DblpDump(dblp_dump_path or default_dump_path())
 
         # data structures containing the results
         self.sss_scholars = []
@@ -101,126 +47,27 @@ class ScholarMiner(xml.sax.ContentHandler):
         self.current_string_done = False
         self.current_string = ""
 
-        self._last_request_ts = 0.0
-
-    def _fetch_xml_bytes(self, url: str, max_tries: int = 8) -> bytes:
-        """
-        Fetch DBLP XML politely with retry/backoff and Retry-After support.
-        Returns raw XML bytes.
-
-        Handles:
-          - HTTP 429 (Retry-After)
-          - transient 5xx
-          - connection resets (WinError 10054), TLS hiccups, remote disconnects
-        """
-
-        # Be more conservative now that DBLP is touchy. Tune later.
-        min_interval_s = 3.0
-
-        # Mirror fallback can save runs when dblp.org is aggressive.
-        mirrors = [
-            url,
-            url.replace("https://dblp.org", "https://dblp.uni-trier.de"),
-            url.replace("https://dblp.org", "https://dblp.dagstuhl.de"),
-        ]
-
-        def polite_wait():
-            now = time.monotonic()
-            dt = now - getattr(self, "_last_request_ts", 0.0)
-            if dt < min_interval_s:
-                time.sleep(min_interval_s - dt)
-            self._last_request_ts = time.monotonic()
-
-        backoff = 2.0
-        for attempt in range(1, max_tries + 1):
-            for u in mirrors:
-                polite_wait()
-
-                req = urllib.request.Request(
-                    u,
-                    headers={
-                        "User-Agent": "SWE-SE-SCI/1.0 (+your-contact-or-repo-url)",
-                        "Accept": "application/xml,text/xml;q=0.9,*/*;q=0.1",
-                        "Connection": "close",  # avoids some keep-alive edge cases
-                    },
-                )
-
-                try:
-                    with urllib.request.urlopen(req, timeout=60) as resp:
-                        data = resp.read()
-                        if not data.strip():
-                            raise urllib.error.URLError("Empty response body")
-                        return data
-
-                except urllib.error.HTTPError as e:
-                    if e.code == 429:
-                        ra = e.headers.get("Retry-After")
-                        sleep_s = int(ra) if (ra and ra.isdigit()) else backoff
-                        sleep_s = min(sleep_s, 1800) * random.uniform(1.0, 1.4)  # cap 30 min
-                        print(
-                            f"DBLP 429 (attempt {attempt}/{max_tries}). Retry-After={ra}. Sleeping {sleep_s:.0f}s. URL={u}")
-                        time.sleep(sleep_s)
-                        backoff = min(backoff * 2, 600)
-                        # On 429, no point trying mirrors immediately; cooldown first.
-                        break
-
-                    if 500 <= e.code < 600:
-                        sleep_s = min(backoff, 120) * random.uniform(1.0, 1.4)
-                        print(f"DBLP {e.code} (attempt {attempt}/{max_tries}). Sleeping {sleep_s:.0f}s. URL={u}")
-                        time.sleep(sleep_s)
-                        backoff = min(backoff * 2, 600)
-                        continue
-
-                    raise
-
-                except (
-                        urllib.error.URLError,
-                        TimeoutError,
-                        ConnectionResetError,  # WinError 10054
-                        socket.timeout,
-                        ssl.SSLError,
-                        http.client.RemoteDisconnected,
-                ) as e:
-                    sleep_s = min(backoff, 120) * random.uniform(1.0, 1.4)
-                    print(f"DBLP connection error {type(e).__name__} (attempt {attempt}/{max_tries}). "
-                          f"Sleeping {sleep_s:.0f}s. URL={u}")
-                    time.sleep(sleep_s)
-                    backoff = min(backoff * 2, 600)
-                    continue
-
-            else:
-                # mirrors loop exhausted without 'break' → keep outer attempt going
-                continue
-
-            # we hit 'break' due to 429 → go to next attempt
-            continue
-
-        raise RuntimeError(f"Failed to fetch DBLP XML after {max_tries} tries: {url}")
-
-    def _parse_dblp_url(self, parser, url: str) -> None:
-        """
-        Fetch URL and parse XML from bytes (avoids SAX doing urlopen itself).
-        """
-        xml_bytes = self._fetch_xml_bytes(url)
-        parser.parse(io.BytesIO(xml_bytes))
-
     def parse_scholars(self):
         nbr_scholars = len(self.input_sss_scholars)
         if nbr_scholars > 0:
-            i = 0 # for the progress bar
-            print(str(nbr_scholars) + " scholars to parse from DBLP...")
-            self.print_progress_bar(i, nbr_scholars)
-            parser = xml.sax.make_parser()
-            parser.setContentHandler(self)
+            print(str(nbr_scholars) + " scholars to parse from the DBLP dump " + self.dblp_dump.path)
+            pids = [scholar.pid for scholar in self.input_sss_scholars]
+            print("Pass 1/2: finding name variants...")
+            names_by_pid = self.dblp_dump.find_person_names(pids, self.print_progress_bar)
+            print("Pass 2/2: collecting publication records...")
+            records_by_pid = self.dblp_dump.collect_person_records(names_by_pid, self.print_progress_bar)
             for scholar in self.input_sss_scholars:
-                i += 1
+                if scholar.pid not in names_by_pid:
+                    print("Scholar not found in the DBLP dump: " + scholar.name + " (" + scholar.url + ")")
+                    curr = next((x for x in self.input_sss_affiliations if scholar.affiliation == x.name), None)
+                    curr.nbr_scholars -= 1
+                    continue
                 self.current_scholar_name = scholar.name
                 self.current_scholar_running_nbr = scholar.running_number
                 self.current_scholar_affiliation = scholar.affiliation
                 self.current_scholar_url = scholar.url
-                # SAX parse the URL
-                self._parse_dblp_url(parser, scholar.url)
-                self.print_progress_bar(i, nbr_scholars)
+                # Replay the person's records through the SAX callbacks below
+                replay_person(self, scholar.pid, names_by_pid[scholar.pid], records_by_pid.get(scholar.pid, []))
 
             # Calculating statistics and removing scholars with no first-authored SCI publications
             print("Calculating statistics...")
@@ -342,8 +189,8 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.clear_current_pub()
         # Opening co-author of a publication
         elif tag == "author" and self.parsing_publication:
-            # store the author's PID until we end the element
-            self.tmp_author_pid = attributes["pid"]
+            # store the author's PID until we end the element (the DBLP dump has no author PIDs)
+            self.tmp_author_pid = attributes.get("pid", "")
 
     def endElement(self, tag):
         #print("# Closing: " + tag)
