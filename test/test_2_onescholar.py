@@ -5,6 +5,7 @@ Created on Sat Jun 15 16:50:30 2019
 @author: Markus Borg
 """
 
+import csv
 import pytest
 import os.path
 from datetime import date
@@ -75,6 +76,14 @@ class TestClass_OneScholar:
         analyzer.analyze_individual_research_interests()
         assert david.sss_contrib == 5.94
         assert david.sss_rating == 21.82
+
+        # TC9: Test one line per publication, oldest first, with the first-authored ones marked
+        with open(self.filename_prefix + "1_publications_per_author.csv", newline="") as csv_file:
+            rows = list(csv.reader(csv_file, delimiter=";"))
+        assert len(rows) == 126
+        assert all(row[0] == "David Notkin" and row[2] in ("first", "co") for row in rows)
+        assert [row[1] for row in rows] == sorted(row[1] for row in rows)
+        assert sum(row[2] == "first" for row in rows) / len(rows) == pytest.approx(david.first_ratio, abs=0.005)
 
         # TC10: Test tabulator
         tabulator = ScholarTabulator(self.filename_prefix, self.sss_scholars, self.sss_affiliations)

@@ -5,6 +5,7 @@ Created on Wed Jul 21 2021
 @author: Markus Borg
 """
 
+import csv
 import xml.sax
 import pandas as pd
 from collections import Counter
@@ -116,6 +117,9 @@ class ScholarMiner(xml.sax.ContentHandler):
         # Write concatenated titles per author and affiliation
         self.write_author_and_affiliation_titles()
 
+        # Write each scholar's publications, oldest first, e.g., for summarizing a whole career
+        self.write_publications_per_author()
+
         # Write co-authors to csv-file
         (pd.DataFrame.from_dict(data=self.global_SSS_coauthors, orient='index').to_csv(self.filename_prefix + "1_coauthors.csv", sep=';', header=False))
 
@@ -128,6 +132,16 @@ class ScholarMiner(xml.sax.ContentHandler):
                 diff[candidate] = self.global_SSS_coauthors[candidate]
 
         (pd.DataFrame.from_dict(data=diff, orient='index').to_csv(self.filename_prefix + "1_candidates.csv", sep=';', header=False))
+
+    def write_publications_per_author(self):
+        """
+        Write one line per publication: scholar;year;first|co;title
+        """
+        with open(self.filename_prefix + "1_publications_per_author.csv", "w+", newline="") as csv_file:
+            writer = csv.writer(csv_file, delimiter=";")
+            for scholar in self.sss_scholars:
+                for p in sorted(scholar.publications, key=lambda publ: publ.year):
+                    writer.writerow([scholar.name, p.year, "first" if scholar.is_first_author(p) else "co", p.title])
 
     def write_author_and_affiliation_titles(self):
         """

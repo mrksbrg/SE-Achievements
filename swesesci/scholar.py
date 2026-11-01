@@ -161,6 +161,14 @@ class SSSScholar:
                 nbr += 1
         return nbr
     
+    def is_first_author(self, publ):
+        ''' Return True if the scholar is the first author of the publication. '''
+        if not publ.authors:
+            return False
+        if self.running_number == "-1":
+            return publ.authors[0][0] == self.name
+        return publ.authors[0][0] == str(self.name + " " + self.running_number)
+
     def get_first_author_titles(self):
         first_author_titles = []
         for publ in self.publications:
