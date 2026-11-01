@@ -13,6 +13,14 @@ from .publication import SSSPublication
 from .scholar import SSSScholar
 from .dblp_dump import DblpDump, default_dump_path, replay_person
 
+# Substrings of titles that indicate editorial work, corrections, keynotes, etc., rather than papers
+EDITORIAL_PHRASES = ("special issue", "special section", "editorial", "commentaries on", "introduction to section",
+                     "editor's introduction", "editors' notebook", "in this issue", "foreword to the", "erratum",
+                     "corrigendum", "correction to",
+                     "open science initiative of the empirical software engineering journal",
+                     "preface.", "preface:", "splc", "ftscs", "keynote")
+
+
 class ScholarMiner(xml.sax.ContentHandler):
 
     def __init__(self, filename_prefix, input_sss_scholars, input_sss_affiliations, dblp_dump_path=None):
@@ -133,6 +141,11 @@ class ScholarMiner(xml.sax.ContentHandler):
 
         (pd.DataFrame.from_dict(data=diff, orient='index').to_csv(self.filename_prefix + "1_candidates.csv", sep=';', header=False))
 
+    @staticmethod
+    def is_editorial_work(title):
+        title = title.lower()
+        return any(phrase in title for phrase in EDITORIAL_PHRASES)
+
     def write_publications_per_author(self):
         """
         Write one line per publication: scholar;year;first|co;title
@@ -215,28 +228,8 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.sss_scholars.append(self.current_scholar)
         # Closing journal paper
         elif tag == "article" and not self.current_pub_informal:
-            # Remove titles containing any of the substrings indicating editorial work
-            real_article = True
-            title_to_check = self.current_pub_title.lower()
-            if title_to_check.find("special issue") >= 0 or \
-                    title_to_check.find("special section") >= 0 or \
-                    title_to_check.find("editorial") >= 0 or \
-                    title_to_check.find("commentaries on") >= 0 or \
-                    title_to_check.find("introduction to section") >= 0 or \
-                    title_to_check.find("editor's introduction") >= 0 or \
-                    title_to_check.find("editors' notebook") >= 0 or \
-                    title_to_check.find("in this issue") >= 0 or \
-                    title_to_check.find("foreword to the") >= 0 or \
-                    title_to_check.find("erratum") >= 0 or \
-                    title_to_check.find("corrigendum") >= 0 or \
-                    title_to_check.find("correction to") >= 0 or \
-                    title_to_check.find("open science initiative of the empirical software engineering journal") >= 0 or \
-                    title_to_check.find("preface.") >= 0 or \
-                    title_to_check.find("splc") >= 0 or \
-                    title_to_check.find("ftscs") >= 0 or \
-                    title_to_check.find("keynote") >= 0:
-                #print("Skipping editorial work and corrections: " + self.current_pub_title)
-                real_article = False
+            # Remove editorial work and corrections
+            real_article = not self.is_editorial_work(self.current_pub_title)
 
             # Remove titles published in ACM SIGSOFT Softw. Eng. Notes
             if self.current_pub_journal == "ACM SIGSOFT Softw. Eng. Notes":
@@ -248,10 +241,12 @@ class ScholarMiner(xml.sax.ContentHandler):
             self.parsing_publication = False
         # Closing conference/workshop paper
         elif tag == "inproceedings":
-            current_publication = SSSPublication(self.current_pub_title, self.current_pub_journal,
-                                                 self.current_pub_booktitle, self.current_pub_year,
-                                                 self.current_pub_authors)
-            self.current_scholar.add_publication(current_publication)
+            # Remove prefaces, keynotes, etc.
+            if not self.is_editorial_work(self.current_pub_title):
+                current_publication = SSSPublication(self.current_pub_title, self.current_pub_journal,
+                                                     self.current_pub_booktitle, self.current_pub_year,
+                                                     self.current_pub_authors)
+                self.current_scholar.add_publication(current_publication)
             self.parsing_publication = False
         # Closing author
         elif tag == "author" and self.parsing_publication:
