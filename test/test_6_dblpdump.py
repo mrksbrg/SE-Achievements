@@ -28,11 +28,20 @@ DUMP = '''<?xml version="1.0" encoding="ISO-8859-1"?>
 </dblp>
 '''
 NAMES = ["Björn Test", "Bjorn Test"]
+SPLIT_DUMP = '''<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE dblp SYSTEM "dblp-2023-06-28.dtd">
+<dblp>
+<www key="homepages/5/6" publtype="disambiguation"><author>Ada Other</author><title>Home Page</title></www>
+<www key="homepages/5/6-1"><author>Ada Other 0001</author><title>Home Page</title></www>
+<www key="homepages/5/6-2"><author>Ada Other 0002</author><title>Home Page</title></www>
+<www key="homepages/1/2"><author>Bjorn Test</author><title>Home Page</title></www>
+</dblp>
+'''
 
 
-def write_dump(path):
+def write_dump(path, content=DUMP):
     with gzip.open(path, "wb") as f:
-        f.write(DUMP.encode("iso-8859-1"))
+        f.write(content.encode("iso-8859-1"))
 
 
 class Recorder(ContentHandler):
@@ -91,8 +100,22 @@ class TestClass_DblpDump:
         with pytest.raises(FileNotFoundError):
             dump.find_person_names(["1/2"])
 
+    def test_split_profile_warning(self, tmp_path, capsys):
+        # TC6: A pid that has become a disambiguation page is reported with the split profiles
+        (tmp_path / DTD_NAME).write_text(DTD)
+        write_dump(tmp_path / "split.xml.gz", SPLIT_DUMP)
+        DblpDump(str(tmp_path / "split.xml.gz")).find_person_names(["5/6", "1/2"])
+        warnings = [line for line in capsys.readouterr().out.splitlines() if line.startswith("WARNING")]
+        assert len(warnings) == 1
+        assert warnings[0].endswith("5/6 -> 5/6-1 or 5/6-2")
+
+    def test_no_split_profile_warning(self, dump, capsys):
+        # TC7: A person's own profile, and a merged one, give no warning
+        dump.find_person_names(["1/2", "3/4"])
+        assert "WARNING" not in capsys.readouterr().out
+
     def test_missing_dump(self, tmp_path):
-        # TC6: A clear error when the dump does not exist
+        # TC8: A clear error when the dump does not exist
         with pytest.raises(FileNotFoundError):
             DblpDump(str(tmp_path / "missing.xml.gz"))
 
@@ -116,7 +139,7 @@ class TestClass_DumpDownload:
         monkeypatch.setattr(dblp_dump, "download_verified", no_network)
 
     def test_existing_dump_needs_no_download(self, tmp_path, monkeypatch):
-        # TC7: This month's dump and its DTD are already there, so nothing is downloaded
+        # TC9: This month's dump and its DTD are already there, so nothing is downloaded
         def unexpected_download(url, path):
             raise AssertionError("Unexpected download: " + url)
         monkeypatch.setattr(dblp_dump, "download_verified", unexpected_download)
@@ -126,7 +149,7 @@ class TestClass_DumpDownload:
         assert ensure_latest_dump(str(tmp_path), date(2026, 9, 11)) == str(tmp_path / "dblp-2026-09-01.xml.gz")
 
     def test_snapshot_published_after_the_first(self, tmp_path, monkeypatch):
-        # TC8: The snapshot named on the collection page is downloaded, whatever its day, and older dumps removed
+        # TC10: The snapshot named on the collection page is downloaded, whatever its day, and older dumps removed
         urls = []
 
         def fake_download(url, path):
@@ -146,7 +169,7 @@ class TestClass_DumpDownload:
         assert DblpDump(path).find_person_names(["1/2"]) == {"1/2": NAMES}
 
     def test_stops_before_this_months_release(self, tmp_path, monkeypatch):
-        # TC9: On the first of the month the newest snapshot is last month's, so nothing is downloaded or mined
+        # TC11: On the first of the month the newest snapshot is last month's, so nothing is downloaded or mined
         def unexpected_download(url, path):
             raise AssertionError("Unexpected download: " + url)
         monkeypatch.setattr(dblp_dump, "download_verified", unexpected_download)
@@ -155,7 +178,7 @@ class TestClass_DumpDownload:
             ensure_latest_dump(str(tmp_path), date(2026, 11, 1))
 
     def test_stale_dump_on_request(self, tmp_path, monkeypatch):
-        # TC10: With DBLP_ALLOW_STALE_DUMP set, last month's snapshot is mined anyway
+        # TC12: With DBLP_ALLOW_STALE_DUMP set, last month's snapshot is mined anyway
         monkeypatch.setenv("DBLP_ALLOW_STALE_DUMP", "1")
         self.published(monkeypatch, date(2026, 10, 3))
         write_dump(tmp_path / "dblp-2026-10-03.xml.gz")
@@ -163,20 +186,20 @@ class TestClass_DumpDownload:
         assert ensure_latest_dump(str(tmp_path), date(2026, 11, 1)) == str(tmp_path / "dblp-2026-10-03.xml.gz")
 
     def test_offline_uses_current_local_dump(self, tmp_path, monkeypatch):
-        # TC11: Without network access, a local dump from this month is used
+        # TC13: Without network access, a local dump from this month is used
         self.offline(monkeypatch)
         write_dump(tmp_path / "dblp-2026-09-01.xml.gz")
         assert ensure_latest_dump(str(tmp_path), date(2026, 9, 11)) == str(tmp_path / "dblp-2026-09-01.xml.gz")
 
     def test_offline_stops_on_old_local_dump(self, tmp_path, monkeypatch):
-        # TC12: Without network access, a local dump from an earlier month is not mined
+        # TC14: Without network access, a local dump from an earlier month is not mined
         self.offline(monkeypatch)
         write_dump(tmp_path / "dblp-2026-09-01.xml.gz")
         with pytest.raises(StaleDumpError, match="2026-09-01"):
             ensure_latest_dump(str(tmp_path), date(2026, 11, 1))
 
     def test_newest_snapshot_on_collection_page(self, monkeypatch):
-        # TC13: The newest snapshot is read off the collection page, also when it is not from the first
+        # TC15: The newest snapshot is read off the collection page, also when it is not from the first
         page = (b'<a href="https://doi.org/10.4230/dblp.xml.2026-08-01">x</a>'
                 b'<a href="https://doi.org/10.4230/dblp.xml.2026-10-03">x</a>'
                 b'<a href="https://doi.org/10.4230/dblp.xml.2026-09-01">x</a>')

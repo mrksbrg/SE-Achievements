@@ -196,12 +196,21 @@ class _HomepageHandler:
         self.names_by_pid = {}
         # Merged profiles keep their old key with a crossref to the new one
         self.redirects = {}
+        # Split profiles turn the old key into a disambiguation page, and the persons get keys like pid-1, pid-2
+        self.disambiguation_pids = set()
+        self.split_pids = {}
         self.current_pid = None
         self.current_text = None
 
     def start(self, tag, attrs):
         if tag == "www":
-            self.current_pid = self.pid_by_key.get(attrs.get("key"))
+            key = attrs.get("key", "")
+            self.current_pid = self.pid_by_key.get(key)
+            if self.current_pid is not None and attrs.get("publtype") == "disambiguation":
+                self.disambiguation_pids.add(self.current_pid)
+            split_from = self.pid_by_key.get(key.rsplit("-", 1)[0]) if "-" in key else None
+            if split_from is not None:
+                self.split_pids.setdefault(split_from, []).append(key[len(HOMEPAGE_PREFIX):])
         elif tag in ("author", "crossref") and self.current_pid is not None:
             self.current_text = []
 
@@ -280,6 +289,11 @@ class DblpDump:
         handler = _HomepageHandler(pids)
         self.parse(handler, progress)
         names_by_pid = handler.names_by_pid
+        if handler.disambiguation_pids:
+            print("WARNING: DBLP profiles that are now disambiguation pages, so few records will be found "
+                  "(update input_scholars.csv to the person's own profile and running number): " +
+                  ", ".join(pid + " -> " + " or ".join(sorted(handler.split_pids.get(pid, ["?"])))
+                            for pid in sorted(handler.disambiguation_pids)))
         if handler.redirects:
             print("Merged DBLP profiles (update input_scholars.csv to skip an extra pass): " +
                   ", ".join(pid + " -> " + target for pid, target in handler.redirects.items()))
