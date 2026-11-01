@@ -152,6 +152,7 @@ class ScholarAnalyzer:
     def analyze_affiliation_topics(self):
         print("\n### LDA topics ###")
         tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2, stop_words='english')
+        topics_file = open(self.filename_prefix + "2_analyzer_topics.csv", "w+")
         for key, value in self.affiliations_stopped_corpus.items():
             try:
                 print(key)
@@ -161,11 +162,11 @@ class ScholarAnalyzer:
                 tf_feature_names = tf_vectorizer.get_feature_names_out()
                 nbr_topics, nbr_words = self.calc_topics_tuple(nbr_terms)
 
-                # LDA
-                lda = LDA(n_components=nbr_topics)
+                # LDA, with a fixed seed so that the same titles give the same topics
+                lda = LDA(n_components=nbr_topics, random_state=1)
                 lda.fit(tf)
                 topics = self.display_and_get_topics(lda, tf_feature_names, nbr_words)
-                self.write_topics(lda, tf_feature_names, nbr_words)
+                self.write_topics(topics_file, key, topics)
 
                 # Find the current affiliation in the master list
                 curr = next((x for x in self.sss_affiliations if key == x.name), None)
@@ -174,6 +175,7 @@ class ScholarAnalyzer:
             except Exception as e:
                 print("Failed due to:", str(e))
                 print("Too few publications? Then there will be no topic model for this affiliation.")
+        topics_file.close()
        
     def display_and_get_topics(self, model, feature_names, no_top_words):
         topics = []
@@ -184,12 +186,9 @@ class ScholarAnalyzer:
             topics.append(tmp)
         return topics
 
-    def write_topics(self, model, feature_names, no_top_words):
-        tmp = open(self.filename_prefix + "2_analyzer_topics.csv", "w+")
-        for topic_idx, topic in enumerate(model.components_):
-            tmp.write("Topic %d:" % (topic_idx+1))
-            tmp.write(" ".join([feature_names[i] for i in topic.argsort()[:-no_top_words - 1:-1]]))
-        tmp.close()
+    def write_topics(self, topics_file, affiliation, topics):
+        for topic_idx, topic in enumerate(topics):
+            topics_file.write(affiliation + ";Topic %d;" % (topic_idx+1) + topic + "\n")
 
     def calc_topics_tuple(self, nbr_terms):
         ''' Calculate a reasonable number of topics and words per topic. '''
