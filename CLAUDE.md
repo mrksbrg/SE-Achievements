@@ -40,7 +40,7 @@ python swe-se-sci.py
 
 The app expects an `input_scholars.csv` file with candidate scholars.
 
-The DBLP web API (dblp.org/pid/*.xml) is behind a bot check, so scholars are mined from the monthly DBLP XML dump hosted on Dagstuhl DROPS. Unless it is already in `dblp_dump/` (gitignored), `swe-se-sci.py` downloads the newest snapshot (about 1.1 GB) and the DTD it references, and removes older snapshots. Snapshots are published a few days into each month; until then the previous month is used, and without network access the most recent local dump. Set `DBLP_DUMP` to use a specific dump file. Mining makes two passes over the dump and takes several minutes.
+The DBLP web API (dblp.org/pid/*.xml) is behind a bot check, so scholars are mined from the monthly DBLP XML dump hosted on Dagstuhl DROPS. Unless it is already in `dblp_dump/` (gitignored), `swe-se-sci.py` downloads the newest snapshot (about 1.1 GB) and the DTD it references, and removes older snapshots. The newest snapshot is read off the DROPS collection page, since it is published a few days into each month on a day that varies (e.g., `dblp-2026-10-03.xml.gz`); without network access the most recent local dump is used. If that snapshot is from an earlier month, the run stops before downloading or mining, as the results would repeat last month's; set `DBLP_ALLOW_STALE_DUMP=1` to mine it anyway, or `DBLP_DUMP` to use a specific dump file. Mining makes two passes over the dump and takes several minutes.
 
 ### Running Tests
 

@@ -6,12 +6,13 @@ Created on Fri Sep 11 2026
 """
 
 import gzip
+import io
 import urllib.error
 from datetime import date
 import pytest
 from xml.sax.handler import ContentHandler
 from swesesci import dblp_dump
-from swesesci.dblp_dump import DblpDump, DROPS_URL, ensure_latest_dump, replay_person
+from swesesci.dblp_dump import DblpDump, DROPS_URL, StaleDumpError, ensure_latest_dump, replay_person
 
 DTD_NAME = "dblp-2023-06-28.dtd"
 DTD = '<!ENTITY ouml "&#246;">\n'
@@ -101,42 +102,83 @@ class TestClass_DumpDownload:
     @pytest.fixture(autouse=True)
     def no_env_override(self, monkeypatch):
         monkeypatch.delenv("DBLP_DUMP", raising=False)
+        monkeypatch.delenv("DBLP_ALLOW_STALE_DUMP", raising=False)
+
+    @staticmethod
+    def published(monkeypatch, snapshot):
+        monkeypatch.setattr(dblp_dump, "latest_published_snapshot", lambda: snapshot)
+
+    @staticmethod
+    def offline(monkeypatch):
+        def no_network(*args):
+            raise urllib.error.URLError("offline")
+        monkeypatch.setattr(dblp_dump, "latest_published_snapshot", no_network)
+        monkeypatch.setattr(dblp_dump, "download_verified", no_network)
 
     def test_existing_dump_needs_no_download(self, tmp_path, monkeypatch):
         # TC7: This month's dump and its DTD are already there, so nothing is downloaded
         def unexpected_download(url, path):
             raise AssertionError("Unexpected download: " + url)
         monkeypatch.setattr(dblp_dump, "download_verified", unexpected_download)
+        self.published(monkeypatch, date(2026, 9, 1))
         write_dump(tmp_path / "dblp-2026-09-01.xml.gz")
         (tmp_path / DTD_NAME).write_text(DTD)
         assert ensure_latest_dump(str(tmp_path), date(2026, 9, 11)) == str(tmp_path / "dblp-2026-09-01.xml.gz")
 
-    def test_previous_month_before_release(self, tmp_path, monkeypatch):
-        # TC8: This month's snapshot is not published yet, so last month's is downloaded and older dumps removed
+    def test_snapshot_published_after_the_first(self, tmp_path, monkeypatch):
+        # TC8: The snapshot named on the collection page is downloaded, whatever its day, and older dumps removed
         urls = []
 
         def fake_download(url, path):
             urls.append(url)
-            if "2026-09-01" in url:
-                raise urllib.error.HTTPError(url, 404, "Not Found", None, None)
             if url.endswith(".dtd"):
                 (tmp_path / DTD_NAME).write_text(DTD)
             else:
                 write_dump(path)
         monkeypatch.setattr(dblp_dump, "download_verified", fake_download)
-        write_dump(tmp_path / "dblp-2026-07-01.xml.gz")
+        self.published(monkeypatch, date(2026, 10, 3))
+        write_dump(tmp_path / "dblp-2026-09-01.xml.gz")
 
-        path = ensure_latest_dump(str(tmp_path), date(2026, 9, 1))
-        assert path == str(tmp_path / "dblp-2026-08-01.xml.gz")
-        assert urls == [DROPS_URL + "2026/dblp-2026-09-01.xml.gz", DROPS_URL + "2026/dblp-2026-08-01.xml.gz",
-                        DROPS_URL + "2023/" + DTD_NAME]
-        assert not (tmp_path / "dblp-2026-07-01.xml.gz").exists()
+        path = ensure_latest_dump(str(tmp_path), date(2026, 10, 5))
+        assert path == str(tmp_path / "dblp-2026-10-03.xml.gz")
+        assert urls == [DROPS_URL + "2026/dblp-2026-10-03.xml.gz", DROPS_URL + "2023/" + DTD_NAME]
+        assert not (tmp_path / "dblp-2026-09-01.xml.gz").exists()
         assert DblpDump(path).find_person_names(["1/2"]) == {"1/2": NAMES}
 
-    def test_offline_uses_local_dump(self, tmp_path, monkeypatch):
-        # TC9: Without network access, the most recent local dump is used
-        def offline(url, path):
-            raise urllib.error.URLError("offline")
-        monkeypatch.setattr(dblp_dump, "download_verified", offline)
-        write_dump(tmp_path / "dblp-2026-07-01.xml.gz")
-        assert ensure_latest_dump(str(tmp_path), date(2026, 9, 11)) == str(tmp_path / "dblp-2026-07-01.xml.gz")
+    def test_stops_before_this_months_release(self, tmp_path, monkeypatch):
+        # TC9: On the first of the month the newest snapshot is last month's, so nothing is downloaded or mined
+        def unexpected_download(url, path):
+            raise AssertionError("Unexpected download: " + url)
+        monkeypatch.setattr(dblp_dump, "download_verified", unexpected_download)
+        self.published(monkeypatch, date(2026, 10, 3))
+        with pytest.raises(StaleDumpError, match="2026-10-03"):
+            ensure_latest_dump(str(tmp_path), date(2026, 11, 1))
+
+    def test_stale_dump_on_request(self, tmp_path, monkeypatch):
+        # TC10: With DBLP_ALLOW_STALE_DUMP set, last month's snapshot is mined anyway
+        monkeypatch.setenv("DBLP_ALLOW_STALE_DUMP", "1")
+        self.published(monkeypatch, date(2026, 10, 3))
+        write_dump(tmp_path / "dblp-2026-10-03.xml.gz")
+        (tmp_path / DTD_NAME).write_text(DTD)
+        assert ensure_latest_dump(str(tmp_path), date(2026, 11, 1)) == str(tmp_path / "dblp-2026-10-03.xml.gz")
+
+    def test_offline_uses_current_local_dump(self, tmp_path, monkeypatch):
+        # TC11: Without network access, a local dump from this month is used
+        self.offline(monkeypatch)
+        write_dump(tmp_path / "dblp-2026-09-01.xml.gz")
+        assert ensure_latest_dump(str(tmp_path), date(2026, 9, 11)) == str(tmp_path / "dblp-2026-09-01.xml.gz")
+
+    def test_offline_stops_on_old_local_dump(self, tmp_path, monkeypatch):
+        # TC12: Without network access, a local dump from an earlier month is not mined
+        self.offline(monkeypatch)
+        write_dump(tmp_path / "dblp-2026-09-01.xml.gz")
+        with pytest.raises(StaleDumpError, match="2026-09-01"):
+            ensure_latest_dump(str(tmp_path), date(2026, 11, 1))
+
+    def test_newest_snapshot_on_collection_page(self, monkeypatch):
+        # TC13: The newest snapshot is read off the collection page, also when it is not from the first
+        page = (b'<a href="https://doi.org/10.4230/dblp.xml.2026-08-01">x</a>'
+                b'<a href="https://doi.org/10.4230/dblp.xml.2026-10-03">x</a>'
+                b'<a href="https://doi.org/10.4230/dblp.xml.2026-09-01">x</a>')
+        monkeypatch.setattr(dblp_dump, "_fetch", lambda url: io.BytesIO(page))
+        assert dblp_dump.latest_published_snapshot() == date(2026, 10, 3)

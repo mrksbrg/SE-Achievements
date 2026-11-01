@@ -5,8 +5,10 @@ Created on Fri Sep 11 2026
 @author: Markus Borg
 
 Reads scholar data from a local DBLP XML dump instead of the DBLP web API, which is behind a bot check.
-The newest monthly snapshot (dblp-YYYY-MM-01.xml.gz) and the DTD it references are downloaded from Dagstuhl DROPS:
+The newest monthly snapshot (dblp-YYYY-MM-DD.xml.gz) and the DTD it references are downloaded from Dagstuhl DROPS:
 https://drops.dagstuhl.de/entities/collection/10.4230/dblp.xml
+The snapshot is published a few days into each month, on a day that varies (e.g., dblp-2026-10-03.xml.gz), so its
+name is read off the collection page rather than derived from the date.
 """
 
 import glob
@@ -17,7 +19,7 @@ import pyexpat
 import re
 import urllib.error
 import urllib.request
-from datetime import date, timedelta
+from datetime import date
 from xml.sax.xmlreader import AttributesImpl
 
 DEFAULT_DUMP_DIR = "dblp_dump"
@@ -26,37 +28,73 @@ USER_AGENT = "SWE-SE-SCI/1.0 (+https://github.com/mrksbrg/SE-Achievements)"
 HOMEPAGE_PREFIX = "homepages/"
 PERSON_TAGS = ("author", "editor")
 CHUNK_SIZE = 1024 * 1024
+COLLECTION_URL = "https://drops.dagstuhl.de/entities/collection/10.4230/dblp.xml"
+SNAPSHOT_PATTERN = re.compile(r"dblp\.xml\.(\d{4})-(\d{2})-(\d{2})")
+DUMP_NAME_PATTERN = re.compile(r"dblp-(\d{4})-(\d{2})-(\d{2})\.xml\.gz$")
+STALE_DUMP_OVERRIDE = "DBLP_ALLOW_STALE_DUMP"
 
 # Buffered SAX events
 START, CHARS, END = 0, 1, 2
 
 
+class StaleDumpError(RuntimeError):
+    """ The newest available snapshot is from an earlier month, so mining it would repeat that month's results. """
+
+
 def ensure_latest_dump(dump_dir=DEFAULT_DUMP_DIR, today=None):
-    """ Return the newest monthly DBLP dump, downloading it (and removing older ones) unless it is already there. """
+    """ Return this month's DBLP dump, downloading it (and removing older ones) unless it is already there. """
     if os.environ.get("DBLP_DUMP"):
         return os.environ["DBLP_DUMP"]
-    first_of_month = (today or date.today()).replace(day=1)
-    previous_month = (first_of_month - timedelta(days=1)).replace(day=1)
-    for month in (first_of_month, previous_month):
-        name = "dblp-" + month.isoformat() + ".xml.gz"
-        path = os.path.join(dump_dir, name)
-        try:
-            if not os.path.isfile(path):
-                os.makedirs(dump_dir, exist_ok=True)
-                download_verified(DROPS_URL + str(month.year) + "/" + name, path)
-                remove_other_dumps(dump_dir, name)
-            ensure_dtd(path)
-            return path
-        except urllib.error.HTTPError as e:
-            if e.code == 404:
-                continue  # snapshots are published a few days into the month
-            print("Could not download " + name + ": " + str(e))
-            break
-        except urllib.error.URLError as e:
-            print("Could not download " + name + ": " + str(e))
-            break
-    print("Falling back to the most recent local DBLP dump")
-    return default_dump_path(dump_dir)
+    today = today or date.today()
+    try:
+        snapshot = latest_published_snapshot()
+    except (urllib.error.URLError, RuntimeError) as e:
+        print("Could not look up the newest published DBLP snapshot: " + str(e))
+        path = default_dump_path(dump_dir)
+        check_snapshot_is_current(snapshot_date_of(path), today, "the newest local DBLP dump")
+        print("Falling back to the local DBLP dump " + path)
+        return path
+    # Checked before downloading, as the snapshot is not always out on the first of the month
+    check_snapshot_is_current(snapshot, today, "the newest published DBLP snapshot")
+    name = "dblp-" + snapshot.isoformat() + ".xml.gz"
+    path = os.path.join(dump_dir, name)
+    if not os.path.isfile(path):
+        os.makedirs(dump_dir, exist_ok=True)
+        download_verified(DROPS_URL + str(snapshot.year) + "/" + name, path)
+        remove_other_dumps(dump_dir, name)
+    ensure_dtd(path)
+    print("Using the DBLP snapshot of " + snapshot.isoformat())
+    return path
+
+
+def latest_published_snapshot():
+    """ Return the date of the newest snapshot listed on the DROPS collection page. """
+    with _fetch(COLLECTION_URL) as response:
+        page = response.read().decode("utf-8", "replace")
+    snapshots = sorted({date(int(y), int(m), int(d)) for y, m, d in SNAPSHOT_PATTERN.findall(page)})
+    if not snapshots:
+        raise RuntimeError("No snapshot is listed at " + COLLECTION_URL)
+    return snapshots[-1]
+
+
+def check_snapshot_is_current(snapshot, today, source):
+    """ Raise StaleDumpError unless the snapshot is from this month, or $DBLP_ALLOW_STALE_DUMP is set. """
+    if snapshot is not None and (snapshot.year, snapshot.month) == (today.year, today.month):
+        return
+    complaint = ("This month's DBLP snapshot is not available yet: " + source + " is from " +
+                 (snapshot.isoformat() if snapshot else "an unknown date") +
+                 ", so mining it would repeat last month's results. Snapshots are published a few days into the "
+                 "month, so run again later, or set " + STALE_DUMP_OVERRIDE + "=1 to mine it anyway.")
+    if os.environ.get(STALE_DUMP_OVERRIDE):
+        print("WARNING: " + complaint)
+        return
+    raise StaleDumpError(complaint)
+
+
+def snapshot_date_of(dump_path):
+    """ Return the snapshot date in a dump's file name, or None if it is not named after a snapshot. """
+    match = DUMP_NAME_PATTERN.search(os.path.basename(dump_path))
+    return date(int(match.group(1)), int(match.group(2)), int(match.group(3))) if match else None
 
 
 def default_dump_path(dump_dir=DEFAULT_DUMP_DIR):

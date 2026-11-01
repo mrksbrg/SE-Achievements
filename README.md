@@ -11,7 +11,7 @@ Affiliations are ranked by the number of first-authored SCI publications by SSS 
 
 ## Running Swe-SE-SCI
 
-The DBLP web API is behind a bot check, so Swe-SE-SCI mines the monthly [DBLP XML dump](https://drops.dagstuhl.de/entities/collection/10.4230/dblp.xml) published by Schloss Dagstuhl instead. The newest snapshot (about 1.1 GB) is downloaded into `dblp_dump/` when it is not already there, so the first run of a month takes a few minutes longer.
+The DBLP web API is behind a bot check, so Swe-SE-SCI mines the monthly [DBLP XML dump](https://drops.dagstuhl.de/entities/collection/10.4230/dblp.xml) published by Schloss Dagstuhl instead. The newest snapshot (about 1.1 GB) is downloaded into `dblp_dump/` when it is not already there, so the first run of a month takes a few minutes longer. Snapshots appear a few days into each month, and until this month's is out the run stops with a message rather than repeat last month's results (set `DBLP_ALLOW_STALE_DUMP=1` to mine the older snapshot anyway).
 
 ```bash
 python swe-se-sci.py
